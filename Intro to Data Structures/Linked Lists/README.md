@@ -39,5 +39,5 @@ To follow along with this unit, you will need:
 Clone this repository to your local machine to get started:
 
 ```bash
-git clone <repository_url>
+git clone <[repository_url](https://github.com/isa-nurbek/Computer-Science)>
 ```
