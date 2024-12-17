@@ -106,7 +106,7 @@ This program demonstrates the concept of a **singly linked list**, where each no
 
 ---
 
-### Example Visualization:
+### Example Visualization
 
 Here’s how the nodes are linked after running the code:
 
