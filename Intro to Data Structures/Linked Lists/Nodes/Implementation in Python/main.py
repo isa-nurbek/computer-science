@@ -16,19 +16,20 @@ class Node:
     def set_link_node(self, link_node):
         self.link_node = link_node
 
-node1 = Node('A')
-node2 = Node('B')
-node3 = Node('C')
+
+node1 = Node("A")
+node2 = Node("B")
+node3 = Node("C")
 
 node1.set_link_node(node2)
 node2.set_link_node(node3)
 
-print(node1.get_value()) # A
-print(node1.get_link_node().get_value()) # B
-print(node2.get_link_node().get_value()) # C
+print(node1.get_value())  # A
+print(node1.get_link_node().get_value())  # B
+print(node2.get_link_node().get_value())  # C
 
 
-                                            # Code Explanation:
+# Code Explanation:
 """
 The provided code implements a basic **singly linked list** using a `Node` class. Here’s a detailed breakdown:
 
@@ -105,11 +106,11 @@ This program demonstrates the concept of a **singly linked list**, where each no
 
 ---
 
-### Example Visualization
+### Example Visualization:
 
 Here’s how the nodes are linked after running the code:
 
-```plaintext
+```
 Node 1 ('A')  --->  Node 2 ('B')  --->  Node 3 ('C')  --->  None
 ```
 
