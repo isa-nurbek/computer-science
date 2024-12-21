@@ -29,7 +29,7 @@ print(node1.get_link_node().get_value())  # B
 print(node2.get_link_node().get_value())  # C
 
 
-                                          # Code Explanation:
+# Code Explanation:
 
 """
 The provided code implements a basic **singly linked list** using a `Node` class. Here’s a detailed breakdown:
@@ -99,6 +99,7 @@ The provided code implements a basic **singly linked list** using a `Node` class
 ---
 
 ### How It Works
+
 This program demonstrates the concept of a **singly linked list**, where each node links to the next one in a linear sequence.  
 
 1. **Dynamic Linking**: Nodes are linked dynamically using `set_link_node()`. You can reorder or extend the chain by reassigning the links.  
