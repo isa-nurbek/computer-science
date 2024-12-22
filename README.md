@@ -72,8 +72,7 @@ Each of these topics forms a crucial foundation for problem-solving, software de
   - *Computer Organization and Design* by David A. Patterson and John L. Hennessy.
 
 - **Online Platforms**:
-  - [GeeksforGeeks](https://www.geeksforgeeks.org/)
-  - [Khan Academy](https://www.khanacademy.org/)
+  - [Codecademy](https://www.codecademy.com/learn/paths/computer-science)
   - [MIT OpenCourseWare](https://ocw.mit.edu/)
 
 ---
