@@ -7,8 +7,3 @@ Learn how data structures are used by computer programs to efficiently store and
 -   Overview of Data Structures
 -   Practical Examples and Use Cases
 -   Code Implementations
--   Resources for Further Learning
-
----
-
-Feel free to explore the repository, experiment with the code, and deepen your understanding of data structures!
