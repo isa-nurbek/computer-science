@@ -138,3 +138,47 @@ D
     - The `stringify_list` method ensures easy visualization of the list contents.
 
 This implementation is a simple yet powerful way to work with linked lists in Python!
+
+---
+
+The **Big O complexity** of operations in `LinkedList` implementation is as follows:
+
+### **1. `insert_beginning(new_value)`**
+
+-   **Complexity:** \(O(1)\)
+-   **Explanation:** This operation involves creating a new node and updating the `head_node` reference, which takes constant time.
+
+---
+
+### **2. `insert_end(value)`**
+
+-   **Complexity:** \(O(n)\)
+-   **Explanation:** In the worst case, you traverse the entire list to find the last node before inserting the new node at the end. This traversal takes linear time, where \(n\) is the number of nodes in the list.
+
+---
+
+### **3. `remove_node(value_to_remove)`**
+
+-   **Complexity:** \(O(n)\)
+-   **Explanation:**
+    -   In the worst case, you need to traverse the entire list to find the node with the value to remove.
+    -   The traversal is linear in the number of nodes \(n\).
+
+---
+
+### **4. `stringify_list()`**
+
+-   **Complexity:** \(O(n)\)
+-   **Explanation:** This operation traverses all \(n\) nodes in the list to build the string representation. Each traversal step takes \(O(1)\), leading to a total complexity of \(O(n)\).
+
+---
+
+### **Big O Complexity for the Given Example**
+
+In the test example:
+
+1. The `insert_beginning` operations each take \(O(1)\).
+2. The `remove_node("B")` operation involves traversing the list to locate "B". In a list with 4 nodes, this will take \(O(4) = O(n)\).
+3. The `stringify_list()` calls traverse the list twice (before and after the removal), each taking \(O(4) = O(n)\).
+
+So the total time complexity for the example is dominated by \(O(n)\) operations.
