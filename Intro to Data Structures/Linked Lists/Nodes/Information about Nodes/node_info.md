@@ -2,10 +2,11 @@
 
 In computer science, a **node** is a fundamental unit of a data structure that serves as a building block for organizing, storing, and manipulating data. Nodes are typically used in hierarchical or linked data structures like **trees**, **graphs**, and **linked lists**.
 
--   An individual node contains data and links to other nodes. Each data structure adds additional constraints or behavior to these features to create the desired structure.
--   Consider the node depicted below. This node (node_a) contains a piece of data (the number 5) and a link to another node (node_b):
+An individual node contains data and links to other nodes. Each data structure adds additional constraints or behavior to these features to create the desired structure.
 
-![Description of Image](../Information%20about%20Nodes/node_images/node.webp)
+Consider the node depicted below. This node (node_a) contains a piece of data (the number 5) and a link to another node (node_b):
+
+![Node representation showing data value 5 and a link to the next node](../Information%20about%20Nodes/node_images/node.webp)
 
 ## Components of a Node
 
