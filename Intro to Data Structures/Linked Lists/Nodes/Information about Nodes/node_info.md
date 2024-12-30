@@ -2,6 +2,11 @@
 
 In computer science, a **node** is a fundamental unit of a data structure that serves as a building block for organizing, storing, and manipulating data. Nodes are typically used in hierarchical or linked data structures like **trees**, **graphs**, and **linked lists**.
 
+-   An individual node contains data and links to other nodes. Each data structure adds additional constraints or behavior to these features to create the desired structure.
+-   Consider the node depicted below. This node (node_a) contains a piece of data (the number 5) and a link to another node (node_b):
+
+![Description of Image](../Information%20about%20Nodes/node_images/node.webp)
+
 ## Components of a Node
 
 A node generally consists of the following components:
@@ -144,7 +149,3 @@ Nodes are pivotal because they:
 4. Serve as a foundation for implementing complex algorithms like Dijkstra's or A\* in graphs.
 
 Understanding nodes is essential for working with complex data structures and designing efficient algorithms!
-
-```
-
-```
