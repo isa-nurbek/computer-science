@@ -2,11 +2,35 @@
 
 In computer science, a **node** is a fundamental unit of a data structure that serves as a building block for organizing, storing, and manipulating data. Nodes are typically used in hierarchical or linked data structures like **trees**, **graphs**, and **linked lists**.
 
+In this article, we’ll discuss what a node is as well as how nodes link to other nodes.
+
 An individual node contains data and links to other nodes. Each data structure adds additional constraints or behavior to these features to create the desired structure.
 
 Consider the node depicted below. This node (node_a) contains a piece of data (the number 5) and a link to another node (node_b):
 
 ![Node representation showing data value 5 and a link to the next node](../Information%20about%20Nodes/node_images/node.webp)
+
+## Node implementations
+
+The data contained within a node can be a variety of types, depending on the language you are using. In the previous example, it was an integer (the number 5), but it could be a string ("five"), decimal (5.1), an array ([5,3,4]) or nothing (null).
+
+The link or links within the node are sometimes referred to as pointers. This is because they “point” to another node.
+
+Typically, data structures implement nodes with one or more links. If these links are null, it denotes that you have reached the end of the particular node or link path you were previously following.
+
+A variety of node implementations are depicted in the following diagram. Examine the types of data and how some of the nodes are linked:
+
+![Node Implementations](../Information%20about%20Nodes/node_images/node_implementation.svg)
+
+## Node linking
+
+Often, due to the data structure, nodes may only be linked to a single other node. This makes it very important to consider how you implement modifying or removing nodes from a data structure.
+
+If you inadvertently remove the single link to a node, that node’s data and any linked nodes could be “lost” to your application. When this happens to a node, it is called an orphaned node.
+
+Examine the nodes in the diagram:
+
+![Node Linking](../Information%20about%20Nodes/node_images/nodes.gif)
 
 ## Components of a Node
 
