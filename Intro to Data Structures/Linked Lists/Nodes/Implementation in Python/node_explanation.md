@@ -2,6 +2,38 @@ This code defines a simple **Node** class to create and manipulate a linked list
 
 ---
 
+```python
+class Node:
+    # Initialize a new node with a value and optional link to next node
+    def __init__(self, value, link_node=None):
+        self.value = value
+        self.link_node = link_node
+
+    # Get the value stored in the node
+    def get_value(self):
+        return self.value
+
+    # Get the next node that this node links to
+    def get_link_node(self):
+        return self.link_node
+
+    # Set the next node that this node links to
+    def set_link_node(self, link_node):
+        self.link_node = link_node
+
+
+node1 = Node("A")
+node2 = Node("B")
+node3 = Node("C")
+
+node1.set_link_node(node2)
+node2.set_link_node(node3)
+
+print(node1.get_value())  # A
+print(node1.get_link_node().get_value())  # B
+print(node2.get_link_node().get_value())  # C
+```
+
 ### **Code Breakdown**
 
 #### 1. **Node Class**
@@ -34,11 +66,13 @@ This code defines a simple **Node** class to create and manipulate a linked list
 #### 2. **Creating Nodes**
 
 -   Three nodes are created:
+
     ```python
     node1 = Node("A")
     node2 = Node("B")
     node3 = Node("C")
     ```
+
     -   `node1` stores the value `"A"`, `node2` stores `"B"`, and `node3` stores `"C"`.
     -   Initially, their `link_node` attributes are `None`.
 
@@ -47,10 +81,12 @@ This code defines a simple **Node** class to create and manipulate a linked list
 #### 3. **Linking the Nodes**
 
 -   The `set_link_node` method is used to connect the nodes:
+
     ```python
     node1.set_link_node(node2)
     node2.set_link_node(node3)
     ```
+
     -   `node1`'s `link_node` now points to `node2`.
     -   `node2`'s `link_node` now points to `node3`.
 
@@ -66,16 +102,16 @@ This code defines a simple **Node** class to create and manipulate a linked list
 
     -   Calls the `get_value()` method of `node1`, which returns `"A"`.
 
-    ```python
-    print(node1.get_link_node().get_value())  # B
-    ```
+        ```python
+        print(node1.get_link_node().get_value())  # B
+        ```
 
     -   First, `node1.get_link_node()` retrieves the reference to `node2`.
     -   Then, `node2.get_value()` retrieves the value stored in `node2`, which is `"B"`.
 
-    ```python
-    print(node2.get_link_node().get_value())  # C
-    ```
+        ```python
+        print(node2.get_link_node().get_value())  # C
+        ```
 
     -   Similarly:
         -   `node2.get_link_node()` retrieves the reference to `node3`.
