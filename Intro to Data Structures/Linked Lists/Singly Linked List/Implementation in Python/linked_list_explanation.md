@@ -50,7 +50,7 @@ The `Node` class represents a single element in the linked list, containing:
 
 ---
 
-## **LinkedList Class**
+## **Linked List Class**
 
 ---
 
@@ -251,7 +251,9 @@ This implementation is a simple yet powerful way to work with linked lists in Py
 
 ---
 
-## **Big O complexity** of operations in `LinkedList` implementation is as follows:
+## **Big O:**
+
+The **Big O complexity** of operations in `LinkedList` implementation is as follows:
 
 ### **1. `insert_beginning(new_value)`**
 
@@ -280,15 +282,3 @@ This implementation is a simple yet powerful way to work with linked lists in Py
 
 -   **Complexity:** \(O(n)\)
 -   **Explanation:** This operation traverses all \(n\) nodes in the list to build the string representation. Each traversal step takes \(O(1)\), leading to a total complexity of \(O(n)\).
-
----
-
-### **Big O Complexity for the Given Example**
-
-In the test example:
-
-1. The `insert_beginning` operations each take \(O(1)\).
-2. The `remove_node("B")` operation involves traversing the list to locate "B". In a list with 4 nodes, this will take \(O(4) = O(n)\).
-3. The `stringify_list()` calls traverse the list twice (before and after the removal), each taking \(O(4) = O(n)\).
-
-So the total time complexity for the example is dominated by \(O(n)\) operations.
