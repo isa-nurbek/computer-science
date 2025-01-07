@@ -251,7 +251,7 @@ This implementation is a simple yet powerful way to work with linked lists in Py
 
 ---
 
-The ### **Big O complexity** of operations in `LinkedList` implementation is as follows:
+## **Big O complexity** of operations in `LinkedList` implementation is as follows:
 
 ### **1. `insert_beginning(new_value)`**
 
