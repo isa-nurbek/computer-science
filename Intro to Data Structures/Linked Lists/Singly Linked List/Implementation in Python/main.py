@@ -102,7 +102,7 @@ print(ll.stringify_list())  # Print the modified list: A->C->D
 
                                                 ** Big O: **
                                                          
-The **Big O complexity** of operations in your `LinkedList` implementation is as follows:
+The **Big O complexity** of operations in our `LinkedList` implementation is as follows:
 
 ### **1. `insert_beginning(new_value)`**
 - **Complexity:** O(1)
@@ -145,7 +145,7 @@ So the total time complexity for the example is dominated by O(n) operations.
 # Code Explanation:
 
 """
-                                                 *** __init__() method ***
+                                                 *** __init__() method: ***
 
 # Code:
 
@@ -260,7 +260,7 @@ self.head_node = Node(value)
 
 ******************************************************************************************************************************
 
-                                                *** insert_beginning() method ***
+                                                *** insert_beginning() method: ***
 
 # Code:
 
@@ -410,7 +410,7 @@ The `insert_beginning` method:
 
 ******************************************************************************************************************************
 
-                                                *** insert_end() method ***
+                                                *** insert_end() method: ***
 
 # Code:
 
@@ -597,7 +597,7 @@ The `insert_end` method works as follows:
 
 ******************************************************************************************************************************
 
-                                                *** remove_node() method ***
+                                                *** remove_node() method: ***
 
 # Code:
 
@@ -814,7 +814,7 @@ The `remove_node` method:
 
 ******************************************************************************************************************************
 
-                                                *** stringify_list() method ***
+                                                *** stringify_list() method: ***
 
 # Code:
 
