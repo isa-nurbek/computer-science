@@ -77,6 +77,8 @@ Similarly, there are two cases when adding a node to the tail of a doubly linked
 
 ![Doubly Linked List Insertion](../Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/add_doubly_linked_list.svg)
 
+---
+
 ### Removing from the list
 
 Due to the extra pointer and tail property, removing the head from a doubly linked list is slightly more complicated than removing the head from a singly linked list. However, the previous pointer and tail property make it much simpler to remove the tail of the list, as we don’t have to traverse the entire list to be able to do it.
@@ -101,6 +103,8 @@ It is also possible to remove a node from the middle of the list. Since that nod
 There is no need to change the pointers of the removed node, as updating the pointers of its neighboring nodes will remove it from the list. If no nodes in the list are pointing to it, the node is orphaned.
 
 ![Doubly Linked List Remove Middle](../Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/remove_middle_doubly_linked_list.svg)
+
+---
 
 ### Advantages of Doubly Linked Lists
 
