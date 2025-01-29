@@ -196,9 +196,7 @@ print(dll.stringify_list())
 
 ---
 
-Let's analyze the **time and space complexity** of the **DoublyLinkedList** operations.
-
----
+## Let's analyze the **time and space complexity** of the **DoublyLinkedList** operations
 
 ### **1. `add_to_head(new_value)` & `add_to_tail(new_value)`**
 
