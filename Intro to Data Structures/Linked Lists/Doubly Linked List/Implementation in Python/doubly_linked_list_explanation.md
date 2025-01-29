@@ -196,11 +196,71 @@ print(dll.stringify_list())
 
 ---
 
+Let's analyze the **time and space complexity** of the **DoublyLinkedList** operations.
+
+---
+
+### **1. `add_to_head(new_value)` & `add_to_tail(new_value)`**
+
+- These operations create a new node and adjust a few pointers.
+- **Time Complexity:** \( O(1) \) (Constant time, as only a few pointer changes are required)
+- **Space Complexity:** \( O(1) \) (No extra space except for the new node)
+
+---
+
+### **2. `insert(pos, new_value)`**
+
+- If inserting at the head: \( O(1) \).
+- If inserting at an arbitrary position:
+  - In the worst case, we traverse \( O(n) \) elements.
+  - The insertion itself (pointer adjustments) takes \( O(1) \).
+- **Time Complexity:** \( O(n) \) (Worst case: inserting at the end)
+- **Space Complexity:** \( O(1) \) (Only a new node is added)
+
+---
+
+### **3. `remove_head()` & `remove_tail()`**
+
+- These operations adjust a few pointers and return a value.
+- **Time Complexity:** \( O(1) \) (No traversal required)
+- **Space Complexity:** \( O(1) \) (No extra space used)
+
+---
+
+### **4. `remove_by_value(value_to_remove)`**
+
+- In the worst case, we traverse the entire list if the value is at the end or not present.
+- Removing the node itself takes \( O(1) \) (pointer changes).
+- **Time Complexity:** \( O(n) \) (Worst case: searching the entire list)
+- **Space Complexity:** \( O(1) \) (No extra space used)
+
+---
+
+### **5. `stringify_list()`**
+
+- Traverses the entire list and builds a string.
+- **Time Complexity:** \( O(n) \) (Iterating through all elements)
+- **Space Complexity:** \( O(n) \) (Storing the output string)
+
+---
+
+### **Overall Summary**
+
+| Operation           | Time Complexity | Space Complexity |
+|---------------------|----------------|-----------------|
+| `add_to_head()` / `add_to_tail()` | \( O(1) \) | \( O(1) \) |
+| `insert(pos, value)` | \( O(n) \) (worst case) | \( O(1) \) |
+| `remove_head()` / `remove_tail()` | \( O(1) \) | \( O(1) \) |
+| `remove_by_value(value)` | \( O(n) \) (worst case) | \( O(1) \) |
+| `stringify_list()` | \( O(n) \) | \( O(n) \) |
+
+The **space complexity remains \( O(1) \) for most operations** since we do not allocate extra memory apart from the new nodes themselves.
+
+---
+
 ## **Key Takeaways**
 
 - **Doubly Linked Lists** allow **bidirectional traversal** (both forward & backward).
 - **Head & Tail pointers** help efficient insertion and deletion.
 - **Each node links to both next and previous nodes**, unlike singly linked lists.
 - **Dynamic operations** like insertion, deletion, and searching are handled efficiently.
-
-Would you like me to modify or optimize any part of the implementation? 🚀
