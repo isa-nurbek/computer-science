@@ -207,64 +207,60 @@ After removing value 7:
 
 """
 
-Let's analyze the **time and space complexity** of each method in the `DoublyLinkedList` class.
-
-### 1. **add_to_head(new_value)**
-   - **Time Complexity**: O(1)  
-     - Involves creating a new node and updating at most two pointers.
-   - **Space Complexity**: O(1)  
-     - Only creates one new node.
-
-### 2. **add_to_tail(new_value)**
-   - **Time Complexity**: O(1)   
-     - Since we maintain a `tail_node` reference, adding to the tail is done in constant time.
-   - **Space Complexity**: O(1)  
-     - Only creates one new node.
-
-### 3. **insert(pos, new_value)**
-   - **Time Complexity**:
-     - **Best case** (insert at head): O(1) 
-     - **Worst case** (insert at the end): O(n)
-     - **Average case**: O(n) (since we need to traverse the list to find the position)
-   - **Space Complexity**: O(1) 
-     - Creates one new node.
-
-### 4. **remove_head()**
-   - **Time Complexity**: O(1) 
-     - Updates `head_node` and `prev_node` of the new head.
-   - **Space Complexity**: O(1) 
-     - No additional memory is allocated.
-
-### 5. **remove_tail()**
-   - **Time Complexity**: O(1) 
-     - Updates `tail_node` and `next_node` of the new tail.
-   - **Space Complexity**: O(1)  
-     - No additional memory is allocated.
-
-### 6. **remove_by_value(value_to_remove)**
-   - **Time Complexity**: O(n)  
-     - In the worst case, we have to traverse the entire list to find the node.
-   - **Space Complexity**: O(1)  
-     - No extra space is used.
-
-### 7. **stringify_list()**
-   - **Time Complexity**: O(n)   
-     - Iterates through the list to construct a string.
-   - **Space Complexity**: O(n)  
-     - Stores all elements in a string.
+Let's analyze the **time and space complexity** of the **DoublyLinkedList** operations.
 
 ---
 
-### **Overall Complexity Summary:**
+### **1. `add_to_head(new_value)` & `add_to_tail(new_value)`**
+- These operations create a new node and adjust a few pointers.
+- **Time Complexity:** O(1) (Constant time, as only a few pointer changes are required)
+- **Space Complexity:** O(1) (No extra space except for the new node)
 
-| Operation           | Time Complexity | Space Complexity |
-|---------------------|-----------------|------------------|
-| add_to_head()       |   O(1)          |       O(1)       |
-| add_to_tail()       |   O(1)          |       O(1)       |
-| insert(pos, val)    |   O(n)          |       O(1)       |
-| remove_head()       |   O(1)          |       O(1)       |
-| remove_tail()       |   O(1)          |       O(1)       |
-| remove_by_value()   |   O(n)          |       O(1)       |
-| stringify_list()    |   O(n)          |       O(n)       |
+---
+
+### **2. `insert(pos, new_value)`**
+- If inserting at the head: O(1).
+- If inserting at an arbitrary position:
+  - In the worst case, we traverse O(n) elements.
+  - The insertion itself (pointer adjustments) takes O(1).
+- **Time Complexity:** O(n) (Worst case: inserting at the end)
+- **Space Complexity:** O(1) (Only a new node is added)
+
+---
+
+### **3. `remove_head()` & `remove_tail()`**
+- These operations adjust a few pointers and return a value.
+- **Time Complexity:** O(1) (No traversal required)
+- **Space Complexity:** O(1) (No extra space used)
+
+---
+
+### **4. `remove_by_value(value_to_remove)`**
+- In the worst case, we traverse the entire list if the value is at the end or not present.
+- Removing the node itself takes O(1) (pointer changes).
+- **Time Complexity:** O(n) (Worst case: searching the entire list)
+- **Space Complexity:** O(1) (No extra space used)
+
+---
+
+### **5. `stringify_list()`**
+- Traverses the entire list and builds a string.
+- **Time Complexity:** O(n) (Iterating through all elements)
+- **Space Complexity:** O(n) (Storing the output string)
+
+---
+
+### **Overall Summary**
+
+| Operation                     | Time Complexity    | Space Complexity |
+|-------------------------------|--------------------|------------------|
+| add_to_head() / add_to_tail() |  O(1)              |  O(1)            |
+| insert(pos, value)            |  O(n) (worst case) |  O(1)            |
+| remove_head() / remove_tail() |  O(1)              |  O(1)            |
+| remove_by_value(value)        |  O(n) (worst case) |  O(1)            |
+| stringify_list()              |  O(n)              |  O(n)            |
+
+The **space complexity remains O(1) for most operations** since we do not allocate extra memory
+apart from the new nodes themselves.
 
 """
