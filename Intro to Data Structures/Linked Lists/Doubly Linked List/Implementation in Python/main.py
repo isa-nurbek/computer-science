@@ -1,8 +1,8 @@
 class Node:
     def __init__(self, value, next_node=None, prev_node=None):
-        self.value = value
-        self.next_node = next_node
-        self.prev_node = prev_node
+        self.value = value  # Store node value
+        self.next_node = next_node  # Pointer to next node
+        self.prev_node = prev_node  # Pointer to previous node
 
     def set_next_node(self, next_node):
         self.next_node = next_node
@@ -22,49 +22,49 @@ class Node:
 
 class DoublyLinkedList:
     def __init__(self):
-        self.head_node = None
-        self.tail_node = None
+        self.head_node = None  # Reference to head node
+        self.tail_node = None  # Reference to tail node
 
     def add_to_head(self, new_value):
-        new_head = Node(new_value)
-        current_head = self.head_node
+        new_head = Node(new_value)  # Create a new node
+        current_head = self.head_node  # Get current head
 
         if current_head is not None:
-            current_head.set_prev_node(new_head)
-            new_head.set_next_node(current_head)
+            current_head.set_prev_node(new_head)  # Link old head to new head
+            new_head.set_next_node(current_head)  # Link new head to old head
 
-        self.head_node = new_head
+        self.head_node = new_head  # Update head reference
 
-        if self.tail_node is None:
+        if self.tail_node is None:  # If list was empty, set tail as well
             self.tail_node = new_head
 
     def add_to_tail(self, new_value):
-        new_tail = Node(new_value)
-        current_tail = self.tail_node
+        new_tail = Node(new_value)  # Create a new node
+        current_tail = self.tail_node  # Get current tail
 
         if current_tail is not None:
-            current_tail.set_next_node(new_tail)
-            new_tail.set_prev_node(current_tail)
+            current_tail.set_next_node(new_tail)  # Link old tail to new tail
+            new_tail.set_prev_node(current_tail)  # Link new tail to old tail
 
-        self.tail_node = new_tail
+        self.tail_node = new_tail  # Update tail reference
 
-        if self.head_node is None:
+        if self.head_node is None:  # If list was empty, set head as well
             self.head_node = new_tail
 
     def insert(self, pos, new_value):
-        if pos == 0:
+        if pos == 0:  # Insert at head if position is 0
             self.add_to_head(new_value)
         else:
             current_node = self.head_node
             for i in range(pos):
-                if current_node is None:
-                    # Position is beyond the end of the list, add to tail
+                if (
+                    current_node is None
+                ):  # If position is beyond list length, add to tail
                     self.add_to_tail(new_value)
                     return
                 current_node = current_node.get_next_node()
 
-            # If current_node is None after the loop, add to tail
-            if current_node is None:
+            if current_node is None:  # If we reached end, add to tail
                 self.add_to_tail(new_value)
             else:
                 new_node = Node(new_value)
@@ -76,34 +76,33 @@ class DoublyLinkedList:
 
                 current_node.set_next_node(new_node)
 
-                # Update tail if necessary
-                if new_node.get_next_node() is None:
+                if new_node.get_next_node() is None:  # If inserted at end, update tail
                     self.tail_node = new_node
 
     def remove_head(self):
         removed_head = self.head_node
-        if removed_head is None:
+        if removed_head is None:  # If list is empty
             return None
 
-        self.head_node = removed_head.get_next_node()
+        self.head_node = removed_head.get_next_node()  # Update head
         if self.head_node is not None:
-            self.head_node.set_prev_node(None)
+            self.head_node.set_prev_node(None)  # Remove backward link
 
-        if removed_head == self.tail_node:
+        if removed_head == self.tail_node:  # If only one node was present
             self.remove_tail()
 
         return removed_head.get_value()
 
     def remove_tail(self):
         removed_tail = self.tail_node
-        if removed_tail is None:
+        if removed_tail is None:  # If list is empty
             return None
 
-        self.tail_node = removed_tail.get_prev_node()
+        self.tail_node = removed_tail.get_prev_node()  # Update tail
         if self.tail_node is not None:
-            self.tail_node.set_next_node(None)
+            self.tail_node.set_next_node(None)  # Remove forward link
 
-        if removed_tail == self.head_node:
+        if removed_tail == self.head_node:  # If only one node was present
             self.remove_head()
 
         return removed_tail.get_value()
@@ -112,13 +111,13 @@ class DoublyLinkedList:
         node_to_remove = None
         current_node = self.head_node
 
-        while current_node is not None:
+        while current_node is not None:  # Traverse the list
             if current_node.get_value() == value_to_remove:
                 node_to_remove = current_node
                 break
             current_node = current_node.get_next_node()
 
-        if node_to_remove is None:
+        if node_to_remove is None:  # Value not found
             return None
 
     def stringify_list(self):
