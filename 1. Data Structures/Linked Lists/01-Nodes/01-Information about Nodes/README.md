@@ -8,7 +8,7 @@ An individual node contains data and links to other nodes. Each data structure a
 
 Consider the node depicted below. This node (node_a) contains a piece of data (the number 5) and a link to another node (node_b):
 
-![Node representation showing data value 5 and a link to the next node](../Information%20about%20Nodes/node_images/node.webp)
+![Node representation showing data value 5 and a link to the next node](../01-Information%20about%20Nodes/node_images/node.webp)
 
 ## Node implementations
 
@@ -20,7 +20,7 @@ Typically, data structures implement nodes with one or more links. If these link
 
 A variety of node implementations are depicted in the following diagram. Examine the types of data and how some of the nodes are linked:
 
-![Node Implementations](../Information%20about%20Nodes/node_images/node_implementation.svg)
+![Node Implementations](../01-Information%20about%20Nodes/node_images/node_implementation.svg)
 
 ## Node linking
 
@@ -30,7 +30,7 @@ If you inadvertently remove the single link to a node, that node’s data and an
 
 Examine the nodes in the diagram:
 
-![Node Linking](../Information%20about%20Nodes/node_images/nodes.gif)
+![Node Linking](../01-Information%20about%20Nodes/node_images/nodes.gif)
 
 ## Components of a Node
 
