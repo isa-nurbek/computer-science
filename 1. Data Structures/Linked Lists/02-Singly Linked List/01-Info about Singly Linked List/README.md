@@ -2,7 +2,7 @@
 
 A **Singly Linked List** is a fundamental data structure in Computer Science that consists of a sequence of elements, called **nodes**, where each node stores data and a reference (or pointer) to the next node in the sequence. Unlike arrays, Singly Linked Lists do not store elements in contiguous memory locations, making them dynamic and flexible in terms of memory usage.
 
-![Linked List](../Info%20about%20Singly%20Linked%20List/linked_list_images/linked_list_1.svg)
+![Linked List](../01-Info%20about%20Singly%20Linked%20List/linked_list_images/linked_list_1.svg)
 
 The list is comprised of a series of nodes as shown in the diagram above. The head node is the node at the beginning of the list. Each node contains data and a link (or pointer) to the next node in the list. The list is terminated when a node’s link is null. This last node is called the tail node.
 
@@ -65,7 +65,7 @@ Each node in a singly linked list typically has two components:
 
 As an example, we added values to the linked list diagram from above:
 
-![Linked List Insertion](../Info%20about%20Singly%20Linked%20List/linked_list_images/linked_list_2.webp)
+![Linked List Insertion](../01-Info%20about%20Singly%20Linked%20List/linked_list_images/linked_list_2.webp)
 
 This linked list contains three nodes (node_a, node_b, and node_c).
 
@@ -91,7 +91,7 @@ Depending on the language, nodes that are not referenced are removed automatical
 
 Look at the diagram below to see the proper manner of removing a node:
 
-![Linked List Deletion](../Info%20about%20Singly%20Linked%20List/linked_list_images/linked_list_3.webp)
+![Linked List Deletion](../01-Info%20about%20Singly%20Linked%20List/linked_list_images/linked_list_3.webp)
 
 In order to remove node_b, you must first link node_a to node_c (where node_b was linking). Then you can remove node_b.
 
