@@ -14,7 +14,7 @@ Like a singly linked list, a doubly linked list is comprised of a series of node
 
 Think of your daily commute on the subway as a real-world example of a doubly linked list. Your home is the head of the list, your place of work is the tail, and every stop in between is another node in the list.
 
-![Doubly Linked List](../Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/doubly_linked_list.svg)
+![Doubly Linked List](../01-Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/doubly_linked_list.svg)
 
 ### Structure of a Node in a Doubly Linked List
 
