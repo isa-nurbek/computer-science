@@ -75,7 +75,7 @@ Similarly, there are two cases when adding a node to the tail of a doubly linked
 - Set the new tail’s previous pointer to the current tail
 - Set the new tail’s next pointer to null
 
-![Doubly Linked List Insertion](../Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/add_doubly_linked_list.svg)
+![Doubly Linked List Insertion](../01-Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/add_doubly_linked_list.svg)
 
 ---
 
