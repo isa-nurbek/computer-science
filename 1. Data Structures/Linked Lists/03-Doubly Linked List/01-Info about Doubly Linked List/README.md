@@ -91,7 +91,7 @@ Removing the head involves updating the pointer at the beginning of the list. We
 
 Similarly, removing the tail involves updating the pointer at the end of the list. We will set the next pointer of the new tail (the element directly before the tail) to null, and update the tail property of the list. If the tail was also the head, the head removal process will occur as well.
 
-![Doubly Linked List Remove Head & Tail](../Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/remove_head_doubly_linked_list.svg)
+![Doubly Linked List Remove Head & Tail](../01-Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/remove_head_doubly_linked_list.svg)
 
 ### Removing from the middle of the list
 
@@ -102,7 +102,7 @@ It is also possible to remove a node from the middle of the list. Since that nod
 
 There is no need to change the pointers of the removed node, as updating the pointers of its neighboring nodes will remove it from the list. If no nodes in the list are pointing to it, the node is orphaned.
 
-![Doubly Linked List Remove Middle](../Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/remove_middle_doubly_linked_list.svg)
+![Doubly Linked List Remove Middle](../01-Info%20about%20Doubly%20Linked%20List/doubly_linked_list_images/remove_middle_doubly_linked_list.svg)
 
 ---
 
