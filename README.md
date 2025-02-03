@@ -4,7 +4,7 @@
 
 ## Why Learn Computer Science?
 
-Computer Science is not just about coding—it's about solving problems, thinking logically, and understanding how technology works.
+Computer Science is not just about coding — it's about solving problems, thinking logically, and understanding how technology works.
 Computer Science is a journey of creativity, logic, and innovation. It enables us to build solutions to complex problems and create technology that shapes the future.
 
 This repository serves as an introductory guide to fundamental Computer Science concepts and practices, providing resources, examples, and exercises to help you build a solid foundation.
