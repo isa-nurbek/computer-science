@@ -184,7 +184,7 @@ if __name__ == "__main__":
 
 The current implementation of `dequeue()` has a time complexity of \(O(n)\) due to the use of `pop(0)`. To achieve \(O(1)\) time complexity for both `enqueue()` and `dequeue()`, you can use a **double-ended queue (deque)** from Python's `collections` module. A deque allows efficient appends and pops from both ends.
 
-Here’s how you can modify the `Queue` class to use a deque:
+Here’s how we can modify the `Queue` class to use a deque:
 
 ```python
 from collections import deque
