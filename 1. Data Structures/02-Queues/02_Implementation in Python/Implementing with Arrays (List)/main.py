@@ -135,3 +135,213 @@ Queue after operations: [20, 30]
 
 
 # Code Explanation:
+
+"""
+
+The `Queue` class is a simple implementation of a **First-In-First-Out (FIFO)** data structure. It uses
+a Python list to store elements and provides methods to manipulate the queue. Below is a detailed
+explanation of how the code works:
+
+---
+
+### 1. **Initialization (`__init__` method)**
+```
+def __init__(self):
+    self.queue = []
+```
+- When a `Queue` object is created, an empty list (`self.queue`) is initialized to store the elements of the queue.
+
+---
+
+### 2. **Enqueue (`enqueue` method)**
+```
+def enqueue(self, item):
+    self.queue.append(item)
+```
+- The `enqueue` method adds an element (`item`) to the **rear** (end) of the queue.
+- This is done using the `append` method of the list, which adds the item to the end of the list.
+
+---
+
+### 3. **Dequeue (`dequeue` method)**
+```
+def dequeue(self):
+    if self.is_empty():
+        raise IndexError("Dequeue from an empty queue")
+    return self.queue.pop(0)
+```
+- The `dequeue` method removes and returns the element at the **front** (beginning) of the queue.
+- If the queue is empty, it raises an `IndexError` to indicate that no elements are available to remove.
+- The `pop(0)` method is used to remove the first element of the list, which corresponds to the front of the queue.
+
+---
+
+### 4. **Peek (`peek` method)**
+```
+def peek(self):
+    if self.is_empty():
+        raise IndexError("Peek from an empty queue")
+    return self.queue[0]
+```
+- The `peek` method returns the element at the **front** of the queue **without removing it**.
+- If the queue is empty, it raises an `IndexError`.
+- The first element of the list (`self.queue[0]`) is returned.
+
+---
+
+### 5. **Check if Empty (`is_empty` method)**
+```
+def is_empty(self):
+    return len(self.queue) == 0
+```
+- The `is_empty` method checks if the queue is empty by verifying if the length of the list (`self.queue`) is `0`.
+- It returns `True` if the queue is empty, otherwise `False`.
+
+---
+
+### 6. **Size of the Queue (`size` method)**
+```
+def size(self):
+    return len(self.queue)
+```
+- The `size` method returns the number of elements in the queue by returning the length of the list (`self.queue`).
+
+---
+
+### 7. **String Representation (`__str__` method)**
+```
+def __str__(self):
+    return str(self.queue)
+```
+- The `__str__` method provides a string representation of the queue.
+- When the `print` function is called on a `Queue` object, this method is invoked, and it returns
+the list (`self.queue`) as a string.
+
+---
+
+### Example Usage
+```
+if __name__ == "__main__":
+    q = Queue()
+
+    # Enqueue elements
+    q.enqueue(10)
+    q.enqueue(20)
+    q.enqueue(30)
+
+    # Display the queue
+    print("Queue:", q)  # Output: Queue: [10, 20, 30]
+
+    # Dequeue an element
+    print("Dequeue:", q.dequeue())  # Output: Dequeue: 10
+
+    # Peek at the front element
+    print("Peek:", q.peek())  # Output: Peek: 20
+
+    # Check if the queue is empty
+    print("Is empty?", q.is_empty())  # Output: Is empty? False
+
+    # Get the size of the queue
+    print("Size:", q.size())  # Output: Size: 2
+
+    # Display the queue after operations
+    print("Queue after operations:", q)  # Output: Queue after operations: [20, 30]
+```
+
+---
+
+### How It Works
+1. **Enqueue**: Elements are added to the rear of the queue using the `enqueue` method.
+2. **Dequeue**: Elements are removed from the front of the queue using the `dequeue` method.
+3. **Peek**: The front element is viewed without removing it using the `peek` method.
+4. **Check if Empty**: The `is_empty` method checks if the queue has no elements.
+5. **Size**: The `size` method returns the number of elements in the queue.
+6. **String Representation**: The `__str__` method allows the queue to be printed in a readable format.
+
+---
+
+### Key Points
+- The queue follows the **FIFO** principle: the first element added is the first one to be removed.
+- The `dequeue` and `peek` methods raise exceptions if the queue is empty to prevent invalid operations.
+- The implementation uses a Python list, which makes it simple but may not be the most efficient
+for large queues (due to `pop(0)` being O(n) in time complexity).
+
+******************************************************************************************************************
+
+
+### Optimizing `dequeue()` for O(1) Time Complexity
+
+The current implementation of `dequeue()` has a time complexity of O(n) due to the use of `pop(0)`.
+To achieve O(1) time complexity for both `enqueue()` and `dequeue()`, we can use a **double-ended
+queue (deque)** from Python's `collections` module. A deque allows efficient appends and pops from both ends.
+
+Here’s how you can modify the `Queue` class to use a deque:
+
+"""
+
+from collections import deque
+
+
+class Queue:
+    def __init__(self):
+        # Initialize a deque to store queue elements
+        self.queue = deque()
+
+    def enqueue(self, item):
+        """
+        Add an element to the rear of the queue.
+        """
+        self.queue.append(item)
+
+    def dequeue(self):
+        """
+        Remove and return the element at the front of the queue.
+        Raises an exception if the queue is empty.
+        """
+        if self.is_empty():
+            raise IndexError("Dequeue from an empty queue")
+        return self.queue.popleft()  # Remove the first element in O(1) time
+
+    def peek(self):
+        """
+        Return the element at the front of the queue without removing it.
+        Raises an exception if the queue is empty.
+        """
+        if self.is_empty():
+            raise IndexError("Peek from an empty queue")
+        return self.queue[0]  # Return the first element in O(1) time
+
+    def is_empty(self):
+        """
+        Check if the queue is empty.
+        """
+        return len(self.queue) == 0
+
+    def size(self):
+        """
+        Return the number of elements in the queue.
+        """
+        return len(self.queue)
+
+    def __str__(self):
+        """
+        Return a string representation of the queue.
+        """
+        return str(list(self.queue))
+
+
+"""
+
+### Updated Time Complexity with Deque
+
+1. **`enqueue(item)`**: O(1)
+2. **`dequeue()`**: O(1)
+3. **`peek()`**: O(1)
+4. **`is_empty()`**: O(1)
+5. **`size()`**: O(1)
+6. **`__str__()`**: (O(n)
+
+Using a deque ensures that both `enqueue()` and `dequeue()` operations are performed in constant time,
+making the implementation more efficient for large queues.
+
+"""
