@@ -182,3 +182,197 @@ Index 4: [("banana", 20) → ("lemon", 50)]
 - It uses a hash function to compute an index for each key.
 - Collisions are handled using techniques like chaining or open addressing.
 - Hash maps provide average O(1) time complexity for insertions, deletions, and lookups.
+
+---
+
+### Scenario: Inserting Key-Value Pairs into a Hash Map
+
+Let’s create a **visual example** of a hash map to help you understand how it works step by step. We’ll use a simple scenario with collisions and demonstrate how they are handled using **chaining**.
+
+**Keys and Values**:
+
+- `("apple", 10)`
+- `("banana", 20)`
+- `("orange", 30)`
+- `("grape", 40)`
+- `("lemon", 50)`
+
+**Hash Function**:
+
+- Sum of ASCII values of the characters in the key.
+
+**Array Size**: 5
+
+---
+
+### Step 1: Compute Hash Codes and Indices
+
+| Key     | Hash Code Calculation                     | Hash Code | Index (Hash Code % 5) |
+|---------|-------------------------------------------|-----------|-----------------------|
+| "apple" | 97 + 112 + 112 + 108 + 101 = 530          | 530       | 530 % 5 = 0           |
+| "banana"| 98 + 97 + 110 + 97 + 110 + 97 = 609        | 609       | 609 % 5 = 4           |
+| "orange"| 111 + 114 + 97 + 110 + 103 + 101 = 636     | 636       | 636 % 5 = 1           |
+| "grape" | 103 + 114 + 97 + 112 + 101 = 527           | 527       | 527 % 5 = 2           |
+| "lemon" | 108 + 101 + 109 + 111 + 110 = 539          | 539       | 539 % 5 = 4           |
+
+---
+
+### Step 2: Insert Key-Value Pairs into the Hash Map
+
+#### Initial Hash Map (Empty)
+
+```text
+Index 0: -
+Index 1: -
+Index 2: -
+Index 3: -
+Index 4: -
+```
+
+#### Insert `("apple", 10)`
+
+- Index = 0
+
+```text
+Index 0: ("apple", 10)
+Index 1: -
+Index 2: -
+Index 3: -
+Index 4: -
+```
+
+#### Insert `("banana", 20)`
+
+- Index = 4
+
+```text
+Index 0: ("apple", 10)
+Index 1: -
+Index 2: -
+Index 3: -
+Index 4: ("banana", 20)
+```
+
+#### Insert `("orange", 30)`
+
+- Index = 1
+
+```text
+Index 0: ("apple", 10)
+Index 1: ("orange", 30)
+Index 2: -
+Index 3: -
+Index 4: ("banana", 20)
+```
+
+#### Insert `("grape", 40)`
+
+- Index = 2
+
+```text
+Index 0: ("apple", 10)
+Index 1: ("orange", 30)
+Index 2: ("grape", 40)
+Index 3: -
+Index 4: ("banana", 20)
+```
+
+#### Insert `("lemon", 50)`
+
+- Index = 4 (Collision with `("banana", 20)`)
+- Use **chaining** to handle the collision.
+
+```text
+Index 0: ("apple", 10)
+Index 1: ("orange", 30)
+Index 2: ("grape", 40)
+Index 3: -
+Index 4: [("banana", 20) → ("lemon", 50)]
+```
+
+---
+
+### Final Hash Map Visualization
+
+Here’s the final state of the hash map after all insertions:
+
+```text
+Index 0: ("apple", 10)
+Index 1: ("orange", 30)
+Index 2: ("grape", 40)
+Index 3: -
+Index 4: [("banana", 20) → ("lemon", 50)]
+```
+
+---
+
+### Visual Representation
+
+Let’s represent the hash map as a table with linked lists for chaining:
+
+| Index | Key-Value Pair(s)                     |
+|-------|---------------------------------------|
+| 0     | ("apple", 10)                         |
+| 1     | ("orange", 30)                        |
+| 2     | ("grape", 40)                         |
+| 3     | -                                     |
+| 4     | [("banana", 20) → ("lemon", 50)]      |
+
+---
+
+### How It Works Visually
+
+1. **Index 0**: Contains only `("apple", 10)`.
+2. **Index 1**: Contains only `("orange", 30)`.
+3. **Index 2**: Contains only `("grape", 40)`.
+4. **Index 3**: Empty.
+5. **Index 4**: Contains a linked list with two key-value pairs:
+   - `("banana", 20)` is the first node.
+   - `("lemon", 50)` is the second node, linked to the first.
+
+---
+
+### Lookup Example
+
+#### Lookup `("lemon")`
+
+1. Compute hash code: `hash("lemon") = 539`.
+2. Compute index: `539 % 5 = 4`.
+3. Go to index 4.
+4. Traverse the linked list:
+   - First node: `("banana", 20)` → Key does not match.
+   - Second node: `("lemon", 50)` → Key matches! Return value `50`.
+
+---
+
+### Deletion Example
+
+#### Delete `("banana")`
+
+1. Compute hash code: `hash("banana") = 609`.
+2. Compute index: `609 % 5 = 4`.
+3. Go to index 4.
+4. Traverse the linked list:
+   - First node: `("banana", 20)` → Key matches! Remove this node.
+5. Update the linked list at index 4:
+   - New linked list: `("lemon", 50)`.
+
+Updated hash map:
+
+```text
+Index 0: ("apple", 10)
+Index 1: ("orange", 30)
+Index 2: ("grape", 40)
+Index 3: -
+Index 4: ("lemon", 50)
+```
+
+---
+
+### Summary of Visual Example
+
+- The hash map uses a hash function to map keys to indices.
+- Collisions are handled using **chaining** (linked lists).
+- Lookup, insertion, and deletion are efficient when collisions are minimal.
+
+Let me know if you’d like to explore more visual examples or dive deeper into specific scenarios!
