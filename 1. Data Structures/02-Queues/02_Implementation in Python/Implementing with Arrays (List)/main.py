@@ -266,7 +266,7 @@ if __name__ == "__main__":
 - The implementation uses a Python list, which makes it simple but may not be the most efficient
 for large queues (due to `pop(0)` being O(n) in time complexity).
 
-******************************************************************************************************************
+***************************************************************************************************************************
 
 
 ### Optimizing `dequeue()` for O(1) Time Complexity
