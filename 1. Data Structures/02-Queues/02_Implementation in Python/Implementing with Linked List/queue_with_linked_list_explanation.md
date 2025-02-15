@@ -174,7 +174,7 @@ This implementation is efficient and adheres to the FIFO principle of a queue.
 
 ---
 
-### Time Complexity Analysis
+### Time and Space Complexity Analysis
 
 Let's analyze the **time and space complexity** of the given **Queue** implementation.
 
