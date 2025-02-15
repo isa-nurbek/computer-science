@@ -4,14 +4,7 @@ A **stack** is a linear data structure that follows the **Last In, First Out (LI
 
 ---
 
-## **1. How a Stack Works**
-
-A stack is typically implemented using:
-
-- **Arrays** (Fixed size, efficient, but requires resizing if full)
-- **Linked Lists** (Dynamic size, uses extra memory for pointers)
-
-### **Operations in a Stack**
+## **1. Operations in a Stack**
 
 A stack mainly supports three primary operations:
 
@@ -32,6 +25,16 @@ Additional operations:
 - **isFull()** – Checks if the stack is full (for array-based stacks).
 - **Size()** – Returns the number of elements in the stack.
 
+Stacks mimic a physical “stack” of objects. Consider a set of gym weights:
+
+![Stacks Description](../01_Info%20about%20Stacks/stack_images/weight_stacking.webp)
+
+Each plate has a weight (the data). The first plate you add, or push, onto the floor is both the bottom and top of the stack. Each weight added becomes the new top of the stack.
+
+At any point, the only weight you can remove, or pop, from the stack is the top one. You can peek and read the top weight without removing it from the stack.
+
+The last plate that you put down becomes the first, and only, one that you can access. This is a Last In, First Out or LIFO structure. A less frequently used term is First In, Last Out, or FILO.
+
 ---
 
 ## **2. Stack Representation**
@@ -51,7 +54,24 @@ Bottom → [  1  ]
 
 ---
 
-## **3. Applications of Stacks**
+## **3. Implementation**
+
+A stack is typically implemented using:
+
+- **Arrays** (Fixed size, efficient, but requires resizing if full)
+- **Linked Lists** (Dynamic size, uses extra memory for pointers)
+
+Stacks can be implemented using a linked list as the underlying data structure because it’s more efficient than a list or array.
+
+![Stacks Implementation with Linked List](../01_Info%20about%20Stacks/stack_images/stack_linked_list.svg)
+
+Depending on the implementation, the top of the stack is equivalent to the head node of a linked list and the bottom of the stack is equivalent to the tail node.
+
+A constraint that may be placed on a stack is its size. This is done to limit and quantify the resources the data structure will take up when it is “full.”
+
+Attempting to push data onto an already full stack will result in a stack overflow. Similarly, if you attempt to pop data from an empty stack, it will result in a stack underflow.
+
+## **4. Applications of Stacks**
 
 Stacks are used in various real-world and computer science applications, including:
 
@@ -79,7 +99,7 @@ Stacks are used in various real-world and computer science applications, includi
 
 ---
 
-## **4. Stack vs. Queue**
+## **5. Stack vs. Queue**
 
 | Feature        | Stack (LIFO)  | Queue (FIFO)  |
 |---------------|--------------|--------------|
@@ -93,5 +113,3 @@ Stacks are used in various real-world and computer science applications, includi
 ### **Conclusion**
 
 Stacks are an essential data structure widely used in software development and system operations. Understanding their LIFO behavior and applications will help in writing efficient algorithms, especially when dealing with recursive functions, expression evaluations, and backtracking problems.
-
-Would you like a deeper dive into a specific aspect, such as stack-based algorithms or a specific programming language implementation? 🚀
