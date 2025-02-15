@@ -171,3 +171,47 @@ print("Peek:", queue.peek())  # Output: Peek: 20
 - The `is_empty` method is used to handle edge cases (e.g., dequeueing or peeking from an empty queue).
 
 This implementation is efficient and adheres to the FIFO principle of a queue.
+
+### Time Complexity Analysis
+
+Let's analyze the **time and space complexity** of the given **Queue** implementation.
+
+### 1. **Time Complexity**
+
+Each operation's time complexity:
+
+- **`enqueue(data)`**:  
+  - Creating a new node takes **O(1)**.  
+  - Updating the `rear` pointer and linking takes **O(1)**.  
+  - **Overall complexity: O(1)**.
+
+- **`dequeue()`**:  
+  - Checking if the queue is empty takes **O(1)**.  
+  - Removing the front node and updating the pointers takes **O(1)**.  
+  - **Overall complexity: O(1)**.
+
+- **`peek()`**:  
+  - Checking if the queue is empty takes **O(1)**.  
+  - Returning the front element takes **O(1)**.  
+  - **Overall complexity: O(1)**.
+
+- **`__str__()` (Printing the queue)**:  
+  - Traverses all nodes in the queue, taking **O(n)** time, where **n** is the number of elements in the queue.
+
+### 2. **Space Complexity**
+
+- Each element in the queue is stored in a **Node** object, which requires **O(n)** space for **n** elements.
+- No additional auxiliary space is used apart from a few pointers (`front` and `rear`), which are **O(1)**.
+- **Overall space complexity: O(n)**.
+
+### Summary
+
+| Operation  | Time Complexity | Space Complexity |
+|------------|---------------|------------------|
+| `enqueue()` | O(1) | O(1) |
+| `dequeue()` | O(1) | O(1) |
+| `peek()` | O(1) | O(1) |
+| `__str__()` | O(n) | O(1) |
+| Overall | O(1) per operation | O(n) total |
+
+This is an efficient **linked list-based queue**, performing enqueue, dequeue, and peek in constant time. 🚀
