@@ -1,78 +1,71 @@
-# Define a Node class to represent each element in the queue
+# Node class represents each element in the queue
 class Node:
     def __init__(self, data):
-        self.data = data  # Store the data in the node
-        self.next = None  # Initialize the next pointer to None
+        self.data = data  # Stores the value of the node
+        self.next = None  # Pointer to the next node in the queue
 
 
-# Define a Queue class to implement the queue data structure
+# Queue class implementing a linked list-based queue
 class Queue:
     def __init__(self):
-        self.front = None  # Initialize the front of the queue to None
-        self.rear = None  # Initialize the rear of the queue to None
+        self.front = None  # Points to the front (first) element of the queue
+        self.rear = None  # Points to the rear (last) element of the queue
 
-    # Method to check if the queue is empty
+    # Check if the queue is empty
     def is_empty(self):
-        return self.front is None  # If front is None, the queue is empty
+        return self.front is None
 
-    # Method to add an element to the rear of the queue (enqueue)
+    # Add an element to the rear of the queue
     def enqueue(self, data):
         new_node = Node(data)  # Create a new node with the given data
-        if self.rear is None:  # If the queue is empty
-            self.front = self.rear = (
-                new_node  # Both front and rear point to the new node
-            )
+        if (
+            self.rear is None
+        ):  # If the queue is empty, both front and rear should point to new node
+            self.front = self.rear = new_node
             return
-        # If the queue is not empty, add the new node to the rear
         self.rear.next = new_node  # Link the current rear node to the new node
-        self.rear = new_node  # Update the rear to point to the new node
+        self.rear = new_node  # Update the rear pointer
 
-    # Method to remove an element from the front of the queue (dequeue)
+    # Remove an element from the front of the queue
     def dequeue(self):
-        if self.is_empty():  # Check if the queue is empty
-            raise IndexError("Dequeue from an empty queue")  # Raise an error if empty
-        temp = self.front  # Store the current front node in a temporary variable
-        self.front = temp.next  # Move the front pointer to the next node
-        if self.front is None:  # If the queue is now empty
-            self.rear = None  # Set the rear to None as well
-        return temp.data  # Return the data of the dequeued node
+        if self.is_empty():  # Check if the queue is empty before removing
+            raise IndexError("Dequeue from an empty queue")
+        temp = self.front  # Store the front node to return its data later
+        self.front = temp.next  # Move front to the next node
+        if self.front is None:  # If the queue becomes empty, reset rear as well
+            self.rear = None
+        return temp.data  # Return the removed element's data
 
-    # Method to peek at the front element of the queue without removing it
+    # View the front element without removing it
     def peek(self):
-        if self.is_empty():  # Check if the queue is empty
-            raise IndexError("Peek from an empty queue")  # Raise an error if empty
-        return self.front.data  # Return the data of the front node
+        if self.is_empty():
+            raise IndexError("Peek from an empty queue")
+        return self.front.data  # Return the front element's data
 
-    # Method to represent the queue as a string for easy visualization
+    # Return a string representation of the queue
     def __str__(self):
-        if self.is_empty():  # Check if the queue is empty
-            return "Queue is empty"  # Return a message indicating the queue is empty
+        if self.is_empty():
+            return "Queue is empty"
         temp = self.front  # Start from the front of the queue
-        queue_str = []  # Initialize a list to store the queue elements
+        queue_str = []
         while temp:  # Traverse the queue
-            queue_str.append(str(temp.data))  # Append each element's data to the list
-            temp = temp.next  # Move to the next node
-        return " -> ".join(queue_str)  # Join the elements with " -> " for visualization
+            queue_str.append(str(temp.data))  # Collect data values
+            temp = temp.next
+        return " -> ".join(queue_str)  # Format as a string
 
 
 # Example usage:
-queue = Queue()  # Create an instance of the Queue class
-
-# Enqueue elements into the queue
+queue = Queue()
 queue.enqueue(10)
 queue.enqueue(20)
 queue.enqueue(30)
 
-# Print the current state of the queue
 print("Queue:", queue)  # Output: Queue: 10 -> 20 -> 30
 
-# Dequeue an element from the queue and print it
 print("Dequeue:", queue.dequeue())  # Output: Dequeue: 10
 
-# Print the queue after dequeue operation
 print("Queue after dequeue:", queue)  # Output: Queue after dequeue: 20 -> 30
 
-# Peek at the front element of the queue without removing it
 print("Peek:", queue.peek())  # Output: Peek: 20
 
 
