@@ -145,7 +145,7 @@ if __name__ == "__main__":
 
 ---
 
-### Time Complexity Analysis
+### Time and Space Complexity Analysis
 
 1. **`enqueue(item)`**:
    - **Time Complexity**: \(O(1)\)
