@@ -79,6 +79,60 @@ Top element: 20
 """
 ## Time and Space Complexity Analysis:
 
+Let's analyze the **time complexity** and **space complexity** of the `Stack` implementation provided.
+
+---
+
+### **Time Complexity**
+
+1. **`push(data)`**:
+   - **Time Complexity**: O(1)
+   - Explanation: Inserting a new node at the top of the stack involves creating a new node and updating
+   the `top` pointer. This is a constant-time operation.
+
+2. **`pop()`**:
+   - **Time Complexity**: O(1)
+   - Explanation: Removing the top node involves updating the `top` pointer to the next node.
+   This is also a constant-time operation.
+
+3. **`peek()`**:
+   - **Time Complexity**: O(1)
+   - Explanation: Accessing the data of the top node is a constant-time operation.
+
+4. **`is_empty()`**:
+   - **Time Complexity**: O(1)
+   - Explanation: Checking if the `top` pointer is `None` is a constant-time operation.
+
+5. **`__str__()`**:
+   - **Time Complexity**: O(n), where `n` is the number of elements in the stack.
+   - Explanation: The `__str__` method traverses the entire stack to construct the string representation.
+   This requires visiting each node once, so the time complexity is linear in the number of elements.
+
+---
+
+### **Space Complexity**
+
+1. **Overall Space Complexity**:
+   - **Space Complexity**: O(n), where `n` is the number of elements in the stack.
+   - Explanation: The space required to store the stack is proportional to the number of elements in it.
+   Each node stores data and a pointer to the next node, so the total space used is O(n).
+
+2. **Auxiliary Space**:
+   - **`push(data)`**: O(1)
+     - Explanation: No additional space is required beyond the new node being added.
+     
+   - **`pop()`**: O(1)
+     - Explanation: No additional space is required beyond the temporary variable to store the popped data.
+     
+   - **`peek()`**: O(1)
+     - Explanation: No additional space is required.
+     
+   - **`is_empty()`**: O(1)
+     - Explanation: No additional space is required.
+     
+   - **`__str__()`**: O(n)
+     - Explanation: The `stack_str` variable grows linearly with the number of elements in the stack.
+
 """
 
 # ********************************************************************************************************************* #
