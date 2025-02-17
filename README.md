@@ -1,4 +1,4 @@
-# Computer Science: Introduction to 
+# Computer Science: Introduction.
 
 **Computer Science** is the study of computation, algorithms, and information. It encompasses a wide range of topics, including software development, data structures, artificial intelligence, networking, cybersecurity, and more.
 
