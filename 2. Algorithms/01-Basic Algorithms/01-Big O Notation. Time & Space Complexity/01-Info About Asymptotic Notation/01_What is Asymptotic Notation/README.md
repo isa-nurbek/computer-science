@@ -20,12 +20,12 @@ For instance, a program that has input of size `N` may tell the computer to run 
 
 For example, when `N` is 1000:
 
-- **the `N2` term is 1,000,000**
-- **the `N` term is 1,000**
+- the `N2` term is 1,000,000
+- the `N` term is 1,000
   
 As you can see, the `N2` term is much more significant than the `N` term. When `N` is larger than 1000, the difference becomes even more significant. Because the difference is so enormous, we don’t even need to consider the `N` term when calculating the runtime. Thus, for this program, we would describe the runtime in terms of `N2`. There are three different ways we could describe the runtime of this program: Big Theta or `Θ(N2)`, Big O or `O(N2)`, Big Omega or `Ω(N2)`. The difference between the three and when to use which one will be detailed in the next exercises.
 
-You may see the term ***execution*** count used in evaluating algorithms. Execution count is more precise than Big O notation. The following method, `addUpTo()`, depending on how we count the number of operations, can be as low as `2N` or as high as `5N + 2`.
+You may see the term **execution count** used in evaluating algorithms. Execution count is more precise than Big O notation. The following method, `addUpTo()`, depending on how we count the number of operations, can be as low as `2N` or as high as `5N + 2`.
 
 ```java
 public class Main() { 
@@ -59,17 +59,17 @@ Big-O notation gives an upper bound on the growth rate of an algorithm. It descr
 
 A function `f(n)` is said to be **O(g(n))** if there exist positive constants `c` and `n₀` such that:
 
-    ```
-    f(n) ≤ c * g(n)  for all n ≥ n₀
-    ```
+```math
+f(n) ≤ c * g(n)  for all n ≥ n₀
+```
 
 #### **Example**
 
 If an algorithm takes `3n² + 5n + 7` operations, we approximate its time complexity as:
 
-    ```
-    O(n²)
-    ```
+```math
+O(n²)
+```
 
 **Why?** Because as `n` grows large, the `n²` term dominates, and constants are ignored.
 
@@ -83,17 +83,17 @@ Omega notation provides a lower bound on the running time of an algorithm. It de
 
 A function `f(n)` is said to be **Ω(g(n))** if there exist positive constants `c` and `n₀` such that:
 
-    ```
-    f(n) ≥ c * g(n)  for all n ≥ n₀
-    ```
+```math
+f(n) ≥ c * g(n)  for all n ≥ n₀
+```
 
 #### **Example**
 
 For the function `f(n) = 3n² + 5n + 7`, we can say:
 
-    ```
-    `Ω(n²)`
-    ```
+```math
+`Ω(n²)`
+```
 
 because, in the best case, it still behaves at least as `n²` for large `n`.
 
@@ -107,17 +107,17 @@ Theta notation describes the exact bound of an algorithm, meaning it provides bo
 
 A function `f(n)` is said to be **Θ(g(n))** if there exist positive constants `c₁`, `c₂`, and `n₀` such that:
 
-    ```
-    c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)  for all n ≥ n₀`
-    ```
+```math
+c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)  for all n ≥ n₀`
+```
 
 #### **Example**
 
 For the function `f(n) = 3n² + 5n + 7`, since its growth rate is bounded both from above and below by `n²`, we write:
 
-    ```
-    Θ(n²)
-    ```
+```math
+Θ(n²)
+```
 
 Thus, `f(n)` is neither faster nor slower than `n²` in terms of growth rate.
 
