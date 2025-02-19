@@ -1,6 +1,6 @@
 # Asymptotic Notation: Conceptual
 
-Asymptotic notation is a mathematical framework used to describe the efficiency of an algorithm in terms of time complexity and space complexity as the input size `( n )` grows. It provides a way to compare algorithms based on their performance without worrying about machine-specific details, such as processor speed or compiler optimizations.
+Asymptotic notation is a mathematical framework used to describe the efficiency of an algorithm in terms of time complexity and space complexity as the input size `n` grows. It provides a way to compare algorithms based on their performance without worrying about machine-specific details, such as processor speed or compiler optimizations.
 
 ## **Why Asymptotic Notation?**
 
@@ -59,19 +59,44 @@ Big-O notation gives an upper bound on the growth rate of an algorithm. It descr
 
 A function `f(n)` is said to be **O(g(n))** if there exist positive constants `c` and `n₀` such that:
 
-```text
-f(n) ≤ c * g(n)  for all n ≥ n₀
+```math
+f(n) ≤ c ⋅ g(n), ∀n ≥ n₀
 ```
 
-#### **Example**
+### **What It Means**
 
-If an algorithm takes `3n² + 5n + 7` operations, we approximate its time complexity as:
+- Big-O notation provides an **upper bound** on how fast an algorithm grows.
+- It tells us that for sufficiently large values of `n`, the function `f(n)` will never grow faster than some constant multiple of `g(n)`.
+- The constants `c` and `n₀` help define where the bound starts applying.
+
+### **Breaking It Down**
+
+- `f(n)`: The actual time complexity function of the algorithm.
+- `g(n)`: A simpler function that acts as an upper bound.
+- `c`: A constant multiplier that ensures `f(n)` is always below `c * g(n)`.
+- `n₀`: The threshold beyond which this bound holds.
+
+### **Example**
+
+Suppose we have an algorithm with:
 
 ```text
-O(n²)
+f(n) = 3n² + 5n + 7
 ```
 
-**Why?** Because as `n` grows large, the `n²` term dominates, and constants are ignored.
+We claim that:
+
+```text
+f(n) = O(n²)
+```
+
+To prove this, we choose `c = 4` and `n₀ = 10`. For all `n ≥ 10`, we get:
+
+```text
+3n² + 5n + 7 ≤ 4n²
+```
+
+Thus, we say `f(n) = O(n²)`, meaning the algorithm **at most** grows like `n²`.
 
 ---
 
@@ -83,19 +108,44 @@ Omega notation provides a lower bound on the running time of an algorithm. It de
 
 A function `f(n)` is said to be **Ω(g(n))** if there exist positive constants `c` and `n₀` such that:
 
-```text
-f(n) ≥ c * g(n)  for all n ≥ n₀
+```math
+f(n) ≥ c ⋅ g(n), ∀n ≥ n₀
 ```
 
-#### **Example**
+### **What It Means**
 
-For the function `f(n) = 3n² + 5n + 7`, we can say:
+- Omega notation provides a **lower bound** on the algorithm's growth.
+- It tells us that for sufficiently large `n`, the function `f(n)` will **at least** grow as fast as `g(n)`.
+- This helps determine the **best-case** performance of an algorithm.
+
+### **Breaking It Down**
+
+- `f(n)`: The actual complexity function.
+- `g(n)`: A simpler function that acts as a lower bound.
+- `c`: A constant that ensures `f(n)` is always at least `c * g(n)`.
+- `n₀`: The threshold beyond which this bound holds.
+
+### **Example**
+
+For the same function:
 
 ```text
-`Ω(n²)`
+f(n) = 3n² + 5n + 7
 ```
 
-because, in the best case, it still behaves at least as `n²` for large `n`.
+We claim:
+
+```text
+f(n) = Ω(n²)
+```
+
+By picking `c = 2` and `n₀ = 10`, we see that for all `n ≥ 10`:
+
+```text
+3n² + 5n + 7 ≥ 2n²
+```
+
+Thus, `f(n) = Ω(n²)`, meaning the algorithm **at least** grows like `n²`.
 
 ---
 
@@ -107,19 +157,53 @@ Theta notation describes the exact bound of an algorithm, meaning it provides bo
 
 A function `f(n)` is said to be **Θ(g(n))** if there exist positive constants `c₁`, `c₂`, and `n₀` such that:
 
-```text
-c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)  for all n ≥ n₀`
+```math
+c₁ ⋅ g(n) ≤ f(n) ≤ c₂ ⋅ g(n), ∀n ≥ n₀
 ```
 
-#### **Example**
+### **What It Means**
 
-For the function `f(n) = 3n² + 5n + 7`, since its growth rate is bounded both from above and below by `n²`, we write:
+- Theta notation provides a **tight bound**, meaning the algorithm **exactly** follows the growth rate of `g(n)`.
+- This notation is used when both the upper and lower bounds are the same.
+
+### **Breaking It Down**
+
+- `c₁` and `c₂`: Two constants that sandwich `f(n)`.
+- `f(n)`: The actual complexity function.
+- `g(n)`: The function that defines the growth rate.
+- `n₀`: The threshold beyond which this bound holds.
+
+### **Example**
+
+For the same function:
 
 ```text
-Θ(n²)
+f(n) = 3n² + 5n + 7
 ```
 
-Thus, `f(n)` is neither faster nor slower than `n²` in terms of growth rate.
+Since it is both `O(n²)` and `Ω(n²)`, it follows that:
+
+```text
+f(n) = Ω(n²)
+```
+
+For `c₁ = 2` and `c₂ = 4`, we get:
+
+```math
+2n² ≤ 3n² + 5n + 7 ≤ 4n², ∀n ≥ 10
+```
+
+Thus, `f(n) = Θ(n²)`, meaning the algorithm **grows exactly** like `n²`.
+
+---
+
+## **Summary**
+
+| Notation | Formula | Meaning |
+|----------|---------|---------|
+| **Big-O** (`O(g(n))`) | `f(n) ≤ c * g(n)` | **Upper bound (worst case)** |
+| **Omega** (`Ω(g(n))`) | `f(n) ≥ c * g(n)` | **Lower bound (best case)** |
+| **Theta** (`Θ(g(n))`) | `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)` | **Exact bound (tight case)** |
 
 ---
 
