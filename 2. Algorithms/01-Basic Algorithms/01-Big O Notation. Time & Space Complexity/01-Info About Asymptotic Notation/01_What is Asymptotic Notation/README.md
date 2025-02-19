@@ -59,7 +59,7 @@ Big-O notation gives an upper bound on the growth rate of an algorithm. It descr
 
 A function `f(n)` is said to be **O(g(n))** if there exist positive constants `c` and `n₀` such that:
 
-```math
+```text
 f(n) ≤ c * g(n)  for all n ≥ n₀
 ```
 
@@ -67,7 +67,7 @@ f(n) ≤ c * g(n)  for all n ≥ n₀
 
 If an algorithm takes `3n² + 5n + 7` operations, we approximate its time complexity as:
 
-```math
+```text
 O(n²)
 ```
 
@@ -83,7 +83,7 @@ Omega notation provides a lower bound on the running time of an algorithm. It de
 
 A function `f(n)` is said to be **Ω(g(n))** if there exist positive constants `c` and `n₀` such that:
 
-```math
+```text
 f(n) ≥ c * g(n)  for all n ≥ n₀
 ```
 
@@ -91,7 +91,7 @@ f(n) ≥ c * g(n)  for all n ≥ n₀
 
 For the function `f(n) = 3n² + 5n + 7`, we can say:
 
-```math
+```text
 `Ω(n²)`
 ```
 
@@ -107,7 +107,7 @@ Theta notation describes the exact bound of an algorithm, meaning it provides bo
 
 A function `f(n)` is said to be **Θ(g(n))** if there exist positive constants `c₁`, `c₂`, and `n₀` such that:
 
-```math
+```text
 c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)  for all n ≥ n₀`
 ```
 
@@ -115,7 +115,7 @@ c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)  for all n ≥ n₀`
 
 For the function `f(n) = 3n² + 5n + 7`, since its growth rate is bounded both from above and below by `n²`, we write:
 
-```math
+```text
 Θ(n²)
 ```
 
