@@ -25,8 +25,8 @@ This repository serves as a foundational guide to essential Computer Science con
   - Divide and Conquer
   - Dynamic Programming
   - Greedy Algorithms
-- Analyze time and space complexity using Big-O notation.
-- Practice solving problems efficiently with sorting, searching, and optimization algorithms.
+- Analyze time and space complexity using Big-O notation
+- Practice solving problems efficiently with sorting, searching, and optimization algorithms
 
 ### 3. **Trees and Graphs**
 
