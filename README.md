@@ -1,8 +1,8 @@
-# Introduction to Computer Science
+# Computer Science: Introduction.
 
 **Computer Science** is the study of computation, algorithms, and information. It encompasses a wide range of topics, including software development, data structures, artificial intelligence, networking, cybersecurity, and more.
 
-## Why Learn Computer Science?
+## Why Learn Computer Science?.
 
 Computer Science is not just about coding — it's about solving problems, thinking logically, and understanding how technology works.
 Computer Science is a journey of creativity, logic, and innovation. It enables us to build solutions to complex problems and create technology that shapes the future.
@@ -11,9 +11,9 @@ This repository serves as an introductory guide to fundamental Computer Science 
 
 This repository serves as a foundational guide to essential Computer Science concepts, implemented and explored using the Python programming language.
 
-## Topics Covered
+## Topics Covered:
 
-### 1. **Data Structures**
+### 1. **Data Structures**:
 
 - Learn about foundational structures such as arrays, linked lists, stacks, queues, and hash tables.
 - Understand advanced structures like trees, heaps, and graphs.
