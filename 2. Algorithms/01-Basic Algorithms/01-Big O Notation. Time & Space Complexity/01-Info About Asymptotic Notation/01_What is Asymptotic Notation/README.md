@@ -8,6 +8,43 @@ Asymptotic notation is a mathematical framework used to describe the efficiency 
 2. **Machine Independence** – It ignores constant factors and lower-order terms that do not significantly impact performance at large `n`.
 3. **Comparative Analysis** – Helps determine which algorithm performs better for large inputs.
 
+Cheetahs. Ferrari's. Life. All are fast, but how do you know which one is the fastest? You can measure a cheetah’s and a Ferrari’s speed with a speedometer. You can measure life with years and months.
+
+But what about computer programs? In fact, you can time a computer program, but different computers run at different speeds. For example, a program that takes 12 nanoseconds on one computer could take 45 milliseconds on another. Therefore, we need a more general way to gauge a program’s runtime. We do this with **Asymptotic Notation**.
+
+Instead of timing a program, through asymptotic notation, we can calculate a program’s runtime by looking at how many instructions the computer has to perform based on the size of the program’s input: `N`.
+
+For instance, a program that has input of size `N` may tell the computer to run `5N2 + 3N + 2` instructions. (We will get into how we get this kind of expression in future exercises.) Nevertheless, this is still a fairly messy and large expression. For asymptotic notation, we drop all of our constants (the numbers) because as `N` becomes extremely large, the constants will make minute differences. After changing our constants, we have `N2 + N`. If we take each of these terms in the expression and graph them, we see that the `N2` term grows faster than the `N` term.
+
+![Common Runtimes](../01_What%20is%20Asymptotic%20Notation/image_of_an/runtimes%20compare.webp)
+
+For example, when `N` is 1000:
+
+- **the `N2` term is 1,000,000**
+- **the `N` term is 1,000**
+  
+As you can see, the `N2` term is much more significant than the `N` term. When `N` is larger than 1000, the difference becomes even more significant. Because the difference is so enormous, we don’t even need to consider the `N` term when calculating the runtime. Thus, for this program, we would describe the runtime in terms of `N2`. There are three different ways we could describe the runtime of this program: Big Theta or `Θ(N2)`, Big O or `O(N2)`, Big Omega or `Ω(N2)`. The difference between the three and when to use which one will be detailed in the next exercises.
+
+You may see the term ***execution*** count used in evaluating algorithms. Execution count is more precise than Big O notation. The following method, `addUpTo()`, depending on how we count the number of operations, can be as low as `2N` or as high as `5N + 2`.
+
+```java
+public class Main() { 
+  void int addUpTo(int n) {
+    int total = 0;
+    for (int i = 1; i <= n; i++) {
+      total += i;
+    }
+  return total;
+  } 
+}
+```
+
+Determining execution count can increase in difficulty as our algorithms become even more sophisticated!
+
+But regardless of the execution count, the number of operations grows roughly proportionally with `n`. If `n` doubles, the number of operations will also roughly double.
+
+Big O Notation is a way to formalize fuzzy counting. It allows us to talk formally about how the runtime of an algorithm grows as the inputs grow. As we will see, Big O doesn’t focus on the details, only the trends.
+
 ---
 
 ## **Types of Asymptotic Notation**
@@ -22,13 +59,17 @@ Big-O notation gives an upper bound on the growth rate of an algorithm. It descr
 
 A function `f(n)` is said to be **O(g(n))** if there exist positive constants `c` and `n₀` such that:
 
-    `f(n) ≤ c * g(n)  for all n ≥ n₀`
+    ```
+    f(n) ≤ c * g(n)  for all n ≥ n₀
+    ```
 
 #### **Example**
 
 If an algorithm takes `3n² + 5n + 7` operations, we approximate its time complexity as:
 
-    `O(n²)`
+    ```
+    O(n²)
+    ```
 
 **Why?** Because as `n` grows large, the `n²` term dominates, and constants are ignored.
 
@@ -42,13 +83,17 @@ Omega notation provides a lower bound on the running time of an algorithm. It de
 
 A function `f(n)` is said to be **Ω(g(n))** if there exist positive constants `c` and `n₀` such that:
 
-    `f(n) ≥ c * g(n)  for all n ≥ n₀`
+    ```
+    f(n) ≥ c * g(n)  for all n ≥ n₀
+    ```
 
 #### **Example**
 
 For the function `f(n) = 3n² + 5n + 7`, we can say:
 
+    ```
     `Ω(n²)`
+    ```
 
 because, in the best case, it still behaves at least as `n²` for large `n`.
 
@@ -62,13 +107,17 @@ Theta notation describes the exact bound of an algorithm, meaning it provides bo
 
 A function `f(n)` is said to be **Θ(g(n))** if there exist positive constants `c₁`, `c₂`, and `n₀` such that:
 
-    `c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)  for all n ≥ n₀`
+    ```
+    c₁ * g(n) ≤ f(n) ≤ c₂ * g(n)  for all n ≥ n₀`
+    ```
 
 #### **Example**
 
 For the function `f(n) = 3n² + 5n + 7`, since its growth rate is bounded both from above and below by `n²`, we write:
 
-    `Θ(n²)`
+    ```
+    Θ(n²)
+    ```
 
 Thus, `f(n)` is neither faster nor slower than `n²` in terms of growth rate.
 
