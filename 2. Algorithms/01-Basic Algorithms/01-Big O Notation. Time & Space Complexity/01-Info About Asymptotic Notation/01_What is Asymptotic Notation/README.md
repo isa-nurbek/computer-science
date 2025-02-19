@@ -60,7 +60,7 @@ Big-O notation gives an upper bound on the growth rate of an algorithm. It descr
 A function `f(n)` is said to be **O(g(n))** if there exist positive constants `c` and `n₀` such that:
 
 ```math
-f(n) ≤ c ⋅ g(n), ∀n ≥ n₀
+f(n) ≤ c ⋅ g(n),  ∀n ≥ n₀
 ```
 
 ### **What It Means**
@@ -109,7 +109,7 @@ Omega notation provides a lower bound on the running time of an algorithm. It de
 A function `f(n)` is said to be **Ω(g(n))** if there exist positive constants `c` and `n₀` such that:
 
 ```math
-f(n) ≥ c ⋅ g(n), ∀n ≥ n₀
+f(n) ≥ c ⋅ g(n),  ∀n ≥ n₀
 ```
 
 ### **What It Means**
@@ -158,7 +158,7 @@ Theta notation describes the exact bound of an algorithm, meaning it provides bo
 A function `f(n)` is said to be **Θ(g(n))** if there exist positive constants `c₁`, `c₂`, and `n₀` such that:
 
 ```math
-c₁ ⋅ g(n) ≤ f(n) ≤ c₂ ⋅ g(n), ∀n ≥ n₀
+c₁ ⋅ g(n) ≤ f(n) ≤ c₂ ⋅ g(n),  ∀n ≥ n₀
 ```
 
 ### **What It Means**
@@ -190,7 +190,7 @@ f(n) = Ω(n²)
 For `c₁ = 2` and `c₂ = 4`, we get:
 
 ```math
-2n² ≤ 3n² + 5n + 7 ≤ 4n², ∀n ≥ 10
+2n² ≤ 3n² + 5n + 7 ≤ 4n²,  ∀n ≥ 10
 ```
 
 Thus, `f(n) = Θ(n²)`, meaning the algorithm **grows exactly** like `n²`.
