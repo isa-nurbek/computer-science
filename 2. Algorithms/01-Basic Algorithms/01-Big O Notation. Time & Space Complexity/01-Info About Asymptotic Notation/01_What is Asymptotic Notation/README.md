@@ -8,24 +8,24 @@ Asymptotic notation is a mathematical framework used to describe the efficiency 
 2. **Machine Independence** – It ignores constant factors and lower-order terms that do not significantly impact performance at large `n`.
 3. **Comparative Analysis** – Helps determine which algorithm performs better for large inputs.
 
-Cheetahs. Ferrari's. Life. All are fast, but how do you know which one is the fastest? You can measure a cheetah’s and a Ferrari’s speed with a speedometer. You can measure life with years and months.
+Cheetahs. Ferraris. Life. All are fast, but how do you know which one is the fastest? You can measure a cheetah’s and a Ferrari’s speed with a speedometer. You can measure life with years and months.
 
 But what about computer programs? In fact, you can time a computer program, but different computers run at different speeds. For example, a program that takes 12 nanoseconds on one computer could take 45 milliseconds on another. Therefore, we need a more general way to gauge a program’s runtime. We do this with **Asymptotic Notation**.
 
-Instead of timing a program, through asymptotic notation, we can calculate a program’s runtime by looking at how many instructions the computer has to perform based on the size of the program’s input: `N`.
+Instead of timing a program, through asymptotic notation, we can calculate a program’s runtime by looking at how many instructions the computer has to perform based on the size of the program’s input: `n`.
 
-For instance, a program that has input of size `N` may tell the computer to run `5N2 + 3N + 2` instructions. (We will get into how we get this kind of expression in future exercises.) Nevertheless, this is still a fairly messy and large expression. For asymptotic notation, we drop all of our constants (the numbers) because as `N` becomes extremely large, the constants will make minute differences. After changing our constants, we have `N2 + N`. If we take each of these terms in the expression and graph them, we see that the `N2` term grows faster than the `N` term.
+For instance, a program that has input of size `n` may tell the computer to run `5n² + 3n + 2` instructions. (We will get into how we get this kind of expression in future exercises.) Nevertheless, this is still a fairly messy and large expression. For asymptotic notation, we drop all of our constants (the numbers) because as `n` becomes extremely large, the constants will make minute differences. After changing our constants, we have `n² + n`. If we take each of these terms in the expression and graph them, we see that the `n²` term grows faster than the `n` term.
 
 ![Common Runtimes](../01_What%20is%20Asymptotic%20Notation/image_of_an/runtimes%20compare.webp)
 
-For example, when `N` is 1000:
+For example, when `n` is 1000:
 
-- the `N2` term is 1,000,000
-- the `N` term is 1,000
+- the `n²` term is 1,000,000
+- the `n` term is 1,000
   
-As you can see, the `N2` term is much more significant than the `N` term. When `N` is larger than 1000, the difference becomes even more significant. Because the difference is so enormous, we don’t even need to consider the `N` term when calculating the runtime. Thus, for this program, we would describe the runtime in terms of `N2`. There are three different ways we could describe the runtime of this program: Big Theta or `Θ(N2)`, Big O or `O(N2)`, Big Omega or `Ω(N2)`. The difference between the three and when to use which one will be detailed in the next exercises.
+As you can see, the `n²` term is much more significant than the `n` term. When `n` is larger than 1000, the difference becomes even more significant. Because the difference is so enormous, we don’t even need to consider the `n` term when calculating the runtime. Thus, for this program, we would describe the runtime in terms of `n²`. There are three different ways we could describe the runtime of this program: Big Theta or `Θ(n²)`, Big O or `O(n²)`, Big Omega or `Ω(n²)`. The difference between the three and when to use which one will be detailed in the next exercises.
 
-You may see the term **execution count** used in evaluating algorithms. Execution count is more precise than Big O notation. The following method, `addUpTo()`, depending on how we count the number of operations, can be as low as `2N` or as high as `5N + 2`.
+You may see the term **execution count** used in evaluating algorithms. Execution count is more precise than Big O notation. The following method, `addUpTo()`, depending on how we count the number of operations, can be as low as `2n` or as high as `5n + 2`.
 
 ```java
 public class Main() { 
