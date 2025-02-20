@@ -1,14 +1,25 @@
-### **Big Theta (Θ) Notation – Detailed Explanation**
+# Big Theta (Θ) Notation – Detailed Explanation
 
 Big Theta (Θ) notation is used in asymptotic analysis to describe an algorithm’s running time in a **tight bound**—meaning it provides both an upper and lower bound for the function's growth rate.
 
-Mathematically, a function \( f(n) \) is said to be **Θ(g(n))** if there exist positive constants \( c_1, c_2, \) and \( n_0 \) such that:
+In the analysis of algorithms, asymptotic notations are used to evaluate the performance of an algorithm by providing an exact order of growth. This article will discuss Big – Theta notations represented by a Greek letter `(Θ)`.
 
-\[
-c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n) \quad \text{for all } n \geq n_0
-\]
+**Definition:** Let `g` and `f` be the function from the set of natural numbers to itself. The function `f` is said to be `Θ(g)`, if there are constants `c1`, `c2 > 0` and a natural number `n₀` such that: `c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n0`
 
-### **Interpretation**
+Mathematical Representation:
+
+```text
+Θ (g(n)) = {f(n): there exist positive constants c1, c2 and n₀ such that 0 ≤ c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n₀}
+Note: `Θ(g)` is a set
+```
+
+The above definition means, if `f(n)` is theta of `g(n)`, then the value `f(n)` is always between `c1 * g(n) and c2 * g(n)` for large values of `n (n ≥ n0)`. The definition of theta also requires that `f(n)` must be non-negative for values of `n` greater than `n₀`.
+
+Graphical Representation:
+
+![Big Theta (Θ)](./images_of_bt/big_theta.webp)
+
+## **Interpretation**
 
 - **Upper bound:** \( f(n) \) does not grow faster than \( c_2 \cdot g(n) \) after some \( n_0 \).
 - **Lower bound:** \( f(n) \) does not grow slower than \( c_1 \cdot g(n) \) after some \( n_0 \).
@@ -92,37 +103,9 @@ print(constant_function(arr, 2))  # Output: 30, Θ(1)
 
 ---
 
-## **Visualizing Big Theta (Θ)**
-
-To better understand how Big Theta bounds a function, let’s visualize it using Python.
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-n = np.linspace(1, 100, 100)
-f_n = n**2  # Example function f(n)
-g_n_lower = 0.1 * n**2  # Lower bound
-g_n_upper = 2 * n**2  # Upper bound
-
-plt.plot(n, f_n, label="f(n) = n²", color='blue')
-plt.plot(n, g_n_lower, '--', label="c1 * g(n) = 0.1n²", color='green')
-plt.plot(n, g_n_upper, '--', label="c2 * g(n) = 2n²", color='red')
-
-plt.xlabel("n")
-plt.ylabel("Function Growth")
-plt.legend()
-plt.title("Big Theta (Θ) Example")
-plt.show()
-```
-
----
-
 ## **Key Takeaways**
 
 - **Θ(g(n)) gives a tight bound**, meaning it provides both the upper and lower limits for an algorithm's growth rate.
 - It is useful in cases where we need a **precise classification** of an algorithm’s time complexity.
 - **Different algorithms** have different growth rates, but Big Theta helps **categorize them efficiently**.
 - **In Python**, understanding Big Theta helps optimize code and choose the best algorithm for a given problem.
-
-Would you like me to explain any specific case further? 😊
