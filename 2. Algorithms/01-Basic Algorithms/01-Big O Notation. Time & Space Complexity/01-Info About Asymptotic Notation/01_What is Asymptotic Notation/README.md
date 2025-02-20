@@ -15,8 +15,7 @@ But what about computer programs? In fact, you can time a computer program, but 
 Instead of timing a program, through asymptotic notation, we can calculate a program’s runtime by looking at how many instructions the computer has to perform based on the size of the program’s input: `n`.
 
 For instance, a program that has input of size `n` may tell the computer to run `5n² + 3n + 2` instructions. (We will get into how we get this kind of expression in future exercises.) Nevertheless, this is still a fairly messy and large expression. For asymptotic notation, we drop all of our constants (the numbers) because as `n` becomes extremely large, the constants will make minute differences. After changing our constants, we have `n² + n`. If we take each of these terms in the expression and graph them, we see that the `n²` term grows faster than the `n` term.
-
-![Common Runtimes](../01_What%20is%20Asymptotic%20Notation/image_of_an/runtimes%20compare.webp)
+![Common Runtimes](./image_of_an/runtimes%20compare.webp)
 
 For example, when `n` is 1000:
 
