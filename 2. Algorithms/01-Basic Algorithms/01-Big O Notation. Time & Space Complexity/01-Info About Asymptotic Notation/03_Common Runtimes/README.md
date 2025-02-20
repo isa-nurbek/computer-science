@@ -218,6 +218,239 @@ def all_permutations(arr):
 
 ---
 
+Let’s go step by step and analyze how to count the runtime for each example in detail:
+
+## **1. Constant Time: O(1)**  
+
+- **Example:**
+
+  ```python
+  def get_first_element(arr):
+      return arr[0]  # Always takes constant time
+  ```
+
+- **Analysis:**  
+  - The function always takes a single operation regardless of the array size.
+  - Accessing an element by index in an array is a direct memory lookup (takes one step).
+  - No loops or recursion, so **runtime remains constant**.
+
+📌 **Conclusion:** `O(1)` (constant time) because there is no dependency on `n`.
+
+---
+
+## **2. Logarithmic Time: O(log n)**  
+
+- **Example (Binary Search):**
+
+  ```python
+  def binary_search(arr, target):
+      left, right = 0, len(arr) - 1
+      while left <= right:
+          mid = (left + right) // 2
+          if arr[mid] == target:
+              return mid
+          elif arr[mid] < target:
+              left = mid + 1
+          else:
+              right = mid - 1
+      return -1  # Not found
+  ```
+
+- **Analysis:**  
+  - Each iteration **divides the search space by 2**.
+  - If the array has `n` elements:
+    - First step: `n`
+    - Second step: `n/2`
+    - Third step: `n/4`
+    - …
+    - Last step: `1` (when we find or finish searching).
+  - The number of times we can divide `n` before reaching 1 is **log 2 n**.
+
+📌 **Conclusion:** `O(log n)` (logarithmic time) because the input size is reduced exponentially in each iteration.
+
+---
+
+## **3. Linear Time: O(n)**  
+
+- **Example (Linear Search):**
+
+  ```python
+  def linear_search(arr, target):
+      for i in range(len(arr)):
+          if arr[i] == target:
+              return i
+      return -1  # Not found
+  ```
+
+- **Analysis:**  
+  - The function **loops through all `n` elements** in the worst case.
+  - If the element is not found, we check all elements once → **n iterations**.
+  - Each iteration takes a constant amount of time `O(1)`.
+
+📌 **Conclusion:** `O(n)` (linear time) because the number of operations grows **directly proportional** to `n`.
+
+---
+
+## **4. Linearithmic Time: O(n log n)**  
+
+- **Example (Merge Sort):**
+
+  ```python
+  def merge_sort(arr):
+      if len(arr) <= 1:
+          return arr
+      mid = len(arr) // 2
+      left = merge_sort(arr[:mid])
+      right = merge_sort(arr[mid:])
+      return merge(left, right)
+
+  def merge(left, right):
+      sorted_arr = []
+      i = j = 0
+      while i < len(left) and j < len(right):
+          if left[i] < right[j]:
+              sorted_arr.append(left[i])
+              i += 1
+          else:
+              sorted_arr.append(right[j])
+              j += 1
+      sorted_arr.extend(left[i:])
+      sorted_arr.extend(right[j:])
+      return sorted_arr
+  ```
+
+- **Analysis:**  
+  - Merge Sort divides the array into halves **(log 2 n)** times.
+  - Each division requires merging, which takes **O(n)**.
+  - The recurrence relation:
+  
+    ```text  
+    T(n) = 2T(n/2) + O(n)
+    ```
+
+  - This expands to **O(n log n)**.
+
+📌 **Conclusion:** `O(n log n)` (linearithmic time) because **logarithmic divisions** are combined with **linear merging**.
+
+---
+
+## **5. Quadratic Time: O(n²)**  
+
+- **Example (Bubble Sort):**
+
+  ```python
+  def bubble_sort(arr):
+      n = len(arr)
+      for i in range(n):
+          for j in range(0, n - i - 1):
+              if arr[j] > arr[j + 1]:
+                  arr[j], arr[j + 1] = arr[j + 1], arr[j]
+  ```
+
+- **Analysis:**  
+  - Two **nested loops**:
+    - Outer loop runs `n` times.
+    - Inner loop runs at most `n` times in the worst case.
+  - Total iterations:
+
+    ```text
+    (n - 1) + (n - 2) + ... + 1 = n(n-1) / 2 ≈ O(n²)
+    ```
+
+📌 **Conclusion:** `O(n²)` (quadratic time) because **every element is compared with every other element**.
+
+---
+
+## **6. Cubic Time: O(n³)**  
+
+- **Example (Matrix Multiplication):**
+
+  ```python
+  def matrix_multiply(A, B):
+      n = len(A)
+      result = [[0] * n for _ in range(n)]
+      for i in range(n):
+          for j in range(n):
+              for k in range(n):
+                  result[i][j] += A[i][k] * B[k][j]
+      return result
+  ```
+
+- **Analysis:**  
+  - **Three nested loops**, each iterating `n` times.
+  - Total operations:  
+
+    ```text
+    n * n * n = n³
+    ```
+
+📌 **Conclusion:** `O(n³)` (cubic time) because **three nested loops iterate over `n`**.
+
+---
+
+## **7. Exponential Time: O(2^n)**  
+
+- **Example (Naive Fibonacci):**
+
+  ```python
+  def fibonacci(n):
+      if n <= 1:
+          return n
+      return fibonacci(n - 1) + fibonacci(n - 2)
+  ```
+
+- **Analysis:**  
+  - Each call to `fibonacci(n)` **calls itself twice**.
+  - Forms a binary tree of recursive calls of height `n`.
+  - Number of calls grows like:
+
+    ```text
+    T(n) = T(n-1) + T(n-2) ≈ 2^n
+    ```
+
+📌 **Conclusion:** `O(2^n)` (exponential time) because **the number of function calls doubles each step**.
+
+---
+
+## **8. Factorial Time: O(n!)**  
+
+- **Example (Generating All Permutations):**
+
+  ```python
+  from itertools import permutations
+
+  def all_permutations(arr):
+      return list(permutations(arr))
+  ```
+
+- **Analysis:**  
+  - Number of ways to arrange `n` elements:
+
+    ```text
+    n! = n * (n-1) * (n-2) * ... * 1
+    ```
+
+  - A brute-force approach generates all `n!` permutations.
+
+📌 **Conclusion:** `O(n!)` (factorial time) because **every possible arrangement is generated**.
+
+---
+
+## **Final Summary**
+
+| Complexity | Example | Why? |
+|------------|---------|------|
+|  O(1)  | Array access | Constant operations |
+|  O(log n)  | Binary Search | Divides input each step |
+|  O(n)  | Linear Search | One operation per element |
+|  O(n log n)  | Merge Sort | Logarithmic splits + linear merge |
+|  O(n²)  | Bubble Sort | Nested loops |
+|  O(n³)  | Matrix Multiplication | Three nested loops |
+|  O(2^n)  | Recursive Fibonacci | Calls double each step |
+|  O(n!)  | Generating permutations | Every possible arrangement |
+
+---
+
 ## **Final Thoughts**
 
 - **Lower complexity is better** because it scales efficiently.
