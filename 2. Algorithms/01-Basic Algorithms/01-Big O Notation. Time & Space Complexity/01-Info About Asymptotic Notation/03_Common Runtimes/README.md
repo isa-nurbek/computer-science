@@ -63,7 +63,7 @@ def binary_search(arr, target):
 ```
 
 - At each step, the search space is divided by 2.
-- If the array has `n` elements, it will take at most `log 2 n` steps.
+- If the array has `n` elements, it will take at most `log2 n` steps.
 
 ---
 
@@ -264,7 +264,7 @@ Let’s go step by step and analyze how to count the runtime for each example in
     - Third step: `n/4`
     - …
     - Last step: `1` (when we find or finish searching).
-  - The number of times we can divide `n` before reaching 1 is **log 2 n**.
+  - The number of times we can divide `n` before reaching 1 is **log2 n**.
 
 📌 **Conclusion:** `O(log n)` (logarithmic time) because the input size is reduced exponentially in each iteration.
 
@@ -320,7 +320,7 @@ Let’s go step by step and analyze how to count the runtime for each example in
   ```
 
 - **Analysis:**  
-  - Merge Sort divides the array into halves **(log 2 n)** times.
+  - Merge Sort divides the array into halves **(log2 n)** times.
   - Each division requires merging, which takes **O(n)**.
   - The recurrence relation:
   
