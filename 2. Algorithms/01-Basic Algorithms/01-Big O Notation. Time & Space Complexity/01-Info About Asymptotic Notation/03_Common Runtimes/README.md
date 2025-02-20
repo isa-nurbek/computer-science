@@ -6,21 +6,22 @@ Asymptotic notation is used in computer science to describe the running time (or
 
 Before we delve into the multiple runtime cases, let’s see the different common runtimes a program could have. Below is a list of common runtimes that run from fastest to slowest.
 
-**Θ(1)**. This is constant runtime. This is the runtime when a program will always do the same thing regardless of the input. For instance, a program that only prints “hello, world” runs in Θ(1) because the program will always just print “hello, world”.
+**Θ(1)**. This is constant runtime. This is the runtime when a program will always do the same thing regardless of the input. For instance, a program that only prints “hello, world” runs in `Θ(1)` because the program will always just print “hello, world”.
 
-**Θ(log N)**. This is logarithmic runtime. You will see this runtime in search algorithms.
+**Θ(log n)**. This is logarithmic runtime. You will see this runtime in search algorithms.
 
-**Θ(N)**. This is linear runtime. You will often see this when you have to iterate through an entire dataset.
+**Θ(n)**. This is linear runtime. You will often see this when you have to iterate through an entire dataset.
 
-**Θ(N*logN)**. You will see this runtime in sorting algorithms.
+**Θ(n*log n)**. You will see this runtime in sorting algorithms.
 
-**Θ(N2)**. This is an example of a polynomial runtime. When N is raised to the 2nd power, it’s known as a quadratic runtime. You will see this runtime when you have to search through a two-dimensional dataset (like a matrix) or nested loops.
+**Θ(n²)**. This is an example of a polynomial runtime. When `n` is raised to the 2nd power, it’s known as a quadratic runtime. You will see this runtime when you have to search through a two-dimensional dataset (like a matrix) or nested loops.
 
-**Θ(2N)**. This is exponential runtime. You will often see this runtime in recursive algorithms (Don’t worry if you don’t know what that is yet!).
+**Θ(2n)**. This is exponential runtime. You will often see this runtime in recursive algorithms (Don’t worry if you don’t know what that is yet!).
 
-**Θ(N!)**. This is factorial runtime. You will often see this runtime when you have to generate all of the different permutations of something. For instance, a program that generates all the different ways to order the letters “abcd” would run in this runtime.
+**Θ(n!)**. This is factorial runtime. You will often see this runtime when you have to generate all of the different permutations of something. For instance, a program that generates all the different ways to order the letters “abcd” would run in this runtime.
 
-![Common Runtimes](./images_of_cr/common_runtimes.svg)
+![Common Runtimes](./images_of_cr/common_runtimes.webp)
+![Common Runtimes](./images_of_cr/comon_runtimes_2.webp)
 
 ---
 
@@ -62,15 +63,15 @@ def binary_search(arr, target):
 ```
 
 - At each step, the search space is divided by 2.
-- If the array has \( n \) elements, it will take at most \( \log_2 n \) steps.
+- If the array has `n` elements, it will take at most `log 2 n` steps.
 
 ---
 
-### **3. Linear Time: \( O(n) \)**
+### **3. Linear Time: O(n)**
 
 - **Definition:** The number of operations grows directly in proportion to the input size.
 - **Example:** Iterating through an array.
-- **Graph Behavior:** A straight-line increase as \( n \) increases.
+- **Graph Behavior:** A straight-line increase as `n` increases.
 
 **Example Code (Linear Search in Python):**
 
@@ -84,7 +85,7 @@ def linear_search(arr, target):
 
 ---
 
-### **4. Linearithmic Time: \( O(n \log n) \)**
+### **4. Linearithmic Time: O(n log n)**
 
 - **Definition:** The runtime grows slightly faster than linear time but much slower than quadratic time.
 - **Example:** Efficient sorting algorithms like Merge Sort and Quick Sort.
@@ -116,13 +117,13 @@ def merge(left, right):
     return sorted_arr
 ```
 
-- Sorting involves \( n \) steps, each requiring \( O(\log n) \) merge operations.
+- Sorting involves `n` steps, each requiring `O(log n)` merge operations.
 
 ---
 
-### **5. Quadratic Time: \( O(n^2) \)**
+### **5. Quadratic Time: O(n²)**
 
-- **Definition:** The number of operations is proportional to \( n^2 \), meaning if \( n \) doubles, the runtime increases by \( 4x \).
+- **Definition:** The number of operations is proportional to `n²`, meaning if `n` doubles, the runtime increases by `4x`.
 - **Example:** Bubble Sort, Selection Sort, and Insertion Sort.
 - **Graph Behavior:** The curve rises sharply.
 
@@ -137,11 +138,11 @@ def bubble_sort(arr):
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
 ```
 
-- Nested loops contribute to \( O(n^2) \) complexity.
+- Nested loops contribute to `O(n²)` complexity.
 
 ---
 
-### **6. Cubic Time: \( O(n^3) \)**
+### **6. Cubic Time: O(n³)**
 
 - **Definition:** The runtime scales with the cube of the input size.
 - **Example:** Matrix multiplication with three nested loops.
@@ -160,11 +161,11 @@ def matrix_multiply(A, B):
     return result
 ```
 
-- Three nested loops contribute to \( O(n^3) \) complexity.
+- Three nested loops contribute to `O(n³)` complexity.
 
 ---
 
-### **7. Exponential Time: \( O(2^n) \)**
+### **7. Exponential Time: O(2^n)**
 
 - **Definition:** The number of operations doubles with each additional element.
 - **Example:** Recursive algorithms like the naive Fibonacci sequence calculation.
@@ -179,11 +180,11 @@ def fibonacci(n):
     return fibonacci(n - 1) + fibonacci(n - 2)
 ```
 
-- This runs in \( O(2^n) \) because each call spawns two more recursive calls.
+- This runs in `O(2^n)` because each call spawns two more recursive calls.
 
 ---
 
-### **8. Factorial Time: \( O(n!) \)**
+### **8. Factorial Time: O(n!)**
 
 - **Definition:** The runtime grows as fast as the factorial of the input size.
 - **Example:** Brute-force solutions to the Traveling Salesman Problem.
@@ -198,7 +199,7 @@ def all_permutations(arr):
     return list(permutations(arr))
 ```
 
-- The number of permutations of an \( n \)-element set is \( n! \).
+- The number of permutations of an `n-element` set is `n!`.
 
 ---
 
@@ -206,21 +207,20 @@ def all_permutations(arr):
 
 | Complexity | Name | Example |
 |------------|------|---------|
-| \( O(1) \) | Constant | Accessing an array element |
-| \( O(\log n) \) | Logarithmic | Binary search |
-| \( O(n) \) | Linear | Linear search |
-| \( O(n \log n) \) | Linearithmic | Merge Sort, Quick Sort |
-| \( O(n^2) \) | Quadratic | Bubble Sort, Insertion Sort |
-| \( O(n^3) \) | Cubic | Matrix multiplication |
-| \( O(2^n) \) | Exponential | Recursive Fibonacci |
-| \( O(n!) \) | Factorial | Traveling Salesman Problem |
+|  O(1)  | Constant | Accessing an array element |
+|  O(log n)  | Logarithmic | Binary search |
+|  O(n)  | Linear | Linear search |
+|  O(n log n)  | Linearithmic | Merge Sort, Quick Sort |
+|  O(n²)  | Quadratic | Bubble Sort, Insertion Sort |
+|  O(n³)  | Cubic | Matrix multiplication |
+|  O(2^n)  | Exponential | Recursive Fibonacci |
+|  O(n!)  | Factorial | Traveling Salesman Problem |
 
 ---
 
 ## **Final Thoughts**
 
 - **Lower complexity is better** because it scales efficiently.
-- **\( O(n \log n) \) is typically the best for sorting**.
-- **Exponential and factorial complexities are infeasible** for large \( n \).
+- **`O(n log n)` is typically the best for sorting**.
+- **Exponential and factorial complexities are infeasible** for large `n`.
 - **Big-O ignores constants**, focusing only on dominant growth rates.
-
