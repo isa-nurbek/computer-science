@@ -9,9 +9,11 @@ In the analysis of algorithms, asymptotic notations are used to evaluate the per
 Mathematical Representation:
 
 ```text
-Θ (g(n)) = {f(n): there exist positive constants c1, c2 and n₀ such that 0 ≤ c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n₀}
-Note: Θ(g) is a set
+c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n0
 ```
+
+Θ (g(n)) = {f(n): there exist positive constants `c1`, `c2` and `n₀` such that `0 ≤ c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n₀`}
+Note: `Θ(g)` is a set
 
 The above definition means, if `f(n)` is theta of `g(n)`, then the value `f(n)` is always between `c1 * g(n) and c2 * g(n)` for large values of `n (n ≥ n0)`. The definition of theta also requires that `f(n)` must be non-negative for values of `n` greater than `n₀`.
 
