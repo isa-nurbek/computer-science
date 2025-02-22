@@ -4,18 +4,18 @@ Big Theta (Θ) notation is used in asymptotic analysis to describe an algorithm�
 
 In the analysis of algorithms, asymptotic notations are used to evaluate the performance of an algorithm by providing an exact order of growth. This article will discuss Big – Theta notations represented by a Greek letter `(Θ)`.
 
-**Definition:** Let `g` and `f` be the function from the set of natural numbers to itself. The function `f` is said to be `Θ(g)`, if there are constants `c1`, `c2 > 0` and a natural number `n₀` such that: `c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n0`
+**Definition:** Let `g` and `f` be the function from the set of natural numbers to itself. The function `f` is said to be `Θ(g)`, if there are constants `c1`, `c2 > 0` and a natural number `n₀` such that: `c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n₀`
 
 Mathematical Representation:
 
 ```text
-c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n0
+c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n₀
 ```
 
 Θ (g(n)) = {f(n): there exist positive constants `c1`, `c2` and `n₀` such that `0 ≤ c1 * g(n) ≤ f(n) ≤ c2 * g(n) for all n ≥ n₀`}
 Note: `Θ(g)` is a set
 
-The above definition means, if `f(n)` is theta of `g(n)`, then the value `f(n)` is always between `c1 * g(n) and c2 * g(n)` for large values of `n (n ≥ n0)`. The definition of theta also requires that `f(n)` must be non-negative for values of `n` greater than `n₀`.
+The above definition means, if `f(n)` is theta of `g(n)`, then the value `f(n)` is always between `c1 * g(n) and c2 * g(n)` for large values of `n (n ≥ n₀)`. The definition of theta also requires that `f(n)` must be non-negative for values of `n` greater than `n₀`.
 
 ## **Interpretation**
 
