@@ -12,6 +12,10 @@ f(n) ≥ c ⋅ g(n) for all n ≥ n₀
 
 This means that `f(n)` grows **at least as fast** as `g(n)` for sufficiently large `n`.
 
+**Graphical example for Big Omega (Ω)**:
+
+![Big Omega (Ω)](./images_of_bo/big_omega.png)
+
 ---
 
 ### Key Points
@@ -56,7 +60,7 @@ The best case occurs when the **middle element** of the list is the target. In t
 #### Step 4: Express the Best Case in Big Omega (Ω) Notation
 
 - The best-case running time is constant, regardless of the input size `n`.
-- Therefore, the best case is Ω(1).
+- Therefore, the best case is `Ω(1)`.
 
 ---
 
@@ -129,7 +133,7 @@ The best case occurs when **all elements of `A` or `B` are zero**. In this case,
 
 ---
 
-### Example 7: Finding the Minimum Element in a List
+### Example 4: Finding the Minimum Element in a List
 
 #### Step 1: Understand the Algorithm
 
@@ -160,7 +164,7 @@ The best case occurs when the **first element** is the minimum. However, the alg
 
 ---
 
-### Example 8: Checking if a List is Sorted
+### Example 5: Checking if a List is Sorted
 
 #### Step 1: Understand the Algorithm
 
@@ -194,14 +198,14 @@ The best case occurs when the list is **not sorted**, and the first two elements
 
 | Algorithm            | Best-Case Input               | Best-Case Running Time |
 |----------------------|-------------------------------|-------------------------|
-| Linear Search        | Target is first element       | \( Ω(1) \)         |
-| Binary Search        | Target is middle element      | \( Ω(1) \)         |
-| Bubble Sort          | Input is already sorted       | \( Ω(n) \)         |
-| Insertion Sort       | Input is already sorted       | \( Ω(n) \)         |
-| Matrix Multiplication| All elements of \( A \) or \( B \) are zero | \( Ω(m * p) \) |
-| Find Minimum         | First element is minimum      | \( Ω(n) \)         |
-| Check if Sorted      | First two elements are out of order | \( Ω(1) \)         |
+| Linear Search        | Target is first element       |    Ω(1)            |
+| Binary Search        | Target is middle element      |    Ω(1)            |
+| Bubble Sort          | Input is already sorted       |    Ω(n)            |
+| Insertion Sort       | Input is already sorted       |    Ω(n)            |
+| Matrix Multiplication| All elements of `A` or `B` are zero |  Ω(m * p)    |
+| Find Minimum         | First element is minimum      |  Ω(n)          |
+| Check if Sorted      | First two elements are out of order |  Ω(1)          |
 
-- Big Omega (Ω) provides a lower bound for an algorithm's performance.
-- It describes the best-case scenario for an algorithm's running time.
-- Examples in Python demonstrate how Ω is applied to real-world algorithms.
+- Big Omega `(Ω)` provides a lower bound for an algorithm's performance.
+- It describes the `best-case` scenario for an algorithm's running time.
+- Examples in Python demonstrate how `Ω` is applied to real-world algorithms.
