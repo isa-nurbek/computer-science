@@ -33,7 +33,7 @@ Follow the steps below to find the average time complexity of any program:
 
 - Break the program into smaller segments.
 - Find all types and number of inputs and calculate the number of operations they take to be executed. Make sure that the input cases are equally distributed.
-- Find the sum of all the calculated values and divide the sum by the total number of inputs let say the function of n obtained is `g(n)` after removing all the constants, then in `Θ` notation its represented as `Θ(g(n))`
+- Find the sum of all the calculated values and divide the sum by the total number of inputs let say the function of `n` obtained is `g(n)` after removing all the constants, then in `Θ` notation its represented as `Θ(g(n))`
 
 ### **Big Theta Example Cases**
 
