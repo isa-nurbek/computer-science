@@ -17,7 +17,74 @@ In simpler terms, `f(n)` is `O(g(n))` if `f(n)` grows no faster than `c * g(n) f
 
 *Graphic example for Big O*:
 
-![Big O]()
+![Big O](./images_of_big_o/big-o-image.webp)
+
+---
+
+## Importance of Big O Notation
+
+Big O notation is a mathematical notation used to describe the worst-case time complexity or efficiency of an algorithm or the worst-case space complexity of a data structure. It provides a way to compare the performance of different algorithms and data structures, and to predict how they will behave as the input size increases.
+
+Big O notation is important for several reasons:
+
+- Big O Notation is important because it helps analyze the efficiency of algorithms.
+- It provides a way to describe how the ``runtime` or `space requirements` of an algorithm grow as the input size increases.
+- Allows programmers to compare different algorithms and choose the most efficient one for a specific problem.
+- Helps in understanding the scalability of algorithms and predicting how they will perform as the input size grows.
+- Enables developers to optimize code and improve overall performance.
+
+---
+
+## Properties of Big O Notation
+
+Below are some important Properties of Big O Notation:
+
+1. Reflexivity
+For any function f(n), f(n) = O(f(n)).
+
+Example:
+
+f(n) = n2, then f(n) = O(n2).
+
+2. Transitivity
+If f(n) = O(g(n)) and g(n) = O(h(n)), then f(n) = O(h(n)).
+
+Example:
+
+If f(n) = n^2, g(n) = n^3, and h(n) = n^4, then f(n) = O(g(n)) and g(n) = O(h(n)). 
+Therefore, by transitivity, f(n) = O(h(n)).
+
+
+3. Constant Factor
+For any constant c > 0 and functions f(n) and g(n), if f(n) = O(g(n)), then cf(n) = O(g(n)).
+
+Example:
+
+f(n) = n, g(n) = n2. Then f(n) = O(g(n)). Therefore, 2f(n) = O(g(n)).
+
+
+4. Sum Rule
+If f(n) = O(g(n)) and h(n) = O(g(n)), then f(n) + h(n) = O(g(n)).
+
+Example:
+
+f(n) = n2, g(n) = n3, h(n) = n4. Then f(n) = O(g(n)) and h(n) = O(g(n)). Therefore, f(n) + h(n) = O(g(n)).
+
+
+5. Product Rule
+If f(n) = O(g(n)) and h(n) = O(k(n)), then f(n) * h(n) = O(g(n) * k(n)).
+
+Example:
+
+f(n) = n, g(n) = n2, h(n) = n3, k(n) = n4. Then f(n) = O(g(n)) and h(n) = O(k(n)). Therefore, f(n) * h(n) = O(g(n) * k(n)) = O(n6).
+
+
+6. Composition Rule
+If f(n) = O(g(n)) and g(n) = O(h(n)), then f(g(n)) = O(h(n)).
+
+Example:
+
+f(n) = n2, g(n) = n, h(n) = n3. Then f(n) = O(g(n)) and g(n) = O(h(n)). Therefore, f(g(n)) = O(h(n)) = O(n3).
 
 ---
 
