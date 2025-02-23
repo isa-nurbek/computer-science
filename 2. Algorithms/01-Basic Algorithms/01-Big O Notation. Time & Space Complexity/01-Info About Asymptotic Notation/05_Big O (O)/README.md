@@ -55,7 +55,7 @@ If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(n) = O(h(n))`.
 Example:
 
 ```text
-If f(n) = n^2, g(n) = n^3, and h(n) = n^4, then f(n) = O(g(n)) and g(n) = O(h(n)).
+If f(n) = n², g(n) = n³, and h(n) = n⁴, then f(n) = O(g(n)) and g(n) = O(h(n)).
 ```
 
 Therefore, by transitivity, f(n) = O(h(n)).
@@ -67,35 +67,83 @@ For any constant `c > 0` and functions `f(n)` and `g(n)`, if `f(n) = O(g(n))`, t
 Example:
 
 ```text
-f(n) = n, g(n) = n2. Then f(n) = O(g(n)). Therefore, 2f(n) = O(g(n)).
+f(n) = n, g(n) = n². Then f(n) = O(g(n)). Therefore, 2f(n) = O(g(n)).
 ```
 
 1. Sum Rule
-If f(n) = O(g(n)) and h(n) = O(g(n)), then f(n) + h(n) = O(g(n)).
+
+If `f(n) = O(g(n))` and `h(n) = O(g(n))`, then `f(n) + h(n) = O(g(n))`.
 
 Example:
 
-f(n) = n2, g(n) = n3, h(n) = n4. Then f(n) = O(g(n)) and h(n) = O(g(n)). Therefore, f(n) + h(n) = O(g(n)).
+```text
+f(n) = n², g(n) = n³, h(n) = n⁴. Then f(n) = O(g(n)) and h(n) = O(g(n)). Therefore, f(n) + h(n) = O(g(n)).
+```
 
-5. Product Rule
-If f(n) = O(g(n)) and h(n) = O(k(n)), then f(n) *h(n) = O(g(n)* k(n)).
+1. Product Rule
 
-Example:
-
-f(n) = n, g(n) = n2, h(n) = n3, k(n) = n4. Then f(n) = O(g(n)) and h(n) = O(k(n)). Therefore, f(n) *h(n) = O(g(n)* k(n)) = O(n6).
-
-6. Composition Rule
-If f(n) = O(g(n)) and g(n) = O(h(n)), then f(g(n)) = O(h(n)).
+If `f(n) = O(g(n))` and `h(n) = O(k(n))`, then `f(n) * h(n) = O(g(n) * k(n))`.
 
 Example:
 
-f(n) = n2, g(n) = n, h(n) = n3. Then f(n) = O(g(n)) and g(n) = O(h(n)). Therefore, f(g(n)) = O(h(n)) = O(n3).
+```text
+f(n) = n, g(n) = n², h(n) = n³, k(n) = n⁴. Then f(n) = O(g(n)) and h(n) = O(k(n)). Therefore, f(n) * h(n) = O(g(n) * k(n)) = O(n⁶).
+```
+
+1. Composition Rule
+
+If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(g(n)) = O(h(n))`.
+
+Example:
+
+```text
+f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Therefore, f(g(n)) = O(h(n)) = O(n³).
+```
 
 ---
 
 ### **1. How It Works**
 
-Big O notation describes the upper bound (worst-case scenario) of an algorithm’s growth rate. It simplifies performance analysis by focusing on the dominant term and ignoring constant factors and lower-order terms.
+1. **Identify the input size \( n \)**:
+   - Determine what \( n \) represents (e.g., the length of a list, the number of nodes in a graph).
+
+2. **Count the basic operations**:
+   - Count how many times the algorithm performs a basic operation (e.g., comparisons, assignments).
+
+3. **Express the complexity**:
+   - Write the complexity in terms of \( n \), simplifying by dropping constants and lower-order terms.
+
+**Here are some common Big O notations, ordered from fastest to slowest**:
+
+1. **O(1) - Constant Time**:
+   - The algorithm takes the same amount of time regardless of the input size.
+   - Example: Accessing an element in an array by index.
+
+2. **O(log n) - Logarithmic Time**:
+   - The algorithm's runtime grows logarithmically with the input size.
+   - Example: Binary search.
+
+3. **O(n) - Linear Time**:
+   - The algorithm's runtime grows linearly with the input size.
+   - Example: Iterating through a list.
+
+4. **O(n log n) - Linearithmic Time**:
+   - The algorithm's runtime grows in proportion to \( n \log n \).
+   - Example: Efficient sorting algorithms like Merge Sort and Quick Sort.
+
+5. **O(n^2) - Quadratic Time**:
+   - The algorithm's runtime grows quadratically with the input size.
+   - Example: Nested loops.
+
+6. **O(2^n) - Exponential Time**:
+   - The algorithm's runtime doubles with each additional input.
+   - Example: Recursive Fibonacci without memoization.
+
+7. **O(n!) - Factorial Time**:
+   - The algorithm's runtime grows factorially with the input size.
+   - Example: Generating all permutations of a list.
+
+---
 
 #### **Key Rules of Big O**
 
