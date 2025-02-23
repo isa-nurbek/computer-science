@@ -1,6 +1,6 @@
 # Big O Notation: Detailed Explanation
 
-Big O notation is a mathematical concept used in computer science to describe the performance or complexity of an algorithm. Specifically, it characterizes the time complexity (how long an algorithm takes to run) or space complexity (how much memory an algorithm uses) as a function of the input size n. Big O notation focuses on the worst-case scenario and provides an upper bound on the growth rate of an algorithm.
+Big O notation is a mathematical concept used in computer science to describe the performance or complexity of an algorithm. Specifically, it characterizes the time complexity (how long an algorithm takes to run) or space complexity (how much memory an algorithm uses) as a function of the input size `n`. Big O notation focuses on the `worst-case` scenario and provides an upper bound on the growth rate of an algorithm.
 
 **Important Point:**
 
@@ -15,7 +15,7 @@ f(n) <= c * g(n) for all n >= n₀
 
 In simpler terms, `f(n)` is `O(g(n))` if `f(n)` grows no faster than `c * g(n) for all n >= n₀` where `c` and `n₀` are constants.
 
-*Graphic example for Big O*:
+**Graphic example for Big O**:
 
 ![Big O](./images_of_big_o/big-o-image.webp)
 
@@ -28,7 +28,7 @@ Big O notation is a mathematical notation used to describe the worst-case time c
 Big O notation is important for several reasons:
 
 - Big O Notation is important because it helps analyze the efficiency of algorithms.
-- It provides a way to describe how the ``runtime` or `space requirements` of an algorithm grow as the input size increases.
+- It provides a way to describe how the `runtime` or `space requirements` of an algorithm grow as the input size increases.
 - Allows programmers to compare different algorithms and choose the most efficient one for a specific problem.
 - Helps in understanding the scalability of algorithms and predicting how they will perform as the input size grows.
 - Enables developers to optimize code and improve overall performance.
@@ -39,45 +39,50 @@ Big O notation is important for several reasons:
 
 Below are some important Properties of Big O Notation:
 
-1. Reflexivity
-For any function f(n), f(n) = O(f(n)).
+1. **Reflexivity**
+For any function `f(n)`, `f(n) = O(f(n))`.
 
 Example:
 
-f(n) = n2, then f(n) = O(n2).
+```text
+f(n) = n², then f(n) = O(n²).
+```
 
-2. Transitivity
-If f(n) = O(g(n)) and g(n) = O(h(n)), then f(n) = O(h(n)).
+1. **Transitivity**
+
+If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(n) = O(h(n))`.
 
 Example:
 
-If f(n) = n^2, g(n) = n^3, and h(n) = n^4, then f(n) = O(g(n)) and g(n) = O(h(n)). 
+```text
+If f(n) = n^2, g(n) = n^3, and h(n) = n^4, then f(n) = O(g(n)) and g(n) = O(h(n)).
+```
+
 Therefore, by transitivity, f(n) = O(h(n)).
 
+1. Constant Factor
 
-3. Constant Factor
-For any constant c > 0 and functions f(n) and g(n), if f(n) = O(g(n)), then cf(n) = O(g(n)).
+For any constant `c > 0` and functions `f(n)` and `g(n)`, if `f(n) = O(g(n))`, then `cf(n) = O(g(n))`.
 
 Example:
 
+```text
 f(n) = n, g(n) = n2. Then f(n) = O(g(n)). Therefore, 2f(n) = O(g(n)).
+```
 
-
-4. Sum Rule
+1. Sum Rule
 If f(n) = O(g(n)) and h(n) = O(g(n)), then f(n) + h(n) = O(g(n)).
 
 Example:
 
 f(n) = n2, g(n) = n3, h(n) = n4. Then f(n) = O(g(n)) and h(n) = O(g(n)). Therefore, f(n) + h(n) = O(g(n)).
 
-
 5. Product Rule
-If f(n) = O(g(n)) and h(n) = O(k(n)), then f(n) * h(n) = O(g(n) * k(n)).
+If f(n) = O(g(n)) and h(n) = O(k(n)), then f(n) *h(n) = O(g(n)* k(n)).
 
 Example:
 
-f(n) = n, g(n) = n2, h(n) = n3, k(n) = n4. Then f(n) = O(g(n)) and h(n) = O(k(n)). Therefore, f(n) * h(n) = O(g(n) * k(n)) = O(n6).
-
+f(n) = n, g(n) = n2, h(n) = n3, k(n) = n4. Then f(n) = O(g(n)) and h(n) = O(k(n)). Therefore, f(n) *h(n) = O(g(n)* k(n)) = O(n6).
 
 6. Composition Rule
 If f(n) = O(g(n)) and g(n) = O(h(n)), then f(g(n)) = O(h(n)).
