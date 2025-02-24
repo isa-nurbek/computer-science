@@ -11,7 +11,7 @@ This repository serves as an introductory guide to fundamental Computer Science 
 
 This repository serves as a foundational guide to essential Computer Science concepts, implemented and explored using the Python programming language.
 
-## Topics Covered
+## Topics Covered....
 
 ### 1. **Data Structures**
 
