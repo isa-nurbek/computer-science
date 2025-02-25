@@ -1,4 +1,4 @@
-# Introduction to Computer Science.....
+# Introduction to Computer Science.
 
 **Computer Science** is the study of computation, algorithms, and information. It encompasses a wide range of topics, including software development, data structures, artificial intelligence, networking, cybersecurity, and more.
 
@@ -11,7 +11,7 @@ This repository serves as an introductory guide to fundamental Computer Science 
 
 This repository serves as a foundational guide to essential Computer Science concepts, implemented and explored using the Python programming language.
 
-## Topics Covered....
+## Topics Covered
 
 ### 1. **Data Structures**
 
