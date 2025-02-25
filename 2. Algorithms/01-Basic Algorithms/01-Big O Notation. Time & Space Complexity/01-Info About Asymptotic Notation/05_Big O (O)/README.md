@@ -4,8 +4,8 @@ Big O notation is a mathematical concept used in computer science to describe th
 
 **Important Point:**
 
-- *Big O *notation* only describes the asymptotic behavior of a function, not its exact value.
-- The *Big O notation* can be used to compare the efficiency of different algorithms or data structures.
+- **Big O notation** only describes the asymptotic behavior of a function, not its exact value.
+- The **Big O notation** can be used to compare the efficiency of different algorithms or data structures.
 
 Given two functions `f(n)` and `g(n)`, we say that `f(n)` is `O(g(n))` if there exist constants `c > 0` and `n₀ >= 0` such that:
 
@@ -290,3 +290,381 @@ def fibonacci(n):
 - Helps compare algorithms before implementation.
 - Guides optimization efforts.
 - Essential for competitive programming and technical interviews.
+
+---
+
+## **How to Count Runtime in Detail?**
+
+Measuring runtime is crucial for analyzing an algorithm's efficiency. This involves both theoretical (Big O notation) and empirical (actual execution time) analysis.
+
+---
+
+## **1. Theoretical Runtime Analysis**
+
+Theoretical runtime is determined by counting the number of operations an algorithm performs as a function of input size `n`.
+
+### **Example: Counting Operations in a Loop**
+
+```python
+def count_operations(n):
+    count = 0
+    for i in range(n):  # Runs n times
+        count += 1  # Constant time O(1) operation
+    return count
+```
+
+- **Loop runs `n` times** → `O(n)`
+- **Each iteration does `O(1)` work** → Total complexity = **O(n)**
+
+### **Nested Loop Example**
+
+```python
+def nested_loops(n):
+    count = 0
+    for i in range(n):  # Runs n times
+        for j in range(n):  # Runs n times for each i
+            count += 1
+    return count
+```
+
+- **Outer loop runs `n` times**
+- **Inner loop runs `n` times for each outer loop**
+- **Total operations**: `n * n = n²`
+- **Time complexity**: **O(n²)**
+
+---
+
+## **2. Empirical Runtime Analysis**
+
+Empirical analysis measures actual execution time using Python tools like `time`, `timeit`, and `cProfile`.
+
+### **Method 1: Using `time` Module**
+
+```python
+import time
+
+def measure_runtime():
+    start_time = time.time()  # Record start time
+    
+    # Code to measure
+    sum = 0
+    for i in range(1000000):
+        sum += i
+    
+    end_time = time.time()  # Record end time
+    print(f"Execution Time: {end_time - start_time:.6f} seconds")
+
+measure_runtime()
+```
+
+📌 **Pros**: Simple  
+📌 **Cons**: Affected by external factors (CPU load, OS scheduling)
+
+---
+
+### **Method 2: Using `timeit` Module (More Precise)**
+
+The `timeit` module runs the function multiple times to get a reliable average.
+
+```python
+import timeit
+
+def test_function():
+    sum = 0
+    for i in range(1000000):
+        sum += i
+
+# Measure execution time
+execution_time = timeit.timeit(test_function, number=10)
+print(f"Average Execution Time: {execution_time / 10:.6f} seconds")
+```
+
+📌 **Pros**: More accurate by reducing variability  
+📌 **Cons**: Cannot directly measure large functions
+
+---
+
+### **Method 3: Using `cProfile` for Detailed Profiling**
+
+For complex programs, use `cProfile` to analyze function calls and execution time.
+
+```python
+import cProfile
+
+def profile_test():
+    sum = 0
+    for i in range(1000000):
+        sum += i
+
+cProfile.run('profile_test()')
+```
+
+📌 **Pros**: Provides a breakdown of function calls  
+📌 **Cons**: Overhead of profiling can slightly affect execution time
+
+---
+
+## **3. Counting Runtime for Recursive Functions**
+
+Recursion can be tricky to analyze. Consider the Fibonacci function:
+
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+```
+
+- **Each call branches into two more calls.**
+- **Total number of calls is approximately `O(2^n)`.**
+- **To verify, use `cProfile` or count calls manually:**
+
+```python
+count = 0
+def fibonacci_count(n):
+    global count
+    count += 1
+    if n <= 1:
+        return n
+    return fibonacci_count(n - 1) + fibonacci_count(n - 2)
+
+fibonacci_count(5)
+print(f"Function calls: {count}")
+```
+
+---
+
+## **4. Practical Tips for Measuring Runtime**
+
+✅ **Use `timeit` for small code snippets**  
+✅ **Use `cProfile` for larger programs**  
+✅ **Run multiple trials to smooth out inconsistencies**  
+✅ **Check different input sizes (`n`) to estimate complexity**  
+
+---
+
+Let's measure runtime for various **common asymptotic runtimes** and explain their behavior in detail.
+
+## **1. Common Asymptotic Runtimes**
+
+Here’s a list of common time complexities we’ll analyze:
+
+| Complexity  | Name                  | Example Algorithm     |
+|------------|----------------------|----------------------|
+| `O(1)`     | Constant Time         | Hash lookup          |
+| `O(log n)` | Logarithmic Time      | Binary search        |
+| `O(n)`     | Linear Time           | Loop iteration       |
+| `O(n log n)` | Linearithmic Time  | Merge Sort           |
+| `O(n²)`    | Quadratic Time        | Nested loops (Bubble Sort) |
+| `O(2^n)`   | Exponential Time      | Recursive Fibonacci  |
+| `O(n!)`    | Factorial Time        | Traveling Salesman Problem |
+
+---
+
+## **2. Measuring Runtime for Each Complexity**
+
+We'll use the `timeit` module to measure execution time and observe how runtime scales with increasing input size.
+
+---
+
+## **(A) O(1) - Constant Time**
+
+This executes in a fixed amount of time, regardless of input size.
+
+```python
+import timeit
+
+def constant_time_example():
+    return 42  # Single operation
+
+execution_time = timeit.timeit(constant_time_example, number=1000000)
+print(f"O(1) Execution Time: {execution_time:.6f} seconds")
+```
+
+### **Explanation**
+
+- The function does **one operation**, so it runs in `O(1)`.
+- Runtime does **not depend on input size `n`**.
+
+---
+
+## **(B) O(log n) - Logarithmic Time (Binary Search)**
+
+Binary search halves the search space at every step.
+
+```python
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+arr = list(range(1, 10**6))  # Large sorted array
+execution_time = timeit.timeit(lambda: binary_search(arr, 999999), number=1000)
+print(f"O(log n) Execution Time: {execution_time:.6f} seconds")
+```
+
+### **Explanation**
+
+- **Divides array in half** each iteration (`log n` steps).
+- Much **faster than `O(n)`** for large `n`.
+
+---
+
+## **(C) O(n) - Linear Time (Looping Through an Array)**
+
+Looping through `n` elements takes `O(n)` time.
+
+```python
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+arr = list(range(1, 10**6))
+execution_time = timeit.timeit(lambda: linear_search(arr, 999999), number=10)
+print(f"O(n) Execution Time: {execution_time:.6f} seconds")
+```
+
+### **Explanation**
+
+- Worst case: **traverses all `n` elements** before finding `target`.
+- Slower than `O(log n)` for large `n`.
+
+---
+
+## **(D) O(n log n) - Linearithmic Time (Merge Sort)**
+
+Merge Sort recursively splits and merges elements.
+
+```python
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+arr = list(range(10**4, 0, -1))  # Reverse sorted list
+execution_time = timeit.timeit(lambda: merge_sort(arr), number=1)
+print(f"O(n log n) Execution Time: {execution_time:.6f} seconds")
+```
+
+### **Explanation**
+
+- **Splits array (`log n`) times**, merging takes `O(n)`.
+- **Total runtime: `O(n log n)`**.
+
+---
+
+## **(E) O(n²) - Quadratic Time (Bubble Sort)**
+
+Bubble Sort compares and swaps every pair.
+
+```python
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+arr = list(range(1000, 0, -1))  # Reverse sorted list
+execution_time = timeit.timeit(lambda: bubble_sort(arr.copy()), number=1)
+print(f"O(n²) Execution Time: {execution_time:.6f} seconds")
+```
+
+### **Explanation**
+
+- **Nested loops run `O(n²)` times.**
+- Becomes **very slow for large `n`**.
+
+---
+
+## **(F) O(2^n) - Exponential Time (Recursive Fibonacci)**
+
+Recursive Fibonacci calls itself **twice per call**.
+
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+execution_time = timeit.timeit(lambda: fibonacci(30), number=1)
+print(f"O(2^n) Execution Time: {execution_time:.6f} seconds")
+```
+
+### **Explanation**
+
+- **Grows exponentially**, doubling calls each step.
+- **Impossible to compute for large `n`**.
+
+---
+
+## **(G) O(n!) - Factorial Time (Traveling Salesman Brute Force)**
+
+Factorial time grows **faster than exponential**.
+
+```python
+import itertools
+
+def traveling_salesman(points):
+    min_distance = float('inf')
+    for perm in itertools.permutations(points):
+        distance = sum(abs(perm[i] - perm[i+1]) for i in range(len(perm)-1))
+        min_distance = min(min_distance, distance)
+    return min_distance
+
+points = list(range(10))  # 10! = 3,628,800 permutations
+execution_time = timeit.timeit(lambda: traveling_salesman(points), number=1)
+print(f"O(n!) Execution Time: {execution_time:.6f} seconds")
+```
+
+### **Explanation**
+
+- **Tries all `n!` permutations**.
+- **Extremely slow** for even moderate `n`.
+
+---
+
+# **3. Summary of Results**
+
+| Complexity  | Small `n` Runtime | Large `n` Runtime | Practical? |
+|------------|----------------|----------------|------------|
+| `O(1)`     | Instant        | Instant        | ✅ Yes     |
+| `O(log n)` | Very fast      | Fast          | ✅ Yes     |
+| `O(n)`     | Fast           | Slower        | ✅ Yes     |
+| `O(n log n)` | Slower     | Still manageable | ✅ Yes     |
+| `O(n²)`    | Manageable     | Very slow     | ⚠️ Use cautiously |
+| `O(2^n)`   | Slow           | Impractical   | ❌ No     |
+| `O(n!)`    | Very slow      | Impossible    | ❌ No     |
+
+### **Key Takeaways**
+
+1. **O(1), O(log n), O(n), and O(n log n) are practical.**
+2. **O(n²) should be avoided for large `n`.**
+3. **O(2^n) and O(n!) are only feasible for very small inputs.**
