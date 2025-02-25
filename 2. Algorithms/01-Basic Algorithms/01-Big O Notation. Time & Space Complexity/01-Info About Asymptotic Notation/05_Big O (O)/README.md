@@ -48,7 +48,7 @@ Example:
 f(n) = n², then f(n) = O(n²).
 ```
 
-1. **Transitivity**
+2. **Transitivity**
 
 If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(n) = O(h(n))`.
 
@@ -60,7 +60,7 @@ If f(n) = n², g(n) = n³, and h(n) = n⁴, then f(n) = O(g(n)) and g(n) = O(h(n
 
 Therefore, by transitivity, f(n) = O(h(n)).
 
-1. Constant Factor
+1. **Constant Factor**
 
 For any constant `c > 0` and functions `f(n)` and `g(n)`, if `f(n) = O(g(n))`, then `cf(n) = O(g(n))`.
 
@@ -70,7 +70,7 @@ Example:
 f(n) = n, g(n) = n². Then f(n) = O(g(n)). Therefore, 2f(n) = O(g(n)).
 ```
 
-1. Sum Rule
+4. **Sum Rule**
 
 If `f(n) = O(g(n))` and `h(n) = O(g(n))`, then `f(n) + h(n) = O(g(n))`.
 
@@ -80,7 +80,7 @@ Example:
 f(n) = n², g(n) = n³, h(n) = n⁴. Then f(n) = O(g(n)) and h(n) = O(g(n)). Therefore, f(n) + h(n) = O(g(n)).
 ```
 
-1. Product Rule
+5. **Product Rule**
 
 If `f(n) = O(g(n))` and `h(n) = O(k(n))`, then `f(n) * h(n) = O(g(n) * k(n))`.
 
@@ -90,7 +90,7 @@ Example:
 f(n) = n, g(n) = n², h(n) = n³, k(n) = n⁴. Then f(n) = O(g(n)) and h(n) = O(k(n)). Therefore, f(n) * h(n) = O(g(n) * k(n)) = O(n⁶).
 ```
 
-1. Composition Rule
+6. **Composition Rule**
 
 If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(g(n)) = O(h(n))`.
 
@@ -104,14 +104,14 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
 
 ### **1. How It Works**
 
-1. **Identify the input size \( n \)**:
-   - Determine what \( n \) represents (e.g., the length of a list, the number of nodes in a graph).
+1. **Identify the input size `n`**:
+   - Determine what `n` represents (e.g., the length of a list, the number of nodes in a graph).
 
 2. **Count the basic operations**:
    - Count how many times the algorithm performs a basic operation (e.g., comparisons, assignments).
 
 3. **Express the complexity**:
-   - Write the complexity in terms of \( n \), simplifying by dropping constants and lower-order terms.
+   - Write the complexity in terms of `n`, simplifying by dropping constants and lower-order terms.
 
 **Here are some common Big O notations, ordered from fastest to slowest**:
 
@@ -128,10 +128,10 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
    - Example: Iterating through a list.
 
 4. **O(n log n) - Linearithmic Time**:
-   - The algorithm's runtime grows in proportion to \( n \log n \).
+   - The algorithm's runtime grows in proportion to `n log n`.
    - Example: Efficient sorting algorithms like Merge Sort and Quick Sort.
 
-5. **O(n^2) - Quadratic Time**:
+5. **O(n²) - Quadratic Time**:
    - The algorithm's runtime grows quadratically with the input size.
    - Example: Nested loops.
 
