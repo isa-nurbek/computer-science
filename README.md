@@ -13,7 +13,7 @@ This repository serves as a foundational guide to essential Computer Science con
 
 ## Topics Covered
 
-### 1. **Data Structures**
+### 1. **Data Structures********
 
 - Learn about foundational structures such as arrays, linked lists, stacks, queues, and hash tables.
 - Understand advanced structures like trees, heaps, and graphs.
