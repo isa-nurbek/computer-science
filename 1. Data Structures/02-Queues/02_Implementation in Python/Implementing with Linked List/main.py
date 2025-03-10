@@ -1,3 +1,6 @@
+# Implementation in Python:
+
+
 # Node class represents each element in the queue
 class Node:
     def __init__(self, data):
@@ -79,10 +82,12 @@ Peek: 20
 
 """
 
+# ******************************************************************************************************************************** #
+
 # Big O:
 
 """
-## Time and Space Complexity Analysis:
+## Time and Space Complexity Analysis
 
 Let's analyze the **time and space complexity** of the given **Queue** implementation.
 
@@ -93,16 +98,19 @@ Each operation's time complexity:
 - **`enqueue(data)`**:  
   - Creating a new node takes **O(1)**.  
   - Updating the `rear` pointer and linking takes **O(1)**.  
+  
   - **Overall complexity: O(1)**.
 
 - **`dequeue()`**:  
   - Checking if the queue is empty takes **O(1)**.  
-  - Removing the front node and updating the pointers takes **O(1)**.  
+  - Removing the front node and updating the pointers takes **O(1)**. 
+   
   - **Overall complexity: O(1)**.
 
 - **`peek()`**:  
   - Checking if the queue is empty takes **O(1)**.  
   - Returning the front element takes **O(1)**.  
+  
   - **Overall complexity: O(1)**.
 
 - **`__str__()` (Printing the queue)**:  
@@ -111,9 +119,10 @@ Each operation's time complexity:
 ### 2. **Space Complexity**
 - Each element in the queue is stored in a **Node** object, which requires **O(n)** space for **n** elements.
 - No additional auxiliary space is used apart from a few pointers (`front` and `rear`), which are **O(1)**.
+
 - **Overall space complexity: O(n)**.
 
-This is an efficient **linked list-based queue**, performing enqueue, dequeue, and peek in constant time. 🚀
+This is an efficient **linked list-based queue**, performing enqueue, dequeue, and peek in constant time.
 
 """
 
