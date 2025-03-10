@@ -1,4 +1,4 @@
-# Introduction to Computer Science.
+# Introduction to Computer Science
 
 **Computer Science** is the study of computation, algorithms, and information. It encompasses a wide range of topics, including software development, data structures, artificial intelligence, networking, cybersecurity, and more.
 
@@ -13,7 +13,7 @@ This repository serves as a foundational guide to essential Computer Science con
 
 ## Topics Covered
 
-### 1. **Data Structures********
+### 1. **Data Structures**
 
 - Learn about foundational structures such as arrays, linked lists, stacks, queues, and hash tables.
 - Understand advanced structures like trees, heaps, and graphs.
