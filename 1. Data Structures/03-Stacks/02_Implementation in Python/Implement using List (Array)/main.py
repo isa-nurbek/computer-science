@@ -1,3 +1,6 @@
+# Implementation in Python:
+
+
 class Stack:
     def __init__(self):
         # Initialize an empty list to store stack elements
@@ -68,10 +71,12 @@ Stack size: 2
 
 """
 
+# ******************************************************************************************************************************** #
+
 # Big O:
 
 """
-## Time and Space Complexity Analysis:
+## Time and Space Complexity Analysis
 
 Let's analyze the **time** and **space complexity** of each operation in the `Stack` class:
 
@@ -81,30 +86,37 @@ Let's analyze the **time** and **space complexity** of each operation in the `St
 
 1. **`__init__`**:
    - **Time Complexity**: O(1)
+   
    - Initializing an empty list is a constant-time operation.
 
 2. **`is_empty`**:
    - **Time Complexity**: O(1)
+   
    - Checking the length of a list is a constant-time operation.
 
 3. **`push`**:
    - **Time Complexity**: O(1)
+   
    - Appending an item to the end of a list is a constant-time operation in Python (amortized).
 
 4. **`pop`**:
    - **Time Complexity**: O(1)
+   
    - Removing the last item from a list is a constant-time operation.
 
 5. **`peek`**:
    - **Time Complexity**: O(1)
+   
    - Accessing the last element of a list is a constant-time operation.
 
 6. **`size`**:
    - **Time Complexity**: O(1)
+   
    - Getting the length of a list is a constant-time operation.
 
 7. **`__str__`**:
    - **Time Complexity**: O(n), where `n` is the number of elements in the stack.
+   
    - Converting the list to a string requires iterating over all elements.
 
 ---
@@ -113,15 +125,17 @@ Let's analyze the **time** and **space complexity** of each operation in the `St
 
 1. **Overall Space Complexity**:
    - **Space Complexity**: O(n), where `n` is the number of elements in the stack.
+   
    - The space is dominated by the list `self.items`, which stores all the elements of the stack.
 
 2. **Auxiliary Space for Operations**:
    - All operations (except `__str__`) use O(1) auxiliary space.
+   
    - The `__str__` method uses O(n) auxiliary space to create the string representation of the stack.
 
 """
 
-# ********************************************************************************************************************* #
+# ******************************************************************************************************************************** #
 
 # Code Explanation:
 
