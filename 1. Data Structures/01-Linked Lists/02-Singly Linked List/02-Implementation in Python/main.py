@@ -1,3 +1,6 @@
+# Implementation in Python:
+
+
 # Node class represents a single node in the linked list
 class Node:
     # Initialize a new node with a value and optional next node reference
@@ -96,40 +99,48 @@ print(ll.stringify_list())  # Print the list: A->B->C->D
 ll.remove_node("B")  # Remove node with value 'B'
 print(ll.stringify_list())  # Print the modified list: A->C->D
 
+# ******************************************************************************************************************************** #
 
 # Big O:
 
 """
-
 ### Time and Space Complexity Analysis
 
 Let's break down the time and space complexity of the key operations in the `LinkedList` class:
 
 #### 1. **Insert at the Beginning (`insert_beginning`)**
    - **Time Complexity:** O(1)
+   
      - Inserting at the beginning of the linked list involves creating a new node and updating the `head_node` reference.
      This operation is constant time because it doesn't depend on the size of the list.
+     
    - **Space Complexity:** O(1)
      - The space required is constant because we only create a single new node, regardless of the size of the list.
 
 #### 2. **Insert at the End (`insert_end`)**
    - **Time Complexity:** O(n)
+   
      - Inserting at the end of the linked list requires traversing the entire list to find the last node. This operation
      takes linear time because it depends on the number of nodes in the list.
+     
    - **Space Complexity:** O(1)
      - The space required is constant because we only create a single new node, regardless of the size of the list.
 
 #### 3. **Remove a Node (`remove_node`)**
    - **Time Complexity:** O(n)
+   
      - Removing a node involves traversing the list to find the node with the specified value. In the worst case, this
      operation takes linear time because it may need to traverse the entire list.
+     
    - **Space Complexity:** O(1)
      - The space required is constant because we only need a few pointers to manage the removal, regardless of the size of the list.
 
 #### 4. **Convert to String (`stringify_list`)**
    - **Time Complexity:** O(n)
+   
      - Converting the linked list to a string involves traversing the entire list to build the string representation.
      This operation takes linear time because it depends on the number of nodes in the list.
+     
    - **Space Complexity:** O(n)
      - The space required is linear because the string representation grows with the number of nodes in the list.
 
@@ -141,31 +152,6 @@ Let's break down the time and space complexity of the key operations in the `Lin
 | `insert_end`         | O(n)            | O(1)             |
 | `remove_node`        | O(n)            | O(1)             |
 | `stringify_list`     | O(n)            | O(n)             |
-
-### Example Walkthrough
-
-Given the test code:
-```
-ll = LinkedList("D")  # Create new list with 'D' as head
-ll.insert_beginning("C")  # Add 'C' to the beginning
-ll.insert_beginning("B")  # Add 'B' to the beginning
-ll.insert_beginning("A")  # Add 'A' to the beginning
-print(ll.stringify_list())  # Print the list: A->B->C->D
-
-ll.remove_node("B")  # Remove node with value 'B'
-print(ll.stringify_list())  # Print the modified list: A->C->D
-```
-
-- **Initial List Construction:**
-  - `insert_beginning("C")`, `insert_beginning("B")`, and `insert_beginning("A")` each take O(1) time.
-  - The list becomes `A -> B -> C -> D`.
-
-- **Removing Node "B":**
-  - `remove_node("B")` takes O(n) time in the worst case (traversing the list to find "B").
-  - The list becomes `A -> C -> D`.
-
-- **Printing the List:**
-  - `stringify_list()` takes O(n) time and O(n) space to build the string representation.
 
 ### Conclusion
 The linked list implementation provided has efficient O(1) insertion at the beginning and O(n) insertion at the end,
