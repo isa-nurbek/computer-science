@@ -603,89 +603,89 @@ Let's analyze the time and space complexity of each method in the `LinkedList` c
 
 #### 2. **`get_head_node`**
 
-- **Time Complexity**: \(O(1)\)
-- **Space Complexity**: \(O(1)\)
+- **Time Complexity**: O(1)
+- **Space Complexity**: O(1)
 - Explanation: Simply returns the `head_node`, which is a constant-time operation.
 
 ---
 
 #### 3. **`insert_beginning`**
 
-- **Time Complexity**: \(O(1)\)
-- **Space Complexity**: \(O(1)\)
+- **Time Complexity**: O(1)
+- **Space Complexity**: O(1)
 - Explanation: Inserting a new node at the beginning involves creating a new node and updating the `head_node`, which is a constant-time operation.
 
 ---
 
 #### 4. **`insert_end`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(1)\)
-- Explanation: In the worst case, you need to traverse the entire list to find the last node, which takes \(O(n)\) time. The space complexity is constant because only a fixed number of variables are used.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+- Explanation: In the worst case, you need to traverse the entire list to find the last node, which takes O(n) time. The space complexity is constant because only a fixed number of variables are used.
 
 ---
 
 #### 5. **`remove_node`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(1)\)
-- Explanation: In the worst case, you need to traverse the entire list to find the node to remove, which takes \(O(n)\) time. The space complexity is constant because no additional data structures are used.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+- Explanation: In the worst case, you need to traverse the entire list to find the node to remove, which takes O(n) time. The space complexity is constant because no additional data structures are used.
 
 ---
 
 #### 6. **`stringify_list`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(n)\)
-- Explanation: You need to traverse the entire list to build the string representation, which takes \(O(n)\) time. The space complexity is \(O(n)\) because the string grows linearly with the number of nodes.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n)
+- Explanation: You need to traverse the entire list to build the string representation, which takes O(n) time. The space complexity is O(n) because the string grows linearly with the number of nodes.
 
 ---
 
 #### 7. **`search`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(1)\)
-- Explanation: In the worst case, you need to traverse the entire list to find the value, which takes \(O(n)\) time. The space complexity is constant because no additional data structures are used.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+- Explanation: In the worst case, you need to traverse the entire list to find the value, which takes O(n) time. The space complexity is constant because no additional data structures are used.
 
 ---
 
 #### 8. **`reverse`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(1)\)
-- Explanation: Reversing the list requires traversing the entire list once, which takes \(O(n)\) time. The space complexity is constant because only a fixed number of variables are used.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+- Explanation: Reversing the list requires traversing the entire list once, which takes O(n) time. The space complexity is constant because only a fixed number of variables are used.
 
 ---
 
 #### 9. **`find_middle`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(1)\)
-- Explanation: The "two-pointer" technique (slow and fast pointers) traverses the list in \(O(n)\) time. The space complexity is constant because only two pointers are used.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+- Explanation: The "two-pointer" technique (slow and fast pointers) traverses the list in O(n) time. The space complexity is constant because only two pointers are used.
 
 ---
 
 #### 10. **`has_cycle`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(1)\)
-- Explanation: The "two-pointer" technique (slow and fast pointers) traverses the list in \(O(n)\) time. The space complexity is constant because only two pointers are used.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+- Explanation: The "two-pointer" technique (slow and fast pointers) traverses the list in O(n) time. The space complexity is constant because only two pointers are used.
 
 ---
 
 #### 11. **`find_cycle_start`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(1)\)
-- Explanation: Detecting the cycle and finding its start involves traversing the list with two pointers, which takes \(O(n)\) time. The space complexity is constant because only a fixed number of variables are used.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+- Explanation: Detecting the cycle and finding its start involves traversing the list with two pointers, which takes O(n) time. The space complexity is constant because only a fixed number of variables are used.
 
 ---
 
 #### 12. **`remove_duplicates`**
 
-- **Time Complexity**: \(O(n)\)
-- **Space Complexity**: \(O(n)\)
-- Explanation: Traversing the list takes \(O(n)\) time. The space complexity is \(O(n)\) because a set is used to store seen values, which can grow up to the size of the list in the worst case (if all values are unique).
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n)
+- Explanation: Traversing the list takes O(n) time. The space complexity is O(n) because a set is used to store seen values, which can grow up to the size of the list in the worst case (if all values are unique).
 
 ---
 
@@ -693,23 +693,23 @@ Let's analyze the time and space complexity of each method in the `LinkedList` c
 
 | Method               | Time Complexity | Space Complexity |
 |----------------------|-----------------|------------------|
-| `__init__`           | \(O(1)\)        | \(O(1)\)         |
-| `get_head_node`      | \(O(1)\)        | \(O(1)\)         |
-| `insert_beginning`   | \(O(1)\)        | \(O(1)\)         |
-| `insert_end`         | \(O(n)\)        | \(O(1)\)         |
-| `remove_node`        | \(O(n)\)        | \(O(1)\)         |
-| `stringify_list`     | \(O(n)\)        | \(O(n)\)         |
-| `search`             | \(O(n)\)        | \(O(1)\)         |
-| `reverse`            | \(O(n)\)        | \(O(1)\)         |
-| `find_middle`        | \(O(n)\)        | \(O(1)\)         |
-| `has_cycle`          | \(O(n)\)        | \(O(1)\)         |
-| `find_cycle_start`   | \(O(n)\)        | \(O(1)\)         |
-| `remove_duplicates`  | \(O(n)\)        | \(O(n)\)         |
+| `__init__`           | O(1)            | O(1)             |
+| `get_head_node`      | O(1)            | O(1)             |
+| `insert_beginning`   | O(1)            | O(1)             |
+| `insert_end`         | O(n)            | O(1)             |
+| `remove_node`        | O(n)            | O(1)             |
+| `stringify_list`     | O(n)            | O(n)             |
+| `search`             | O(n)            | O(1)             |
+| `reverse`            | O(n)            | O(1)             |
+| `find_middle`        | O(n)            | O(1)             |
+| `has_cycle`          | O(n)            | O(1)             |
+| `find_cycle_start`   | O(n)            | O(1)             |
+| `remove_duplicates`  | O(n)            | O(n)             |
 
 ---
 
 ### Key Takeaways
 
-- Most operations that involve traversing the list (e.g., `insert_end`, `remove_node`, `search`, `reverse`, etc.) have a **time complexity of \(O(n)\)**.
-- Operations that modify the head of the list (e.g., `insert_beginning`) have a **time complexity of \(O(1)\)**.
-- The **space complexity** is generally \(O(1)\) for most operations, except for `stringify_list` and `remove_duplicates`, which use additional space proportional to the size of the list.
+- Most operations that involve traversing the list (e.g., `insert_end`, `remove_node`, `search`, `reverse`, etc.) have a **time complexity of - O(n)**.
+- Operations that modify the head of the list (e.g., `insert_beginning`) have a **time complexity of - O(1)**.
+- The **space complexity** is generally O(1) for most operations, except for `stringify_list` and `remove_duplicates`, which use additional space proportional to the size of the list.
