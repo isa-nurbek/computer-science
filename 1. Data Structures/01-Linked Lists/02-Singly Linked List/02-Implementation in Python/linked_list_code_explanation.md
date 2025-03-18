@@ -595,8 +595,8 @@ Let's analyze the time and space complexity of each method in the `LinkedList` c
 
 #### 1. **`__init__`**
 
-- **Time Complexity**: \(O(1)\)
-- **Space Complexity**: \(O(1)\)
+- **Time Complexity**: O(1)
+- **Space Complexity**: O(1)
 - Explanation: Initializing the `head_node` is a constant-time operation.
 
 ---
