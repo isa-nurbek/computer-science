@@ -579,9 +579,9 @@ def remove_duplicates(self):
 
 - Uses a **set** to remove duplicate values.
 
----
+### Conclusion
 
-This linked list implementation provides a full set of operations for common tasks.
+This linked list supports many useful operations and provides a full set of operations for common tasks.
 
 ---
 
