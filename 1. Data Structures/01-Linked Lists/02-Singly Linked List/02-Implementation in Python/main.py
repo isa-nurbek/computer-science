@@ -99,69 +99,105 @@ print(ll.stringify_list())  # Print the list: A->B->C->D
 ll.remove_node("B")  # Remove node with value 'B'
 print(ll.stringify_list())  # Print the modified list: A->C->D
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
-### Time and Space Complexity Analysis
+## Time and Space Complexity Analysis:
 
-Let's break down the time and space complexity of the key operations in the `LinkedList` class:
+### Node Class
 
-#### 1. **Insert at the Beginning (`insert_beginning`)**
+1. **`__init__` Method:**
    - **Time Complexity:** O(1)
-   
-     - Inserting at the beginning of the linked list involves creating a new node and updating the `head_node` reference.
-     This operation is constant time because it doesn't depend on the size of the list.
-     
    - **Space Complexity:** O(1)
-     - The space required is constant because we only create a single new node, regardless of the size of the list.
-
-#### 2. **Insert at the End (`insert_end`)**
-   - **Time Complexity:** O(n)
    
-     - Inserting at the end of the linked list requires traversing the entire list to find the last node. This operation
-     takes linear time because it depends on the number of nodes in the list.
-     
+   - **Explanation:** Initializing a node with a value and an optional next node reference is a constant-time operation.
+   The space required is also constant since we are just creating a single node.
+
+2. **`get_value` Method:**
+   - **Time Complexity:** O(1)
    - **Space Complexity:** O(1)
-     - The space required is constant because we only create a single new node, regardless of the size of the list.
-
-#### 3. **Remove a Node (`remove_node`)**
-   - **Time Complexity:** O(n)
    
-     - Removing a node involves traversing the list to find the node with the specified value. In the worst case, this
-     operation takes linear time because it may need to traverse the entire list.
-     
+   - **Explanation:** Accessing the value of a node is a constant-time operation.
+
+3. **`get_next_node` Method:**
+   - **Time Complexity:** O(1)
    - **Space Complexity:** O(1)
-     - The space required is constant because we only need a few pointers to manage the removal, regardless of the size of the list.
-
-#### 4. **Convert to String (`stringify_list`)**
-   - **Time Complexity:** O(n)
    
-     - Converting the linked list to a string involves traversing the entire list to build the string representation.
-     This operation takes linear time because it depends on the number of nodes in the list.
-     
+   - **Explanation:** Accessing the next node reference is a constant-time operation.
+
+4. **`set_next_node` Method:**
+   - **Time Complexity:** O(1)
+   - **Space Complexity:** O(1)
+   
+   - **Explanation:** Setting the next node reference is a constant-time operation.
+
+5. **`__str__` Method:**
+   - **Time Complexity:** O(1)
+   - **Space Complexity:** O(1)
+   
+   - **Explanation:** Converting the node to a string representation is a constant-time operation.
+
+### LinkedList Class
+
+1. **`__init__` Method:**
+   - **Time Complexity:** O(1)
+   - **Space Complexity:** O(1)
+   
+   - **Explanation:** Initializing a linked list with an optional starting value is a constant-time operation.
+   The space required is also constant since we are just creating a single node.
+
+2. **`get_head_node` Method:**
+   - **Time Complexity:** O(1)
+   - **Space Complexity:** O(1)
+   
+   - **Explanation:** Accessing the head node is a constant-time operation.
+
+3. **`insert_beginning` Method:**
+   - **Time Complexity:** O(1)
+   - **Space Complexity:** O(1)
+   
+   - **Explanation:** Inserting a new node at the beginning of the list is a constant-time operation. 
+   The space required is also constant since we are just creating a single node.
+
+4. **`insert_end` Method:**
+   - **Time Complexity:** O(n)
+   - **Space Complexity:** O(1)
+   
+   - **Explanation:** Inserting a new node at the end of the list requires traversing the entire list to find the last node,
+   which takes O(n) time. The space required is constant since we are just creating a single node.
+
+5. **`remove_node` Method:**
+   - **Time Complexity:** O(n)
+   - **Space Complexity:** O(1)
+   
+   - **Explanation:** Removing the first occurrence of a node with a specified value requires traversing the list, which
+   takes O(n) time in the worst case. The space required is constant.
+
+6. **`stringify_list` Method:**
+   - **Time Complexity:** O(n)
    - **Space Complexity:** O(n)
-     - The space required is linear because the string representation grows with the number of nodes in the list.
+   
+   - **Explanation:** Converting the linked list to a string representation requires traversing the entire list, which
+   takes O(n) time. The space required is also O(n) because we are building a string that contains all the values in the list.
 
-### Summary of Complexities
+### Summary
 
-| Operation            | Time Complexity | Space Complexity |
-|----------------------|-----------------|------------------|
-| `insert_beginning`   | O(1)            | O(1)             |
-| `insert_end`         | O(n)            | O(1)             |
-| `remove_node`        | O(n)            | O(1)             |
-| `stringify_list`     | O(n)            | O(n)             |
+- **Node Class:**
+  - All methods have a time and space complexity of O(1).
 
-### Conclusion
-The linked list implementation provided has efficient O(1) insertion at the beginning and O(n) insertion at the end,
-removal, and string conversion. The space complexity is generally O(1) for modifications and O(n) for the string representation.
+- **LinkedList Class:**
+  - **O(1):** `__init__`, `get_head_node`, `insert_beginning`
+  - **O(n):** `insert_end`, `remove_node`, `stringify_list`
+  
+  - **Space Complexity:** Generally O(1) for most operations, except `stringify_list`, which is O(n).
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
                                                 *** __init__() method: ***
@@ -277,7 +313,7 @@ self.head_node = Node(value)
 - Creates the first node of the linked list (`head_node`) with the given value (`value`).
 - If no value is provided, the list starts with a single node containing `None`.
 
-*********************************************************************************************************************************
+# =========================================================================================================================== #
 
                                             *** insert_beginning() method: ***
 
@@ -427,7 +463,7 @@ The `insert_beginning` method:
 2. Links this new node to the current head node of the list.
 3. Updates the `head_node` to point to the new node, making it the first node in the list.
 
-*********************************************************************************************************************************
+# =========================================================================================================================== #
 
                                             *** insert_end() method: ***
 
@@ -614,7 +650,7 @@ The `insert_end` method works as follows:
 3. Otherwise, it traverses the list to find the last node.
 4. Updates the last node’s `next_node` to point to the new node, appending it to the end of the list.
 
-*********************************************************************************************************************************
+# =========================================================================================================================== #
 
                                             *** remove_node() method: ***
 
@@ -831,7 +867,7 @@ The `remove_node` method:
 3. When a match is found, updates the `next_node` of the preceding node to skip over the matched node,
 effectively removing it from the list.
 
-*********************************************************************************************************************************
+# =========================================================================================================================== #
 
                                              *** stringify_list() method: ***
 
