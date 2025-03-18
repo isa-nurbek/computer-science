@@ -1,103 +1,217 @@
 # Implementation in Python:
 
-
-# Node class represents a single node in the linked list
 class Node:
-    # Initialize a new node with a value and optional next node reference
     def __init__(self, value, next_node=None):
         self.value = value
         self.next_node = next_node
 
-    # Return the value stored in this node
     def get_value(self):
         return self.value
 
-    # Return the reference to the next node
     def get_next_node(self):
         return self.next_node
 
-    # Set the reference to the next node
     def set_next_node(self, next_node):
         self.next_node = next_node
 
-    # String representation of the node
     def __str__(self):
         return f"Node({self.value})"
 
 
-# LinkedList class manages a collection of nodes
 class LinkedList:
-    # Initialize a new linked list with an optional starting value
     def __init__(self, value=None):
-        self.head_node = Node(value)
+        self.head_node = Node(value) if value is not None else None
 
-    # Return the first node in the list
     def get_head_node(self):
         return self.head_node
 
-    # Add a new node at the beginning of the list
     def insert_beginning(self, new_value):
         new_node = Node(new_value)
-        new_node.set_next_node(self.head_node)  # Link new node to current head
-        self.head_node = new_node  # Update head to new node
+        new_node.set_next_node(self.head_node)
+        self.head_node = new_node
 
-    # Add a new node at the end of the list
     def insert_end(self, value):
         new_node = Node(value)
-        # Handle empty list case
         if self.head_node is None:
             self.head_node = new_node
             return
 
-        # Find the last node in the list
         current_node = self.head_node
-        while current_node.get_next_node() is not None:
+        while current_node.get_next_node():
             current_node = current_node.get_next_node()
-
-        # Link the last node to our new node
         current_node.set_next_node(new_node)
 
-    # Remove the first occurrence of a node with the specified value
     def remove_node(self, value_to_remove):
-        current_node = self.get_head_node()
+        current_node = self.head_node
 
-        # Special case: removing head node
-        if current_node.get_value() == value_to_remove:
+        if current_node and current_node.get_value() == value_to_remove:
             self.head_node = current_node.get_next_node()
-        else:
-            # Traverse list looking for the value to remove
-            while current_node:
-                next_node = current_node.get_next_node()
-                if next_node and next_node.get_value() == value_to_remove:
-                    current_node.set_next_node(
-                        next_node.get_next_node()
-                    )  # Skip over the removed node
-                    current_node = None  # Exit the loop
-                else:
-                    current_node = next_node
+            return
 
-    # Convert the linked list to a string representation
+        while current_node and current_node.get_next_node():
+            next_node = current_node.get_next_node()
+            if next_node.get_value() == value_to_remove:
+                current_node.set_next_node(next_node.get_next_node())
+                return
+            current_node = next_node
+
     def stringify_list(self):
         string_list = ""
-        current_node = self.get_head_node()
-        # Traverse the list and build string representation
+        current_node = self.head_node
         while current_node:
             if current_node.get_value() is not None:
-                string_list += str(current_node.get_value()) + "\n"
-                current_node = current_node.get_next_node()
+                string_list += str(current_node.get_value()) + " -> "
+            current_node = current_node.get_next_node()
+        return string_list[:-4] if string_list else "Empty List"
 
-        return string_list
+    def search(self, value):
+        current_node = self.head_node
+        while current_node:
+            if current_node.get_value() == value:
+                return True
+            current_node = current_node.get_next_node()
+        return False
+
+    def reverse(self):
+        prev = None
+        current = self.head_node
+        while current:
+            next_node = current.get_next_node()
+            current.set_next_node(prev)
+            prev = current
+            current = next_node
+        self.head_node = prev
+
+    def find_middle(self):
+        slow = self.head_node
+        fast = self.head_node
+        while fast and fast.get_next_node():
+            slow = slow.get_next_node()
+            fast = fast.get_next_node().get_next_node()
+        return slow.get_value() if slow else None
+
+    def has_cycle(self):
+        slow = self.head_node
+        fast = self.head_node
+        while fast and fast.get_next_node():
+            slow = slow.get_next_node()
+            fast = fast.get_next_node().get_next_node()
+            if slow == fast:
+                return True
+        return False
+
+    def find_cycle_start(self):
+        slow = self.head_node
+        fast = self.head_node
+        cycle_detected = False
+
+        while fast and fast.get_next_node():
+            slow = slow.get_next_node()
+            fast = fast.get_next_node().get_next_node()
+            if slow == fast:
+                cycle_detected = True
+                break
+
+        if not cycle_detected:
+            return None
+
+        slow = self.head_node
+        while slow != fast:
+            slow = slow.get_next_node()
+            fast = fast.get_next_node()
+
+        return slow.get_value()
+
+    def remove_duplicates(self):
+        if not self.head_node:
+            return
+
+        seen_values = set()
+        current_node = self.head_node
+        seen_values.add(current_node.get_value())
+
+        while current_node.get_next_node():
+            next_node = current_node.get_next_node()
+            if next_node.get_value() in seen_values:
+                current_node.set_next_node(next_node.get_next_node())
+            else:
+                seen_values.add(next_node.get_value())
+                current_node = next_node
+
+# Example Usage 
+
+ll = LinkedList()
+
+ll.insert_end(1)
+ll.insert_end(2)
+ll.insert_end(3)
+ll.insert_end(4)
+ll.insert_end(5)
+
+print("Original List:")
+print(ll.stringify_list())  # Output: 1 -> 2 -> 3 -> 4 -> 5
+
+# Test Searching
+print("\nSearch for 3:", ll.search(3))  # Output: True
+print("Search for 10:", ll.search(10))  # Output: False
+
+# Test Finding Middle Node
+print("\nMiddle Node:", ll.find_middle())  # Output: 3
+
+# Test Reversing
+ll.reverse()
+print("\nReversed List:")
+print(ll.stringify_list())  # Output: 5 -> 4 -> 3 -> 2 -> 1
+
+# Test Cycle Detection
+print("\nCycle Detected:", ll.has_cycle())  # Output: False
+
+# Creating a cycle manually
+ll.get_head_node().get_next_node().get_next_node().set_next_node(ll.get_head_node())  # Cycle at node 1
+print("Cycle Detected after introducing cycle:", ll.has_cycle())  # Output: True
+print("Cycle Start Node:", ll.find_cycle_start())  # Output: 1
+
+# Remove cycle for further testing
+ll.get_head_node().get_next_node().get_next_node().set_next_node(None)
+
+# Test Removing Duplicates
+ll.insert_end(3)
+ll.insert_end(4)
+ll.insert_end(4)
+print("\nList before removing duplicates:")
+print(ll.stringify_list())  # Output: 5 -> 4 -> 3 -> 2 -> 1 -> 3 -> 4 -> 4
+
+ll.remove_duplicates()
+print("\nList after removing duplicates:")
+print(ll.stringify_list())  # Output: 5 -> 4 -> 3 -> 2 -> 1
 
 
-# Test the LinkedList implementation
-ll = LinkedList("D")  # Create new list with 'D' as head
-ll.insert_beginning("C")  # Add 'C' to the beginning
-ll.insert_beginning("B")  # Add 'B' to the beginning
-ll.insert_beginning("A")  # Add 'A' to the beginning
-print(ll.stringify_list())  # Print the list: A->B->C->D
+# Output:
 
-ll.remove_node("B")  # Remove node with value 'B'
-print(ll.stringify_list())  # Print the modified list: A->C->D
+"""
+Original List:
+1 -> 2 -> 3 -> 4 -> 5
+
+Search for 3: True
+Search for 10: False
+
+Middle Node: 3
+
+Reversed List:
+5 -> 4 -> 3 -> 2 -> 1
+
+Cycle Detected: False
+Cycle Detected after introducing cycle: True
+Cycle Start Node: 5
+
+List before removing duplicates:
+5 -> 4 -> 3 -> 3 -> 4 -> 4
+
+List after removing duplicates:
+5 -> 4 -> 3
+
+"""
+
 
 # =========================================================================================================================== #
 
@@ -141,57 +255,139 @@ print(ll.stringify_list())  # Print the modified list: A->C->D
 
 ### LinkedList Class
 
-1. **`__init__` Method:**
-   - **Time Complexity:** O(1)
-   - **Space Complexity:** O(1)
-   
-   - **Explanation:** Initializing a linked list with an optional starting value is a constant-time operation.
-   The space required is also constant since we are just creating a single node.
+#### 1. **`__init__`**
+- **Time Complexity**: O(1)
+- **Space Complexity**: O(1)
 
-2. **`get_head_node` Method:**
-   - **Time Complexity:** O(1)
-   - **Space Complexity:** O(1)
-   
-   - **Explanation:** Accessing the head node is a constant-time operation.
+- Explanation: Initializing the `head_node` is a constant-time operation.
 
-3. **`insert_beginning` Method:**
-   - **Time Complexity:** O(1)
-   - **Space Complexity:** O(1)
-   
-   - **Explanation:** Inserting a new node at the beginning of the list is a constant-time operation. 
-   The space required is also constant since we are just creating a single node.
+---
 
-4. **`insert_end` Method:**
-   - **Time Complexity:** O(n)
-   - **Space Complexity:** O(1)
-   
-   - **Explanation:** Inserting a new node at the end of the list requires traversing the entire list to find the last node,
-   which takes O(n) time. The space required is constant since we are just creating a single node.
+#### 2. **`get_head_node`**
+- **Time Complexity**: O(1)
+- **Space Complexity**: O(1)
 
-5. **`remove_node` Method:**
-   - **Time Complexity:** O(n)
-   - **Space Complexity:** O(1)
-   
-   - **Explanation:** Removing the first occurrence of a node with a specified value requires traversing the list, which
-   takes O(n) time in the worst case. The space required is constant.
+- Explanation: Simply returns the `head_node`, which is a constant-time operation.
 
-6. **`stringify_list` Method:**
-   - **Time Complexity:** O(n)
-   - **Space Complexity:** O(n)
-   
-   - **Explanation:** Converting the linked list to a string representation requires traversing the entire list, which
-   takes O(n) time. The space required is also O(n) because we are building a string that contains all the values in the list.
+---
 
-### Summary
+#### 3. **`insert_beginning`**
+- **Time Complexity**: O(1)
+- **Space Complexity**: O(1)
 
-- **Node Class:**
-  - All methods have a time and space complexity of O(1).
+- Explanation: Inserting a new node at the beginning involves creating a new node and updating the `head_node`,
+which is a constant-time operation.
 
-- **LinkedList Class:**
-  - **O(1):** `__init__`, `get_head_node`, `insert_beginning`
-  - **O(n):** `insert_end`, `remove_node`, `stringify_list`
-  
-  - **Space Complexity:** Generally O(1) for most operations, except `stringify_list`, which is O(n).
+---
+
+#### 4. **`insert_end`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+- Explanation: In the worst case, you need to traverse the entire list to find the last node, which takes O(n) time.
+The space complexity is constant because only a fixed number of variables are used.
+
+---
+
+#### 5. **`remove_node`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+- Explanation: In the worst case, you need to traverse the entire list to find the node to remove, which takes O(n) time.
+The space complexity is constant because no additional data structures are used.
+
+---
+
+#### 6. **`stringify_list`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n)
+
+- Explanation: You need to traverse the entire list to build the string representation, which takes O(n) time.
+The space complexity is O(n) because the string grows linearly with the number of nodes.
+
+---
+
+#### 7. **`search`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+- Explanation: In the worst case, you need to traverse the entire list to find the value, which takes O(n) time.
+The space complexity is constant because no additional data structures are used.
+
+---
+
+#### 8. **`reverse`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+- Explanation: Reversing the list requires traversing the entire list once, which takes O(n) time.
+The space complexity is constant because only a fixed number of variables are used.
+
+---
+
+#### 9. **`find_middle`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+- Explanation: The "two-pointer" technique (slow and fast pointers) traverses the list in O(n) time.
+The space complexity is constant because only two pointers are used.
+
+---
+
+#### 10. **`has_cycle`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+- Explanation: The "two-pointer" technique (slow and fast pointers) traverses the list in O(n) time.
+The space complexity is constant because only two pointers are used.
+
+---
+
+#### 11. **`find_cycle_start`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+
+- Explanation: Detecting the cycle and finding its start involves traversing the list with two pointers,
+which takes O(n) time. The space complexity is constant because only a fixed number of variables are used.
+
+---
+
+#### 12. **`remove_duplicates`**
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n)
+
+- Explanation: Traversing the list takes O(n) time. The space complexity is O(n) because a set is used to store
+seen values, which can grow up to the size of the list in the worst case (if all values are unique).
+
+---
+
+### Summary Table
+
+| Method               | Time Complexity | Space Complexity |
+|----------------------|-----------------|------------------|
+| `__init__`           | O(1)            | O(1)             |
+| `get_head_node`      | O(1)            | O(1)             |
+| `insert_beginning`   | O(1)            | O(1)             |
+| `insert_end`         | O(n)            | O(1)             |
+| `remove_node`        | O(n)            | O(1)             |
+| `stringify_list`     | O(n)            | O(n)             |
+| `search`             | O(n)            | O(1)             |
+| `reverse`            | O(n)            | O(1)             |
+| `find_middle`        | O(n)            | O(1)             |
+| `has_cycle`          | O(n)            | O(1)             |
+| `find_cycle_start`   | O(n)            | O(1)             |
+| `remove_duplicates`  | O(n)            | O(n)             |
+
+---
+
+### Key Takeaways
+- Most operations that involve traversing the list (e.g., `insert_end`, `remove_node`, `search`, `reverse`, etc.)
+have a **time complexity of O(n)**.
+
+- Operations that modify the head of the list (e.g., `insert_beginning`) have a **time complexity of O(1)**.
+
+- The **space complexity** is generally O(1) for most operations, except for `stringify_list` and `remove_duplicates`,
+which use additional space proportional to the size of the list.
 
 """
 
@@ -200,877 +396,1331 @@ print(ll.stringify_list())  # Print the modified list: A->C->D
 # Detailed Code Explanation:
 
 """
-                                                *** __init__() method: ***
 
-# Code:
+                                                     # **Node Class**
+
+## **Understanding the `Node` Class**
+
+A **node** is a building block of a **linked list**. Each node stores:
+1. **A value** (the actual data).
+2. **A reference (pointer) to the next node** in the list.
+
+```
+class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next_node = next_node
+```
+- `value`: Stores the actual data.
+- `next_node`: Points to the next node in the list (default is `None`).
+
+- **Example**:
+```
+node = Node(10)  # Creates a node with value 10 and next_node as None
+```
+
+
+### **Methods in the `Node` Class**
+
+#### 1️⃣ `get_value(self)`
+```
+def get_value(self):
+    return self.value
+```
+- Returns the **value** stored in the node.
+
+- **Example**:
+```
+node = Node(10)
+print(node.get_value())  # Output: 10
+```
+
+
+#### 2️⃣ `get_next_node(self)`
+```
+def get_next_node(self):
+    return self.next_node
+```
+- Returns the **reference** (pointer) to the next node.
+
+- **Example**:
+```
+node1 = Node(10)
+node2 = Node(20, node1)  # node2 points to node1
+print(node2.get_next_node())  # Output: <Node object at memory_location>
+```
+
+
+#### 3️⃣ `set_next_node(self, next_node)`
+```
+def set_next_node(self, next_node):
+    self.next_node = next_node
+```
+- Updates the `next_node` reference, linking this node to another node.
+
+- **Example**:
+```
+node1 = Node(10)
+node2 = Node(20)
+node1.set_next_node(node2)  # node1 now points to node2
+```
+
+
+#### 4️⃣ `__str__(self)`
+```
+def __str__(self):
+    return f"Node({self.value})"
+```
+- Returns a string representation of the node for easy debugging.
+
+- **Example**:
+```
+node = Node(10)
+print(node)  # Output: Node(10)
+```
+
+# =========================================================================================================================== #
+
+                                                # **LinkedList Class**
+    
+## **Understanding the `LinkedList` Class**
+
+A **linked list** is a sequence of nodes where:
+- Each node stores a value and a reference to the next node.
+- The list starts at a special node called the **head**.
 
 ```
 class LinkedList:
     def __init__(self, value=None):
-        self.head_node = Node(value)
+        self.head_node = Node(value) if value is not None else None
 ```
 
-This line of code is from the constructor method (`__init__`) of the `LinkedList` class. Let’s break it down step by step:
+- If a value is given, the list starts with a **head node**.
+- Otherwise, the list is **empty**.
 
-### **Purpose of the Constructor (`__init__`)**
-- The constructor initializes a new linked list object.
-- When you create a new `LinkedList` instance, this method is called automatically.
+# =========================================================================================================================== #
+
+                                           **Methods in the `LinkedList` Class**
+                                           
+                                                    get_head_node(self)
+
+```
+def get_head_node(self):
+    return self.head_node
+```
+
+- Returns the **head node** (first node) of the list.
+
+# =========================================================================================================================== #
+
+                                                insert_beginning(self, new_value)
+                                                
+**How it works:**
+- Creates a new node with `new_value`.
+- Links it to the **current head node**.
+- Updates the head to the new node.
+
+**Example:**
+```
+ll = LinkedList()
+ll.insert_beginning(3)  # List: 3
+ll.insert_beginning(2)  # List: 2 -> 3
+ll.insert_beginning(1)  # List: 1 -> 2 -> 3
+```
+
+# =========================================================================================================================== #
+
+                                                    insert_end(self, value)
+
+## **Understanding `insert_end(self, value)`**
+This method **inserts a new node at the end** of the linked list.
+
+### **Code Breakdown**
+```
+def insert_end(self, value):
+    new_node = Node(value)  # Step 1: Create a new node with the given value
+```
+- A new node is created with `value`.  
+- At this point, `new_node.next_node` is `None` (because we are just creating the node).  
 
 ---
 
-### **Key Components of the Line**
 ```
-self.head_node = Node(value)
+    if self.head_node is None:  # Step 2: If list is empty
+        self.head_node = new_node  # Make new_node the head
+        return
 ```
-- **`self`**:
-  - Refers to the specific instance of the `LinkedList` class being created.
-  - `self.head_node` is an attribute of the `LinkedList` instance. It represents the first node (head) in the linked list.
-  
-- **`Node(value)`**:
-  - This creates a new `Node` object with the specified `value`.
-  - The `Node` class constructor (`Node.__init__`) expects a value (`value`) and optionally a `next_node` reference (default is `None`).
-  - For example:
-    ```
-    Node("A")  # Creates a node with value "A" and no next node.
-    ```
-  
-- **`self.head_node = Node(value)`**:
-  - Assigns the newly created `Node` object to `self.head_node`.
-  - This means the linked list starts with one node, and its value is set to `value`.
+- If the **list is empty** (`self.head_node is None`),  
+  - The new node becomes the **head** of the linked list.
+  - The function **returns immediately**, since the node has been added.
 
 ---
 
-### **Behavior Based on the Input**
-#### 1. **When `value` is Provided**
-If you initialize the linked list with a value:
 ```
-ll = LinkedList("A")
+    current_node = self.head_node  # Step 3: Start from the head node
 ```
-- `Node("A")` is created.
-- `self.head_node` is set to this new node.
-- The linked list now contains one node:
-  ```
-  Head -> A
-  ```
+- If the list **is not empty**,  
+  - We start from the **head node** and traverse the list.
 
-#### 2. **When `value` is `None` (Default)**
-If you don't provide a value:
+---
+
+```
+    while current_node.get_next_node():  # Step 4: Traverse to the last node
+        current_node = current_node.get_next_node()
+```
+- This **loop moves through** each node in the linked list.  
+- It stops when it reaches the **last node**, which is the node whose `next_node` is `None`.  
+
+---
+
+```
+    current_node.set_next_node(new_node)  # Step 5: Link last node to new node
+```
+- Once the **last node** is found,  
+  - We **set its `next_node`** to point to the new node.  
+- Now, the new node is **added at the end** of the list.
+
+---
+
+## **Example Walkthrough**
+
+Let’s see how this works with an example.
+
+### **Step 1: Create an Empty Linked List**
 ```
 ll = LinkedList()
 ```
-- `Node(None)` is created.
-- `self.head_node` is set to this node.
-- The linked list contains one node, but the value is `None`:
+- `head_node` is `None` because the list is empty.
+
+---
+
+### **Step 2: Insert `1`**
+```
+ll.insert_end(1)
+```
+- Since the list is **empty**, the new node with value `1` becomes the **head**.
+- **List after operation**:  
   ```
-  Head -> None
+  1
   ```
 
 ---
 
-### **Why Initialize `head_node` with a `Node`?**
-- A linked list requires a starting point, known as the **head node**.
-- Even if the list starts empty (`value=None`), it’s useful to have a placeholder node, which simplifies further operations like insertion.
+### **Step 3: Insert `2`**
+```
+ll.insert_end(2)
+```
+- The method starts at `head_node` (which contains `1`).
+- Since `1` is the **only node**, we **set its `next_node`** to the new node `2`.
+- **List after operation**:
+  ```
+  1 -> 2
+  ```
 
 ---
 
-### **Illustration of the Process**
-Let’s visualize:
-
-#### When `LinkedList("A")` is created:
-1. The `__init__` method is called with `value="A"`.
-2. A new `Node` is created:
-   ```
-   Node(value="A", next_node=None)
-   ```
-3. This node becomes the `head_node`.
-
-Resulting structure:
+### **Step 4: Insert `3`**
 ```
-LinkedList:
-Head -> A
+ll.insert_end(3)
 ```
-
-#### When `LinkedList()` is created:
-1. The `__init__` method is called with `value=None`.
-2. A new `Node` is created:
-   ```
-   Node(value=None, next_node=None)
-   ```
-3. This node becomes the `head_node`.
-
-Resulting structure:
-```
-LinkedList:
-Head -> None
-```
+- The method starts at `head_node` (which contains `1`).
+- It moves to the **next node** (`2`), which is the last node.
+- It **sets `2.next_node` to `3`**.
+- **List after operation**:
+  ```
+  1 -> 2 -> 3
+  ```
 
 ---
 
-### Summary
-```
-self.head_node = Node(value)
-```
-- Creates the first node of the linked list (`head_node`) with the given value (`value`).
-- If no value is provided, the list starts with a single node containing `None`.
+## **Final Thoughts**
+- If the list is **empty**, we **set the head** to the new node.
+- If the list has **nodes**, we **traverse** to the last node and **attach** the new node at the end.
 
 # =========================================================================================================================== #
 
-                                            *** insert_beginning() method: ***
+                                             remove_node(self, value_to_remove)
 
-# Code:
-
-```
-def insert_beginning(self, new_value):
-    new_node = Node(new_value)
-    new_node.set_next_node(self.head_node) 
-    self.head_node = new_node  
-```
-
-This is the `insert_beginning` method from the `LinkedList` class. Its purpose is to add a new node to the **beginning** of
-the linked list. Let's break it down step by step:
-
----
-
-### **Method Purpose**
-The method inserts a new node with a given value (`new_value`) at the start of the linked list, making it the new **head node**.
-
----
-
-### **Breaking Down the Code**
-
-#### 1. **Creating a New Node**
-```
-new_node = Node(new_value)
-```
-- **`Node(new_value)`**:
-  - This creates a new `Node` object with the value `new_value`.
-  - The `next_node` attribute of this new node is `None` by default (as per the `Node` class constructor).
-
-For example:
-```
-new_node = Node("A")
-```
-creates a new node:
-```
-Node("A")  ->  None
-```
-
----
-
-#### 2. **Setting the Next Node for the New Node**
-```
-new_node.set_next_node(self.head_node)
-```
-- **`self.head_node`**:
-  - Refers to the current head node of the linked list (before adding the new node).
-- **`new_node.set_next_node(self.head_node)`**:
-  - Updates the `next_node` reference of the new node to point to the current head node.
-  - This ensures the new node is linked to the rest of the list.
-
-For example:
-- Suppose the linked list looks like this:
-  ```
-  Head -> B -> C -> D
-  ```
-- After:
-  ```
-  new_node.set_next_node(self.head_node)
-  ```
-  The new node now points to the current head:
-  ```
-  New Node ("A") -> B -> C -> D
-  ```
-
----
-
-#### 3. **Updating the Head Node**
-```
-self.head_node = new_node
-```
-- This makes the new node the new **head node** of the linked list.
-- The linked list structure is updated, so the new node is now the first node in the list.
-
-For example:
-- After this step, the list looks like:
-  ```
-  Head -> A -> B -> C -> D
-  ```
-
----
-
-### **Putting It All Together**
-Here’s what happens step by step when `insert_beginning("A")` is called:
-
-1. **Create a New Node (`new_node`)**:
-   - A new node with value `"A"` is created.
-   - Initially, it looks like:
-     ```
-     Node("A") -> None
-     ```
-
-2. **Link the New Node to the Current Head**:
-   - The `next_node` of `new_node` is set to the current head node (`B`).
-   - Now:
-     ```
-     Node("A") -> B -> C -> D
-     ```
-
-3. **Update the Head**:
-   - The `head_node` of the linked list is updated to point to `new_node`.
-   - The linked list now starts with the new node:
-     ```
-     Head -> A -> B -> C -> D
-     ```
-
----
-
-### **Example**
-
-#### Initial State:
-Linked list:
-```
-Head -> B -> C -> D
-```
-
-#### Code Execution:
-```
-ll.insert_beginning("A")
-```
-
-#### After Execution:
-Linked list:
-```
-Head -> A -> B -> C -> D
-```
-
----
-
-### **Why Each Step is Necessary**
-1. **Create a New Node**:
-   - The new value must be stored in a node object to integrate it into the list.
-
-2. **Set the Next Node**:
-   - The new node needs to point to the rest of the list so that the chain of nodes remains intact.
-
-3. **Update the Head Node**:
-   - The new node becomes the first node, so the `head_node` must be updated.
-
----
-
-### **Summary**
-The `insert_beginning` method:
-1. Creates a new node with the given value.
-2. Links this new node to the current head node of the list.
-3. Updates the `head_node` to point to the new node, making it the first node in the list.
-
-# =========================================================================================================================== #
-
-                                            *** insert_end() method: ***
-
-# Code:
-
-```
-def insert_end(self, value):
-    new_node = Node(value)
-    if self.head_node is None:
-        self.head_node = new_node
-        return
-
-    current_node = self.head_node
-    while current_node.get_next_node() is not None:
-        current_node = current_node.get_next_node()
-
-    current_node.set_next_node(new_node) 
-```
-
-This method, `insert_end`, is part of the `LinkedList` class. Its purpose is to add a new node with a specified value (`value`)
-at the **end** of the linked list. Let’s break it down step by step.
-
----
-
-### **Method Purpose**
-- Adds a new node with the given value to the end of the linked list.
-- If the list is empty, the new node becomes the head node.
-
----
+## **Understanding `remove_node(self, value_to_remove)`**
+This method **removes the first node** that contains the given `value_to_remove` from the linked list.
 
 ### **Code Breakdown**
-
-#### 1. **Create a New Node**
-```
-new_node = Node(value)
-```
-- This creates a new instance of the `Node` class with the specified `value`.
-- By default, the `next_node` attribute of the new node is `None` (as per the `Node` class constructor).
-
-For example:
-```
-new_node = Node("A")
-```
-creates a node:
-```
-Node("A") -> None
-```
-
----
-
-#### 2. **Check if the List is Empty**
-```
-if self.head_node is None:
-    self.head_node = new_node
-    return
-```
-- **`self.head_node`**:
-  - Refers to the first node in the list.
-- **If `self.head_node is None`**:
-  - The list is empty (no nodes exist yet).
-- **Set `self.head_node` to `new_node`**:
-  - The new node becomes the first (and only) node in the list.
-- **`return`**:
-  - Ends the method because the node has been inserted, and no further steps are needed.
-
-For example:
-- Before insertion:
-  ```
-  Head -> None
-  ```
-- After:
-  ```
-  Head -> A
-  ```
-
----
-
-#### 3. **Traverse to the Last Node**
-```
-current_node = self.head_node
-while current_node.get_next_node() is not None:
-    current_node = current_node.get_next_node()
-```
-- If the list is not empty, this part of the code finds the last node in the list.
-- **`current_node`**:
-  - Starts as the head node.
-- **`current_node.get_next_node()`**:
-  - Returns the reference to the next node in the list.
-- **While Loop**:
-  - Continues moving to the next node until `get_next_node()` returns `None`, indicating the current node is the last node.
-
-For example:
-- Consider the list:
-  ```
-  Head -> A -> B -> C
-  ```
-- Initially, `current_node` points to `A`.
-- The loop updates `current_node` to point to `B`, then `C`, and stops when it reaches `C` (because `C.get_next_node()` is `None`).
-
----
-
-#### 4. **Set the Last Node’s `next_node`**
-```
-current_node.set_next_node(new_node)
-```
-- **`current_node`**:
-  - At this point, `current_node` refers to the last node in the list.
-- **`set_next_node(new_node)`**:
-  - Updates the `next_node` of the current last node to point to the new node.
-  - This adds the new node to the end of the list.
-
-For example:
-- Before:
-  ```
-  Head -> A -> B -> C
-  ```
-- After adding `D`:
-  ```
-  Head -> A -> B -> C -> D
-  ```
-
----
-
-### **Example Execution**
-Let’s say we have the following initial list:
-```
-Head -> A -> B
-```
-
-#### Code Execution:
-```
-ll.insert_end("C")
-```
-
-**Step 1**: Create a new node:
-```
-new_node = Node("C")
-```
-The new node:
-```
-Node("C") -> None
-```
-
-**Step 2**: Check if the list is empty:
-- `self.head_node` is not `None` (the head is `A`), so skip this step.
-
-**Step 3**: Traverse to the last node:
-- Start at `A` (`current_node = self.head_node`).
-- Move to `B` (`current_node = current_node.get_next_node()`).
-- Stop at `B` because `B.get_next_node()` is `None`.
-
-**Step 4**: Add the new node:
-- Update `B`’s `next_node`:
-  ```
-  current_node.set_next_node(new_node)
-  ```
-
-Final list:
-```
-Head -> A -> B -> C
-```
-
----
-
-### **Why Each Step is Necessary**
-1. **Create a New Node**:
-   - The new value must be stored in a node object.
-
-2. **Check if the List is Empty**:
-   - Handles the edge case where no nodes exist in the list.
-
-3. **Traverse to the Last Node**:
-   - Ensures the new node is added to the very end of the list.
-
-4. **Set the Last Node’s `next_node`**:
-   - Links the new node to the end of the list.
-
----
-
-### **Summary**
-The `insert_end` method works as follows:
-1. Creates a new node with the specified value.
-2. If the list is empty, the new node becomes the head node.
-3. Otherwise, it traverses the list to find the last node.
-4. Updates the last node’s `next_node` to point to the new node, appending it to the end of the list.
-
-# =========================================================================================================================== #
-
-                                            *** remove_node() method: ***
-
-# Code:
-
 ```
 def remove_node(self, value_to_remove):
-    current_node = self.get_head_node()
-
-    if current_node.get_value() == value_to_remove:
-        self.head_node = current_node.get_next_node()
-    else:
-        while current_node:
-            next_node = current_node.get_next_node()
-            if next_node and next_node.get_value() == value_to_remove:
-                current_node.set_next_node(
-                    next_node.get_next_node()
-                )  
-                current_node = None  
-            else:
-                current_node = next_node
+    current_node = self.head_node
 ```
-
-This method, `remove_node`, removes the first occurrence of a node with a specified value (`value_to_remove`) from the linked list.
-Let’s break it down step by step to understand how it works.
+- We start at the **head node** and assign it to `current_node`.
 
 ---
 
-### **Method Purpose**
-The method finds a node with the specified value (`value_to_remove`) in the linked list and removes it while maintaining the integrity of the linked list.
+### **Step 1: Check if the Head Node is the One to Remove**
+```
+    if current_node and current_node.get_value() == value_to_remove:
+        self.head_node = current_node.get_next_node()  # Move head to next node
+        return
+```
+- If the **head node** itself has the value we need to remove:
+  - We update `self.head_node` to the **next node**.
+  - This effectively **removes the head node** from the list.
+  - **Function returns early** (no need to continue).
 
 ---
 
-### **Code Breakdown**
-
-#### 1. **Get the Head Node**
+### **Step 2: Traverse the List to Find the Node to Remove**
 ```
-current_node = self.get_head_node()
+    while current_node and current_node.get_next_node():
 ```
-- **`self.get_head_node()`**:
-  - Retrieves the head node of the linked list.
-- **`current_node`**:
-  - Starts as the head node and will be used to traverse the list.
-
-For example:
-- Given a list:
-  ```
-  Head -> A -> B -> C -> D
-  ```
-  `current_node` initially refers to `A` (the head node).
+- If the **head node wasn't removed**, we **traverse the list** to find the node containing `value_to_remove`.
+- The loop **stops** when:
+  - We reach the **end of the list** (`current_node` becomes `None`).
+  - OR we find a **matching node to remove**.
 
 ---
 
-#### 2. **Check if the Head Node Matches the Value**
+### **Step 3: Check the Next Node**
 ```
-if current_node.get_value() == value_to_remove:
-    self.head_node = current_node.get_next_node()
+next_node = current_node.get_next_node()
+if next_node.get_value() == value_to_remove:
 ```
-- **`current_node.get_value()`**:
-  - Returns the value stored in the current node.
-- **If the head node matches `value_to_remove`**:
-  - Update the `head_node` to point to the next node, effectively removing the head node.
-- This handles the special case where the node to be removed is the head.
-
-For example:
-- Removing `A` from the list:
-  ```
-  Head -> A -> B -> C -> D
-  ```
-  After:
-  ```
-  Head -> B -> C -> D
-  ```
+- `next_node` stores the **next node** in the list.
+- If `next_node` contains `value_to_remove`, we **remove it**.
 
 ---
 
-#### 3. **Traverse the List to Find the Node**
+### **Step 4: Remove the Node**
 ```
-else:
-    while current_node:
-        next_node = current_node.get_next_node()
-        ...
+current_node.set_next_node(next_node.get_next_node())  # Skip node
+return
 ```
-- **`while current_node`**:
-  - Continues traversing the list until it reaches the end (`current_node` becomes `None`).
-- **`next_node = current_node.get_next_node()`**:
-  - Gets a reference to the next node in the list.
-  - This allows checking the value of the next node and updating pointers as needed.
-
-For example:
-- Start with `current_node = A`:
-  ```
-  A -> B -> C -> D
-  ```
-- `next_node` is set to `B`.
+- We **skip the node** by making `current_node.next_node` point to `next_node.next_node`.  
+- This effectively removes `next_node` from the list.
+- The function **returns early** after removal.
 
 ---
 
-#### 4. **Check if the Next Node Matches the Value**
+### **Step 5: Move to the Next Node**
 ```
-if next_node and next_node.get_value() == value_to_remove:
+current_node = next_node  # Move to next node
 ```
-- **`next_node.get_value()`**:
-  - Checks if the next node contains the value to be removed.
-- **If `next_node` matches `value_to_remove`**:
-  - The node after `current_node` is the one to be removed.
-
-For example:
-- To remove `C`:
-  ```
-  A -> B -> C -> D
-  ```
-  When `current_node = B`, `next_node = C`, and `C.get_value() == value_to_remove`.
+- If the current node **wasn't** the one we removed,  
+  - We continue moving to the next node until we find and remove the target value.
 
 ---
 
-#### 5. **Remove the Node**
+## **Example Walkthrough**
+
+Let's go step by step through an example.
+
+### **Step 1: Create a Linked List**
 ```
-current_node.set_next_node(next_node.get_next_node())
+ll = LinkedList()
+ll.insert_end(1)
+ll.insert_end(2)
+ll.insert_end(3)
+ll.insert_end(4)
+ll.insert_end(5)
 ```
-- **`current_node.set_next_node(next_node.get_next_node())`**:
-  - Updates the `next_node` of `current_node` to skip over the node to be removed.
-  - This effectively removes `next_node` from the list.
-
-For example:
-- Removing `C`:
-  ```
-  A -> B -> C -> D
-  ```
-  Update `B`’s `next_node` to point to `D`:
-  ```
-  A -> B -> D
-  ```
-
----
-
-#### 6. **Stop Traversal After Removing**
+**Initial List:**
 ```
-current_node = None
-```
-- **`current_node = None`**:
-  - Stops the loop because the node has been removed. No further traversal is needed.
-
----
-
-#### 7. **Continue Traversal If No Match**
-```
-else:
-    current_node = next_node
-```
-- If the current `next_node` does not match `value_to_remove`, move `current_node` to the next node and continue traversing.
-
-For example:
-- Removing `D`:
-  ```
-  A -> B -> C -> D
-  ```
-  The loop continues until `current_node = C` and `next_node = D`.
-
----
-
-### **Example Execution**
-
-#### Given List:
-```
-Head -> A -> B -> C -> D
-```
-
-#### Removing `C`:
-```
-ll.remove_node("C")
-```
-
-1. **Initial Setup**:
-   - `current_node = A`.
-
-2. **Head Node Check**:
-   - `A.get_value() != "C"`, so move to the `else` block.
-
-3. **Traverse the List**:
-   - `current_node = A`, `next_node = B`. No match, continue.
-   - `current_node = B`, `next_node = C`. Match found.
-
-4. **Remove the Node**:
-   - `B.set_next_node(C.get_next_node())`.
-   - `B`’s `next_node` now points to `D`.
-
-5. **Stop Traversal**:
-   - `current_node = None`.
-
-#### Resulting List:
-```
-Head -> A -> B -> D
+1 -> 2 -> 3 -> 4 -> 5
 ```
 
 ---
 
-### **Key Points**
-1. **Edge Case (Head Node Removal)**:
-   - If the node to remove is the head, update `self.head_node` to point to the next node.
-
-2. **Traversal**:
-   - Iterate through the list, checking the value of each node’s `next_node`.
-
-3. **Remove the Node**:
-   - Update the `next_node` reference of the current node to skip the node being removed.
+### **Step 2: Remove `3`**
+```
+ll.remove_node(3)
+```
+1. `current_node = head_node (1)`
+2. **`1` is not `3`**, move to next.
+3. `current_node = 2`
+4. `next_node = 3` (matches `3`), so we **skip `3`**:
+   ```
+   1 -> 2 -> 4 -> 5
+   ```
 
 ---
 
-### **Summary**
-The `remove_node` method:
-1. Checks if the head node matches the value to remove.
-2. If not, traverses the list while checking each `next_node`.
-3. When a match is found, updates the `next_node` of the preceding node to skip over the matched node,
-effectively removing it from the list.
+### **Step 3: Remove `1` (Head Node)**
+```
+ll.remove_node(1)
+```
+1. `current_node = head_node (1)`
+2. **`1` is the target**, so we set the **head to `2`**:
+   ```
+   2 -> 4 -> 5
+   ```
+
+---
+
+## **Final Thoughts**
+- If the **head node** matches, we **update the head**.
+- Otherwise, we **traverse the list**, find the first match, and **skip that node**.
+- The method **removes only the first occurrence** of the value.
 
 # =========================================================================================================================== #
 
-                                             *** stringify_list() method: ***
+                                                stringify_list(self)
 
-# Code:
+This method **creates a string representation of the linked list**, which helps us see the contents of the list
+in a readable format.
 
+### **Method Explanation**
 ```
 def stringify_list(self):
-    string_list = ""
-    current_node = self.get_head_node()
-    while current_node:
-        if current_node.get_value() is not None:
-            string_list += str(current_node.get_value()) + "\n"
-            current_node = current_node.get_next_node()
-
-    return string_list
+    string_list = ""  # Initialize an empty string
+    current_node = self.head_node  # Start with the head node
 ```
+1. **`string_list = ""`**:  
+   We start with an empty string `string_list`. This will hold the final string representation of the linked list.
 
-This method, `stringify_list`, is part of the `LinkedList` class. Its purpose is to traverse the linked list and
-build a string representation of the list’s elements. Here’s a detailed explanation of how it works:
+2. **`current_node = self.head_node`**:  
+   The `current_node` starts at the **head node** of the linked list. We will use this to traverse the list.
 
 ---
 
-### **Method Purpose**
-- The method creates a string containing the values of all nodes in the linked list, each separated by a newline (`\n`).
-- It iterates through the list, appending the value of each node to the string.
+```
+while current_node:  # Traverse the linked list
+    string_list += str(current_node.get_value()) + " -> "  # Add node's value to the string
+    current_node = current_node.get_next_node()  # Move to the next node
+```
+3. **`while current_node:`**:  
+   This loop will run as long as `current_node` is not `None` (i.e., it hasn't reached the end of the list).
+
+4. **`string_list += str(current_node.get_value()) + " -> "`**:  
+   - For each node, we get its **value** using `current_node.get_value()`.
+   - We **convert** the value to a string (in case it’s not a string).
+   - We then add the node’s value followed by `" -> "` to the `string_list`.  
+     This creates the visual "link" between nodes in the string.
+
+5. **`current_node = current_node.get_next_node()`**:  
+   After adding the current node’s value, we move to the **next node** by updating `current_node`.
 
 ---
 
-### **Breaking Down the Code**
-
-#### 1. **Initialize an Empty String**
 ```
-string_list = ""
+return string_list[:-4] if string_list else "Empty List"
 ```
-- **`string_list`**:
-  - This variable will hold the concatenated values of all nodes as a string.
+6. **`string_list[:-4]`**:  
+   After the loop finishes, `string_list` will have a trailing `" -> "` at the end.  
+   We **remove** the last four characters (`" -> "`) using slicing: `[:-4]`.
 
-For example:
-- Initially:
-  ```
-  string_list = ""
-  ```
+7. **`if string_list else "Empty List"`**:  
+   - If `string_list` is empty (i.e., the list is empty), it returns `"Empty List"`.
+   - Otherwise, it returns the final string representation of the linked list.
 
 ---
 
-#### 2. **Start Traversal from the Head Node**
-```
-current_node = self.get_head_node()
-```
-- **`self.get_head_node()`**:
-  - Retrieves the first node (head) of the linked list.
-- **`current_node`**:
-  - A pointer used to traverse the list. It starts at the head and moves to the next node in each iteration.
+## **Example Walkthrough**
 
-For example:
-- For a list:
+Let’s walk through an example.
+
+### **Example 1: A List with Nodes**
+```
+ll = LinkedList()
+ll.insert_end(1)
+ll.insert_end(2)
+ll.insert_end(3)
+```
+
+- **Initial list**:  
   ```
-  Head -> A -> B -> C
+  1 -> 2 -> 3
   ```
-  `current_node` initially refers to `A`.
+
+- When we call `ll.stringify_list()`, it performs the following:
+  - Starts with `current_node` as the **head node** (`1`).
+  
+  - Adds `1` to `string_list`:  
+    `"1 -> "`
+    
+  - Moves to the next node (`2`), adds `2`:  
+    `"1 -> 2 -> "`
+    
+  - Moves to the next node (`3`), adds `3`:  
+    `"1 -> 2 -> 3 -> "`
+    
+  - The loop ends because `current_node` is now `None`.
+  
+  - We slice off the last `" -> "`, resulting in:  
+    `"1 -> 2 -> 3"`
+
+### **Example 2: An Empty List**
+```
+empty_ll = LinkedList()
+```
+
+- **List is empty**:  
+  The `stringify_list` method returns `"Empty List"`.
 
 ---
 
-#### 3. **Traverse the Linked List**
-```
-while current_node:
-```
-- **`while current_node`**:
-  - The loop continues as long as `current_node` is not `None`.
-  - This ensures that the method processes every node in the list.
+## **Final Thoughts**
+- The method **traverses the linked list** node by node, appending each node's value to a string.
+- The final result is a string representation of the list (e.g., `"1 -> 2 -> 3"`).
+- If the list is empty, it returns `"Empty List"`.
 
-For example:
-- For a list:
-  ```
-  Head -> A -> B -> C
-  ```
-  The loop will iterate through nodes `A`, `B`, and `C`, stopping when `current_node` becomes `None`.
+# =========================================================================================================================== #
+
+                                                search(self, value)
+                                                
+### **What does this method do?**
+
+The `search` method is used to **search for a value** in the linked list. It returns `True` if it finds the value
+in any of the nodes and `False` if the value is not found.
+
+### **Code Explanation**
+
+```
+def search(self, value):
+    current_node = self.head_node  # Start with the head node
+```
+- **`current_node = self.head_node`**:  
+  We start by setting `current_node` to the **head node** of the linked list. This is where the search begins.
+  
+---
+
+```
+while current_node:  # Traverse through the list until we reach the end (None)
+```
+- **`while current_node:`**:  
+  This `while` loop will continue as long as `current_node` is not `None`.  
+  - If `current_node` is `None`, it means we’ve reached the end of the list.
+  
+---
+
+```
+if current_node.get_value() == value:  # Check if current node's value matches
+    return True  # Value found, return True
+```
+- **`if current_node.get_value() == value:`**:  
+  This checks if the value in the **current node** matches the value we are looking for (`value`).
+  - If the values match, it **returns `True`**, indicating that the value was found.
 
 ---
 
-#### 4. **Check if the Current Node Has a Value**
 ```
-if current_node.get_value() is not None:
+current_node = current_node.get_next_node()  # Move to the next node
 ```
-- **`current_node.get_value()`**:
-  - Retrieves the value of the current node.
-- **`is not None`**:
-  - Ensures that the node’s value is not `None` before appending it to the string.
-- This check is useful because some linked list implementations allow nodes to exist without meaningful values.
+- **`current_node = current_node.get_next_node()`**:  
+  If the value didn't match, we move to the **next node** in the list and repeat the process.
+  
+---
+
+```
+return False  # If we reach the end and didn't find the value, return False
+```
+- If we **reach the end of the list** (i.e., `current_node` becomes `None`) without finding the value, we **return `False`**.
 
 ---
 
-#### 5. **Append the Value to the String**
-```
-string_list += str(current_node.get_value()) + "\n"
-```
-- **`str(current_node.get_value())`**:
-  - Converts the value of the current node to a string.
-- **`string_list += ...`**:
-  - Appends the value to `string_list`, followed by a newline character (`\n`).
+### **Example Walkthrough**
 
-For example:
-- If `current_node.get_value()` is `"A"`, after this step:
-  ```
-  string_list = "A\n"
-  ```
+Let’s go through a few examples to see how this method works.
+
+### **Example 1: Searching for a Value that Exists in the List**
+```
+ll = LinkedList()
+ll.insert_end(1)
+ll.insert_end(2)
+ll.insert_end(3)
+
+print(ll.search(2))  # Output: True
+```
+
+- **Step-by-Step Search**:
+  1. We start at the **head node**, which contains `1`.
+  2. The value `1` is not equal to `2`, so we move to the next node (which contains `2`).
+  3. Now, the value `2` is equal to the search value, so we **return `True`**.
+
+- **Final Output**: `True`.
 
 ---
 
-#### 6. **Move to the Next Node**
+### **Example 2: Searching for a Value that Does Not Exist in the List**
 ```
-current_node = current_node.get_next_node()
+print(ll.search(4))  # Output: False
 ```
-- **`current_node.get_next_node()`**:
-  - Retrieves the reference to the next node in the list.
-- **`current_node = ...`**:
-  - Updates `current_node` to point to the next node for the next iteration of the loop.
 
-For example:
-- If the current list is:
-  ```
-  Head -> A -> B -> C
-  ```
-  - After processing `A`, `current_node` is updated to point to `B`.
+- **Step-by-Step Search**:
+  1. We start at the **head node**, which contains `1`.
+  2. The value `1` is not equal to `4`, so we move to the next node (which contains `2`).
+  3. The value `2` is not equal to `4`, so we move to the next node (which contains `3`).
+  4. The value `3` is not equal to `4`, and there are no more nodes to check.
+  5. Since we've reached the end of the list without finding `4`, we **return `False`**.
+
+- **Final Output**: `False`.
 
 ---
 
-#### 7. **Return the Final String**
+### **Final Thoughts**
+
+- The `search` method **traverses** the entire linked list from the head to the last node.
+- It checks if each node's value matches the one we are looking for.
+- If it finds a match, it returns `True`. If it doesn't, it returns `False`.
+
+# =========================================================================================================================== #
+
+                                                reverse(self)
+
+### **What does the method do?**
+The `reverse` method changes the direction of the "links" between nodes so that they point backward instead of forward.
+
+### **Code Breakdown**
+
 ```
-return string_list
+def reverse(self):
+    prev = None  # Initialize a variable to hold the previous node (starts as None)
+    current = self.head_node  # Start with the head node of the list
 ```
-- After the loop completes (i.e., when `current_node` is `None`), the method returns the concatenated string of all node values.
+1. **`prev = None`**:  
+   We initialize `prev` to `None` because, at the start, the **head node** will become the **last node** after
+   reversal, and its `next_node` should point to `None`.
+
+2. **`current = self.head_node`**:  
+   `current` is initialized to the **head node**, and this will be the node we are currently working with during
+   the reversal process.
 
 ---
 
-### **Example Execution**
+```
+while current:  # Continue until we reach the end of the list (when current is None)
+```
+3. **`while current:`**:  
+   This loop will continue as long as `current` is not `None`, meaning we haven’t reached the end of the linked
+   list yet. It allows us to process each node.
 
-#### Given Linked List:
+---
+
 ```
-Head -> A -> B -> C
+next_node = current.get_next_node()  # Save the next node (to avoid losing track of it)
+```
+4. **`next_node = current.get_next_node()`**:  
+   - Before changing the `next_node` of the current node, we store it in a temporary variable called `next_node`.  
+   - This ensures that we don't lose track of the **next node** in the list after we modify the current node's `next_node`.
+
+---
+
+```
+current.set_next_node(prev)  # Reverse the link: current’s next node should point to the previous node
+```
+5. **`current.set_next_node(prev)`**:  
+   - We change the **next pointer** of the current node to point to the previous node (`prev`).  
+   - This **reverses the direction** of the link between the nodes.
+   - Initially, the current node’s `next_node` pointed to the next node in the list, but now it points to the
+   node we just processed (i.e., `prev`).
+
+---
+
+```
+prev = current  # Move prev to current for the next iteration
+current = next_node  # Move to the next node in the list
+```
+6. **`prev = current`**:  
+   - After reversing the link, we move `prev` to point to the current node. This is necessary for the next node
+   we process, as it will need to point backward to the current node.
+
+7. **`current = next_node`**:  
+   - We move to the next node in the list by setting `current` to `next_node`. This ensures that we continue the
+   process until we reach the end of the list.
+
+---
+
+```
+self.head_node = prev  # Update the head node to be the last processed node (new head)
+```
+8. **`self.head_node = prev`**:  
+   - After the loop finishes (when `current` becomes `None`), `prev` will be pointing to the **last node** in the
+   list, which is now the new head of the reversed list.
+   - We set the `head_node` of the linked list to `prev`.
+
+---
+
+### **Example Walkthrough**
+
+Let’s walk through an example to see how this works with a linked list.
+
+### **Initial Linked List**
+```
+1 -> 2 -> 3 -> 4 -> 5
 ```
 
-#### Code Execution:
+### **Step-by-Step Reversal**
+
+1. **First Iteration:**
+   - **current** is `1`, **prev** is `None`.
+   - `next_node` is `2`.
+   
+   - We set `current.next_node` (node `1`) to `prev` (`None`), so now node `1` points to `None`.
+   - `prev` becomes node `1`, `current` moves to node `2`.
+
+   New list after first iteration:
+   ```
+   1 -> None
+   ```
+
+2. **Second Iteration:**
+
+   - **current** is `2`, **prev** is `1`.
+   - `next_node` is `3`.
+   
+   - We set `current.next_node` (node `2`) to `prev` (`1`), so node `2` now points to `1`.
+   - `prev` becomes node `2`, `current` moves to node `3`.
+
+   New list after second iteration:
+   ```
+   2 -> 1 -> None
+   ```
+
+3. **Third Iteration:**
+
+   - **current** is `3`, **prev** is `2`.
+   - `next_node` is `4`.
+   
+   - We set `current.next_node` (node `3`) to `prev` (`2`), so node `3` now points to `2`.
+   - `prev` becomes node `3`, `current` moves to node `4`.
+
+   New list after third iteration:
+   ```
+   3 -> 2 -> 1 -> None
+   ```
+
+4. **Fourth Iteration:**
+
+   - **current** is `4`, **prev** is `3`.
+   - `next_node` is `5`.
+   
+   - We set `current.next_node` (node `4`) to `prev` (`3`), so node `4` now points to `3`.
+   - `prev` becomes node `4`, `current` moves to node `5`.
+
+   New list after fourth iteration:
+   ```
+   4 -> 3 -> 2 -> 1 -> None
+   ```
+
+5. **Fifth Iteration:**
+
+   - **current** is `5`, **prev** is `4`.
+   - `next_node` is `None` (end of the list).
+   
+   - We set `current.next_node` (node `5`) to `prev` (`4`), so node `5` now points to `4`.
+   - `prev` becomes node `5`, `current` moves to `None` (end of the list).
+
+   New list after fifth iteration:
+   ```
+   5 -> 4 -> 3 -> 2 -> 1 -> None
+   ```
+
+### **Result:**
+
+After all the iterations, `prev` points to the node `5`, which is now the head of the reversed list.
+We update `self.head_node` to `prev`.
+
+### **Final Reversed List:**
 ```
-ll.stringify_list()
+5 -> 4 -> 3 -> 2 -> 1
 ```
 
-1. **Initial Setup**:
-   - `string_list = ""`.
-   - `current_node = Head` (node `A`).
+### **Final Thoughts**
+
+- The `reverse` method works by **reversing the links** between nodes. It starts with the head node and
+progressively makes each node point to the previous one.
+- Once the list is completely reversed, the new head is the last node in the original list.
+
+Does that clear things up? Let me know if anything is still confusing! 😊
+
+# =========================================================================================================================== #
+
+                                                    find_middle(self)
+ 
+### **What does the method do?**
+
+The `find_middle` method finds the **middle node** in a linked list. If the list has an odd number of nodes, it returns
+the middle node. If the list has an even number of nodes, it returns the second middle node (since there isn't one "exact"
+middle in that case). This method uses a technique called the **two-pointer technique**.
+
+### **Code Breakdown**
+
+```
+def find_middle(self):
+    slow = self.head_node  # Start slow pointer at the head node
+    fast = self.head_node  # Start fast pointer at the head node
+```
+
+1. **`slow = self.head_node`**:  
+   The `slow` pointer starts at the **head node**. This pointer will move **one step at a time** through the list.
+   
+2. **`fast = self.head_node`**:  
+   The `fast` pointer also starts at the **head node**, but this pointer will move **two steps at a time** through the list.
+
+---
+
+```
+while fast and fast.get_next_node():  # Continue until fast reaches the end
+    slow = slow.get_next_node()  # Move slow pointer one step forward
+    fast = fast.get_next_node().get_next_node()  # Move fast pointer two steps forward
+```
+
+3. **`while fast and fast.get_next_node():`**:  
+   This loop runs until `fast` reaches the end of the list. The condition checks if `fast` exists and if
+   `fast.get_next_node()` is not `None` (meaning there’s still another node to move to).
+   
+4. **`slow = slow.get_next_node()`**:  
+   In each iteration, the `slow` pointer moves **one step forward**, so it advances one node at a time.
+
+5. **`fast = fast.get_next_node().get_next_node()`**:  
+   In each iteration, the `fast` pointer moves **two steps forward**. It first moves to `fast.get_next_node()` and
+   then again to `fast.get_next_node().get_next_node()`. This way, `fast` skips over one node each time.
+
+---
+
+```
+return slow.get_value() if slow else None  # Return the value of the middle node
+```
+
+6. **`return slow.get_value() if slow else None`**:  
+   After the loop finishes, the `slow` pointer will be at the middle node. We return the **value** of that
+   middle node with `slow.get_value()`.
+   - If the list is empty (i.e., `slow` is `None`), the method will return `None`.
+
+---
+
+### **Why does this work?**
+
+The key to understanding this method is how the **slow** and **fast** pointers move:
+- **Fast pointer** moves **two steps at a time**.
+- **Slow pointer** moves **one step at a time**.
+
+Because the `fast` pointer moves twice as fast as the `slow` pointer, when `fast` reaches the end of the list,
+`slow` will have reached the **middle**.
+
+### **Example Walkthrough**
+
+Let’s walk through an example with a list of 5 nodes: `[1, 2, 3, 4, 5]`.
+
+1. **Initial Setup**:  
+   - `slow = 1` (head node)
+   - `fast = 1` (head node)
 
 2. **First Iteration**:
-   - `current_node.get_value()` is `"A"`.
-   - Append `"A\n"` to `string_list`:
-     ```
-     string_list = "A\n"
-     ```
-   - Move to the next node: `current_node = B`.
-
+   - `slow` moves 1 step: `slow = 2`
+   - `fast` moves 2 steps: `fast = 3`
+   
+   So after the first iteration:
+   - `slow = 2`
+   - `fast = 3`
+   
 3. **Second Iteration**:
-   - `current_node.get_value()` is `"B"`.
-   - Append `"B\n"` to `string_list`:
-     ```
-     string_list = "A\nB\n"
-     ```
-   - Move to the next node: `current_node = C`.
+   - `slow` moves 1 step: `slow = 3`
+   - `fast` moves 2 steps: `fast = 5`
+   
+   So after the second iteration:
+   - `slow = 3`
+   - `fast = 5`
 
-4. **Third Iteration**:
-   - `current_node.get_value()` is `"C"`.
-   - Append `"C\n"` to `string_list`:
-     ```
-     string_list = "A\nB\nC\n"
-     ```
-   - Move to the next node: `current_node = None`.
+4. **End of Loop**:
+   - The `fast` pointer now reaches the end of the list (`None`), so the loop stops.
+   - At this point, `slow` is at the middle node (`3`), so the method returns `slow.get_value()`, which is `3`.
 
-5. **End of Loop**:
-   - The loop exits because `current_node` is `None`.
+### **Example with an Even Number of Nodes**
 
-6. **Return the Result**:
-   - The method returns:
-     ```
-     "A\nB\nC\n"
-     ```
+Now, let’s try a list with 4 nodes: `[1, 2, 3, 4]`.
 
----
+1. **Initial Setup**:  
+   - `slow = 1` (head node)
+   - `fast = 1` (head node)
 
-### **Key Points**
-1. **String Concatenation**:
-   - Each node’s value is appended to `string_list`, followed by a newline character.
+2. **First Iteration**:
+   - `slow` moves 1 step: `slow = 2`
+   - `fast` moves 2 steps: `fast = 3`
+   
+   So after the first iteration:
+   - `slow = 2`
+   - `fast = 3`
+   
+3. **Second Iteration**:
+   - `slow` moves 1 step: `slow = 3`
+   - `fast` moves 2 steps: `fast = None`
+   
+   The loop ends since `fast` reached the end of the list.
 
-2. **Traversal**:
-   - The method uses `current_node` to traverse the linked list from the head to the last node.
-
-3. **Termination**:
-   - The loop ends when `current_node` becomes `None`, indicating the end of the list.
+4. **Final Result**:
+   - Now, the `slow` pointer is at node `3`. Since the list has an **even number of nodes**, the method
+   returns `3` as the second middle node.
 
 ---
 
 ### **Summary**
-The `stringify_list` method:
-1. Starts at the head node of the linked list.
-2. Iterates through each node, appending its value to a string with a newline.
-3. Stops when all nodes have been processed.
-4. Returns the final string, representing the linked list’s contents.
+- The `slow` pointer moves one step at a time, and the `fast` pointer moves two steps at a time.
+- When `fast` reaches the end, `slow` will be at the middle node.
+- If the list has an odd number of nodes, it returns the middle node. If the list has an even number,
+it returns the second middle node.
+
+# =========================================================================================================================== #
+
+                                                    has_cycle(self)
+
+This method is designed to detect if a **linked list contains a cycle**. A **cycle** happens when a node’s `next` pointer 
+points back to one of the previous nodes, creating a loop.
+
+The method uses the **Floyd's Tortoise and Hare algorithm**, which is a common and efficient way to detect cycles
+in a linked list. This algorithm uses two pointers moving at different speeds to detect the cycle. Here's the breakdown:
+
+### **What does the method do?**
+
+The `has_cycle` method checks if the linked list contains a cycle. It uses two pointers:
+1. **`slow` pointer**: Moves one step at a time.
+2. **`fast` pointer**: Moves two steps at a time.
+
+If the list has a cycle, the `slow` and `fast` pointers will eventually meet inside the cycle. If there’s no cycle,
+the `fast` pointer will reach the end of the list.
+
+### **Code Breakdown**
+
+```
+def has_cycle(self):
+    slow = self.head_node  # Start slow pointer at the head node
+    fast = self.head_node  # Start fast pointer at the head node
+```
+1. **`slow = self.head_node`**:  
+   The `slow` pointer starts at the **head node** of the list.
+
+2. **`fast = self.head_node`**:  
+   The `fast` pointer also starts at the **head node** of the list.
+
+---
+
+```
+while fast and fast.get_next_node():  # Continue as long as fast and next node exist
+```
+3. **`while fast and fast.get_next_node():`**:  
+   The loop continues as long as:
+   - `fast` exists (not `None`).
+   - `fast.get_next_node()` exists (meaning `fast` isn't at the end of the list yet).
+
+   This condition ensures the loop will terminate if there is no cycle and the list reaches the end (i.e., `fast` becomes `None`).
+
+---
+
+```
+slow = slow.get_next_node()  # Move slow pointer one step forward
+fast = fast.get_next_node().get_next_node()  # Move fast pointer two steps forward
+```
+4. **`slow = slow.get_next_node()`**:  
+   The `slow` pointer moves **one step forward**.
+
+5. **`fast = fast.get_next_node().get_next_node()`**:  
+   The `fast` pointer moves **two steps forward**. It first moves to `fast.get_next_node()` (the next node), then to `fast.get_next_node().get_next_node()` (the node after that).
+
+---
+
+```
+if slow == fast:  # If slow and fast meet, there's a cycle
+    return True  # Cycle detected
+```
+6. **`if slow == fast:`**:  
+   If the `slow` pointer and the `fast` pointer meet (i.e., point to the same node), this means that both pointers
+   have **entered the cycle**. Since the `fast` pointer moves faster than the `slow` pointer, it will eventually
+   "catch up" with the `slow` pointer if a cycle exists.
+
+   - If this happens, the method returns **`True`**, indicating that a cycle has been detected.
+
+---
+
+```
+return False  # No cycle detected, fast pointer reached the end
+```
+7. **`return False`**:  
+   If the loop finishes (i.e., `fast` reaches the end of the list), this means that there is **no cycle** in the list.
+   Therefore, the method returns **`False`**, indicating no cycle.
+
+---
+
+### **Why does this work?**
+
+- The `slow` pointer moves one step at a time, and the `fast` pointer moves two steps at a time. 
+- If there’s a cycle, the `fast` pointer will eventually catch up to the `slow` pointer, because the `fast` pointer
+is moving faster.
+- If there’s no cycle, the `fast` pointer will eventually reach the end of the list, and the method will return `False`.
+
+### **Example Walkthrough**
+
+Let’s walk through an example with a linked list that has a cycle.
+
+### **Linked List:**
+```
+1 -> 2 -> 3 -> 4 -> 5
+          ^         |
+          |_________|
+```
+
+### **Step-by-Step Detection**
+
+1. **Initial Setup**:  
+   - `slow = 1` (head node)
+   - `fast = 1` (head node)
+
+2. **First Iteration**:
+   - `slow` moves 1 step: `slow = 2`
+   - `fast` moves 2 steps: `fast = 3`
+
+3. **Second Iteration**:
+   - `slow` moves 1 step: `slow = 3`
+   - `fast` moves 2 steps: `fast = 5`
+
+4. **Third Iteration**:
+   - `slow` moves 1 step: `slow = 4`
+   - `fast` moves 2 steps: `fast = 4`
+
+5. **Cycle Detection**:
+   - At this point, `slow` and `fast` both point to node `4`, which means they've **met** inside the cycle. 
+   - The method returns `True`, indicating that there is a cycle in the list.
+
+### **Example with No Cycle**
+
+Now, let's try a list with no cycle: `[1, 2, 3, 4, 5]`.
+
+1. **Initial Setup**:  
+   - `slow = 1`
+   - `fast = 1`
+
+2. **First Iteration**:
+   - `slow` moves 1 step: `slow = 2`
+   - `fast` moves 2 steps: `fast = 3`
+
+3. **Second Iteration**:
+   - `slow` moves 1 step: `slow = 3`
+   - `fast` moves 2 steps: `fast = 5`
+
+4. **Third Iteration**:
+   - `slow` moves 1 step: `slow = 4`
+   - `fast` moves 2 steps: `fast = None` (reached the end of the list)
+
+Since `fast` is now `None`, the loop ends and the method returns **`False`**, indicating that there is no cycle.
+
+### **Summary**
+
+- The `has_cycle` method uses two pointers: `slow` (moves 1 step at a time) and `fast` (moves 2 steps at a time).
+- If there’s a cycle, the `fast` pointer will eventually meet the `slow` pointer.
+- If the list ends (i.e., `fast` becomes `None`), then there’s no cycle.
+
+# =========================================================================================================================== #
+
+                                                find_cycle_start(self)
+
+This method is used to find the **starting node** of the cycle in a linked list, assuming that a cycle already exists.
+
+### **What does the method do?**
+
+The `find_cycle_start` method is designed to detect where the cycle begins in a linked list. If there is no cycle,
+it returns `None`. If there is a cycle, it returns the value of the node where the cycle starts.
+
+### **Code Breakdown**
+
+```
+def find_cycle_start(self):
+    slow = self.head_node  # Start slow pointer at the head node
+    fast = self.head_node  # Start fast pointer at the head node
+    cycle_detected = False  # Flag to check if a cycle is detected
+```
+
+1. **`slow = self.head_node`**:  
+   The `slow` pointer starts at the **head node** of the list.
+
+2. **`fast = self.head_node`**:  
+   The `fast` pointer also starts at the **head node**.
+
+3. **`cycle_detected = False`**:  
+   A flag `cycle_detected` is initialized to `False`. This flag will be used to determine if a cycle exists in the list.
+
+---
+
+```
+while fast and fast.get_next_node():  # Continue as long as fast and next node exist
+    slow = slow.get_next_node()  # Move slow pointer one step forward
+    fast = fast.get_next_node().get_next_node()  # Move fast pointer two steps forward
+    if slow == fast:  # If slow and fast meet, there's a cycle
+        cycle_detected = True  # Set cycle_detected to True
+        break  # Exit the loop
+```
+
+4. **`while fast and fast.get_next_node():`**:  
+   The loop runs as long as:
+   - `fast` exists (i.e., it's not `None`).
+   - `fast.get_next_node()` exists (ensuring `fast` is not at the last node).
+
+   This condition ensures that the loop will terminate if there is no cycle and the `fast` pointer reaches the end of the list.
+
+5. **`slow = slow.get_next_node()`**:  
+   The `slow` pointer moves **one step forward**. This means that in each iteration, it advances by 1 node.
+
+6. **`fast = fast.get_next_node().get_next_node()`**:  
+   The `fast` pointer moves **two steps forward**. It first moves to `fast.get_next_node()` and then to
+   `fast.get_next_node().get_next_node()`.
+
+7. **`if slow == fast:`**:  
+   If the `slow` pointer and the `fast` pointer meet (i.e., they point to the same node), this means that
+   a **cycle** exists in the list. The two pointers have entered the cycle.
+
+   - If a cycle is detected, the `cycle_detected` flag is set to `True`, and the loop is **broken** to proceed 
+   to the next part of the code.
+
+---
+
+```
+if not cycle_detected:  # If no cycle was detected
+    return None  # Return None indicating no cycle
+```
+
+8. **`if not cycle_detected:`**:  
+   If the `cycle_detected` flag is still `False`, this means no cycle was found in the list. Therefore, the method
+   returns `None`, indicating there is no cycle in the list.
+
+---
+
+```
+slow = self.head_node  # Reset slow pointer to the head node
+while slow != fast:  # Continue until slow and fast meet at the cycle's start
+    slow = slow.get_next_node()  # Move slow pointer one step forward
+    fast = fast.get_next_node()  # Move fast pointer one step forward
+```
+
+9. **`slow = self.head_node`**:  
+   After detecting a cycle, we **reset** the `slow` pointer back to the head node. This is because we want to find
+   the **starting point** of the cycle.
+
+10. **`while slow != fast:`**:  
+   This loop continues until the `slow` pointer and `fast` pointer meet at the same node, which will be the **start of the cycle**.
+
+   - **Why do we use two pointers?** The idea is that when the `slow` pointer starts from the head of the list and the `fast`
+   pointer is already inside the cycle, both pointers will meet at the starting node of the cycle after moving through the list.
+   
+   - Each pointer moves **one step forward** in this second loop. The `slow` pointer moves one step at a time, and the `fast`
+   pointer, which is already inside the cycle, also moves one step at a time.
+
+---
+
+```
+return slow.get_value()  # Return the value of the node where the cycle starts
+```
+
+11. **`return slow.get_value()`**:  
+   Once the `slow` and `fast` pointers meet, they will be at the **starting node** of the cycle. The method then returns
+   the **value** of the node where the cycle begins.
+
+### **Why does this work?**
+
+The key idea here is that once a cycle is detected, resetting the `slow` pointer to the head node and moving both
+`slow` and `fast` pointers one step at a time will eventually lead them to the **starting node of the cycle**.
+
+Here's why:
+
+- When `slow` and `fast` meet in the cycle, it means they are inside the cycle.
+- Resetting `slow` to the head node and moving both pointers at the same speed (one step at a time) ensures that they
+will meet at the node where the cycle starts.
+
+### **Example Walkthrough**
+
+Let’s walk through an example with a linked list that has a cycle:
+
+### **Linked List:**
+```
+1 -> 2 -> 3 -> 4 -> 5
+          ^         |
+          |_________|
+```
+
+1. **First Loop (Cycle Detection)**:
+
+   - `slow` and `fast` start at node `1`.
+   - `slow` moves 1 step at a time, `fast` moves 2 steps at a time.
+   - Eventually, `slow` and `fast` meet at node `4`, indicating that a cycle exists.
+
+2. **Second Loop (Find Cycle Start)**:
+
+   - We reset `slow` to node `1` and leave `fast` at node `4`.
+   - Both `slow` and `fast` move 1 step at a time:
+     - `slow` moves from `1` to `2`, then to `3`, then to `4`.
+     - `fast` moves from `4` to `5`, then to `1`, and finally to `2`.
+   - Eventually, they both meet at node `3`, the **start** of the cycle.
+
+### **Summary**
+
+- The first loop detects if a cycle exists by moving the `slow` and `fast` pointers at different speeds.
+- The second loop finds the start of the cycle by resetting `slow` to the head and moving both `slow` and `fast`
+pointers one step at a time until they meet at the start of the cycle.
+
+# =========================================================================================================================== #
+
+                                            remove_duplicates(self)
+
+This method is designed to remove **duplicate values** from a linked list. After calling this method, the list will
+contain only unique values (i.e., duplicates will be removed).
+
+### **What does the method do?**
+
+The `remove_duplicates` method ensures that all nodes in the linked list contain unique values by iterating through
+the list and removing nodes with duplicate values.
+
+### **Code Breakdown**
+
+```
+def remove_duplicates(self):
+    if not self.head_node:  # If the list is empty, do nothing
+        return
+```
+
+1. **`if not self.head_node:`**  
+   This checks if the linked list is empty by verifying if the **head node** is `None`. If the list is empty, the method
+   simply returns because there are no duplicates to remove.
+
+---
+
+```
+seen_values = set()  # Set to track the values we've already seen
+current_node = self.head_node  # Start from the head node
+seen_values.add(current_node.get_value())  # Add the first node's value to the set
+```
+
+2. **`seen_values = set()`**  
+   We create a `set` called `seen_values` to keep track of the unique values we encounter while traversing the list.
+   Sets are used here because they automatically handle duplicates (i.e., they don’t allow duplicate entries).
+
+3. **`current_node = self.head_node`**  
+   The `current_node` pointer starts at the **head node** of the list, as this is where we will begin our traversal.
+
+4. **`seen_values.add(current_node.get_value())`**  
+   The value of the **head node** is added to the `seen_values` set. This ensures that the first node's value is not removed.
+
+---
+
+```
+while current_node.get_next_node():  # Continue as long as there is a next node
+    next_node = current_node.get_next_node()  # Get the next node
+```
+
+5. **`while current_node.get_next_node():`**  
+   This loop will continue as long as the `current_node` has a **next node** (i.e., it hasn't reached the end of the list).
+
+6. **`next_node = current_node.get_next_node()`**  
+   `next_node` is a pointer to the **next node** after the `current_node`.
+   We will check if the value of `next_node` is a duplicate.
+
+---
+
+```
+if next_node.get_value() in seen_values:  # If the value is a duplicate
+    current_node.set_next_node(next_node.get_next_node())  # Remove duplicate
+```
+
+7. **`if next_node.get_value() in seen_values:`**  
+   This checks if the value of the `next_node` is already in the `seen_values` set. If it is, this means
+   that the `next_node` has a **duplicate value**, so we need to remove it.
+
+8. **`current_node.set_next_node(next_node.get_next_node())`**  
+   This is the key line for removing the duplicate. It updates the `current_node`'s `next` pointer to skip the `next_node`,
+   effectively removing it from the list.
+   
+   - **Before**:  
+     `current_node -> next_node -> next_next_node`
+   
+   - **After**:  
+     `current_node -> next_next_node`
+   
+   The `current_node` now points directly to the node after the `next_node`, thus skipping over the duplicate.
+
+---
+
+```
+else:  # If it's not a duplicate, add the value to the set and move to the next node
+    seen_values.add(next_node.get_value())  # Add to seen values
+    current_node = next_node  # Move current_node to the next node
+```
+
+9. **`else:`**  
+   If the value of `next_node` is **not** in `seen_values`, it means this is the first time we have encountered this value.
+   So, we:
+   - Add the `next_node`'s value to the `seen_values` set.
+   - Move the `current_node` pointer to the `next_node`, so we can continue checking the next node in the list.
+
+---
+
+### **Why does this work?**
+
+- The `seen_values` set is used to track which values have already been encountered while traversing the list.
+If a value appears more than once, it will be removed from the list (by updating the `current_node`'s `next` pointer).
+
+- By updating the `next` pointer, the duplicate node is effectively **skipped** and not included in the final list.
+- We only add a value to the set if it has not been seen before, ensuring that only unique values remain.
+
+### **Example Walkthrough**
+
+Let’s walk through an example linked list to see how this works.
+
+### **Linked List:**
+```
+1 -> 2 -> 3 -> 2 -> 4 -> 1
+```
+
+### **Step-by-Step Execution**
+
+1. **Initial Setup**:
+   - `seen_values = {}` (empty set)
+   - `current_node = 1` (head node)
+
+2. **First Iteration** (current_node = 1):
+   - `next_node = 2`
+   - `next_node.get_value() = 2` is not in `seen_values`, so:
+     - Add `2` to `seen_values`.
+     - Move `current_node` to `2`.
+
+   `seen_values = {1, 2}`
+
+3. **Second Iteration** (current_node = 2):
+   - `next_node = 3`
+   - `next_node.get_value() = 3` is not in `seen_values`, so:
+     - Add `3` to `seen_values`.
+     - Move `current_node` to `3`.
+
+   `seen_values = {1, 2, 3}`
+
+4. **Third Iteration** (current_node = 3):
+   - `next_node = 2`
+   - `next_node.get_value() = 2` **is** in `seen_values`, so:
+     - Remove `next_node` by updating `current_node.next` to `next_node.next` (skip the duplicate).
+     - Don't move `current_node`, as we don't want to advance to the duplicate.
+
+   `seen_values = {1, 2, 3}` (no change in the set)
+
+5. **Fourth Iteration** (current_node = 3):
+   - `next_node = 4`
+   - `next_node.get_value() = 4` is not in `seen_values`, so:
+     - Add `4` to `seen_values`.
+     - Move `current_node` to `4`.
+
+   `seen_values = {1, 2, 3, 4}`
+
+6. **Fifth Iteration** (current_node = 4):
+   - `next_node = 1`
+   - `next_node.get_value() = 1` **is** in `seen_values`, so:
+     - Remove `next_node` by updating `current_node.next` to `next_node.next` (skip the duplicate).
+
+   `seen_values = {1, 2, 3, 4}` (no change in the set)
+
+---
+
+### **Final Linked List**:
+After all iterations, the linked list looks like this:
+```
+1 -> 2 -> 3 -> 4
+```
+
+Duplicates (the second `2` and `1`) have been removed.
+
+### **Summary**
+
+- The `remove_duplicates` method traverses the list and uses a set to track seen values.
+- If it encounters a node with a duplicate value, it skips that node by adjusting the `next` pointer.
+- The final result is a linked list with unique values, and the duplicates are removed.
 
 """
