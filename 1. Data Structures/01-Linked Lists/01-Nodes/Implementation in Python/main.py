@@ -31,6 +31,16 @@ print(node1.get_value())  # A
 print(node1.get_link_node().get_value())  # B
 print(node2.get_link_node().get_value())  # C
 
+# Output:
+
+"""
+
+A
+B
+C
+
+"""
+
 # =========================================================================================================================== #
 
 # Big O Analysis:
