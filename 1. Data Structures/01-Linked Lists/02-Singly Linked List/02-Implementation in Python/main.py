@@ -1161,8 +1161,6 @@ We update `self.head_node` to `prev`.
 progressively makes each node point to the previous one.
 - Once the list is completely reversed, the new head is the last node in the original list.
 
-Does that clear things up? Let me know if anything is still confusing! 😊
-
 # =========================================================================================================================== #
 
                                                     find_middle(self)
