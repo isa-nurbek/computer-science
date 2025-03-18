@@ -1,61 +1,79 @@
 # Implementation in Python:
 
+
 class Node:
     def __init__(self, value, next_node=None):
+        # Initialize a node with a value and an optional next_node reference
         self.value = value
         self.next_node = next_node
 
     def get_value(self):
+        # Return the value of the node
         return self.value
 
     def get_next_node(self):
+        # Return the next node in the linked list
         return self.next_node
 
     def set_next_node(self, next_node):
+        # Set the next node in the linked list
         self.next_node = next_node
 
     def __str__(self):
+        # Return a string representation of the node
         return f"Node({self.value})"
 
 
 class LinkedList:
     def __init__(self, value=None):
+        # Initialize the linked list with a head node if a value is provided
         self.head_node = Node(value) if value is not None else None
 
     def get_head_node(self):
+        # Return the head node of the linked list
         return self.head_node
 
     def insert_beginning(self, new_value):
+        # Insert a new node at the beginning of the linked list
         new_node = Node(new_value)
         new_node.set_next_node(self.head_node)
         self.head_node = new_node
 
     def insert_end(self, value):
+        # Insert a new node at the end of the linked list
         new_node = Node(value)
         if self.head_node is None:
+            # If the list is empty, set the new node as the head node
             self.head_node = new_node
             return
 
+        # Traverse to the end of the list
         current_node = self.head_node
         while current_node.get_next_node():
             current_node = current_node.get_next_node()
+        # Set the new node as the next node of the last node
         current_node.set_next_node(new_node)
 
     def remove_node(self, value_to_remove):
+        # Remove the first node with the specified value
         current_node = self.head_node
 
         if current_node and current_node.get_value() == value_to_remove:
+            # If the head node is the one to be removed, update the head node
             self.head_node = current_node.get_next_node()
             return
 
+        # Traverse the list to find the node to remove
         while current_node and current_node.get_next_node():
             next_node = current_node.get_next_node()
             if next_node.get_value() == value_to_remove:
+                # Skip the node to remove by updating the next node reference
                 current_node.set_next_node(next_node.get_next_node())
                 return
             current_node = next_node
 
     def stringify_list(self):
+        # Return a string representation of the linked list
         string_list = ""
         current_node = self.head_node
         while current_node:
@@ -65,6 +83,7 @@ class LinkedList:
         return string_list[:-4] if string_list else "Empty List"
 
     def search(self, value):
+        # Search for a node with the specified value
         current_node = self.head_node
         while current_node:
             if current_node.get_value() == value:
@@ -73,6 +92,7 @@ class LinkedList:
         return False
 
     def reverse(self):
+        # Reverse the linked list
         prev = None
         current = self.head_node
         while current:
@@ -80,9 +100,11 @@ class LinkedList:
             current.set_next_node(prev)
             prev = current
             current = next_node
+        # Update the head node to the new first node
         self.head_node = prev
 
     def find_middle(self):
+        # Find the middle node of the linked list using the two-pointer technique
         slow = self.head_node
         fast = self.head_node
         while fast and fast.get_next_node():
@@ -91,6 +113,7 @@ class LinkedList:
         return slow.get_value() if slow else None
 
     def has_cycle(self):
+        # Check if the linked list has a cycle using the two-pointer technique
         slow = self.head_node
         fast = self.head_node
         while fast and fast.get_next_node():
@@ -101,10 +124,12 @@ class LinkedList:
         return False
 
     def find_cycle_start(self):
+        # Find the starting node of a cycle in the linked list
         slow = self.head_node
         fast = self.head_node
         cycle_detected = False
 
+        # Detect if there is a cycle
         while fast and fast.get_next_node():
             slow = slow.get_next_node()
             fast = fast.get_next_node().get_next_node()
@@ -115,6 +140,7 @@ class LinkedList:
         if not cycle_detected:
             return None
 
+        # Find the start of the cycle
         slow = self.head_node
         while slow != fast:
             slow = slow.get_next_node()
@@ -123,9 +149,11 @@ class LinkedList:
         return slow.get_value()
 
     def remove_duplicates(self):
+        # Remove duplicate values from the linked list
         if not self.head_node:
             return
 
+        # Use a set to keep track of seen values
         seen_values = set()
         current_node = self.head_node
         seen_values.add(current_node.get_value())
@@ -133,12 +161,15 @@ class LinkedList:
         while current_node.get_next_node():
             next_node = current_node.get_next_node()
             if next_node.get_value() in seen_values:
+                # Remove the duplicate node
                 current_node.set_next_node(next_node.get_next_node())
             else:
+                # Add the new value to the set and move to the next node
                 seen_values.add(next_node.get_value())
                 current_node = next_node
 
-# Example Usage 
+
+# Example Usage
 
 ll = LinkedList()
 
@@ -167,7 +198,9 @@ print(ll.stringify_list())  # Output: 5 -> 4 -> 3 -> 2 -> 1
 print("\nCycle Detected:", ll.has_cycle())  # Output: False
 
 # Creating a cycle manually
-ll.get_head_node().get_next_node().get_next_node().set_next_node(ll.get_head_node())  # Cycle at node 1
+ll.get_head_node().get_next_node().get_next_node().set_next_node(
+    ll.get_head_node()
+)  # Cycle at node 1
 print("Cycle Detected after introducing cycle:", ll.has_cycle())  # Output: True
 print("Cycle Start Node:", ll.find_cycle_start())  # Output: 1
 
@@ -381,6 +414,7 @@ seen values, which can grow up to the size of the list in the worst case (if all
 ---
 
 ### Key Takeaways
+
 - Most operations that involve traversing the list (e.g., `insert_end`, `remove_node`, `search`, `reverse`, etc.)
 have a **time complexity of O(n)**.
 
@@ -397,7 +431,7 @@ which use additional space proportional to the size of the list.
 
 """
 
-                                                     # **Node Class**
+                                                       # **Node Class**
 
 ## **Understanding the `Node` Class**
 
