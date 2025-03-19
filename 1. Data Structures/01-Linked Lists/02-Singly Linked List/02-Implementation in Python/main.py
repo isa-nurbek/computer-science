@@ -36,12 +36,14 @@ class LinkedList:
     def insert_beginning(self, new_value):
         # Insert a new node at the beginning of the linked list
         new_node = Node(new_value)
+
         new_node.set_next_node(self.head_node)
         self.head_node = new_node
 
     def insert_end(self, value):
         # Insert a new node at the end of the linked list
         new_node = Node(value)
+
         if self.head_node is None:
             # If the list is empty, set the new node as the head node
             self.head_node = new_node
@@ -51,6 +53,7 @@ class LinkedList:
         current_node = self.head_node
         while current_node.get_next_node():
             current_node = current_node.get_next_node()
+
         # Set the new node as the next node of the last node
         current_node.set_next_node(new_node)
 
@@ -66,20 +69,24 @@ class LinkedList:
         # Traverse the list to find the node to remove
         while current_node and current_node.get_next_node():
             next_node = current_node.get_next_node()
+
             if next_node.get_value() == value_to_remove:
                 # Skip the node to remove by updating the next node reference
                 current_node.set_next_node(next_node.get_next_node())
                 return
+
             current_node = next_node
 
     def stringify_list(self):
         # Return a string representation of the linked list
         string_list = ""
+
         current_node = self.head_node
         while current_node:
             if current_node.get_value() is not None:
                 string_list += str(current_node.get_value()) + " -> "
             current_node = current_node.get_next_node()
+
         return string_list[:-4] if string_list else "Empty List"
 
     def search(self, value):
@@ -89,17 +96,20 @@ class LinkedList:
             if current_node.get_value() == value:
                 return True
             current_node = current_node.get_next_node()
+
         return False
 
     def reverse(self):
         # Reverse the linked list
         prev = None
+
         current = self.head_node
         while current:
             next_node = current.get_next_node()
             current.set_next_node(prev)
             prev = current
             current = next_node
+
         # Update the head node to the new first node
         self.head_node = prev
 
@@ -107,20 +117,25 @@ class LinkedList:
         # Find the middle node of the linked list using the two-pointer technique
         slow = self.head_node
         fast = self.head_node
+
         while fast and fast.get_next_node():
             slow = slow.get_next_node()
             fast = fast.get_next_node().get_next_node()
+
         return slow.get_value() if slow else None
 
     def has_cycle(self):
         # Check if the linked list has a cycle using the two-pointer technique
         slow = self.head_node
         fast = self.head_node
+
         while fast and fast.get_next_node():
             slow = slow.get_next_node()
             fast = fast.get_next_node().get_next_node()
+
             if slow == fast:
                 return True
+
         return False
 
     def find_cycle_start(self):
@@ -133,6 +148,7 @@ class LinkedList:
         while fast and fast.get_next_node():
             slow = slow.get_next_node()
             fast = fast.get_next_node().get_next_node()
+
             if slow == fast:
                 cycle_detected = True
                 break
