@@ -579,9 +579,266 @@ def remove_duplicates(self):
 
 - Uses a **set** to remove duplicate values.
 
-### Conclusion
+---
 
-This linked list supports many useful operations and provides a full set of operations for common tasks.
+Let's go step by step and explain how the **example usage** of the `LinkedList` class works.  
+
+---
+
+### **Step 1: Creating a Linked List**  
+
+```python
+ll = LinkedList()
+```
+
+This initializes an **empty linked list** (`ll`). Initially, the `head_node` is set to `None`, meaning the list has no elements.  
+
+---
+
+### **Step 2: Inserting Elements at the End**  
+
+```python
+ll.insert_end(1)
+ll.insert_end(2)
+ll.insert_end(3)
+ll.insert_end(4)
+ll.insert_end(5)
+```
+
+- These calls insert elements `1, 2, 3, 4, 5` **at the end** of the linked list.
+- The first call (`insert_end(1)`) sets the head node to `1` because the list is initially empty.
+- Subsequent calls traverse the list to find the last node and append the new node at the end.
+
+**After inserting elements, the linked list looks like this:**  
+
+```plaintext
+1 -> 2 -> 3 -> 4 -> 5
+```
+
+---
+
+### **Step 3: Printing the List**
+
+```python
+print("Original List:")
+print(ll.stringify_list())  # Output: 1 -> 2 -> 3 -> 4 -> 5
+```
+
+- `stringify_list()` traverses the list, collecting values as a string formatted like `"1 -> 2 -> 3 -> 4 -> 5"`.
+- This prints:  
+
+  ```plaintext
+  Original List:
+  1 -> 2 -> 3 -> 4 -> 5
+  ```
+
+---
+
+### **Step 4: Searching for Elements**
+
+```python
+print("\nSearch for 3:", ll.search(3))  # Output: True
+print("Search for 10:", ll.search(10))  # Output: False
+```
+
+- `search(3)` traverses the list and **finds** the value `3`, so it returns `True`.
+- `search(10)` traverses the list but **does not find** the value `10`, so it returns `False`.
+
+Output:
+
+```plaintext
+Search for 3: True
+Search for 10: False
+```
+
+---
+
+### **Step 5: Finding the Middle Node**
+
+```python
+print("\nMiddle Node:", ll.find_middle())  # Output: 3
+```
+
+- Uses **two pointers**:  
+  - `slow` moves **one step** at a time.  
+  - `fast` moves **two steps** at a time.  
+  - When `fast` reaches the end, `slow` is at the middle node (`3` in this case).
+
+Output:
+
+```plaintext
+Middle Node: 3
+```
+
+---
+
+### **Step 6: Reversing the Linked List**
+
+```python
+ll.reverse()
+print("\nReversed List:")
+print(ll.stringify_list())  # Output: 5 -> 4 -> 3 -> 2 -> 1
+```
+
+- Reverses the list **by changing each node’s next pointer** to point to its previous node.
+- The head of the list is updated to the last node.
+
+**New List after reversal:**
+
+```plaintext
+5 -> 4 -> 3 -> 2 -> 1
+```
+
+Output:
+
+```plaintext
+Reversed List:
+5 -> 4 -> 3 -> 2 -> 1
+```
+
+---
+
+### **Step 7: Checking for a Cycle**
+
+```python
+print("\nCycle Detected:", ll.has_cycle())  # Output: False
+```
+
+- `has_cycle()` uses **two pointers** (`slow` and `fast`).  
+- If they meet, a cycle exists. If `fast` reaches `None`, no cycle exists.  
+- Since we haven’t added a cycle yet, this returns `False`.
+
+Output:
+
+```plaintext
+Cycle Detected: False
+```
+
+---
+
+### **Step 8: Manually Creating a Cycle**
+
+```python
+ll.get_head_node().get_next_node().get_next_node().set_next_node(
+    ll.get_head_node()
+)  # Cycle at node 1
+```
+
+- Creates a **cycle** by setting the `next` pointer of the third node (`3`) to the head (`1`).
+- The list now has a **loop**, meaning traversal will never reach `None`.
+
+### **Step 9: Checking for a Cycle Again**
+
+```python
+print("Cycle Detected after introducing cycle:", ll.has_cycle())  # Output: True
+```
+
+- Now `has_cycle()` **detects** the cycle and returns `True`.
+
+### **Step 10: Finding the Start of the Cycle**
+
+```python
+print("Cycle Start Node:", ll.find_cycle_start())  # Output: 1
+```
+
+- Uses **Floyd’s Cycle Detection Algorithm** to find where the cycle begins (`1` in this case).
+
+Output:
+
+```plaintext
+Cycle Detected after introducing cycle: True
+Cycle Start Node: 1
+```
+
+---
+
+### **Step 11: Removing the Cycle**
+
+```python
+ll.get_head_node().get_next_node().get_next_node().set_next_node(None)
+```
+
+- Removes the cycle by setting `3.next = None`, breaking the loop.
+
+---
+
+### **Step 12: Adding Duplicates to the List**
+
+```python
+ll.insert_end(3)
+ll.insert_end(4)
+ll.insert_end(4)
+```
+
+- Appends duplicate values (`3, 4, 4`) at the end.
+
+New list before removing duplicates:
+
+```plaintext
+5 -> 4 -> 3 -> 2 -> 1 -> 3 -> 4 -> 4
+```
+
+Printing:
+
+```python
+print("\nList before removing duplicates:")
+print(ll.stringify_list())  # Output: 5 -> 4 -> 3 -> 2 -> 1 -> 3 -> 4 -> 4
+```
+
+Output:
+
+```plaintext
+List before removing duplicates:
+5 -> 4 -> 3 -> 2 -> 1 -> 3 -> 4 -> 4
+```
+
+---
+
+### **Step 13: Removing Duplicates**
+
+```python
+ll.remove_duplicates()
+```
+
+- **Uses a set (`seen_values`) to track values**.  
+- If a node’s value is **already in the set**, the node is removed.  
+- **If not,** the value is added to `seen_values` and traversal continues.
+
+Final list:
+
+```plaintext
+5 -> 4 -> 3 -> 2 -> 1
+```
+
+Printing:
+
+```python
+print("\nList after removing duplicates:")
+print(ll.stringify_list())  # Output: 5 -> 4 -> 3 -> 2 -> 1
+```
+
+Output:
+
+```plaintext
+List after removing duplicates:
+5 -> 4 -> 3 -> 2 -> 1
+```
+
+---
+
+### **Final Summary**
+
+1. **Created a linked list** and inserted values.
+2. **Printed the list** to check insertion.
+3. **Searched for values** (found `3`, didn't find `10`).
+4. **Found the middle node** (`3`).
+5. **Reversed the list** (`5 -> 4 -> 3 -> 2 -> 1`).
+6. **Checked for a cycle** (initially `False`).
+7. **Created a cycle manually** and detected it (`True`).
+8. **Found where the cycle starts** (`1`).
+9. **Removed the cycle** to restore normal operation.
+10. **Added duplicate values** (`3, 4, 4`).
+11. **Removed duplicates**, keeping only unique values.
 
 ---
 
