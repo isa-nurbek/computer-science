@@ -21,11 +21,12 @@ class Queue:
     # Add an element to the rear of the queue
     def enqueue(self, data):
         new_node = Node(data)  # Create a new node with the given data
-        if (
-            self.rear is None
-        ):  # If the queue is empty, both front and rear should point to new node
+
+        # If the queue is empty, both front and rear should point to new node
+        if self.rear is None:
             self.front = self.rear = new_node
             return
+
         self.rear.next = new_node  # Link the current rear node to the new node
         self.rear = new_node  # Update the rear pointer
 
@@ -33,27 +34,34 @@ class Queue:
     def dequeue(self):
         if self.is_empty():  # Check if the queue is empty before removing
             raise IndexError("Dequeue from an empty queue")
+
         temp = self.front  # Store the front node to return its data later
         self.front = temp.next  # Move front to the next node
+
         if self.front is None:  # If the queue becomes empty, reset rear as well
             self.rear = None
+
         return temp.data  # Return the removed element's data
 
     # View the front element without removing it
     def peek(self):
         if self.is_empty():
             raise IndexError("Peek from an empty queue")
+
         return self.front.data  # Return the front element's data
 
     # Return a string representation of the queue
     def __str__(self):
         if self.is_empty():
             return "Queue is empty"
+
         temp = self.front  # Start from the front of the queue
         queue_str = []
+
         while temp:  # Traverse the queue
             queue_str.append(str(temp.data))  # Collect data values
             temp = temp.next
+
         return " -> ".join(queue_str)  # Format as a string
 
 
@@ -72,9 +80,9 @@ print("Queue after dequeue:", queue)  # Output: Queue after dequeue: 20 -> 30
 print("Peek:", queue.peek())  # Output: Peek: 20
 
 
-"""
-Output:
+# Output:
 
+"""
 Queue: 10 -> 20 -> 30
 Dequeue: 10
 Queue after dequeue: 20 -> 30
@@ -82,53 +90,92 @@ Peek: 20
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
-## Time and Space Complexity Analysis
+## Time and Space Complexity Analysis:
 
-Let's analyze the **time and space complexity** of the given **Queue** implementation.
+#### Time Complexity
 
-### 1. **Time Complexity**
-
-Each operation's time complexity:
-
-- **`enqueue(data)`**:  
-  - Creating a new node takes **O(1)**.  
-  - Updating the `rear` pointer and linking takes **O(1)**.  
-  
-  - **Overall complexity: O(1)**.
-
-- **`dequeue()`**:  
-  - Checking if the queue is empty takes **O(1)**.  
-  - Removing the front node and updating the pointers takes **O(1)**. 
+1. **`is_empty()`**:
+   - **Time Complexity**: O(1)
    
-  - **Overall complexity: O(1)**.
+   - **Explanation**: This method simply checks if `self.front` is `None`, which is a constant-time operation.
 
-- **`peek()`**:  
-  - Checking if the queue is empty takes **O(1)**.  
-  - Returning the front element takes **O(1)**.  
+2. **`enqueue(data)`**:
+   - **Time Complexity**: O(1)
+   
+   - **Explanation**: Adding an element to the rear of the queue involves creating a new node and updating 
+   the `rear` pointer. This is a constant-time operation since no traversal is needed.
+
+3. **`dequeue()`**:
+   - **Time Complexity**: O(1)
+   
+   - **Explanation**: Removing an element from the front of the queue involves updating the `front` pointer 
+   to the next node. This is also a constant-time operation.
+
+4. **`peek()`**:
+   - **Time Complexity**: O(1)
+   
+   - **Explanation**: Peeking at the front element involves accessing the `data` attribute of the `front` node,
+   which is a constant-time operation.
+
+5. **`__str__()`**:
+   - **Time Complexity**: O(n)
+   
+   - **Explanation**: This method traverses the entire queue to collect the data values of all nodes, where `n` is
+   the number of elements in the queue. Therefore, the time complexity is linear with respect to the number of elements.
+
+#### Space Complexity
+
+1. **`is_empty()`**:
+   - **Space Complexity**: O(1)
+   
+   - **Explanation**: This method uses a constant amount of space.
+
+2. **`enqueue(data)`**:
+   - **Space Complexity**: O(1)
+   
+   - **Explanation**: This method creates a single new node, so the space complexity is constant.
+
+3. **`dequeue()`**:
+   - **Space Complexity**: O(1)
+   
+   - **Explanation**: This method uses a constant amount of space to store the temporary node.
+
+4. **`peek()`**:
+   - **Space Complexity**: O(1)
+   
+   - **Explanation**: This method uses a constant amount of space.
+
+5. **`__str__()`**:
+   - **Space Complexity**: O(n)
+   
+   - **Explanation**: This method stores the string representation of each element in the queue, which requires
+   space proportional to the number of elements `n`.
+
+### Summary
+
+- **Time Complexity**:
+  - `is_empty()`, `enqueue()`, `dequeue()`, and `peek()` are all O(1).
   
-  - **Overall complexity: O(1)**.
+  - `__str__()` is O(n).
 
-- **`__str__()` (Printing the queue)**:  
-  - Traverses all nodes in the queue, taking **O(n)** time, where **n** is the number of elements in the queue.
+- **Space Complexity**:
+  - `is_empty()`, `enqueue()`, `dequeue()`, and `peek()` are all O(1).
+  
+  - `__str__()` is O(n).
 
-### 2. **Space Complexity**
-- Each element in the queue is stored in a **Node** object, which requires **O(n)** space for **n** elements.
-- No additional auxiliary space is used apart from a few pointers (`front` and `rear`), which are **O(1)**.
-
-- **Overall space complexity: O(n)**.
-
-This is an efficient **linked list-based queue**, performing enqueue, dequeue, and peek in constant time.
+This implementation of a queue using a linked list is efficient for most operations, with constant time complexity for
+adding and removing elements, and linear time complexity for generating a string representation of the queue.
 
 """
 
-# ********************************************************************************************************************* #
+# =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 The provided code defines a simple **Queue** data structure using a **singly linked list**. Below is a detailed
