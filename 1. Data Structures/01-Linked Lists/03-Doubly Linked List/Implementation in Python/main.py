@@ -79,10 +79,12 @@ class DoublyLinkedList:
 
     def remove_head(self):
         removed_head = self.head_node
+
         if removed_head is None:  # If list is empty
             return None
 
         self.head_node = removed_head.get_next_node()  # Update head
+
         if self.head_node is not None:
             self.head_node.set_prev_node(None)  # Remove backward link
         else:
@@ -92,10 +94,12 @@ class DoublyLinkedList:
 
     def remove_tail(self):
         removed_tail = self.tail_node
+
         if removed_tail is None:  # If list is empty
             return None
 
         self.tail_node = removed_tail.get_prev_node()  # Update tail
+
         if self.tail_node is not None:
             self.tail_node.set_next_node(None)  # Remove forward link
         else:
@@ -118,6 +122,7 @@ class DoublyLinkedList:
 
                     if prev_node:
                         prev_node.set_next_node(next_node)
+
                     if next_node:
                         next_node.set_prev_node(prev_node)
 
@@ -134,6 +139,7 @@ class DoublyLinkedList:
         while current_node:
             if current_node.get_value() is not None:
                 string_list += str(current_node.get_value()) + "\n"
+
             current_node = current_node.get_next_node()
 
         return string_list
