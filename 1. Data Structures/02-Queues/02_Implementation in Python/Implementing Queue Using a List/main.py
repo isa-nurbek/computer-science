@@ -324,6 +324,7 @@ class Queue:
         """
         if self.is_empty():
             raise IndexError("Dequeue from an empty queue")
+
         return self.queue.popleft()  # Remove the first element in O(1) time
 
     def peek(self):
@@ -333,6 +334,7 @@ class Queue:
         """
         if self.is_empty():
             raise IndexError("Peek from an empty queue")
+
         return self.queue[0]  # Return the first element in O(1) time
 
     def is_empty(self):
