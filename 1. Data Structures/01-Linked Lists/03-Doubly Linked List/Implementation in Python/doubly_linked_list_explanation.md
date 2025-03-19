@@ -196,63 +196,82 @@ print(dll.stringify_list())
 
 ---
 
-## Let's analyze the **time and space complexity** of the **DoublyLinkedList** operations
+## **Big O Analysis:**
 
-### **1. `add_to_head(new_value)` & `add_to_tail(new_value)`**
+### Time and Space Complexity Analysis
 
-- These operations create a new node and adjust a few pointers.
-- **Time Complexity:** \( O(1) \) (Constant time, as only a few pointer changes are required)
-- **Space Complexity:** \( O(1) \) (No extra space except for the new node)
+Below is the time and space complexity analysis for each method in the `DoublyLinkedList` class:
 
 ---
 
-### **2. `insert(pos, new_value)`**
+#### **Node Class**
 
-- If inserting at the head: \( O(1) \).
-- If inserting at an arbitrary position:
-  - In the worst case, we traverse \( O(n) \) elements.
-  - The insertion itself (pointer adjustments) takes \( O(1) \).
-- **Time Complexity:** \( O(n) \) (Worst case: inserting at the end)
-- **Space Complexity:** \( O(1) \) (Only a new node is added)
+- **Time Complexity**: All operations in the `Node` class (e.g., `get_next_node`, `set_next_node`, etc.) are **O(1)** because they involve simple pointer assignments or retrievals.
+- **Space Complexity**: The `Node` class uses **O(1)** space per node, as it only stores the value and pointers to the next and previous nodes.
 
 ---
 
-### **3. `remove_head()` & `remove_tail()`**
+#### **DoublyLinkedList Class**
 
-- These operations adjust a few pointers and return a value.
-- **Time Complexity:** \( O(1) \) (No traversal required)
-- **Space Complexity:** \( O(1) \) (No extra space used)
+1. **`add_to_head(new_value)`**
+   - **Time Complexity**: **O(1)**  
+     - Creating a new node and updating pointers (head and previous head) are constant-time operations.
+   - **Space Complexity**: **O(1)**  
+     - Only a single new node is created, and no additional space is used.
+
+2. **`add_to_tail(new_value)`**
+   - **Time Complexity**: **O(1)**  
+     - Similar to `add_to_head`, creating a new node and updating pointers (tail and previous tail) are constant-time operations.
+   - **Space Complexity**: **O(1)**  
+     - Only a single new node is created, and no additional space is used.
+
+3. **`insert(pos, new_value)`**
+   - **Time Complexity**: **O(n)** in the worst case, where `n` is the length of the list.  
+     - In the worst case, you may need to traverse the entire list to find the insertion position.
+   - **Space Complexity**: **O(1)**  
+     - Only a single new node is created, and no additional space is used.
+
+4. **`remove_head()`**
+   - **Time Complexity**: **O(1)**  
+     - Updating the head pointer and removing the backward link are constant-time operations.
+   - **Space Complexity**: **O(1)**  
+     - No additional space is used.
+
+5. **`remove_tail()`**
+   - **Time Complexity**: **O(1)**  
+     - Updating the tail pointer and removing the forward link are constant-time operations.
+   - **Space Complexity**: **O(1)**  
+     - No additional space is used.
+
+6. **`remove_by_value(value_to_remove)`**
+   - **Time Complexity**: **O(n)** in the worst case, where `n` is the length of the list.  
+     - In the worst case, you may need to traverse the entire list to find the node with the specified value.
+   - **Space Complexity**: **O(1)**  
+     - No additional space is used.
+
+7. **`stringify_list()`**
+   - **Time Complexity**: **O(n)**, where `n` is the length of the list.  
+     - You need to traverse the entire list to construct the string representation.
+   - **Space Complexity**: **O(n)**  
+     - The string representation of the list requires space proportional to the number of nodes.
 
 ---
 
-### **4. `remove_by_value(value_to_remove)`**
+#### **Overall Summary**
 
-- In the worst case, we traverse the entire list if the value is at the end or not present.
-- Removing the node itself takes \( O(1) \) (pointer changes).
-- **Time Complexity:** \( O(n) \) (Worst case: searching the entire list)
-- **Space Complexity:** \( O(1) \) (No extra space used)
-
----
-
-### **5. `stringify_list()`**
-
-- Traverses the entire list and builds a string.
-- **Time Complexity:** \( O(n) \) (Iterating through all elements)
-- **Space Complexity:** \( O(n) \) (Storing the output string)
+- **Time Complexity**:
+  - Most operations (e.g., `add_to_head`, `add_to_tail`, `remove_head`, `remove_tail`) are **O(1)**.
+  - Operations that involve traversal (e.g., `insert`, `remove_by_value`, `stringify_list`) are **O(n)**.
+- **Space Complexity**:
+  - All operations use **O(1)** additional space, except for `stringify_list`, which uses **O(n)** space to store the string representation.
 
 ---
 
-### **Overall Summary**
+#### **Additional Notes**
 
-| Operation           | Time Complexity | Space Complexity |
-|---------------------|----------------|-----------------|
-| `add_to_head()` / `add_to_tail()` | \( O(1) \) | \( O(1) \) |
-| `insert(pos, value)` | \( O(n) \) (worst case) | \( O(1) \) |
-| `remove_head()` / `remove_tail()` | \( O(1) \) | \( O(1) \) |
-| `remove_by_value(value)` | \( O(n) \) (worst case) | \( O(1) \) |
-| `stringify_list()` | \( O(n) \) | \( O(n) \) |
-
-The **space complexity remains \( O(1) \) for most operations** since we do not allocate extra memory apart from the new nodes themselves.
+- The doubly linked list allows for efficient insertion and deletion at both ends (head and tail) due to the presence of both `next` and `prev` pointers.
+- Traversal-based operations (e.g., `insert`, `remove_by_value`) are less efficient than in arrays or array-based lists because they require sequential access.
+- The space overhead of a doubly linked list is higher than that of a singly linked list due to the additional `prev` pointer in each node.
 
 ---
 
