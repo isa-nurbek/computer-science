@@ -76,9 +76,10 @@ if __name__ == "__main__":
     # Display the queue after operations
     print("Queue after operations:", q)  # Output: Queue after operations: [20, 30]
 
-"""
-Output:
 
+# Output:
+
+"""
 Queue: [10, 20, 30]
 Dequeue: 10
 Peek: 20
@@ -88,65 +89,66 @@ Queue after operations: [20, 30]
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
-## Time and Space Complexity Analysis
+## Time and Space Complexity Analysis:
 
 ### Time Complexity Analysis
 
 1. **`enqueue(item)`**:
    - **Time Complexity**: O(1)
    
-   - **Explanation**: Appending an element to the end of a list in Python is an amortized constant-time operation.
-   
-   This is because Python lists are dynamically resized arrays, and while occasional resizing may occur, the
-   average time complexity remains O(1).
+   - **Explanation**: Appending an element to the end of a list in Python is an O(1) operation on average. This is because
+   Python lists are dynamically allocated arrays, and appending to the end usually doesn't require reallocating memory.
 
 2. **`dequeue()`**:
    - **Time Complexity**: O(n)
    
-   - **Explanation**: Removing the first element of a list (`pop(0)`) requires shifting all remaining elements
-   one position to the left. This operation takes linear time relative to the number of elements in the list.
+   - **Explanation**: Removing the first element of a list (`pop(0)`) is an O(n) operation because all subsequent elements
+   need to be shifted one position to the left. This makes the operation inefficient for large queues.
 
 3. **`peek()`**:
    - **Time Complexity**: O(1)
    
-   - **Explanation**: Accessing the first element of the list (`self.queue[0]`) is a constant-time operation.
+   - **Explanation**: Accessing the first element of the list (`queue[0]`) is an O(1) operation since it directly accesses
+   the element at the specified index.
 
 4. **`is_empty()`**:
    - **Time Complexity**: O(1)
    
-   - **Explanation**: Checking the length of the list (`len(self.queue)`) is a constant-time operation.
+   - **Explanation**: Checking the length of the list (`len(self.queue)`) is an O(1) operation in Python.
 
 5. **`size()`**:
    - **Time Complexity**: O(1)
    
-   - **Explanation**: Similar to `is_empty()`, checking the length of the list is a constant-time operation.
+   - **Explanation**: Similar to `is_empty()`, checking the length of the list is an O(1) operation.
 
 6. **`__str__()`**:
    - **Time Complexity**: O(n)
    
-   - **Explanation**: Converting the list to a string involves iterating over all elements in the list,
-   which takes linear time.
-
----
+   - **Explanation**: Converting the list to a string requires iterating over all elements, which is an O(n) operation.
 
 ### Space Complexity Analysis
 
-1. **Overall Space Complexity**: O(n)
+- **Space Complexity**: O(n)
+  - **Explanation**: The space complexity is O(n) where `n` is the number of elements in the queue. This is because
+  the queue is stored in a list, and the space required grows linearly with the number of elements.
 
-   - **Explanation**: The space complexity is determined by the number of elements stored in the queue.
-   The `self.queue` list stores all the elements, so the space required grows linearly
-   with the number of elements in the queue.
+### Optimizations
+
+- **Using `collections.deque`**:
+  - If you need a more efficient queue implementation, consider using `collections.deque` from the Python standard library.
+  A `deque` (double-ended queue) allows for O(1) time complexity for both `append` (enqueue) and `popleft` (dequeue)
+  operations, making it more suitable for queue operations.
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 
@@ -263,6 +265,7 @@ if __name__ == "__main__":
 ---
 
 ### How It Works
+
 1. **Enqueue**: Elements are added to the rear of the queue using the `enqueue` method.
 2. **Dequeue**: Elements are removed from the front of the queue using the `dequeue` method.
 3. **Peek**: The front element is viewed without removing it using the `peek` method.
@@ -273,6 +276,7 @@ if __name__ == "__main__":
 ---
 
 ### Key Points
+
 - The queue follows the **FIFO** principle: the first element added is the first one to be removed.
 - The `dequeue` and `peek` methods raise exceptions if the queue is empty to prevent invalid operations.
 - The implementation uses a Python list, which makes it simple but may not be the most efficient
@@ -280,7 +284,7 @@ for large queues (due to `pop(0)` being O(n) in time complexity).
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
 # Optimized Version:
 
@@ -348,12 +352,12 @@ class Queue:
         return str(list(self.queue))
 
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
-### Time and Space Complexity Analysis
+## Time and Space Complexity Analysis:
 
 Let's analyze the time and space complexity of each method in the `Queue` class:
 
@@ -361,54 +365,66 @@ Let's analyze the time and space complexity of each method in the `Queue` class:
 
 ### 1. **`enqueue(item)`**
    - **Time Complexity**: O(1)
+   
      - Appending an element to the end of a `deque` is a constant-time operation.
      
    - **Space Complexity**: O(1)
+   
      - No additional space is used apart from storing the item in the `deque`.
 
 ---
 
 ### 2. **`dequeue()`**
    - **Time Complexity**: O(1)
+   
      - Removing an element from the front of a `deque` is a constant-time operation.
      
    - **Space Complexity**: O(1)
+   
      - No additional space is used.
 
 ---
 
 ### 3. **`peek()`**
    - **Time Complexity**: O(1)
+   
      - Accessing the first element of a `deque` is a constant-time operation.
      
    - **Space Complexity**: O(1)
+   
      - No additional space is used.
 
 ---
 
 ### 4. **`is_empty()`**
    - **Time Complexity**: O(1)
+   
      - Checking the length of a `deque` is a constant-time operation.
      
    - **Space Complexity**: O(1)
+   
      - No additional space is used.
 
 ---
 
 ### 5. **`size()`**
    - **Time Complexity**: O(1)
+   
      - Checking the length of a `deque` is a constant-time operation.
      
    - **Space Complexity**: O(1)
+   
      - No additional space is used.
 
 ---
 
 ### 6. **`__str__()`**
    - **Time Complexity**: O(n)
+   
      - Converting the `deque` to a list requires iterating over all `n` elements.
      
    - **Space Complexity**: O(n)
+   
      - A new list of size `n` is created to represent the queue.
 
 ---
