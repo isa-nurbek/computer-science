@@ -173,9 +173,9 @@ print("After removing value 7:")
 print(dll.stringify_list())
 
 
-"""
-Output:
+# Output:
 
+"""
 Doubly Linked List:
 1
 5
