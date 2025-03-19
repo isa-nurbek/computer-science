@@ -206,12 +206,12 @@ After removing value 7:
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
-### Time and Space Complexity Analysis
+## Time and Space Complexity Analysis:
 
 Let's analyze the **time and space complexity** of the methods in the `DoublyLinkedList` class.
 
@@ -324,12 +324,12 @@ space for the output string.
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
-                                             *** __init__() method: ***
+                                            *** __init__() method: ***
 
 
 Let's break down the `DoublyLinkedList` class and its initialization step by step to help you understand it better.
@@ -475,7 +475,7 @@ head_node -> [10] <-> [5] <-> [15] <- tail_node
 - When nodes are added:
   - `head_node` and `tail_node` are updated to reflect the new first and last nodes.
 
-******************************************************************************************************************************
+# =========================================================================================================================== #
 
                                         *** add_to_head() method: ***
                                                
@@ -636,7 +636,7 @@ head_node -> [10] <-> [5] <- tail_node
 3. **Why update `tail_node`?**
    - If the list was empty, the new node is both the first and last node, so `tail_node` must also be updated.
 
-******************************************************************************************************************************
+# =========================================================================================================================== #
 
                                             *** insert() method: ***
                                                
@@ -823,7 +823,7 @@ head_node -> [1] <-> [2] <-> [3] <-> [4] <- tail_node
 3. **Handling out-of-bounds positions**:
    - If the position is beyond the list's length, the node is added to the tail using `add_to_tail`.
 
-******************************************************************************************************************************
+# =========================================================================================================================== #
 
                                         *** remove_head() method: ***
 
@@ -1000,7 +1000,7 @@ dll.remove_head()
 3. **Updating the tail**:
    - If the list becomes empty after removing the head, the `tail_node` is also set to `None`.
 
-******************************************************************************************************************************
+# =========================================================================================================================== #
 
                                         *** remove_tail() method: ***
 
@@ -1177,7 +1177,7 @@ dll.remove_tail()
 3. **Updating the head**:
    - If the list becomes empty after removing the tail, the `head_node` is also set to `None`.
 
-******************************************************************************************************************************
+# =========================================================================================================================== #
 
                                         *** remove_by_value() method: ***
 
@@ -1389,7 +1389,7 @@ dll.remove_by_value(4)
 4. **Handling value not found**:
    - If the value is not found in the list, the method returns `None`.
 
-******************************************************************************************************************************
+# =========================================================================================================================== #
 
                                         *** stringify_list() method: ***
 
@@ -1576,7 +1576,7 @@ The output of `stringify_list` will be:
 3
 ```
  
-************************************************************************************************************************
+# =========================================================================================================================== #
 
                               *** Creating a New Doubly Linked List ***
                               
@@ -1809,6 +1809,6 @@ head_node        tail_node
 head_node        tail_node
 ```
 
-This visually represents how the list changes step by step! Hope this helps!
+This visually represents how the list changes step by step!
 
 """
