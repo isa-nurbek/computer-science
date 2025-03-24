@@ -120,14 +120,14 @@ This makes the `Node` class very efficient for basic operations, which is typica
 
 - Three nodes are created:
 
-    ```python
-    node1 = Node("A")
-    node2 = Node("B")
-    node3 = Node("C")
-    ```
+```python
+node1 = Node("A")
+node2 = Node("B")
+node3 = Node("C")
+```
 
-  - `node1` stores the value `"A"`, `node2` stores `"B"`, and `node3` stores `"C"`.
-  - Initially, their `link_node` attributes are `None`.
+- `node1` stores the value `"A"`, `node2` stores `"B"`, and `node3` stores `"C"`.
+- Initially, their `link_node` attributes are `None`.
 
 ---
 
@@ -135,13 +135,13 @@ This makes the `Node` class very efficient for basic operations, which is typica
 
 - The `set_link_node` method is used to connect the nodes:
 
-    ```python
-    node1.set_link_node(node2)
-    node2.set_link_node(node3)
-    ```
+```python
+node1.set_link_node(node2)
+node2.set_link_node(node3)
+```
 
-  - `node1`'s `link_node` now points to `node2`.
-  - `node2`'s `link_node` now points to `node3`.
+- `node1`'s `link_node` now points to `node2`.
+- `node2`'s `link_node` now points to `node3`.
 
 ---
 
@@ -149,26 +149,26 @@ This makes the `Node` class very efficient for basic operations, which is typica
 
 - **Print Statements**
 
-    ```python
-    print(node1.get_value())  # A
-    ```
+```python
+print(node1.get_value())  # A
+```
 
-  - Calls the `get_value()` method of `node1`, which returns `"A"`.
+- Calls the `get_value()` method of `node1`, which returns `"A"`.
 
-        ```python
-        print(node1.get_link_node().get_value())  # B
-        ```
+```python
+print(node1.get_link_node().get_value())  # B
+```
 
-  - First, `node1.get_link_node()` retrieves the reference to `node2`.
-  - Then, `node2.get_value()` retrieves the value stored in `node2`, which is `"B"`.
+- First, `node1.get_link_node()` retrieves the reference to `node2`.
+- Then, `node2.get_value()` retrieves the value stored in `node2`, which is `"B"`.
 
-        ```python
-        print(node2.get_link_node().get_value())  # C
-        ```
+```python
+print(node2.get_link_node().get_value())  # C
+```
 
-  - Similarly:
-    - `node2.get_link_node()` retrieves the reference to `node3`.
-    - `node3.get_value()` retrieves the value stored in `node3`, which is `"C"`.
+- Similarly:
+  - `node2.get_link_node()` retrieves the reference to `node3`.
+  - `node3.get_value()` retrieves the value stored in `node3`, which is `"C"`.
 
 ---
 
@@ -186,7 +186,7 @@ This makes the `Node` class very efficient for basic operations, which is typica
 
 The linked list can be visualized as:
 
-```
+```plaintext
 [A] -> [B] -> [C] -> None
 ```
 
