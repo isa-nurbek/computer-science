@@ -78,60 +78,58 @@ Stack size: 2
 """
 ## Time and Space Complexity Analysis
 
-Let's analyze the **time** and **space complexity** of each operation in the `Stack` class:
-
----
+Here's the time and space complexity analysis for each method in the `Stack` class:
 
 ### **Time Complexity**
 
-1. **`__init__`**:
-   - **Time Complexity**: O(1)
-   
-   - Initializing an empty list is a constant-time operation.
+1. **`__init__`**  
+   - **O(1)** – Initializing an empty list is a constant-time operation.
 
-2. **`is_empty`**:
-   - **Time Complexity**: O(1)
-   
-   - Checking the length of a list is a constant-time operation.
+2. **`is_empty`**  
+   - **O(1)** – Checking the length of a list is a constant-time operation in Python.
 
-3. **`push`**:
-   - **Time Complexity**: O(1)
-   
-   - Appending an item to the end of a list is a constant-time operation in Python (amortized).
+3. **`push(item)`**  
+   - **O(1) (amortized)** – Appending an item to the end of a list is typically O(1), but occasionally O(n) when
+   the underlying dynamic array needs to be resized. However, on average (amortized), it's considered O(1).
 
-4. **`pop`**:
-   - **Time Complexity**: O(1)
-   
-   - Removing the last item from a list is a constant-time operation.
+4. **`pop()`**  
+   - **O(1)** – Removing the last element of a list is a constant-time operation.
 
-5. **`peek`**:
-   - **Time Complexity**: O(1)
-   
-   - Accessing the last element of a list is a constant-time operation.
+5. **`peek()`**  
+   - **O(1)** – Accessing the last element of a list is O(1).
 
-6. **`size`**:
-   - **Time Complexity**: O(1)
-   
-   - Getting the length of a list is a constant-time operation.
+6. **`size()`**  
+   - **O(1)** – Getting the length of a list is O(1) in Python.
 
-7. **`__str__`**:
-   - **Time Complexity**: O(n), where `n` is the number of elements in the stack.
-   
-   - Converting the list to a string requires iterating over all elements.
+7. **`__str__`**  
+   - **O(n)** – Converting the entire stack to a string requires traversing all elements, which is O(n).
 
 ---
 
 ### **Space Complexity**
 
-1. **Overall Space Complexity**:
-   - **Space Complexity**: O(n), where `n` is the number of elements in the stack.
-   
-   - The space is dominated by the list `self.items`, which stores all the elements of the stack.
+- The **space complexity** of the stack is **O(n)**, where `n` is the number of elements stored in the stack.
+This is because the underlying list (`self.items`) stores all the elements.
 
-2. **Auxiliary Space for Operations**:
-   - All operations (except `__str__`) use O(1) auxiliary space.
-   
-   - The `__str__` method uses O(n) auxiliary space to create the string representation of the stack.
+### **Summary**
+
+| Method      | Time Complexity | Space Complexity |
+|-------------|-----------------|------------------|
+| `__init__`  | O(1)            | O(1)             |
+| `is_empty`  | O(1)            | O(1)             |
+| `push`      | O(1) (amortized)| O(1)*            |
+| `pop`       | O(1)            | O(1)             |
+| `peek`      | O(1)            | O(1)             |
+| `size`      | O(1)            | O(1)             |
+| `__str__`   | O(n)            | O(n)**           |
+
+\* While `push` is O(1) in time, it may occasionally trigger an O(n) resize, but the amortized time remains O(1).  
+
+\** `__str__` creates a new string representation, which takes O(n) space.  
+
+Overall, the stack operations are very efficient, with most operations running in **constant time O(1)**.
+
+The space usage is linear **O(n)** based on the number of elements stored.
 
 """
 
