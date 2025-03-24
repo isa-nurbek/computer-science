@@ -4,11 +4,6 @@ Let's break down the code and understand how the `Stack` class works in detail.
 
 ## 1. **Node Class**
 
-The `Node` class is a basic building block for the stack. It has two attributes:
-
-- `data`: This holds the value of the node.
-- `next`: This is a pointer to the next node in the stack.
-
 ```python
 class Node:
     def __init__(self, data):
@@ -16,13 +11,57 @@ class Node:
         self.next = None
 ```
 
+The `Node` class is a basic building block for the stack. It has two attributes:
+
+- `data`: This holds the value of the node.
+- `next`: This is a pointer to the next node in the stack.
+
 ### 2. **Stack Class**
+
+```python
+class Stack:
+    def __init__(self):
+        self.top = None  # Top of the stack (initially None)
+
+    # Check if the stack is empty
+    def is_empty(self):
+        return self.top is None
+
+    # Push a new element onto the stack
+    def push(self, data):
+        new_node = Node(data)  # Create a new node with the given data
+        new_node.next = self.top  # Link the new node to the current top
+        self.top = new_node  # Update the top to the new node
+
+    # Remove and return the top element from the stack
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("pop from empty stack")  # Raise error if stack is empty
+        popped_data = self.top.data  # Get data from the top node
+        self.top = self.top.next  # Move the top to the next node
+        return popped_data  # Return the popped data
+
+    # Return the top element without removing it
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("peek from empty stack")  # Raise error if stack is empty
+        return self.top.data  # Return the data of the top node
+
+    # String representation of the stack for easy visualization
+    def __str__(self):
+        if self.is_empty():
+            return "Stack is empty"  # Return message if stack is empty
+        current = self.top  # Start from the top
+        stack_str = ""  # Initialize an empty string
+        while current:
+            stack_str += str(current.data) + " -> "  # Append current node data
+            current = current.next  # Move to the next node
+        return stack_str[:-4]  # Remove the last " -> " for cleaner output
+```
 
 The `Stack` class implements the stack data structure using a linked list. It has the following methods:
 
 #### **Attributes**
-
-- `top`: This is a pointer to the top node of the stack. Initially, it is set to `None` because the stack is empty.
 
 ```python
 class Stack:
@@ -30,22 +69,20 @@ class Stack:
         self.top = None
 ```
 
-#### **Methods**
+- `top`: This is a pointer to the top node of the stack. Initially, it is set to `None` because the stack is empty.
 
-1. **`is_empty()`**
-   - This method checks if the stack is empty by checking if `self.top` is `None`.
-   - Returns `True` if the stack is empty, otherwise `False`.
+#### **Methods**
 
 ```python
 def is_empty(self):
     return self.top is None
 ```
 
-2. **`push(data)`**
-   - This method adds a new node with the given `data` to the top of the stack.
-   - A new `Node` object is created with the provided `data`.
-   - The `next` attribute of the new node is set to the current `top` node.
-   - The `top` pointer is updated to point to the new node.
+1. **`is_empty()`**
+   - This method checks if the stack is empty by checking if `self.top` is `None`.
+   - Returns `True` if the stack is empty, otherwise `False`.
+
+--
 
 ```python
 def push(self, data):
@@ -54,12 +91,13 @@ def push(self, data):
     self.top = new_node
 ```
 
-3. **`pop()`**
-   - This method removes and returns the top element of the stack.
-   - If the stack is empty, it raises an `IndexError`.
-   - The `data` of the top node is stored in `popped_data`.
-   - The `top` pointer is updated to point to the next node in the stack.
-   - The `popped_data` is returned.
+2. **`push(data)`**
+   - This method adds a new node with the given `data` to the top of the stack.
+   - A new `Node` object is created with the provided `data`.
+   - The `next` attribute of the new node is set to the current `top` node.
+   - The `top` pointer is updated to point to the new node.
+
+--
 
 ```python
 def pop(self):
@@ -70,9 +108,14 @@ def pop(self):
     return popped_data
 ```
 
-4. **`peek()`**
-   - This method returns the `data` of the top node without removing it.
+3. **`pop()`**
+   - This method removes and returns the top element of the stack.
    - If the stack is empty, it raises an `IndexError`.
+   - The `data` of the top node is stored in `popped_data`.
+   - The `top` pointer is updated to point to the next node in the stack.
+   - The `popped_data` is returned.
+
+--
 
 ```python
 def peek(self):
@@ -81,11 +124,11 @@ def peek(self):
     return self.top.data
 ```
 
-5. **`__str__()`**
-   - This method provides a string representation of the stack.
-   - If the stack is empty, it returns "Stack is empty".
-   - Otherwise, it traverses the stack from the top to the bottom, appending each node's data to a string separated by " -> ".
-   - The last " -> " is removed before returning the string.
+4. **`peek()`**
+   - This method returns the `data` of the top node without removing it.
+   - If the stack is empty, it raises an `IndexError`.
+
+--
 
 ```python
 def __str__(self):
@@ -98,6 +141,12 @@ def __str__(self):
         current = current.next
     return stack_str[:-4]  # Remove the last " -> "
 ```
+
+5. **`__str__()`**
+   - This method provides a string representation of the stack.
+   - If the stack is empty, it returns "Stack is empty".
+   - Otherwise, it traverses the stack from the top to the bottom, appending each node's data to a string separated by " -> ".
+   - The last " -> " is removed before returning the string.
 
 ### 3. **Example Usage**
 
