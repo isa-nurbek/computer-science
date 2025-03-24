@@ -16,6 +16,8 @@ The `Node` class is a basic building block for the stack. It has two attributes:
 - `data`: This holds the value of the node.
 - `next`: This is a pointer to the next node in the stack.
 
+---
+
 ### 2. **Stack Class**
 
 ```python
@@ -61,6 +63,8 @@ class Stack:
 
 The `Stack` class implements the stack data structure using a linked list. It has the following methods:
 
+---
+
 #### **Attributes**
 
 ```python
@@ -82,7 +86,7 @@ def is_empty(self):
    - This method checks if the stack is empty by checking if `self.top` is `None`.
    - Returns `True` if the stack is empty, otherwise `False`.
 
---
+---
 
 ```python
 def push(self, data):
@@ -97,7 +101,7 @@ def push(self, data):
    - The `next` attribute of the new node is set to the current `top` node.
    - The `top` pointer is updated to point to the new node.
 
---
+---
 
 ```python
 def pop(self):
@@ -115,7 +119,7 @@ def pop(self):
    - The `top` pointer is updated to point to the next node in the stack.
    - The `popped_data` is returned.
 
---
+---
 
 ```python
 def peek(self):
@@ -128,7 +132,7 @@ def peek(self):
    - This method returns the `data` of the top node without removing it.
    - If the stack is empty, it raises an `IndexError`.
 
---
+---
 
 ```python
 def __str__(self):
@@ -215,32 +219,32 @@ This implementation is efficient for stack operations, with `push`, `pop`, and `
 
 ---
 
+## **Big O Analysis:**
+
 ### Time and Space Complexity Analysis
 
 Let's analyze the **time complexity** and **space complexity** of the `Stack` implementation provided.
 
----
-
 ### **Time Complexity**
 
 1. **`push(data)`**:
-   - **Time Complexity**: \(O(1)\)
+   - **Time Complexity**: O(1)
    - Explanation: Inserting a new node at the top of the stack involves creating a new node and updating the `top` pointer. This is a constant-time operation.
 
 2. **`pop()`**:
-   - **Time Complexity**: \(O(1)\)
+   - **Time Complexity**: O(1)
    - Explanation: Removing the top node involves updating the `top` pointer to the next node. This is also a constant-time operation.
 
 3. **`peek()`**:
-   - **Time Complexity**: \(O(1)\)
+   - **Time Complexity**: O(1)
    - Explanation: Accessing the data of the top node is a constant-time operation.
 
 4. **`is_empty()`**:
-   - **Time Complexity**: \(O(1)\)
+   - **Time Complexity**: O(1)
    - Explanation: Checking if the `top` pointer is `None` is a constant-time operation.
 
 5. **`__str__()`**:
-   - **Time Complexity**: \(O(n)\), where \(n\) is the number of elements in the stack.
+   - **Time Complexity**: O(n), where `n` is the number of elements in the stack.
    - Explanation: The `__str__` method traverses the entire stack to construct the string representation. This requires visiting each node once, so the time complexity is linear in the number of elements.
 
 ---
@@ -248,19 +252,19 @@ Let's analyze the **time complexity** and **space complexity** of the `Stack` im
 ### **Space Complexity**
 
 1. **Overall Space Complexity**:
-   - **Space Complexity**: \(O(n)\), where \(n\) is the number of elements in the stack.
-   - Explanation: The space required to store the stack is proportional to the number of elements in it. Each node stores data and a pointer to the next node, so the total space used is \(O(n)\).
+   - **Space Complexity**: O(n), where `n` is the number of elements in the stack.
+   - Explanation: The space required to store the stack is proportional to the number of elements in it. Each node stores data and a pointer to the next node, so the total space used is O(n).
 
 2. **Auxiliary Space**:
-   - **`push(data)`**: \(O(1)\)
+   - **`push(data)`**: O(1)
      - Explanation: No additional space is required beyond the new node being added.
-   - **`pop()`**: \(O(1)\)
+   - **`pop()`**: O(1)
      - Explanation: No additional space is required beyond the temporary variable to store the popped data.
-   - **`peek()`**: \(O(1)\)
+   - **`peek()`**: O(1)
      - Explanation: No additional space is required.
-   - **`is_empty()`**: \(O(1)\)
+   - **`is_empty()`**: O(1)
      - Explanation: No additional space is required.
-   - **`__str__()`**: \(O(n)\)
+   - **`__str__()`**: O(n)
      - Explanation: The `stack_str` variable grows linearly with the number of elements in the stack.
 
 ---
@@ -268,39 +272,12 @@ Let's analyze the **time complexity** and **space complexity** of the `Stack` im
 ### **Summary**
 
 | Operation       | Time Complexity | Space Complexity |
-|------------------|-----------------|------------------|
-| `push(data)`     | \(O(1)\)        | \(O(1)\)         |
-| `pop()`          | \(O(1)\)        | \(O(1)\)         |
-| `peek()`         | \(O(1)\)        | \(O(1)\)         |
-| `is_empty()`     | \(O(1)\)        | \(O(1)\)         |
-| `__str__()`      | \(O(n)\)        | \(O(n)\)         |
-| **Overall**      | -               | \(O(n)\)         |
-
----
-
-### **Example Walkthrough**
-
-For the example usage provided:
-
-```python
-stack = Stack()
-stack.push(10)
-stack.push(20)
-stack.push(30)
-print(stack)  # Output: 30 -> 20 -> 10
-print("Popped:", stack.pop())  # Output: Popped: 30
-print(stack)  # Output: 20 -> 10
-print("Top element:", stack.peek())  # Output: Top element: 20
-stack.push(40)
-print(stack)  # Output: 40 -> 20 -> 10
-```
-
-- **Time Complexity**:
-  - Each `push`, `pop`, and `peek` operation is \(O(1)\).
-  - The `__str__` operation is \(O(n)\), where \(n\) is the number of elements in the stack.
-
-- **Space Complexity**:
-  - The stack uses \(O(n)\) space to store the elements.
-  - The `__str__` method uses \(O(n)\) auxiliary space to construct the string representation.
+|-----------------|-----------------|------------------|
+| `push(data)`    |     O(1)        |     O(1)         |
+| `pop()`         |     O(1)        |     O(1)         |
+| `peek()`        |     O(1)        |     O(1)         |
+| `is_empty()`    |     O(1)        |     O(1)         |
+| `__str__()`     |     O(n)        |     O(n)         |
+| **Overall**     |      -          |     O(n)         |
 
 This implementation is efficient for stack operations, with constant time for most operations and linear time for string representation.
