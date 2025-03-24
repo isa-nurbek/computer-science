@@ -544,6 +544,8 @@ Getting key2: None
 
 ### Time and Space Complexity Analysis of Optimized Hash Maps Class
 
+#### Time Complexity Analysis
+
 1. **`_get_hash(key)`**:
    - **Time Complexity**: O(1)
    - **Explanation**: This method computes the hash of the key and performs a modulo operation, both of which are constant-time operations.
@@ -571,7 +573,7 @@ Getting key2: None
    - **Time Complexity**: O(n)
    - **Explanation**: Resizing involves creating a new hash map of double the size and rehashing all existing `n` key-value pairs. Each insertion into the new hash map is O(1) on average, so the total time is O(n).
 
-### Space Complexity Analysis
+#### Space Complexity Analysis
 
 1. **Overall Space Complexity**:
    - **Space Complexity**: O(n)
