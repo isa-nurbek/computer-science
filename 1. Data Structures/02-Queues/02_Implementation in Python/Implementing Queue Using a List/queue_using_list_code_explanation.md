@@ -177,6 +177,17 @@ if __name__ == "__main__":
     print("Queue after operations:", q)  # Output: Queue after operations: [20, 30]
 ```
 
+***Output:***
+
+```plaintext
+Queue: [10, 20, 30]
+Dequeue: 10
+Peek: 20
+Is empty? False
+Size: 2
+Queue after operations: [20, 30]
+```
+
 ---
 
 ### How It Works
