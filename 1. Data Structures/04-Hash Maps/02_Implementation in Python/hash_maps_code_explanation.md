@@ -4,6 +4,95 @@ The provided code defines a simple implementation of a **hash map** (also known 
 
 ---
 
+## **`HashMap` Class**
+
+```python
+class HashMap:
+    def __init__(self, size=10):
+        """
+        Initialize the hash map with a given size (default is 10).
+        Uses a list of lists (buckets) to handle collisions via chaining.
+        """
+        self.size = size
+        self.map = [[] for _ in range(size)]  # Create empty buckets
+
+    def _get_hash(self, key):
+        """
+        Compute a hash value for a given key using the sum of ASCII values of its characters
+        modulo the size of the hash map.
+        """
+        return sum(ord(char) for char in str(key)) % self.size
+
+    def add(self, key, value):
+        """
+        Insert or update a key-value pair in the hash map.
+        If the key already exists, update its value.
+        """
+        key_hash = self._get_hash(key)  # Compute the hash index
+        key_value = [key, value]
+
+        # Check if the key already exists in the bucket
+        for pair in self.map[key_hash]:
+            if pair[0] == key:
+                pair[1] = value  # Update value if key exists
+                return True
+
+        # If key doesn't exist, add the new key-value pair to the bucket
+        self.map[key_hash].append(key_value)
+        return True
+
+    def get(self, key):
+        """
+        Retrieve the value associated with a given key.
+        Returns None if the key is not found.
+        """
+        key_hash = self._get_hash(key)  # Compute hash index
+        for pair in self.map[key_hash]:
+            if pair[0] == key:
+                return pair[1]  # Return the associated value
+        return None  # Key not found
+
+    def delete(self, key):
+        """
+        Remove a key-value pair from the hash map.
+        Returns True if the deletion was successful, otherwise False.
+        """
+        key_hash = self._get_hash(key)  # Compute hash index
+        for i, pair in enumerate(self.map[key_hash]):
+            if pair[0] == key:
+                self.map[key_hash].pop(i)  # Remove the key-value pair
+                return True
+        return False  # Key not found
+
+    def __str__(self):
+        """
+        String representation of the hash map showing the contents of each bucket.
+        """
+        return "\n".join([f"{i}: {bucket}" for i, bucket in enumerate(self.map)])
+
+
+# Example usage
+if __name__ == "__main__":
+    h = HashMap()
+    h.add("key1", "value1")
+    h.add("key2", "value2")
+    h.add("key3", "value3")
+
+    print("Initial hash map:")
+    print(h)  # Print the hash map
+
+    print("\nRetrieving values:")
+    print("Getting key1:", h.get("key1"))  # Get value for key1
+    print("Getting key2:", h.get("key2"))  # Get value for key2
+
+    h.delete("key2")  # Delete key2
+    print("\nAfter deleting key2:")
+    print(h)
+
+    print("\nTrying to retrieve deleted key2:")
+    print("Getting key2:", h.get("key2"))  # Should return None
+```
+
 ## **1. Class Definition: `HashMap`**
 
 The `HashMap` class is the core of the implementation. It uses **chaining** to handle collisions, meaning that each bucket in the hash map can store multiple key-value pairs in a list.
@@ -221,130 +310,55 @@ This implementation is a basic demonstration of how hash maps work and can be ex
 
 ---
 
+## **Big O Analysis:**
+
 ### Time and Space Complexity Analysis
 
-The `HashMap` implementation provided uses **chaining** to handle collisions, where each bucket in the hash map is a list of key-value pairs. Below is an analysis of the **time and space complexity** for the operations in your implementation:
-
----
-
-### **Time Complexity**
+#### **Time Complexity**
 
 1. **`_get_hash(key)`**:
-   - Computes the hash by summing the ASCII values of the characters in the key and taking modulo with the size of the hash map.
-   - **Time Complexity**: `O(k)`, where `k` is the length of the key. This is because we iterate over each character in the key to compute the hash.
+   - **Time Complexity**: O(k), where `k` is the length of the key (string).
+   - **Explanation**: The hash function computes the sum of ASCII values of each character in the key. This requires iterating through each character of the key once.
 
 2. **`add(key, value)`**:
-   - Computes the hash index using `_get_hash(key)`.
-   - Iterates through the bucket (list) at the computed index to check if the key already exists.
-     - If the key exists, it updates the value.
-     - If the key doesn't exist, it appends the new key-value pair to the bucket.
-   - **Time Complexity**:
-     - Best case: `O(1)` (if there are no collisions and the bucket is empty).
-     - Worst case: `O(n)` (if all keys hash to the same bucket, leading to a linear search through the bucket).
+   - **Average Case**: O(1 + α), where α is the load factor (average number of elements per bucket).
+   - **Worst Case**: O(n), where `n` is the number of elements in the hash map (if all keys collide into the same bucket).
+   - **Explanation**:
+     - Computing the hash is O(k) (as above).
+     - Searching the bucket for the key is O(α) on average (due to chaining).
+     - Insertion or update is O(1).
+     - In the worst case (all keys collide), the bucket becomes a list of size `n`, making insertion/search O(n).
 
 3. **`get(key)`**:
-   - Computes the hash index using `_get_hash(key)`.
-   - Iterates through the bucket at the computed index to find the key.
-   - **Time Complexity**:
-     - Best case: `O(1)` (if there are no collisions and the key is the first element in the bucket).
-     - Worst case: `O(n)` (if all keys hash to the same bucket, leading to a linear search through the bucket).
+   - **Average Case**: O(1 + α).
+   - **Worst Case**: O(n).
+   - **Explanation**: Similar to `add`, computing the hash is O(k), and searching the bucket is O(α) on average (or O(n) in the worst case).
 
 4. **`delete(key)`**:
-   - Computes the hash index using `_get_hash(key)`.
-   - Iterates through the bucket at the computed index to find and remove the key-value pair.
-   - **Time Complexity**:
-     - Best case: `O(1)` (if there are no collisions and the key is the first element in the bucket).
-     - Worst case: `O(n)` (if all keys hash to the same bucket, leading to a linear search through the bucket).
+   - **Average Case**: O(1 + α).
+   - **Worst Case**: O(n).
+   - **Explanation**: Same as `get` and `add`, since deletion involves searching the bucket first.
 
----
+#### **Space Complexity**
 
-### **Space Complexity**
+1. **Overall Space**:
+   - **Space Complexity**: O(n + m), where `n` is the number of key-value pairs stored and `m` is the size of the internal bucket array (`self.size`).
+   - **Explanation**:
+     - The hash map stores `n` key-value pairs distributed across `m` buckets.
+     - Each bucket is a list, and the overhead of the bucket array is O(m).
+     - In practice, if the hash map is resized dynamically (not implemented here), `m` is proportional to `n`, making the space complexity O(n).
 
-1. **Overall Space Complexity**:
-   - The space used by the hash map is proportional to the number of buckets (`size`) and the number of key-value pairs stored.
-   - **Space Complexity**: `O(size + n)`, where `size` is the number of buckets and `n` is the number of key-value pairs.
+#### **Notes on Performance**
 
-2. **Auxiliary Space for Operations**:
-   - All operations (`add`, `get`, `delete`) use a constant amount of auxiliary space (`O(1)`) beyond the space required to store the hash map itself.
+- The performance relies heavily on the hash function distributing keys uniformly across buckets. If many keys collide, the worst-case time complexity degrades to O(n).
+- This implementation does not handle resizing (dynamic rehashing), so the load factor (`n/m`) can grow unbounded, leading to poor performance if many keys are added.
+- The `_get_hash` function is simple but may not distribute keys uniformly for certain datasets (e.g., keys with the same characters in different orders will collide).
 
----
+#### **Improvements**
 
-### **Example Analysis**
-
-In our example usage:
-
-1. **Adding keys**:
-   - `h.add("key1", "value1")`: Computes hash for `"key1"` and adds it to the appropriate bucket.
-   - `h.add("key2", "value2")`: Computes hash for `"key2"` and adds it to the appropriate bucket.
-   - `h.add("key3", "value3")`: Computes hash for `"key3"` and adds it to the appropriate bucket.
-   - **Time Complexity**: `O(1)` for each addition (assuming no collisions).
-
-2. **Retrieving values**:
-   - `h.get("key1")`: Computes hash for `"key1"` and retrieves the value from the bucket.
-   - `h.get("key2")`: Computes hash for `"key2"` and retrieves the value from the bucket.
-   - **Time Complexity**: `O(1)` for each retrieval (assuming no collisions).
-
-3. **Deleting a key**:
-   - `h.delete("key2")`: Computes hash for `"key2"` and removes it from the bucket.
-   - **Time Complexity**: `O(1)` (assuming no collisions).
-
-4. **Retrieving a deleted key**:
-   - `h.get("key2")`: Computes hash for `"key2"` and finds no matching key in the bucket.
-   - **Time Complexity**: `O(1)` (assuming no collisions).
-
----
-
-### **Optimization Considerations**
-
-1. **Hash Function**:
-   - The current hash function (`sum(ord(char) for char in str(key)) % self.size`) is simple but may lead to collisions if keys have similar character sums.
-   - Consider using a more robust hash function (e.g., Python's built-in `hash()` function or a cryptographic hash function).
-
-2. **Dynamic Resizing**:
-   - The hash map has a fixed size (`size=10`). If the number of key-value pairs grows significantly, the buckets will become longer, degrading performance.
-   - Implement dynamic resizing (e.g., doubling the size of the hash map when the load factor exceeds a threshold).
-
-3. **Load Factor**:
-   - Monitor the load factor (`n / size`) and resize the hash map if it exceeds a certain threshold (e.g., 0.7).
-
----
-
-### **Final Output of Example Usage**
-
-```plaintext
-Initial hash map:
-0: []
-1: []
-2: []
-3: [['key1', 'value1']]
-4: [['key2', 'value2']]
-5: [['key3', 'value3']]
-6: []
-7: []
-8: []
-9: []
-
-Retrieving values:
-Getting key1: value1
-Getting key2: value2
-
-After deleting key2:
-0: []
-1: []
-2: []
-3: [['key1', 'value1']]
-4: []
-5: [['key3', 'value3']]
-6: []
-7: []
-8: []
-9: []
-
-Trying to retrieve deleted key2:
-Getting key2: None
-```
-
-This output demonstrates the behavior of the hash map, including adding, retrieving, and deleting key-value pairs.
+1. **Dynamic Resizing**: Double the size of the bucket array and rehash all elements when the load factor exceeds a threshold (e.g., 0.7). This keeps α bounded and maintains average O(1) operations.
+2. **Better Hash Function**: Use a more sophisticated hash function (e.g., Python's built-in `hash()` or a cryptographic hash) to reduce collisions.
+3. **Open Addressing**: Alternative to chaining, where collisions are resolved by probing (linear/quadratic/double hashing). This can be more cache-friendly but requires careful handling of deletions.
 
 ---
 
