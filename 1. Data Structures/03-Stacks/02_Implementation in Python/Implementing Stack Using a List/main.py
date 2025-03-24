@@ -59,9 +59,9 @@ if __name__ == "__main__":
     # Get the size of the stack
     print("Stack size:", stack.size())  # Output: 2
 
-"""
-Output:
+# Output:
 
+"""
 Stack after pushes: [10, 20, 30]
 Popped: 30
 Stack after pop: [10, 20]
@@ -71,9 +71,9 @@ Stack size: 2
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -135,9 +135,9 @@ Let's analyze the **time** and **space complexity** of each operation in the `St
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 ### Explanation of the `Stack` Class
@@ -212,7 +212,7 @@ implementation of this concept using a Python list.
    - This method provides a string representation of the stack.
    - It converts the `items` list to a string for easy printing and debugging.
 
----
+# =========================================================================================================================== #
 
 ### How the Stack Works
 
