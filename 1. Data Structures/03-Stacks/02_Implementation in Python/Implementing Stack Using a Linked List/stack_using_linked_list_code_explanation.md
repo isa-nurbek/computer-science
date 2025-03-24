@@ -75,6 +75,8 @@ class Stack:
 
 - `top`: This is a pointer to the top node of the stack. Initially, it is set to `None` because the stack is empty.
 
+---
+
 #### **Methods**
 
 ```python
@@ -151,6 +153,8 @@ def __str__(self):
    - If the stack is empty, it returns "Stack is empty".
    - Otherwise, it traverses the stack from the top to the bottom, appending each node's data to a string separated by " -> ".
    - The last " -> " is removed before returning the string.
+
+---
 
 ### 3. **Example Usage**
 
