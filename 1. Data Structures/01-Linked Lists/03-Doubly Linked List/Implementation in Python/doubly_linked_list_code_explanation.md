@@ -1,7 +1,5 @@
 # Code Explanation: Doubly Linked List Implementation in Python
 
----
-
 ## **Understanding the Classes**
 
 ### **1. `Node` Class**
