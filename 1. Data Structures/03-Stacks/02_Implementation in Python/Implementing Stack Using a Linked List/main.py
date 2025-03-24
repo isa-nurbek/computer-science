@@ -66,9 +66,9 @@ print("Top element:", stack.peek())  # Output: Top element: 20 (peek at the top)
 stack.push(40)
 print(stack)  # Output: 40 -> 20 -> 10 (40 is now the new top)
 
-"""
-Output:
+# Output:
 
+"""
 30 -> 20 -> 10
 Popped: 30
 20 -> 10
@@ -77,9 +77,9 @@ Top element: 20
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Big O:
+# Big O Analysis:
 
 """
 ## Time and Space Complexity Analysis
@@ -147,9 +147,9 @@ Let's analyze the **time complexity** and **space complexity** of the `Stack` im
 
 """
 
-# ******************************************************************************************************************************** #
+# =========================================================================================================================== #
 
-# Code Explanation:
+# Detailed Code Explanation:
 
 """
 Let's break down the code and understand how the `Stack` class works in detail.
