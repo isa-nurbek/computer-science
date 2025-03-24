@@ -202,6 +202,8 @@ if __name__ == "__main__":
 
 ### Time and Space Complexity Analysis
 
+#### Time Complexity Analysis
+
 1. **`enqueue(item)`**:
    - **Time Complexity**: O(1)
    - **Explanation**: Appending an element to the end of a list in Python is an amortized constant-time operation. This is because Python lists are dynamically resized arrays, and while occasional resizing may occur, the average time complexity remains O(1).
@@ -228,7 +230,7 @@ if __name__ == "__main__":
 
 ---
 
-### Space Complexity Analysis
+#### Space Complexity Analysis
 
 1. **Overall Space Complexity**: O(n)
    - **Explanation**: The space complexity is determined by the number of elements stored in the queue. The `self.queue` list stores all the elements, so the space required grows linearly with the number of elements in the queue.
@@ -237,7 +239,7 @@ if __name__ == "__main__":
 
 ### Optimizing `dequeue()` for O(1) Time Complexity
 
-The current implementation of `dequeue()` has a time complexity of \(O(n)\) due to the use of `pop(0)`. To achieve O(1) time complexity for both `enqueue()` and `dequeue()`, you can use a **double-ended queue (deque)** from Python's `collections` module. A deque allows efficient appends and pops from both ends.
+The current implementation of `dequeue()` has a time complexity of O(n) due to the use of `pop(0)`. To achieve O(1) time complexity for both `enqueue()` and `dequeue()`, you can use a **double-ended queue (deque)** from Python's `collections` module. A deque allows efficient appends and pops from both ends.
 
 Here’s how we can modify the `Queue` class to use a deque:
 
@@ -298,9 +300,9 @@ class Queue:
 
 ## **Big O Analysis:**
 
-### Updated Time Complexity with Deque
+### Updated Time & Space Complexity Analysis with Deque
 
-### Time Complexity Analysis
+#### Time Complexity Analysis
 
 1. **`enqueue(item)`**:
    - **Time Complexity**: O(1)
@@ -328,7 +330,7 @@ class Queue:
 
 ---
 
-### Space Complexity Analysis
+#### Space Complexity Analysis
 
 1. **Overall Space Complexity**:
    - **Space Complexity**: O(n)
