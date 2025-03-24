@@ -503,35 +503,6 @@ if __name__ == "__main__":
 
 ---
 
-### **Key Improvements**
-
-1. **Better Hash Function**:
-   - Replaced the custom hash function with Python's built-in `hash()` function, which is more efficient and less prone to collisions.
-
-2. **Dynamic Resizing**:
-   - Added a `_resize()` method to double the size of the hash map when the load factor exceeds 0.7.
-   - Rehashes all key-value pairs after resizing.
-
-3. **Load Factor Monitoring**:
-   - Tracked the number of key-value pairs (`self.count`) and resized the hash map when the load factor (`self.count / self.size`) exceeds 0.7.
-
-4. **Efficient Bucket Handling**:
-   - Used lists for buckets, but the dynamic resizing ensures that buckets remain short on average.
-
----
-
-### **Time and Space Complexity After Optimization**
-
-1. **Time Complexity**:
-   - **`add`, `get`, `delete`**: Average case `O(1)` due to dynamic resizing and better hash function.
-   - **`_resize`**: `O(n)` (occurs infrequently due to amortized analysis).
-
-2. **Space Complexity**:
-   - **Overall**: `O(n)` (proportional to the number of key-value pairs).
-   - **Auxiliary Space**: `O(1)` for operations.
-
----
-
 ### **Example Output**
 
 ```plaintext
@@ -566,5 +537,66 @@ After deleting key2:
 Trying to retrieve deleted key2:
 Getting key2: None
 ```
+
+---
+
+## **Big O Analysis:**
+
+### Time and Space Complexity Analysis of Optimized Hash Maps Class
+
+1. **`_get_hash(key)`**:
+   - **Time Complexity**: O(1)
+   - **Explanation**: This method computes the hash of the key and performs a modulo operation, both of which are constant-time operations.
+
+2. **`add(key, value)`**:
+   - **Average Case**: O(1)
+   - **Worst Case**: O(n)
+   - **Explanation**:
+     - **Average Case**: Assuming a good hash function and a low load factor, the key-value pair is inserted into the bucket (a list) in constant time. Resizing (when the load factor exceeds 0.7) is amortized O(1) because it happens infrequently and the cost is spread out over many insertions.
+     - **Worst Case**: If all keys hash to the same bucket, the bucket becomes a list of size `n`, and inserting a new key-value pair requires traversing the entire list to check for duplicates, resulting in O(n) time.
+
+3. **`get(key)`**:
+   - **Average Case**: O(1)
+   - **Worst Case**: O(n)
+   - **Explanation**:
+     - **Average Case**: With a good hash function, the key is found in the bucket in constant time.
+     - **Worst Case**: If all keys hash to the same bucket, the bucket is a list of size `n`, and searching for the key requires O(n) time.
+
+4. **`delete(key)`**:
+   - **Average Case**: O(1)
+   - **Worst Case**: O(n)
+   - **Explanation**: Similar to `get(key)`, deletion involves finding the key in the bucket and then removing it. In the worst case, this requires traversing the entire bucket.
+
+5. **`_resize()`**:
+   - **Time Complexity**: O(n)
+   - **Explanation**: Resizing involves creating a new hash map of double the size and rehashing all existing `n` key-value pairs. Each insertion into the new hash map is O(1) on average, so the total time is O(n).
+
+### Space Complexity Analysis
+
+1. **Overall Space Complexity**:
+   - **Space Complexity**: O(n)
+   - **Explanation**: The space used by the hash map is proportional to the number of key-value pairs (`n`) and the size of the underlying array (`size`). Since `size` is resized to maintain a load factor <= 0.7, the space used is O(n).
+
+2. **`_resize()`**:
+   - **Space Complexity**: O(n)
+   - **Explanation**: During resizing, a new array of double the size is created, and all existing key-value pairs are rehashed into it. This temporarily uses O(2 * size) space, but since size is proportional to `n`, this is O(n).
+
+### Summary Table
+
+| Operation       | Average Case Time | Worst Case Time | Space Complexity |
+|-----------------|-------------------|-----------------|------------------|
+| `_get_hash`     | O(1)              | O(1)            | O(1)             |
+| `add`           | O(1)              | O(n)            | O(n)             |
+| `get`           | O(1)              | O(n)            | O(1)             |
+| `delete`        | O(1)              | O(n)            | O(1)             |
+| `_resize`       | O(n)              | O(n)            | O(n)             |
+| **Overall**     | -                 | -               | O(n)             |
+
+### Notes
+
+- The **average case** assumes a good hash function that distributes keys uniformly across buckets, keeping the bucket sizes small.
+- The **worst case** occurs when all keys collide in the same bucket, degrading the performance to that of a linked list (O(n) for search, insert, and delete).
+- The **resizing operation** is triggered when the load factor exceeds 0.7, ensuring that the average case performance remains O(1) by keeping the load factor low. The amortized cost of resizing is O(1) per insertion.
+- The **space complexity** is dominated by the storage of the key-value pairs and the underlying array, which grows linearly with the number of elements.
 
 This optimized implementation is more efficient and scalable, especially for larger datasets.
