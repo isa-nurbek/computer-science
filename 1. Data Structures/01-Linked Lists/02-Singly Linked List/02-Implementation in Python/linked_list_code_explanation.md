@@ -326,6 +326,31 @@ print(ll.stringify_list())  # Output: 5 -> 4 -> 3 -> 2 -> 1
 
 ```
 
+***Output:***
+
+```plaintext
+Original List:
+1 -> 2 -> 3 -> 4 -> 5
+
+Search for 3: True
+Search for 10: False
+
+Middle Node: 3
+
+Reversed List:
+5 -> 4 -> 3 -> 2 -> 1
+
+Cycle Detected: False
+Cycle Detected after introducing cycle: True
+Cycle Start Node: 5
+
+List before removing duplicates:
+5 -> 4 -> 3 -> 3 -> 4 -> 4
+
+List after removing duplicates:
+5 -> 4 -> 3
+```
+
 ---
 
 ## **Understanding the `LinkedList` Class**
