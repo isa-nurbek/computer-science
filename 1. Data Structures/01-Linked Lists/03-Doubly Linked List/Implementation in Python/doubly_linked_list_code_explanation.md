@@ -338,6 +338,38 @@ print(dll.stringify_list())
 # 10
 ```
 
+***Output:***
+
+```plaintext
+Doubly Linked List:
+1
+5
+10
+15
+
+After inserting 7 at position 2:
+1
+5
+7
+10
+15
+
+After removing head:
+5
+7
+10
+15
+
+After removing tail:
+5
+7
+10
+
+After removing value 7:
+5
+10
+```
+
 ---
 
 ## **Big O Analysis:**
