@@ -593,7 +593,8 @@ if __name__ == "__main__":
     - **Worst Case**: If all keys hash to the same bucket (due to poor hash function or high collisions), the time 
     complexity becomes O(n), where `n` is the number of key-value pairs in the bucket.
     
-    - **Resizing**: When the load factor exceeds 0.7, the hash map resizes, which involves rehashing all existing key-value pairs. This operation is O(n), but it happens infrequently (amortized O(1) per insertion).
+    - **Resizing**: When the load factor exceeds 0.7, the hash map resizes, which involves rehashing all existing key-value pairs.
+    This operation is O(n), but it happens infrequently (amortized O(1) per insertion).
 
 - **`get(key)`**:
   - **Average Case**: O(1)
