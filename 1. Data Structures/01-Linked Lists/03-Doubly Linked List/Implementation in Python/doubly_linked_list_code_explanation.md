@@ -27,6 +27,8 @@ class Node:
         return self.value
 ```
 
+### **Purpose**
+
 Each node in a doubly linked list has:
 
 - A **value** to store data.
@@ -35,14 +37,16 @@ Each node in a doubly linked list has:
 
 #### **Methods in `Node` Class**
 
-| Method | Description |
-|--------|------------|
-| `__init__(self, value, next_node=None, prev_node=None)` | Constructor initializes the node with a value, and optional next and previous references. |
-| `set_next_node(self, next_node)` | Sets the next node reference. |
-| `get_next_node(self)` | Returns the next node reference. |
-| `set_prev_node(self, prev_node)` | Sets the previous node reference. |
-| `get_prev_node(self)` | Returns the previous node reference. |
-| `get_value(self)` | Returns the value stored in the node. |
+| Method                                                  | Description                                      |
+|---------------------------------------------------------|--------------------------------------------------|
+| `__init__(self, value, next_node=None, prev_node=None)` | Constructor initializes the node with a value,   |
+|                                                         | and optional next and previous references.       |
+|                                                         |                                                  |
+| `set_next_node(self, next_node)`                        | Sets the next node reference.                    |
+| `get_next_node(self)`                                   | Returns the next node reference.                 |
+| `set_prev_node(self, prev_node)`                        | Sets the previous node reference.                |
+| `get_prev_node(self)`                                   | Returns the previous node reference.             |
+| `get_value(self)`                                       | Returns the value stored in the node.            |
 
 ---
 
