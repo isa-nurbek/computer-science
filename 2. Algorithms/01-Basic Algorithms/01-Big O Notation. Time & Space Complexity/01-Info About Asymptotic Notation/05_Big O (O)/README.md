@@ -152,8 +152,6 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
 - **Lower order terms are ignored** → `O(n² + n) → O(n²)`
 - **Only the dominant term matters** → The fastest-growing term determines complexity.
 
----
-
 ## **Common Big O Complexities**
 
 | Complexity  | Name                  | Example Algorithm     |
@@ -168,7 +166,7 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
 
 ---
 
-## **3. Examples in Python**
+## **Examples in Python**
 
 ### **(a) O(1) - Constant Time**
 
@@ -298,13 +296,11 @@ def fibonacci(n):
 
 Measuring runtime is crucial for analyzing an algorithm's efficiency. This involves both theoretical (Big O notation) and empirical (actual execution time) analysis.
 
----
-
 ### **1. Theoretical Runtime Analysis**
 
 Theoretical runtime is determined by counting the number of operations an algorithm performs as a function of input size `n`.
 
-### **Example: Counting Operations in a Loop**
+**Example: Counting Operations in a Loop:**
 
 ```python
 def count_operations(n):
@@ -317,7 +313,7 @@ def count_operations(n):
 - **Loop runs `n` times** → `O(n)`
 - **Each iteration does `O(1)` work** → Total complexity = **O(n)**
 
-### **Nested Loop Example**
+**Nested Loop Example:**
 
 ```python
 def nested_loops(n):
@@ -339,7 +335,7 @@ def nested_loops(n):
 
 Empirical analysis measures actual execution time using Python tools like `time`, `timeit`, and `cProfile`.
 
-### **Method 1: Using `time` Module**
+#### **Method 1: Using `time` Module**
 
 ```python
 import time
@@ -363,7 +359,7 @@ measure_runtime()
 
 ---
 
-### **Method 2: Using `timeit` Module (More Precise)**
+#### **Method 2: Using `timeit` Module (More Precise)**
 
 The `timeit` module runs the function multiple times to get a reliable average.
 
@@ -385,7 +381,7 @@ print(f"Average Execution Time: {execution_time / 10:.6f} seconds")
 
 ---
 
-### **Method 3: Using `cProfile` for Detailed Profiling**
+#### **Method 3: Using `cProfile` for Detailed Profiling**
 
 For complex programs, use `cProfile` to analyze function calls and execution time.
 
@@ -405,7 +401,7 @@ cProfile.run('profile_test()')
 
 ---
 
-## **3. Counting Runtime for Recursive Functions**
+### **3. Counting Runtime for Recursive Functions**
 
 Recursion can be tricky to analyze. Consider the Fibonacci function:
 
@@ -435,7 +431,7 @@ print(f"Function calls: {count}")
 
 ---
 
-## **Practical Tips for Measuring Runtime**
+### **Practical Tips for Measuring Runtime**
 
 ✅ **Use `timeit` for small code snippets**  
 ✅ **Use `cProfile` for larger programs**  
@@ -450,15 +446,15 @@ Let's measure runtime for various **common asymptotic runtimes** and explain the
 
 Here’s a list of common time complexities we’ll analyze:
 
-| Complexity  | Name                  | Example Algorithm     |
-|------------|----------------------|----------------------|
-| `O(1)`     | Constant Time         | Hash lookup          |
-| `O(log n)` | Logarithmic Time      | Binary search        |
-| `O(n)`     | Linear Time           | Loop iteration       |
-| `O(n log n)` | Linearithmic Time  | Merge Sort           |
-| `O(n²)`    | Quadratic Time        | Nested loops (Bubble Sort) |
-| `O(2^n)`   | Exponential Time      | Recursive Fibonacci  |
-| `O(n!)`    | Factorial Time        | Traveling Salesman Problem |
+| Complexity   | Name                  | Example Algorithm          |
+|--------------|-----------------------|----------------------------|
+| `O(1)`       | Constant Time         | Hash lookup                |
+| `O(log n)`   | Logarithmic Time      | Binary search              |
+| `O(n)`       | Linear Time           | Loop iteration             |
+| `O(n log n)` | Linearithmic Time     | Merge Sort                 |
+| `O(n²)`      | Quadratic Time        | Nested loops (Bubble Sort) |
+| `O(2^n)`     | Exponential Time      | Recursive Fibonacci        |
+| `O(n!)`      | Factorial Time        | Traveling Salesman Problem |
 
 ---
 
@@ -482,7 +478,7 @@ execution_time = timeit.timeit(constant_time_example, number=1000000)
 print(f"O(1) Execution Time: {execution_time:.6f} seconds")
 ```
 
-### **Explanation**
+**Explanation:**
 
 - The function does **one operation**, so it runs in `O(1)`.
 - Runtime does **not depend on input size `n`**.
@@ -511,7 +507,7 @@ execution_time = timeit.timeit(lambda: binary_search(arr, 999999), number=1000)
 print(f"O(log n) Execution Time: {execution_time:.6f} seconds")
 ```
 
-### **Explanation**
+**Explanation:**
 
 - **Divides array in half** each iteration (`log n` steps).
 - Much **faster than `O(n)`** for large `n`.
@@ -534,7 +530,7 @@ execution_time = timeit.timeit(lambda: linear_search(arr, 999999), number=10)
 print(f"O(n) Execution Time: {execution_time:.6f} seconds")
 ```
 
-### **Explanation**
+**Explanation:**
 
 - Worst case: **traverses all `n` elements** before finding `target`.
 - Slower than `O(log n)` for large `n`.
@@ -574,7 +570,7 @@ execution_time = timeit.timeit(lambda: merge_sort(arr), number=1)
 print(f"O(n log n) Execution Time: {execution_time:.6f} seconds")
 ```
 
-### **Explanation**
+**Explanation:**
 
 - **Splits array (`log n`) times**, merging takes `O(n)`.
 - **Total runtime: `O(n log n)`**.
@@ -598,7 +594,7 @@ execution_time = timeit.timeit(lambda: bubble_sort(arr.copy()), number=1)
 print(f"O(n²) Execution Time: {execution_time:.6f} seconds")
 ```
 
-### **Explanation**
+**Explanation:**
 
 - **Nested loops run `O(n²)` times.**
 - Becomes **very slow for large `n`**.
@@ -619,7 +615,7 @@ execution_time = timeit.timeit(lambda: fibonacci(30), number=1)
 print(f"O(2^n) Execution Time: {execution_time:.6f} seconds")
 ```
 
-### **Explanation**
+**Explanation:**
 
 - **Grows exponentially**, doubling calls each step.
 - **Impossible to compute for large `n`**.
@@ -645,14 +641,14 @@ execution_time = timeit.timeit(lambda: traveling_salesman(points), number=1)
 print(f"O(n!) Execution Time: {execution_time:.6f} seconds")
 ```
 
-### **Explanation**
+**Explanation:**
 
 - **Tries all `n!` permutations**.
 - **Extremely slow** for even moderate `n`.
 
 ---
 
-# **3. Summary of Results**
+### **Summary of Results**
 
 | Complexity   | Small `n` Runtime | Large `n` Runtime | Practical?         |
 |--------------|-------------------|-------------------|--------------------|
