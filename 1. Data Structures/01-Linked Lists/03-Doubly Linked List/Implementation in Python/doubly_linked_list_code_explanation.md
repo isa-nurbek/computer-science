@@ -27,7 +27,7 @@ class Node:
         return self.value
 ```
 
-### **Purpose**
+**Purpose:**
 
 Each node in a doubly linked list has:
 
@@ -226,7 +226,7 @@ After removing value 7:
 10
 ```
 
-### **Purpose:**
+**Purpose:**
 
 This class manages the **doubly linked list** structure. It maintains:
 
