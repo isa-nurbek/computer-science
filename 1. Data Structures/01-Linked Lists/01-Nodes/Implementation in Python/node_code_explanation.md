@@ -36,67 +36,26 @@ print(node1.get_link_node().get_value())  # B
 print(node2.get_link_node().get_value())  # C
 ```
 
----
+***Output:***
 
-## Big O Analysis
-
-Let's analyze the time and space complexity of the `Node` class and its methods.
-
-### Time Complexity
-
-1. **`__init__` Method**:
-   - This method initializes a new node with a value and an optional link to the next node.
-   - **Time Complexity**: O(1) - It involves a constant number of operations (assigning values to `self.value` and `self.link_node`).
-
-2. **`get_value` Method**:
-   - This method simply returns the value stored in the node.
-   - **Time Complexity**: O(1) - It involves a single operation (returning `self.value`).
-
-3. **`get_link_node` Method**:
-   - This method returns the next node that this node links to.
-   - **Time Complexity**: O(1) - It involves a single operation (returning `self.link_node`).
-
-4. **`set_link_node` Method**:
-   - This method sets the next node that this node links to.
-   - **Time Complexity**: O(1) - It involves a single operation (assigning `link_node` to `self.link_node`).
-
-### Space Complexity
-
-1. **`__init__` Method**:
-   - This method initializes a new node with a value and an optional link to the next node.
-   - **Space Complexity**: O(1) - It only requires space for the `value` and `link_node` attributes, which are constant.
-
-2. **`get_value` Method**:
-   - This method does not use any additional space beyond what is already allocated for the node.
-   - **Space Complexity**: O(1) - No additional space is required.
-
-3. **`get_link_node` Method**:
-   - This method does not use any additional space beyond what is already allocated for the node.
-   - **Space Complexity**: O(1) - No additional space is required.
-
-4. **`set_link_node` Method**:
-   - This method does not use any additional space beyond what is already allocated for the node.
-   - **Space Complexity**: O(1) - No additional space is required.
-
-### Summary
-
-- **Time Complexity**: All methods in the `Node` class have a time complexity of O(1) because they involve a constant number of operations.
-- **Space Complexity**: All methods in the `Node` class have a space complexity of O(1) because they do not require any additional space beyond what is already allocated for the node.
-
-This makes the `Node` class very efficient for basic operations, which is typical for a simple linked list node implementation.
+```plaintext
+A
+B
+C
+```
 
 ---
 
-### **Code Breakdown**
+## **Code Breakdown**
 
-#### 1. **Node Class**
+### 1. **Node Class**
 
 - The `Node` class represents an individual unit (or "node") in the linked list.
 - Each `Node` has two attributes:
   - `value`: Stores the data for that node.
   - `link_node`: A reference to another node, representing the "link" to the next node in the list. By default, this is set to `None` (i.e., no link).
 
-##### **Methods**
+#### **Methods**
 
 1. `__init__(self, value, link_node=None)`:
 
@@ -195,3 +154,54 @@ The linked list can be visualized as:
 - **`node3`**: `[C] -> None`
 
 The code effectively demonstrates the basic structure and traversal of a singly linked list, which is foundational in data structures.
+
+---
+
+## Big O Analysis
+
+## Time and Space Complexity Analysis
+
+Let's analyze the time and space complexity of the `Node` class and its methods.
+
+### Time Complexity
+
+1. **`__init__` Method**:
+   - This method initializes a new node with a value and an optional link to the next node.
+   - **Time Complexity**: O(1) - It involves a constant number of operations (assigning values to `self.value` and `self.link_node`).
+
+2. **`get_value` Method**:
+   - This method simply returns the value stored in the node.
+   - **Time Complexity**: O(1) - It involves a single operation (returning `self.value`).
+
+3. **`get_link_node` Method**:
+   - This method returns the next node that this node links to.
+   - **Time Complexity**: O(1) - It involves a single operation (returning `self.link_node`).
+
+4. **`set_link_node` Method**:
+   - This method sets the next node that this node links to.
+   - **Time Complexity**: O(1) - It involves a single operation (assigning `link_node` to `self.link_node`).
+
+### Space Complexity
+
+1. **`__init__` Method**:
+   - This method initializes a new node with a value and an optional link to the next node.
+   - **Space Complexity**: O(1) - It only requires space for the `value` and `link_node` attributes, which are constant.
+
+2. **`get_value` Method**:
+   - This method does not use any additional space beyond what is already allocated for the node.
+   - **Space Complexity**: O(1) - No additional space is required.
+
+3. **`get_link_node` Method**:
+   - This method does not use any additional space beyond what is already allocated for the node.
+   - **Space Complexity**: O(1) - No additional space is required.
+
+4. **`set_link_node` Method**:
+   - This method does not use any additional space beyond what is already allocated for the node.
+   - **Space Complexity**: O(1) - No additional space is required.
+
+### Summary
+
+- **Time Complexity**: All methods in the `Node` class have a time complexity of O(1) because they involve a constant number of operations.
+- **Space Complexity**: All methods in the `Node` class have a space complexity of O(1) because they do not require any additional space beyond what is already allocated for the node.
+
+This makes the `Node` class very efficient for basic operations, which is typical for a simple linked list node implementation.
