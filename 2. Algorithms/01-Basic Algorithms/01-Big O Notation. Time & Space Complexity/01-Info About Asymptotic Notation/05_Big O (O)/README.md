@@ -2,7 +2,7 @@
 
 Big O notation is a mathematical concept used in computer science to describe the performance or complexity of an algorithm. Specifically, it characterizes the time complexity (how long an algorithm takes to run) or space complexity (how much memory an algorithm uses) as a function of the input size `n`. Big O notation focuses on the `worst-case` scenario and provides an upper bound on the growth rate of an algorithm.
 
-**Important Point:**
+## Important Point
 
 - **Big O notation** only describes the asymptotic behavior of a function, not its exact value.
 - The **Big O notation** can be used to compare the efficiency of different algorithms or data structures.
@@ -25,7 +25,7 @@ In simpler terms, `f(n)` is `O(g(n))` if `f(n)` grows no faster than `c * g(n) f
 
 Big O notation is a mathematical notation used to describe the worst-case time complexity or efficiency of an algorithm or the worst-case space complexity of a data structure. It provides a way to compare the performance of different algorithms and data structures, and to predict how they will behave as the input size increases.
 
-Big O notation is important for several reasons:
+**Big O notation is important for several reasons:**
 
 - Big O Notation is important because it helps analyze the efficiency of algorithms.
 - It provides a way to describe how the `runtime` or `space requirements` of an algorithm grow as the input size increases.
@@ -39,7 +39,8 @@ Big O notation is important for several reasons:
 
 Below are some important Properties of Big O Notation:
 
-1. **Reflexivity**
+### ***1. Reflexivity***
+
 For any function `f(n)`, `f(n) = O(f(n))`.
 
 Example:
@@ -48,7 +49,7 @@ Example:
 f(n) = n², then f(n) = O(n²).
 ```
 
-2. **Transitivity**
+### ***2. Transitivity***
 
 If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(n) = O(h(n))`.
 
@@ -60,7 +61,7 @@ If f(n) = n², g(n) = n³, and h(n) = n⁴, then f(n) = O(g(n)) and g(n) = O(h(n
 
 Therefore, by transitivity, f(n) = O(h(n)).
 
-1. **Constant Factor**
+### ***3. Constant Factor***
 
 For any constant `c > 0` and functions `f(n)` and `g(n)`, if `f(n) = O(g(n))`, then `cf(n) = O(g(n))`.
 
@@ -70,7 +71,7 @@ Example:
 f(n) = n, g(n) = n². Then f(n) = O(g(n)). Therefore, 2f(n) = O(g(n)).
 ```
 
-4. **Sum Rule**
+### ***4. Sum Rule***
 
 If `f(n) = O(g(n))` and `h(n) = O(g(n))`, then `f(n) + h(n) = O(g(n))`.
 
@@ -80,7 +81,7 @@ Example:
 f(n) = n², g(n) = n³, h(n) = n⁴. Then f(n) = O(g(n)) and h(n) = O(g(n)). Therefore, f(n) + h(n) = O(g(n)).
 ```
 
-5. **Product Rule**
+### ***5. Product Rule***
 
 If `f(n) = O(g(n))` and `h(n) = O(k(n))`, then `f(n) * h(n) = O(g(n) * k(n))`.
 
@@ -90,7 +91,7 @@ Example:
 f(n) = n, g(n) = n², h(n) = n³, k(n) = n⁴. Then f(n) = O(g(n)) and h(n) = O(k(n)). Therefore, f(n) * h(n) = O(g(n) * k(n)) = O(n⁶).
 ```
 
-6. **Composition Rule**
+### ***6. Composition Rule***
 
 If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(g(n)) = O(h(n))`.
 
@@ -102,7 +103,7 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
 
 ---
 
-### **1. How It Works**
+## **How Big O Works**
 
 1. **Identify the input size `n`**:
    - Determine what `n` represents (e.g., the length of a list, the number of nodes in a graph).
@@ -145,7 +146,7 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
 
 ---
 
-#### **Key Rules of Big O**
+## **Key Rules of Big O**
 
 - **Constant factors are ignored** → `O(5n²) → O(n²)`
 - **Lower order terms are ignored** → `O(n² + n) → O(n²)`
@@ -153,7 +154,7 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
 
 ---
 
-### **2. Common Big O Complexities**
+## **Common Big O Complexities**
 
 | Complexity  | Name                  | Example Algorithm     |
 |------------|----------------------|----------------------|
@@ -167,9 +168,9 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
 
 ---
 
-### **3. Examples in Python**
+## **3. Examples in Python**
 
-#### **(a) O(1) - Constant Time**
+### **(a) O(1) - Constant Time**
 
 Regardless of input size, the function executes a fixed number of operations.
 
@@ -182,7 +183,7 @@ def constant_time_example(arr):
 
 ---
 
-#### **(b) O(log n) - Logarithmic Time**
+### **(b) O(log n) - Logarithmic Time**
 
 Efficient algorithms like binary search reduce the problem size by half each step.
 
@@ -204,7 +205,7 @@ def binary_search(arr, target):
 
 ---
 
-#### **(c) O(n) - Linear Time**
+### **(c) O(n) - Linear Time**
 
 A function that iterates through all elements in an array.
 
@@ -220,7 +221,7 @@ def linear_search(arr, target):
 
 ---
 
-#### **(d) O(n log n) - Linearithmic Time**
+### **(d) O(n log n) - Linearithmic Time**
 
 Sorting algorithms like **Merge Sort**.
 
@@ -253,7 +254,7 @@ def merge(left, right):
 
 ---
 
-#### **(e) O(n²) - Quadratic Time**
+### **(e) O(n²) - Quadratic Time**
 
 Nested loops, like **Bubble Sort**.
 
@@ -270,7 +271,7 @@ def bubble_sort(arr):
 
 ---
 
-#### **(f) O(2^n) - Exponential Time**
+### **(f) O(2^n) - Exponential Time**
 
 Recursive Fibonacci.
 
@@ -285,7 +286,7 @@ def fibonacci(n):
 
 ---
 
-### **4. Why Big O Matters**
+## **Why Big O Matters**
 
 - Helps compare algorithms before implementation.
 - Guides optimization efforts.
@@ -299,7 +300,7 @@ Measuring runtime is crucial for analyzing an algorithm's efficiency. This invol
 
 ---
 
-## **1. Theoretical Runtime Analysis**
+### **1. Theoretical Runtime Analysis**
 
 Theoretical runtime is determined by counting the number of operations an algorithm performs as a function of input size `n`.
 
@@ -334,7 +335,7 @@ def nested_loops(n):
 
 ---
 
-## **2. Empirical Runtime Analysis**
+### **2. Empirical Runtime Analysis**
 
 Empirical analysis measures actual execution time using Python tools like `time`, `timeit`, and `cProfile`.
 
@@ -434,7 +435,7 @@ print(f"Function calls: {count}")
 
 ---
 
-## **4. Practical Tips for Measuring Runtime**
+## **Practical Tips for Measuring Runtime**
 
 ✅ **Use `timeit` for small code snippets**  
 ✅ **Use `cProfile` for larger programs**  
@@ -653,15 +654,15 @@ print(f"O(n!) Execution Time: {execution_time:.6f} seconds")
 
 # **3. Summary of Results**
 
-| Complexity  | Small `n` Runtime | Large `n` Runtime | Practical? |
-|------------|----------------|----------------|------------|
-| `O(1)`     | Instant        | Instant        | ✅ Yes     |
-| `O(log n)` | Very fast      | Fast          | ✅ Yes     |
-| `O(n)`     | Fast           | Slower        | ✅ Yes     |
-| `O(n log n)` | Slower     | Still manageable | ✅ Yes     |
-| `O(n²)`    | Manageable     | Very slow     | ⚠️ Use cautiously |
-| `O(2^n)`   | Slow           | Impractical   | ❌ No     |
-| `O(n!)`    | Very slow      | Impossible    | ❌ No     |
+| Complexity   | Small `n` Runtime | Large `n` Runtime | Practical?         |
+|--------------|-------------------|-------------------|--------------------|
+| `O(1)`       | Instant           | Instant           | ✅ Yes             |
+| `O(log n)`   | Very fast         | Fast              | ✅ Yes             |
+| `O(n)`       | Fast              | Slower            | ✅ Yes             |
+| `O(n log n)` | Slower            | Still manageable  | ✅ Yes             |
+| `O(n²)`      | Manageable        | Very slow         | ⚠️ Use cautiously  |
+| `O(2^n)`     | Slow              | Impractical       | ❌ No              |
+| `O(n!)`      | Very slow         | Impossible        | ❌ No              |
 
 ### **Key Takeaways**
 
