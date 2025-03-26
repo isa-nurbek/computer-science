@@ -861,15 +861,11 @@ List after removing duplicates:
 
 Let's analyze the time and space complexity of each method in the `LinkedList` class.
 
----
-
 #### 1. **`__init__`**
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
 - Explanation: Initializing the `head_node` is a constant-time operation.
-
----
 
 #### 2. **`get_head_node`**
 
@@ -877,15 +873,11 @@ Let's analyze the time and space complexity of each method in the `LinkedList` c
 - **Space Complexity**: O(1)
 - Explanation: Simply returns the `head_node`, which is a constant-time operation.
 
----
-
 #### 3. **`insert_beginning`**
 
 - **Time Complexity**: O(1)
 - **Space Complexity**: O(1)
 - Explanation: Inserting a new node at the beginning involves creating a new node and updating the `head_node`, which is a constant-time operation.
-
----
 
 #### 4. **`insert_end`**
 
@@ -893,15 +885,11 @@ Let's analyze the time and space complexity of each method in the `LinkedList` c
 - **Space Complexity**: O(1)
 - Explanation: In the worst case, you need to traverse the entire list to find the last node, which takes O(n) time. The space complexity is constant because only a fixed number of variables are used.
 
----
-
 #### 5. **`remove_node`**
 
 - **Time Complexity**: O(n)
 - **Space Complexity**: O(1)
 - Explanation: In the worst case, you need to traverse the entire list to find the node to remove, which takes O(n) time. The space complexity is constant because no additional data structures are used.
-
----
 
 #### 6. **`stringify_list`**
 
@@ -909,15 +897,11 @@ Let's analyze the time and space complexity of each method in the `LinkedList` c
 - **Space Complexity**: O(n)
 - Explanation: You need to traverse the entire list to build the string representation, which takes O(n) time. The space complexity is O(n) because the string grows linearly with the number of nodes.
 
----
-
 #### 7. **`search`**
 
 - **Time Complexity**: O(n)
 - **Space Complexity**: O(1)
 - Explanation: In the worst case, you need to traverse the entire list to find the value, which takes O(n) time. The space complexity is constant because no additional data structures are used.
-
----
 
 #### 8. **`reverse`**
 
@@ -925,15 +909,11 @@ Let's analyze the time and space complexity of each method in the `LinkedList` c
 - **Space Complexity**: O(1)
 - Explanation: Reversing the list requires traversing the entire list once, which takes O(n) time. The space complexity is constant because only a fixed number of variables are used.
 
----
-
 #### 9. **`find_middle`**
 
 - **Time Complexity**: O(n)
 - **Space Complexity**: O(1)
 - Explanation: The "two-pointer" technique (slow and fast pointers) traverses the list in O(n) time. The space complexity is constant because only two pointers are used.
-
----
 
 #### 10. **`has_cycle`**
 
@@ -941,15 +921,11 @@ Let's analyze the time and space complexity of each method in the `LinkedList` c
 - **Space Complexity**: O(1)
 - Explanation: The "two-pointer" technique (slow and fast pointers) traverses the list in O(n) time. The space complexity is constant because only two pointers are used.
 
----
-
 #### 11. **`find_cycle_start`**
 
 - **Time Complexity**: O(n)
 - **Space Complexity**: O(1)
 - Explanation: Detecting the cycle and finding its start involves traversing the list with two pointers, which takes O(n) time. The space complexity is constant because only a fixed number of variables are used.
-
----
 
 #### 12. **`remove_duplicates`**
 
