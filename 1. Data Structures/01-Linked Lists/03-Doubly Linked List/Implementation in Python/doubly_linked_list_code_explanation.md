@@ -173,7 +173,7 @@ class DoublyLinkedList:
         return string_list
 ```
 
-## **Example Walkthrough**
+### **Example Walkthrough**
 
 ```python
 dll = DoublyLinkedList()
@@ -226,7 +226,7 @@ After removing value 7:
 10
 ```
 
-### **Purpose**
+### **Purpose:**
 
 This class manages the **doubly linked list** structure. It maintains:
 
@@ -235,16 +235,16 @@ This class manages the **doubly linked list** structure. It maintains:
 
 ### **Methods in `DoublyLinkedList` Class**
 
-| Method | Description |
-|--------|------------|
-| `__init__(self)` | Initializes an empty doubly linked list. |
-| `add_to_head(self, new_value)` | Adds a new node at the head (beginning) of the list. |
-| `add_to_tail(self, new_value)` | Adds a new node at the tail (end) of the list. |
-| `insert(self, pos, new_value)` | Inserts a node at a specified position in the list. |
-| `remove_head(self)` | Removes the head node and returns its value. |
-| `remove_tail(self)` | Removes the tail node and returns its value. |
-| `remove_by_value(self, value_to_remove)` | Removes a node containing a specific value. |
-| `stringify_list(self)` | Converts the list into a string format for easy printing. |
+| Method                                    | Description                                                |
+|-------------------------------------------|------------------------------------------------------------|
+| `__init__(self)`                          | Initializes an empty doubly linked list.                   |
+| `add_to_head(self, new_value)`            | Adds a new node at the head (beginning) of the list.       |
+| `add_to_tail(self, new_value)`            | Adds a new node at the tail (end) of the list.             |
+| `insert(self, pos, new_value)`            | Inserts a node at a specified position in the list.        |
+| `remove_head(self)`                       | Removes the head node and returns its value.               |
+| `remove_tail(self)`                       | Removes the tail node and returns its value.               |
+| `remove_by_value(self, value_to_remove)`  | Removes a node containing a specific value.                |
+| `stringify_list(self)`                    | Converts the list into a string format for easy printing.  |
 
 ---
 
