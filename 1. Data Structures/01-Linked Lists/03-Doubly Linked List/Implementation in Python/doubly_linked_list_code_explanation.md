@@ -35,18 +35,16 @@ Each node in a doubly linked list has:
 - A **pointer to the next node** (`next_node`).
 - A **pointer to the previous node** (`prev_node`).
 
-#### **Methods in `Node` Class**
+### **Methods in `Node` Class**
 
-| Method                                                  | Description                                      |
-|---------------------------------------------------------|--------------------------------------------------|
-| `init(self, value, next_node=None,                      | Constructor initializes the node with a value,   |
-|  prev_node=None)`                                       | and optional next and previous references.       |
-
-| `set_next_node(self, next_node)`                        | Sets the next node reference.                    |
-| `get_next_node(self)`                                   | Returns the next node reference.                 |
-| `set_prev_node(self, prev_node)`                        | Sets the previous node reference.                |
-| `get_prev_node(self)`                                   | Returns the previous node reference.             |
-| `get_value(self)`                                       | Returns the value stored in the node.            |
+| Method                                           | Description                                      |
+|--------------------------------------------------|--------------------------------------------------|
+| `init(self, value, next_node=None, prev_node=None)` | Constructor initializes the node with a value, and optional next and previous references. |
+| `set_next_node(self, next_node)`                 | Sets the next node reference.                    |
+| `get_next_node(self)`                            | Returns the next node reference.                 |
+| `set_prev_node(self, prev_node)`                 | Sets the previous node reference.                |
+| `get_prev_node(self)`                            | Returns the previous node reference.             |
+| `get_value(self)`                                | Returns the value stored in the node.            |
 
 ---
 
