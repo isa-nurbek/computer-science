@@ -618,8 +618,6 @@ def remove_duplicates(self):
 
 Let's go step by step and explain how the **example usage** of the `LinkedList` class works.  
 
----
-
 ### **Step 1: Creating a Linked List**  
 
 ```python
@@ -627,8 +625,6 @@ ll = LinkedList()
 ```
 
 This initializes an **empty linked list** (`ll`). Initially, the `head_node` is set to `None`, meaning the list has no elements.  
-
----
 
 ### **Step 2: Inserting Elements at the End**  
 
@@ -650,8 +646,6 @@ ll.insert_end(5)
 1 -> 2 -> 3 -> 4 -> 5
 ```
 
----
-
 ### **Step 3: Printing the List**
 
 ```python
@@ -666,8 +660,6 @@ print(ll.stringify_list())  # Output: 1 -> 2 -> 3 -> 4 -> 5
   Original List:
   1 -> 2 -> 3 -> 4 -> 5
   ```
-
----
 
 ### **Step 4: Searching for Elements**
 
@@ -686,8 +678,6 @@ Search for 3: True
 Search for 10: False
 ```
 
----
-
 ### **Step 5: Finding the Middle Node**
 
 ```python
@@ -704,8 +694,6 @@ Output:
 ```plaintext
 Middle Node: 3
 ```
-
----
 
 ### **Step 6: Reversing the Linked List**
 
@@ -731,8 +719,6 @@ Reversed List:
 5 -> 4 -> 3 -> 2 -> 1
 ```
 
----
-
 ### **Step 7: Checking for a Cycle**
 
 ```python
@@ -748,8 +734,6 @@ Output:
 ```plaintext
 Cycle Detected: False
 ```
-
----
 
 ### **Step 8: Manually Creating a Cycle**
 
@@ -785,8 +769,6 @@ Cycle Detected after introducing cycle: True
 Cycle Start Node: 1
 ```
 
----
-
 ### **Step 11: Removing the Cycle**
 
 ```python
@@ -794,8 +776,6 @@ ll.get_head_node().get_next_node().get_next_node().set_next_node(None)
 ```
 
 - Removes the cycle by setting `3.next = None`, breaking the loop.
-
----
 
 ### **Step 12: Adding Duplicates to the List**
 
@@ -826,8 +806,6 @@ Output:
 List before removing duplicates:
 5 -> 4 -> 3 -> 2 -> 1 -> 3 -> 4 -> 4
 ```
-
----
 
 ### **Step 13: Removing Duplicates**
 
