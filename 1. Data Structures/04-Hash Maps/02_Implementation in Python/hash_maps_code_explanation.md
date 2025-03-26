@@ -2,8 +2,6 @@
 
 The provided code defines a simple implementation of a **hash map** (also known as a hash table) in Python. A hash map is a data structure that stores key-value pairs and allows for efficient insertion, retrieval, and deletion of these pairs. Below is a detailed explanation of how the code works:
 
----
-
 ## **`HashMap` Class**
 
 ```python
@@ -69,37 +67,101 @@ class HashMap:
         String representation of the hash map showing the contents of each bucket.
         """
         return "\n".join([f"{i}: {bucket}" for i, bucket in enumerate(self.map)])
-
-
-# Example usage
-if __name__ == "__main__":
-    h = HashMap()
-    h.add("key1", "value1")
-    h.add("key2", "value2")
-    h.add("key3", "value3")
-
-    print("Initial hash map:")
-    print(h)  # Print the hash map
-
-    print("\nRetrieving values:")
-    print("Getting key1:", h.get("key1"))  # Get value for key1
-    print("Getting key2:", h.get("key2"))  # Get value for key2
-
-    h.delete("key2")  # Delete key2
-    print("\nAfter deleting key2:")
-    print(h)
-
-    print("\nTrying to retrieve deleted key2:")
-    print("Getting key2:", h.get("key2"))  # Should return None
 ```
 
-## **1. Class Definition: `HashMap`**
+## Example usage
 
-The `HashMap` class is the core of the implementation. It uses **chaining** to handle collisions, meaning that each bucket in the hash map can store multiple key-value pairs in a list.
+```plaintext
+h = HashMap()
+h.add("key1", "value1")
+h.add("key2", "value2")
+h.add("key3", "value3")
+
+print("Initial hash map:")
+print(h)  # Print the hash map
+
+print("\nRetrieving values:")
+print("Getting key1:", h.get("key1"))  # Get value for key1
+print("Getting key2:", h.get("key2"))  # Get value for key2
+
+h.delete("key2")  # Delete key2
+print("\nAfter deleting key2:")
+print(h)
+
+print("\nTrying to retrieve deleted key2:")
+print("Getting key2:", h.get("key2"))  # Should return None
+```
+
+**Output:**
+
+```plaintext
+Initial hash map:
+0: [['key3', 'value3']]
+1: []
+2: []
+3: []
+4: []
+5: []
+6: []
+7: []
+8: [['key1', 'value1']]
+9: [['key2', 'value2']]
+
+Retrieving values:
+Getting key1: value1
+Getting key2: value2
+
+After deleting key2:
+0: [['key3', 'value3']]
+1: []
+2: []
+3: []
+4: []
+5: []
+6: []
+7: []
+8: [['key1', 'value1']]
+9: []
+
+Trying to retrieve deleted key2:
+Getting key2: None
+```
+
+- **What happens**:
+  1. A `HashMap` object `h` is created.
+  2. Three key-value pairs are added to the hash map.
+  3. The hash map is printed to show its contents.
+  4. Values for `key1` and `key2` are retrieved and printed.
+  5. `key2` is deleted from the hash map.
+  6. The hash map is printed again to show the updated state.
+  7. An attempt to retrieve `key2` after deletion returns `None`.
 
 ---
 
-### **2. Constructor: `__init__`**
+## **How It Works in Detail**
+
+1. **Hashing**:
+   - The hash function converts a key into an index within the range of the hash map's size.
+   - For example, `key1` might hash to index `3`, so it is stored in the bucket at index `3`.
+
+2. **Collision Handling**:
+   - If two keys hash to the same index (collision), they are stored in the same bucket as a list of key-value pairs.
+   - For example, if `key1` and `key4` both hash to index `3`, the bucket at index `3` will contain `[[key1, value1], [key4, value4]]`.
+
+3. **Operations**:
+   - **Insert/Update**: The hash map checks if the key already exists in the bucket. If it does, the value is updated. Otherwise, the new key-value pair is appended to the bucket.
+   - **Retrieve**: The hash map searches the bucket for the key and returns the associated value if found.
+   - **Delete**: The hash map searches the bucket for the key and removes the key-value pair if found.
+
+---
+
+## **Class Definition: `HashMap`**
+
+The `HashMap` class is the core of the implementation. It uses **chaining** to handle collisions, meaning that each bucket in the hash map can store multiple key-value pairs in a list.
+
+## **`HashMap` Methods**
+
+### **1. Constructor: `__init__`**
 
 ```python
 def __init__(self, size=10):
@@ -114,7 +176,7 @@ def __init__(self, size=10):
 
 ---
 
-### **3. Hash Function: `_get_hash`**
+### **2. Hash Function: `_get_hash`**
 
 ```python
 def _get_hash(self, key):
@@ -129,7 +191,7 @@ def _get_hash(self, key):
 
 ---
 
-### **4. Insert/Update: `add`**
+### **3. Insert/Update: `add`**
 
 ```python
 def add(self, key, value):
@@ -154,7 +216,7 @@ def add(self, key, value):
 
 ---
 
-### **5. Retrieve: `get`**
+### **4. Retrieve: `get`**
 
 ```python
 def get(self, key):
@@ -174,7 +236,7 @@ def get(self, key):
 
 ---
 
-### **6. Delete: `delete`**
+### **5. Delete: `delete`**
 
 ```python
 def delete(self, key):
@@ -195,7 +257,7 @@ def delete(self, key):
 
 ---
 
-### **7. String Representation: `__str__`**
+### **6. String Representation: `__str__`**
 
 ```python
 def __str__(self):
@@ -206,97 +268,6 @@ def __str__(self):
 - **How it works**:
   - Iterates through each bucket in `self.map` and formats it as `index: [key-value pairs]`.
   - Joins the formatted strings with newline characters for readability.
-
----
-
-### **8. Example Usage**
-
-```python
-if __name__ == "__main__":
-    h = HashMap()
-    h.add("key1", "value1")
-    h.add("key2", "value2")
-    h.add("key3", "value3")
-
-    print("Initial hash map:")
-    print(h)
-
-    print("\nRetrieving values:")
-    print("Getting key1:", h.get("key1"))
-    print("Getting key2:", h.get("key2"))
-
-    h.delete("key2")
-    print("\nAfter deleting key2:")
-    print(h)
-
-    print("\nTrying to retrieve deleted key2:")
-    print("Getting key2:", h.get("key2"))
-```
-
-- **What happens**:
-  1. A `HashMap` object `h` is created.
-  2. Three key-value pairs are added to the hash map.
-  3. The hash map is printed to show its contents.
-  4. Values for `key1` and `key2` are retrieved and printed.
-  5. `key2` is deleted from the hash map.
-  6. The hash map is printed again to show the updated state.
-  7. An attempt to retrieve `key2` after deletion returns `None`.
-
----
-
-### **How It Works in Detail**
-
-1. **Hashing**:
-   - The hash function converts a key into an index within the range of the hash map's size.
-   - For example, `key1` might hash to index `3`, so it is stored in the bucket at index `3`.
-
-2. **Collision Handling**:
-   - If two keys hash to the same index (collision), they are stored in the same bucket as a list of key-value pairs.
-   - For example, if `key1` and `key4` both hash to index `3`, the bucket at index `3` will contain `[[key1, value1], [key4, value4]]`.
-
-3. **Operations**:
-   - **Insert/Update**: The hash map checks if the key already exists in the bucket. If it does, the value is updated. Otherwise, the new key-value pair is appended to the bucket.
-   - **Retrieve**: The hash map searches the bucket for the key and returns the associated value if found.
-   - **Delete**: The hash map searches the bucket for the key and removes the key-value pair if found.
-
----
-
-### **Output Example**
-
-For the provided example usage, the output might look like this:
-
-```text
-Initial hash map:
-0: []
-1: []
-2: []
-3: [['key1', 'value1']]
-4: [['key2', 'value2']]
-5: [['key3', 'value3']]
-6: []
-7: []
-8: []
-9: []
-
-Retrieving values:
-Getting key1: value1
-Getting key2: value2
-
-After deleting key2:
-0: []
-1: []
-2: []
-3: [['key1', 'value1']]
-4: []
-5: [['key3', 'value3']]
-6: []
-7: []
-8: []
-9: []
-
-Trying to retrieve deleted key2:
-Getting key2: None
-```
 
 ---
 
@@ -362,7 +333,7 @@ This implementation is a basic demonstration of how hash maps work and can be ex
 
 ---
 
-### Optimized Version
+## **Optimized Version**
 
 To optimize the `HashMap` implementation, we can focus on the following improvements:
 
@@ -385,7 +356,7 @@ To optimize the `HashMap` implementation, we can focus on the following improvem
 
 ---
 
-### **Optimized Implementation**
+### **Optimized HashMap Implementation**
 
 Here’s the optimized version of the `HashMap`:
 
