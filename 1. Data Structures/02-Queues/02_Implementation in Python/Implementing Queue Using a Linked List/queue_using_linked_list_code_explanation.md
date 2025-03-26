@@ -98,10 +98,12 @@ print("Peek:", queue.peek())  # Output: Peek: 20
 
 **Output:**
 
+```plaintext
 Queue: 10 -> 20 -> 30
 Dequeue: 10
 Queue after dequeue: 20 -> 30
 Peek: 20
+```
 
 - **Step-by-Step Execution:**
   1. Create an empty queue.
