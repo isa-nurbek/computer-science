@@ -2,8 +2,6 @@
 
 The provided code defines a simple **Queue** data structure using a **singly linked list**. Below is a detailed explanation of how the code works, broken down into its components:
 
----
-
 ## 1. **Node Class**
 
 ```python
@@ -12,6 +10,8 @@ class Node:
         self.data = data
         self.next = None
 ```
+
+***Purpose:***
 
 - The `Node` class represents a single node in the linked list.
 - Each node has two attributes:
@@ -79,12 +79,50 @@ class Queue:
         return " -> ".join(queue_str)  # Format as a string
 ```
 
+## **Example Usage**
+
+```python
+queue = Queue()
+queue.enqueue(10)
+queue.enqueue(20)
+queue.enqueue(30)
+
+print("Queue:", queue)  # Output: Queue: 10 -> 20 -> 30
+
+print("Dequeue:", queue.dequeue())  # Output: Dequeue: 10
+
+print("Queue after dequeue:", queue)  # Output: Queue after dequeue: 20 -> 30
+
+print("Peek:", queue.peek())  # Output: Peek: 20
+```
+
+**Output:**
+
+Queue: 10 -> 20 -> 30
+Dequeue: 10
+Queue after dequeue: 20 -> 30
+Peek: 20
+
+- **Step-by-Step Execution:**
+  1. Create an empty queue.
+  2. Enqueue `10`, `20`, and `30` into the queue. The queue now looks like: `10 -> 20 -> 30`.
+  3. Print the queue: `Queue: 10 -> 20 -> 30`.
+  4. Dequeue the front element (`10`). The queue now looks like: `20 -> 30`.
+  5. Print the queue after dequeue: `Queue after dequeue: 20 -> 30`.
+  6. Peek at the front element (`20`) without removing it.
+
+---
+
+***Purpose:***
+
 The `Queue` class implements the queue data structure using the `Node` class. A queue follows the **First-In-First-Out (FIFO)** principle, meaning the first element added is the first one to be removed.
 
 ### Attributes
 
 - `front`: A pointer to the first node in the queue (the node to be dequeued next).
 - `rear`: A pointer to the last node in the queue (the node most recently enqueued).
+
+---
 
 ### Methods
 
@@ -98,8 +136,6 @@ def __init__(self):
 
 - Initializes an empty queue by setting both `front` and `rear` to `None`.
 
----
-
 #### b. **`is_empty`**
 
 ```python
@@ -109,8 +145,6 @@ def is_empty(self):
 
 - Checks if the queue is empty by verifying if `front` is `None`.
 - Returns `True` if the queue is empty, otherwise `False`.
-
----
 
 #### c. **`enqueue`**
 
@@ -131,8 +165,6 @@ def enqueue(self, data):
   3. If the queue is not empty:
      - Link the current `rear` node's `next` pointer to the new node.
      - Update `rear` to point to the new node.
-
----
 
 #### d. **`dequeue`**
 
@@ -155,8 +187,6 @@ def dequeue(self):
   4. If the queue becomes empty after dequeueing (`front` is `None`), set `rear` to `None`.
   5. Return the `data` of the dequeued node.
 
----
-
 #### e. **`peek`**
 
 ```python
@@ -168,8 +198,6 @@ def peek(self):
 
 - Returns the `data` of the node at the front of the queue without removing it.
 - If the queue is empty, raises an `IndexError`.
-
----
 
 #### f. **`__str__`**
 
@@ -193,34 +221,7 @@ def __str__(self):
 
 ---
 
-## 3. **Example Usage**
-
-```python
-queue = Queue()
-queue.enqueue(10)
-queue.enqueue(20)
-queue.enqueue(30)
-
-print("Queue:", queue)  # Output: Queue: 10 -> 20 -> 30
-
-print("Dequeue:", queue.dequeue())  # Output: Dequeue: 10
-
-print("Queue after dequeue:", queue)  # Output: Queue after dequeue: 20 -> 30
-
-print("Peek:", queue.peek())  # Output: Peek: 20
-```
-
-- **Step-by-Step Execution:**
-  1. Create an empty queue.
-  2. Enqueue `10`, `20`, and `30` into the queue. The queue now looks like: `10 -> 20 -> 30`.
-  3. Print the queue: `Queue: 10 -> 20 -> 30`.
-  4. Dequeue the front element (`10`). The queue now looks like: `20 -> 30`.
-  5. Print the queue after dequeue: `Queue after dequeue: 20 -> 30`.
-  6. Peek at the front element (`20`) without removing it.
-
----
-
-## 4. **Key Points**
+## **Key Points**
 
 - The queue is implemented using a singly linked list, where `front` points to the first node and `rear` points to the last node.
 - Enqueueing adds a node to the `rear`, and dequeueing removes a node from the `front`.
@@ -256,6 +257,8 @@ This implementation is efficient and adheres to the FIFO principle of a queue.
 5. **`__str__()`**:
    - **Time Complexity**: O(n)
    - **Explanation**: This method traverses the entire queue to collect the data values of all nodes, where `n` is the number of elements in the queue. Therefore, the time complexity is linear with respect to the number of elements.
+
+---
 
 #### Space Complexity
 
