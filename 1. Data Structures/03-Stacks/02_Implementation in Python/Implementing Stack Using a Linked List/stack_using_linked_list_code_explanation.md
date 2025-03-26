@@ -11,6 +11,8 @@ class Node:
         self.next = None
 ```
 
+**Purpose:**
+
 The `Node` class is a basic building block for the stack. It has two attributes:
 
 - `data`: This holds the value of the node.
@@ -18,7 +20,7 @@ The `Node` class is a basic building block for the stack. It has two attributes:
 
 ---
 
-### 2. **Stack Class**
+## 2. **Stack Class**
 
 ```python
 class Stack:
@@ -61,11 +63,78 @@ class Stack:
         return stack_str[:-4]  # Remove the last " -> " for cleaner output
 ```
 
-The `Stack` class implements the stack data structure using a linked list. It has the following methods:
+## **Example Usage**
+
+Let's go through the example usage step by step:
+
+```python
+stack = Stack()
+stack.push(10)
+stack.push(20)
+stack.push(30)
+
+print(stack)  # Output: 30 -> 20 -> 10
+
+print("Popped:", stack.pop())  # Output: Popped: 30
+print(stack)  # Output: 20 -> 10
+
+print("Top element:", stack.peek())  # Output: Top element: 20
+
+stack.push(40)
+print(stack)  # Output: 40 -> 20 -> 10
+```
+
+**Output:**
+
+```plaintext
+30 -> 20 -> 10
+Popped: 30
+20 -> 10
+Top element: 20
+40 -> 20 -> 10
+```
+
+### **Step-by-Step Execution**
+
+1. **Initialization**
+   - `stack = Stack()` creates an empty stack with `top` pointing to `None`.
+
+2. **Push 10**
+   - `stack.push(10)` adds a node with `data = 10` to the stack.
+   - The stack now looks like: `10 -> None`
+
+3. **Push 20**
+   - `stack.push(20)` adds a node with `data = 20` to the stack.
+   - The stack now looks like: `20 -> 10 -> None`
+
+4. **Push 30**
+   - `stack.push(30)` adds a node with `data = 30` to the stack.
+   - The stack now looks like: `30 -> 20 -> 10 -> None`
+
+5. **Print Stack**
+   - `print(stack)` outputs: `30 -> 20 -> 10`
+
+6. **Pop**
+   - `stack.pop()` removes the top node (`30`) and returns it.
+   - The stack now looks like: `20 -> 10 -> None`
+   - `print(stack)` outputs: `20 -> 10`
+
+7. **Peek**
+   - `stack.peek()` returns the top element (`20`) without removing it.
+   - `print("Top element:", stack.peek())` outputs: `Top element: 20`
+
+8. **Push 40**
+   - `stack.push(40)` adds a node with `data = 40` to the stack.
+   - The stack now looks like: `40 -> 20 -> 10 -> None`
+   - `print(stack)` outputs: `40 -> 20 -> 10`
 
 ---
 
-#### **Attributes**
+**Purpose:**
+
+The `Stack` class implements the stack data structure using a linked list. It has the following methods:
+
+### **Attributes**
 
 ```python
 class Stack:
@@ -77,7 +146,7 @@ class Stack:
 
 ---
 
-#### **Methods**
+### **Methods**
 
 ```python
 def is_empty(self):
@@ -155,61 +224,6 @@ def __str__(self):
    - The last " -> " is removed before returning the string.
 
 ---
-
-### 3. **Example Usage**
-
-Let's go through the example usage step by step:
-
-```python
-stack = Stack()
-stack.push(10)
-stack.push(20)
-stack.push(30)
-
-print(stack)  # Output: 30 -> 20 -> 10
-
-print("Popped:", stack.pop())  # Output: Popped: 30
-print(stack)  # Output: 20 -> 10
-
-print("Top element:", stack.peek())  # Output: Top element: 20
-
-stack.push(40)
-print(stack)  # Output: 40 -> 20 -> 10
-```
-
-#### **Step-by-Step Execution**
-
-1. **Initialization**
-   - `stack = Stack()` creates an empty stack with `top` pointing to `None`.
-
-2. **Push 10**
-   - `stack.push(10)` adds a node with `data = 10` to the stack.
-   - The stack now looks like: `10 -> None`
-
-3. **Push 20**
-   - `stack.push(20)` adds a node with `data = 20` to the stack.
-   - The stack now looks like: `20 -> 10 -> None`
-
-4. **Push 30**
-   - `stack.push(30)` adds a node with `data = 30` to the stack.
-   - The stack now looks like: `30 -> 20 -> 10 -> None`
-
-5. **Print Stack**
-   - `print(stack)` outputs: `30 -> 20 -> 10`
-
-6. **Pop**
-   - `stack.pop()` removes the top node (`30`) and returns it.
-   - The stack now looks like: `20 -> 10 -> None`
-   - `print(stack)` outputs: `20 -> 10`
-
-7. **Peek**
-   - `stack.peek()` returns the top element (`20`) without removing it.
-   - `print("Top element:", stack.peek())` outputs: `Top element: 20`
-
-8. **Push 40**
-   - `stack.push(40)` adds a node with `data = 40` to the stack.
-   - The stack now looks like: `40 -> 20 -> 10 -> None`
-   - `print(stack)` outputs: `40 -> 20 -> 10`
 
 ### 4. **Summary**
 
