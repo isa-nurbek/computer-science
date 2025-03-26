@@ -4,9 +4,7 @@
 
 A **stack** is a fundamental data structure that follows the **Last-In-First-Out (LIFO)** principle. This means that the last element added to the stack is the first one to be removed. The `Stack` class provided here is a simple implementation of this concept using a Python list.
 
----
-
-### Key Components of the `Stack` Class
+## `Stack` Class
 
 ```python
 class Stack:
@@ -42,6 +40,48 @@ class Stack:
         # Return a string representation of the stack
         return str(self.items)
 ```
+
+### Example Usage
+
+```python
+if __name__ == "__main__":
+    stack = Stack()
+
+    # Push elements onto the stack
+    stack.push(10)
+    stack.push(20)
+    stack.push(30)
+
+    print("Stack after pushes:", stack)  # Output: [10, 20, 30]
+
+    # Pop an element from the stack
+    print("Popped:", stack.pop())  # Output: 30
+    print("Stack after pop:", stack)  # Output: [10, 20]
+
+    # Peek at the top element
+    print("Top element:", stack.peek())  # Output: 20
+
+    # Check if the stack is empty
+    print("Is stack empty?", stack.is_empty())  # Output: False
+
+    # Get the size of the stack
+    print("Stack size:", stack.size())  # Output: 2
+```
+
+**Output:**
+
+```plaintext
+Stack after pushes: [10, 20, 30]
+Popped: 30
+Stack after pop: [10, 20]
+Top element: 20
+Is stack empty? False
+Stack size: 2
+```
+
+---
+
+### **Stack Methods**
 
 1. **`__init__` Method (Constructor):**
 
@@ -181,35 +221,6 @@ class Stack:
      ```python
      print(stack)  # Output: [10, 20]
      ```
-
----
-
-### Example Usage
-
-```python
-if __name__ == "__main__":
-    stack = Stack()
-
-    # Push elements onto the stack
-    stack.push(10)
-    stack.push(20)
-    stack.push(30)
-
-    print("Stack after pushes:", stack)  # Output: [10, 20, 30]
-
-    # Pop an element from the stack
-    print("Popped:", stack.pop())  # Output: 30
-    print("Stack after pop:", stack)  # Output: [10, 20]
-
-    # Peek at the top element
-    print("Top element:", stack.peek())  # Output: 20
-
-    # Check if the stack is empty
-    print("Is stack empty?", stack.is_empty())  # Output: False
-
-    # Get the size of the stack
-    print("Stack size:", stack.size())  # Output: 2
-```
 
 ---
 
