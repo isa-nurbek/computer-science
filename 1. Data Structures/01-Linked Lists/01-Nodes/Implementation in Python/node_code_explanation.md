@@ -2,7 +2,7 @@
 
 This code defines a simple **Node** class to create and manipulate a linked list, where each node contains a value and a reference (or link) to the next node in the list. Here's a step-by-step breakdown of the code and how it works:
 
----
+## **Node Class**
 
 ```python
 class Node:
