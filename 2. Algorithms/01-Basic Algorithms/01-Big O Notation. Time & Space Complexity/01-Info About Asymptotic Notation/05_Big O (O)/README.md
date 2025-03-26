@@ -103,6 +103,19 @@ f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Theref
 
 ---
 
+## 📚 Core Properties (Cheat Sheet)
+
+| Property        | Mathematical Form           | Example                          | Algorithm Use Case              |
+|-----------------|----------------------------|----------------------------------|----------------------------------|
+| **Reflexivity** | `f(n) = O(f(n))`           | `5n² = O(n²)`                   | A single loop is O(n)            |
+| **Transitivity**| `f=O(g), g=O(h) ⇒ f=O(h)`  | `n=O(n log n), n log n=O(n²) ⇒ n=O(n²)` | Comparing algorithm families     |
+| **Constant Factor** | `f=O(g) ⇒ c·f=O(g)`    | `999n = O(n)`                   | Ignoring loop unrolling          |
+| **Sum Rule**    | `f=O(g), h=O(g) ⇒ f+h=O(g)`| `n² + n³ = O(n³)`               | Sequential operations            |
+| **Product Rule**| `f=O(g), h=O(k) ⇒ f·h=O(g·k)` | `O(n) · O(log n) = O(n log n)` | Nested loops                     |
+| **Composition** | `f=O(nᵏ) ⇒ f(g(n))=O(g(n)ᵏ)` | `2^(log n) = O(n)`              | Recursive algorithms             |
+
+---
+
 ## **How Big O Works**
 
 1. **Identify the input size `n`**:
