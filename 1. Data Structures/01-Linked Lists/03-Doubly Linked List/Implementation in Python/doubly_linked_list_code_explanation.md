@@ -39,9 +39,8 @@ Each node in a doubly linked list has:
 
 | Method                                                  | Description                                      |
 |---------------------------------------------------------|--------------------------------------------------|
-| `__init__(self, value, next_node=None, prev_node=None)` | Constructor initializes the node with a value,   |
-|                                                         | and optional next and previous references.       |
-|                                                         |                                                  |
+| `init(self, value, next_node=None,                      | Constructor initializes the node with a value,   |
+|  prev_node=None)`                                       | and optional next and previous references.       |
 | `set_next_node(self, next_node)`                        | Sets the next node reference.                    |
 | `get_next_node(self)`                                   | Returns the next node reference.                 |
 | `set_prev_node(self, prev_node)`                        | Sets the previous node reference.                |
