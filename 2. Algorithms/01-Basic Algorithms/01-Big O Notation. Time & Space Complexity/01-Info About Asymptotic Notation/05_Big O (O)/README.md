@@ -662,6 +662,6 @@ print(f"O(n!) Execution Time: {execution_time:.6f} seconds")
 
 ### **Key Takeaways**
 
-1. **O(1), O(log n), O(n), and O(n log n) are practical.**
-2. **O(n²) should be avoided for large `n`.**
-3. **O(2^n) and O(n!) are only feasible for very small inputs.**
+1. **O(1), O(log n), O(n)**, and **O(n log n)** are practical.
+2. **O(n²)** should be avoided for large `n`.
+3. **O(2^n)** and **O(n!)** are only feasible for very small inputs.
