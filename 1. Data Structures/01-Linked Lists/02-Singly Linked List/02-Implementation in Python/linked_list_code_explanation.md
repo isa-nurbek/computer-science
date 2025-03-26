@@ -2,11 +2,7 @@
 
 This code defines two Python classes, `Node` and `LinkedList`, to implement a singly linked list. Let's go through it step by step:
 
----
-
 ## **Node Class**
-
----
 
 ```python
 class Node:
@@ -110,8 +106,6 @@ def __str__(self):
 ---
 
 ## **Linked List Class**
-
----
 
 ```python
 class LinkedList:
