@@ -11,7 +11,7 @@ class Node:
         self.next = None
 ```
 
-***Purpose:***
+**Purpose:**
 
 - The `Node` class represents a single node in the linked list.
 - Each node has two attributes:
@@ -113,7 +113,7 @@ Peek: 20
 
 ---
 
-***Purpose:***
+**Purpose:**
 
 The `Queue` class implements the queue data structure using the `Node` class. A queue follows the **First-In-First-Out (FIFO)** principle, meaning the first element added is the first one to be removed.
 
