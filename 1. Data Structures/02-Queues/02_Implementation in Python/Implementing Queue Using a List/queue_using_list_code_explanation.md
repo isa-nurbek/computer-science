@@ -57,6 +57,47 @@ class Queue:
         return str(self.queue)
 ```
 
+### Example Usage
+
+```python
+if __name__ == "__main__":
+    q = Queue()
+
+    # Enqueue elements
+    q.enqueue(10)
+    q.enqueue(20)
+    q.enqueue(30)
+
+    # Display the queue
+    print("Queue:", q)  # Output: Queue: [10, 20, 30]
+
+    # Dequeue an element
+    print("Dequeue:", q.dequeue())  # Output: Dequeue: 10
+
+    # Peek at the front element
+    print("Peek:", q.peek())  # Output: Peek: 20
+
+    # Check if the queue is empty
+    print("Is empty?", q.is_empty())  # Output: Is empty? False
+
+    # Get the size of the queue
+    print("Size:", q.size())  # Output: Size: 2
+
+    # Display the queue after operations
+    print("Queue after operations:", q)  # Output: Queue after operations: [20, 30]
+```
+
+***Output:***
+
+```plaintext
+Queue: [10, 20, 30]
+Dequeue: 10
+Peek: 20
+Is empty? False
+Size: 2
+Queue after operations: [20, 30]
+```
+
 ---
 
 ### 1. **Initialization (`__init__` method)**
@@ -144,49 +185,6 @@ def __str__(self):
 
 - The `__str__` method provides a string representation of the queue.
 - When the `print` function is called on a `Queue` object, this method is invoked, and it returns the list (`self.queue`) as a string.
-
----
-
-### Example Usage
-
-```python
-if __name__ == "__main__":
-    q = Queue()
-
-    # Enqueue elements
-    q.enqueue(10)
-    q.enqueue(20)
-    q.enqueue(30)
-
-    # Display the queue
-    print("Queue:", q)  # Output: Queue: [10, 20, 30]
-
-    # Dequeue an element
-    print("Dequeue:", q.dequeue())  # Output: Dequeue: 10
-
-    # Peek at the front element
-    print("Peek:", q.peek())  # Output: Peek: 20
-
-    # Check if the queue is empty
-    print("Is empty?", q.is_empty())  # Output: Is empty? False
-
-    # Get the size of the queue
-    print("Size:", q.size())  # Output: Size: 2
-
-    # Display the queue after operations
-    print("Queue after operations:", q)  # Output: Queue after operations: [20, 30]
-```
-
-***Output:***
-
-```plaintext
-Queue: [10, 20, 30]
-Dequeue: 10
-Peek: 20
-Is empty? False
-Size: 2
-Queue after operations: [20, 30]
-```
 
 ---
 
