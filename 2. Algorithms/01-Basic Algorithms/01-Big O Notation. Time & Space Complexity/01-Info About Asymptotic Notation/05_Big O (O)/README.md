@@ -86,20 +86,21 @@ A linear search `O(n)` is trivially `O(n²)`, but this is not tight.
 ## **3. Constant Factor Rule**  
 
 **Statement:**  
-For any constant \( c > 0 \), if \( f(n) = O(g(n)) \), then  
-\[
-c \cdot f(n) = O(g(n))
-\]  
+For any constant `c > 0`, if `f(n) = O(g(n))`, then  
+
+```plaintext
+c · f(n) = O(g(n))
+```
 
 **Explanation:**  
-Constants are ignored in Big O.  
+Constants are ignored in *Big O*.  
 
 **Example:**  
 
-- \( 9999n = O(n) \).  
+- `9999n = O(n)`.  
 
 **Algorithm Example:**  
-A loop with 3 nested passes over \( n \) elements is still \( O(n) \), not \( O(3n) \).  
+A loop with 3 nested passes over `n` elements is still `O(n)`, not `O(3n)`.  
 
 ---
 
