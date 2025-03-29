@@ -65,20 +65,21 @@ A loop that runs exactly `n` times is `O(n)`, trivially bounded by itself.
 ## **2. Transitivity**  
 
 **Statement:**  
-If \( f(n) = O(g(n)) \) and \( g(n) = O(h(n)) \), then  
-\[
+If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then  
+
+```plaintext
 f(n) = O(h(n))
-\]  
+```
 
 **Explanation:**  
 Useful for chaining bounds (e.g., simplifying nested loops).  
 
 **Example:**  
 
-- \( n = O(n \log n) \) and \( n \log n = O(n^2) \) → \( n = O(n^2) \).  
+- `n = O(n log n)` and `n log n = O(n²)` ⇒ `n = O(n²)`.  
 
 **Algorithm Example:**  
-A linear search (\( O(n) \)) is trivially \( O(n^2) \), but this is not tight.  
+A linear search `O(n)` is trivially `O(n²)`, but this is not tight.  
 
 ---
 
