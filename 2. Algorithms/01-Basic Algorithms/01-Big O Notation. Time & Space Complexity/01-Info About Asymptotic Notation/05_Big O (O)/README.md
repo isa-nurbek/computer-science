@@ -107,20 +107,21 @@ A loop with 3 nested passes over `n` elements is still `O(n)`, not `O(3n)`.
 ## **4. Sum Rule**  
 
 **Statement:**  
-If \( f(n) = O(g(n)) \) and \( h(n) = O(g(n)) \), then  
-\[
+If `f(n) = O(g(n))` and `h(n) = O(g(n))`, then  
+
+```plaintext
 f(n) + h(n) = O(g(n))
-\]  
+```
 
 **Explanation:**  
 The dominant term absorbs others.  
 
 **Example:**  
 
-- \( n^2 + n = O(n^2) \).  
+- `n² + n = O(n³)`.  
 
 **Algorithm Example:**  
-Two sequential loops (each \( O(n) \)) combine to \( O(n) \), not \( O(2n) \).  
+Two sequential loops (each `O(n)`) combine to `O(n)`, not `O(2n)`.  
 
 ---
 
