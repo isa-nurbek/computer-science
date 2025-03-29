@@ -55,10 +55,10 @@ A function always bounds itself. This is the simplest case of Big O, where `c = 
 
 **Example:**  
 
-- \( 2n^2 = O(n^2) \) (even with a constant multiplier).  
+- `2n² = O(n²)` (even with a constant multiplier).  
 
 **Algorithm Example:**  
-A loop that runs exactly \( n \) times is \( O(n) \), trivially bounded by itself.  
+A loop that runs exactly `n` times is `O(n)`, trivially bounded by itself.  
 
 ---
 
