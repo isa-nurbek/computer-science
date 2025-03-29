@@ -35,71 +35,162 @@ Big O notation is a mathematical notation used to describe the worst-case time c
 
 ---
 
-## Properties of Big O Notation
+## **Properties of Big O Notation**  
+
+### A guide to asymptotic analysis with practical applications
 
 Below are some important Properties of Big O Notation:
 
-### ***1. Reflexivity***
+## **1. Reflexivity**  
 
-For any function `f(n)`, `f(n) = O(f(n))`.
+**Statement:**  
+For any function `f(n)`:
 
-Example:
-
-```text
-f(n) = n², then f(n) = O(n²).
+```plaintext
+f(n) = O(f(n))
 ```
 
-### ***2. Transitivity***
+**Explanation:**  
+A function always bounds itself. This is the simplest case of Big O, where `c = 1`.  
 
-If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(n) = O(h(n))`.
+**Example:**  
 
-Example:
+- \( 2n^2 = O(n^2) \) (even with a constant multiplier).  
 
-```text
-If f(n) = n², g(n) = n³, and h(n) = n⁴, then f(n) = O(g(n)) and g(n) = O(h(n)).
-```
+**Algorithm Example:**  
+A loop that runs exactly \( n \) times is \( O(n) \), trivially bounded by itself.  
 
-Therefore, by transitivity, f(n) = O(h(n)).
+---
 
-### ***3. Constant Factor***
+## **2. Transitivity**  
 
-For any constant `c > 0` and functions `f(n)` and `g(n)`, if `f(n) = O(g(n))`, then `cf(n) = O(g(n))`.
+**Statement:**  
+If \( f(n) = O(g(n)) \) and \( g(n) = O(h(n)) \), then  
+\[
+f(n) = O(h(n))
+\]  
 
-Example:
+**Explanation:**  
+Useful for chaining bounds (e.g., simplifying nested loops).  
 
-```text
-f(n) = n, g(n) = n². Then f(n) = O(g(n)). Therefore, 2f(n) = O(g(n)).
-```
+**Example:**  
 
-### ***4. Sum Rule***
+- \( n = O(n \log n) \) and \( n \log n = O(n^2) \) → \( n = O(n^2) \).  
 
-If `f(n) = O(g(n))` and `h(n) = O(g(n))`, then `f(n) + h(n) = O(g(n))`.
+**Algorithm Example:**  
+A linear search (\( O(n) \)) is trivially \( O(n^2) \), but this is not tight.  
 
-Example:
+---
 
-```text
-f(n) = n², g(n) = n³, h(n) = n⁴. Then f(n) = O(g(n)) and h(n) = O(g(n)). Therefore, f(n) + h(n) = O(g(n)).
-```
+## **3. Constant Factor Rule**  
 
-### ***5. Product Rule***
+**Statement:**  
+For any constant \( c > 0 \), if \( f(n) = O(g(n)) \), then  
+\[
+c \cdot f(n) = O(g(n))
+\]  
 
-If `f(n) = O(g(n))` and `h(n) = O(k(n))`, then `f(n) * h(n) = O(g(n) * k(n))`.
+**Explanation:**  
+Constants are ignored in Big O.  
 
-Example:
+**Example:**  
 
-```text
-f(n) = n, g(n) = n², h(n) = n³, k(n) = n⁴. Then f(n) = O(g(n)) and h(n) = O(k(n)). Therefore, f(n) * h(n) = O(g(n) * k(n)) = O(n⁶).
-```
+- \( 9999n = O(n) \).  
 
-### ***6. Composition Rule***
+**Algorithm Example:**  
+A loop with 3 nested passes over \( n \) elements is still \( O(n) \), not \( O(3n) \).  
 
-If `f(n) = O(g(n))` and `g(n) = O(h(n))`, then `f(g(n)) = O(h(n))`.
+---
 
-Example:
+## **4. Sum Rule**  
 
-```text
-f(n) = n², g(n) = n, h(n) = n³. Then f(n) = O(g(n)) and g(n) = O(h(n)). Therefore, f(g(n)) = O(h(n)) = O(n³).
-```
+**Statement:**  
+If \( f(n) = O(g(n)) \) and \( h(n) = O(g(n)) \), then  
+\[
+f(n) + h(n) = O(g(n))
+\]  
+
+**Explanation:**  
+The dominant term absorbs others.  
+
+**Example:**  
+
+- \( n^2 + n = O(n^2) \).  
+
+**Algorithm Example:**  
+Two sequential loops (each \( O(n) \)) combine to \( O(n) \), not \( O(2n) \).  
+
+---
+
+## **5. Product Rule**  
+
+**Statement:**  
+If \( f(n) = O(g(n)) \) and \( h(n) = O(k(n)) \), then  
+\[
+f(n) \cdot h(n) = O(g(n) \cdot k(n))
+\]  
+
+**Explanation:**  
+Critical for analyzing nested operations.  
+
+**Example:**  
+
+- A loop inside another loop: \( O(n) \cdot O(n) = O(n^2) \).  
+
+**Algorithm Example:**  
+Bubble sort has nested loops over \( n \) elements → \( O(n^2) \).  
+
+---
+
+## **6. Composition Rule**  
+
+**Statement:**  
+If \( f(n) = O(n^k) \), then for any \( g(n) \geq 1 \),  
+\[
+f(g(n)) = O((g(n))^k)
+\]  
+
+**Explanation:**  
+Substitutes the inner function’s growth rate into the outer one.  
+
+**Example:**  
+
+- If \( f(n) = n^2 \) and \( g(n) = \log n \), then \( f(g(n)) = O((\log n)^2) \).  
+
+**Algorithm Example:**  
+Binary search in a sorted list calls itself on half the input:  
+\( T(n) = T(n/2) + O(1) \) → \( O(\log n) \).  
+
+---
+
+## **Common Pitfalls**  
+
+1. **Misapplying Composition**:  
+   - ❌ Wrong: \( 2^n = O(n) \) → \( 2^{\log n} = O(n) \) (actually \( n = O(n) \)).  
+   - ✅ Right: If \( f(n) = O(2^n) \), then \( f(\log n) = O(2^{\log n}) = O(n) \).  
+
+2. **Ignoring Dominant Terms**:  
+   - ❌ \( n^3 + n^2 + n = O(n^3 + n^2) \) → Still \( O(n^3) \).  
+
+---
+
+## **Exercises**  
+
+1. Simplify \( O(5n^2 + 3n \log n + 7) \).  
+   **Answer:** \( O(n^2) \).  
+
+2. If \( f(n) = O(n) \) and \( g(n) = O(n^2) \), what is \( f(n) \cdot g(n) \)?  
+   **Answer:** \( O(n^3) \).  
+
+3. A function runs in \( O(2^n) \) time. If you call it on \( \log n \)-sized inputs, what’s the new complexity?  
+   **Answer:** \( O(2^{\log n}) = O(n) \).  
+
+---
+
+## **Real-World Implications**  
+
+- **Optimization**: Reducing \( O(n^2) \) to \( O(n \log n) \) (e.g., sorting with MergeSort vs. BubbleSort).  
+- **Scalability**: An \( O(2^n) \) algorithm fails for large \( n \), while \( O(n) \) scales linearly.  
 
 ---
 
