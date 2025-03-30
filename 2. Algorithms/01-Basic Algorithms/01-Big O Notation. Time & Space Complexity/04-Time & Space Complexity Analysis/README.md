@@ -10,15 +10,15 @@ Time complexity refers to the computational time required by an algorithm as the
 
 ### **Big-O Notation Classes**
 
-| Big-O Notation | Complexity Type   | Example Algorithm                     |
-|----------------|-------------------|---------------------------------------|
-| **O(1)**       | Constant Time     | Accessing an element in an array      |
-| **O(log n)**   | Logarithmic Time  | Binary search                         |
-| **O(n)**       | Linear Time       | Traversing an array                   |
-| **O(n log n)** | Linearithmic Time | Merge sort, Quick sort (average case) |
-| **O(n²)**      | Quadratic Time    | Bubble sort, Selection sort           |
-| **O(2ⁿ)**      | Exponential Time  | Fibonacci (naive recursion)           |
-| **O(n!)**      | Factorial Time    | Traveling Salesman Problem            |
+| Big-O Notation   | Complexity Type     | Example Algorithm                     |
+|------------------|---------------------|---------------------------------------|
+| **`O(1)`**       | Constant Time       | Accessing an element in an array      |
+| **`O(log n)`**   | Logarithmic Time    | Binary search                         |
+| **`O(n)`**       | Linear Time         | Traversing an array                   |
+| **`O(n log n)`** | Linearithmic Time   | Merge sort, Quick sort (average case) |
+| **`O(n²)`**      | Quadratic Time      | Bubble sort, Selection sort           |
+| **`O(2ⁿ)`**      | Exponential Time    | Fibonacci (naive recursion)           |
+| **`O(n!)`**      | Factorial Time      | Traveling Salesman Problem            |
 
 ---
 
