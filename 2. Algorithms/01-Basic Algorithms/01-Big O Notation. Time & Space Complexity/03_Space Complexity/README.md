@@ -145,9 +145,7 @@ for num in generate_numbers(5):
 
 - Instead of storing a list, it **yields** numbers, reducing space complexity to **`O(1)`**.
 
----
-
-## **Conclusion**
+### **Conclusion**
 
 - Space complexity helps analyze memory usage.
 - Efficient algorithms optimize space and time.
