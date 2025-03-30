@@ -136,6 +136,8 @@ Let's analyze the time and space complexity of the given recursive factorial fun
 - **Time Complexity:** `O(n)`
 - **Space Complexity:** `O(n)` (due to recursion stack)
 
+---
+
 ### Iterative Alternative (Optimized Space)
 
 If we rewrite the factorial function iteratively, you can reduce the space complexity to `O(1)` while keeping the time complexity at `O(n)`:
