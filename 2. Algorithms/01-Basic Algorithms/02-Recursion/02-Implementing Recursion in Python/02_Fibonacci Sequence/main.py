@@ -1,3 +1,6 @@
+# Implementation in Python:
+
+
 def fibonacci(n):
     # Base case: if n is 0 or 1, return n directly
     # This is because Fibonacci(0) = 0 and Fibonacci(1) = 1
@@ -136,3 +139,17 @@ print(fibonacci(6))  # Output: 8
 ```
 
 """
+
+# =========================================================================================================================== #
+
+# Optimized Fibonacci Approach:
+
+from functools import lru_cache
+
+
+@lru_cache(None)
+def fibonacci_optimized(n):
+    return n if n <= 1 else fibonacci(n - 1) + fibonacci(n - 2)
+
+
+print(fibonacci_optimized(6))  # Output: 8
