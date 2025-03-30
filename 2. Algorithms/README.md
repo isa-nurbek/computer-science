@@ -6,7 +6,7 @@ This unit explores fundamental algorithmic concepts, including asymptotic notati
 
 ### 1. Asymptotic Notation
 
-- Understanding Big-O, Big-Θ, and Big-Ω
+- Understanding Big-O, Big-Θ (Omega), and Big-Ω (Theta)
 - Time and space complexity analysis
 - Best, worst, and average-case scenarios
 
