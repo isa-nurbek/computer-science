@@ -24,7 +24,7 @@ Time complexity refers to the computational time required by an algorithm as the
 
 ### **Time Complexity Examples in Python**
 
-#### **Example 1: O(1) - Constant Time**
+#### **Example 1: `O(1)` - Constant Time**
 
 Regardless of the input size, the execution time remains the same.
 
@@ -37,7 +37,7 @@ print(get_first_element([10, 20, 30, 40]))  # Output: 10
 
 ---
 
-#### **Example 2: O(n) - Linear Time**
+#### **Example 2: `O(n)` - Linear Time**
 
 The execution time grows proportionally with input size.
 
@@ -51,7 +51,7 @@ print_elements([1, 2, 3, 4, 5])
 
 ---
 
-#### **Example 3: O(n²) - Quadratic Time**
+#### **Example 3: `O(n²)` - Quadratic Time**
 
 Nested loops cause execution time to grow quadratically.
 
@@ -66,7 +66,7 @@ print_pairs([1, 2, 3])
 
 ---
 
-#### **Example 4: O(log n) - Logarithmic Time**
+#### **Example 4: `O(log n)` - Logarithmic Time**
 
 Binary search divides the input size by 2 in each step.
 
@@ -103,15 +103,15 @@ Space complexity refers to the memory required by an algorithm, including:
 
 | Big-O Notation | Space Complexity Example               |
 |----------------|----------------------------------------|
-| **O(1)**       | Using a few variables (constant space) |
-| **O(n)**       | Storing an array of size `n`           |
-| **O(n²)**      | 2D matrix storage                      |
+| **`O(1)`**     | Using a few variables (constant space) |
+| **`O(n)`**     | Storing an array of size `n`           |
+| **`O(n²)`**    | 2D matrix storage                      |
 
 ---
 
 ### **Space Complexity Examples in Python**
 
-#### **Example 1: O(1) - Constant Space**
+#### **Example 1: `O(1)` - Constant Space**
 
 ```python
 def add_numbers(a, b):
@@ -125,7 +125,7 @@ No extra data structures are used, so space complexity is **`O(1)`**.
 
 ---
 
-#### **Example 2: O(n) - Linear Space**
+#### **Example 2: `O(n)` - Linear Space**
 
 ```python
 def create_list(n):
@@ -141,7 +141,7 @@ Since an array of size **n** is used, the space complexity is **`O(n)`**.
 
 ---
 
-#### **Example 3: O(n) - Recursive Function**
+#### **Example 3: `O(n)` - Recursive Function**
 
 Recursion stores intermediate states in the function call stack.
 
@@ -193,7 +193,7 @@ Time and space complexity analysis helps determine how an algorithm will perform
 
 Let's analyze the **time and space complexity** for each example in detail. 
 
-### **1. O(1) - Constant Time Complexity**
+### **1. `O(1)` - Constant Time Complexity**
 
 ```python
 def get_first_element(arr):
@@ -215,7 +215,7 @@ print(get_first_element([10, 20, 30, 40]))  # Output: 10
 
 ---
 
-### **2. O(n) - Linear Time Complexity**
+### **2. `O(n)` - Linear Time Complexity**
 
 ```python
 def print_elements(arr):
@@ -239,7 +239,7 @@ print_elements([1, 2, 3, 4, 5])
 
 ---
 
-### **3. O(n²) - Quadratic Time Complexity**
+### **3. `O(n²)` - Quadratic Time Complexity**
 
 ```python
 def print_pairs(arr):
@@ -265,7 +265,7 @@ print_pairs([1, 2, 3])
 
 ---
 
-### **4. O(log n) - Logarithmic Time Complexity (Binary Search)**
+### **4. `O(log n)` - Logarithmic Time Complexity (Binary Search)**
 
 ```python
 def binary_search(arr, target):
@@ -298,7 +298,7 @@ print(binary_search(arr, 7))  # Output: 3 (index of 7 in the array)
 
 ---
 
-### **5. O(1) - Constant Space Complexity**
+### **5. `O(1)` - Constant Space Complexity**
 
 ```python
 def add_numbers(a, b):
@@ -322,7 +322,7 @@ print(add_numbers(3, 5))  # Output: 8
 
 ---
 
-### **6. O(n) - Linear Space Complexity**
+### **6. `O(n)` - Linear Space Complexity**
 
 ```python
 def create_list(n):
@@ -348,7 +348,7 @@ print(create_list(5))  # Output: [0, 1, 2, 3, 4]
 
 ---
 
-### **7. O(n) - Recursive Function (Factorial)**
+### **7. `O(n)` - Recursive Function (Factorial)**
 
 ```python
 def factorial(n):
