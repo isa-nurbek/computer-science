@@ -1,4 +1,4 @@
-## **Time & Space Complexity Analysis in Computer Science**
+# **Time & Space Complexity Analysis in Computer Science**
 
 Time and space complexity analysis helps us measure how efficiently an algorithm runs and how much memory it consumes. This is crucial for optimizing programs, especially when dealing with large datasets.
 
@@ -10,15 +10,15 @@ Time complexity refers to the computational time required by an algorithm as the
 
 ### **Big-O Notation Classes**
 
-| Big-O Notation | Complexity Type   | Example Algorithm |
-|---------------|----------------|----------------|
-| **O(1)**     | Constant Time   | Accessing an element in an array |
-| **O(log n)**  | Logarithmic Time | Binary search |
-| **O(n)**     | Linear Time     | Traversing an array |
-| **O(n log n)**| Linearithmic Time | Merge sort, Quick sort (average case) |
-| **O(n²)**    | Quadratic Time  | Bubble sort, Selection sort |
-| **O(2ⁿ)**    | Exponential Time | Fibonacci (naive recursion) |
-| **O(n!)**    | Factorial Time  | Traveling Salesman Problem |
+| Big-O Notation | Complexity Type   | Example Algorithm                     |
+|----------------|-------------------|---------------------------------------|
+| **O(1)**       | Constant Time     | Accessing an element in an array      |
+| **O(log n)**   | Logarithmic Time  | Binary search                         |
+| **O(n)**       | Linear Time       | Traversing an array                   |
+| **O(n log n)** | Linearithmic Time | Merge sort, Quick sort (average case) |
+| **O(n²)**      | Quadratic Time    | Bubble sort, Selection sort           |
+| **O(2ⁿ)**      | Exponential Time  | Fibonacci (naive recursion)           |
+| **O(n!)**      | Factorial Time    | Traveling Salesman Problem            |
 
 ---
 
@@ -35,6 +35,8 @@ def get_first_element(arr):
 print(get_first_element([10, 20, 30, 40]))  # Output: 10
 ```
 
+---
+
 #### **Example 2: O(n) - Linear Time**
 
 The execution time grows proportionally with input size.
@@ -46,6 +48,8 @@ def print_elements(arr):
 
 print_elements([1, 2, 3, 4, 5])
 ```
+
+---
 
 #### **Example 3: O(n²) - Quadratic Time**
 
@@ -59,6 +63,8 @@ def print_pairs(arr):
 
 print_pairs([1, 2, 3])
 ```
+
+---
 
 #### **Example 4: O(log n) - Logarithmic Time**
 
@@ -81,7 +87,7 @@ arr = [1, 3, 5, 7, 9, 11]
 print(binary_search(arr, 7))  # Output: 3 (index of 7 in the array)
 ```
 
-Since the search space halves at each step, the complexity is **O(log n)**.
+Since the search space halves at each step, the complexity is **`O(log n)`**.
 
 ---
 
@@ -95,11 +101,11 @@ Space complexity refers to the memory required by an algorithm, including:
 
 ### **Big-O Notation for Space Complexity**
 
-| Big-O Notation | Space Complexity Example |
-|---------------|--------------------------|
-| **O(1)**     | Using a few variables (constant space) |
-| **O(n)**     | Storing an array of size n |
-| **O(n²)**    | 2D matrix storage |
+| Big-O Notation | Space Complexity Example               |
+|----------------|----------------------------------------|
+| **O(1)**       | Using a few variables (constant space) |
+| **O(n)**       | Storing an array of size `n`           |
+| **O(n²)**      | 2D matrix storage                      |
 
 ---
 
@@ -115,7 +121,9 @@ def add_numbers(a, b):
 print(add_numbers(3, 5))  # Output: 8
 ```
 
-No extra data structures are used, so space complexity is **O(1)**.
+No extra data structures are used, so space complexity is **`O(1)`**.
+
+---
 
 #### **Example 2: O(n) - Linear Space**
 
@@ -129,7 +137,9 @@ def create_list(n):
 print(create_list(5))  # Output: [0, 1, 2, 3, 4]
 ```
 
-Since an array of size **n** is used, the space complexity is **O(n)**.
+Since an array of size **n** is used, the space complexity is **`O(n)`**.
+
+---
 
 #### **Example 3: O(n) - Recursive Function**
 
@@ -144,7 +154,7 @@ def factorial(n):
 print(factorial(5))  # Output: 120
 ```
 
-The recursion depth is **n**, so the space complexity is **O(n)**.
+The recursion depth is **n**, so the space complexity is **`O(n)`**.
 
 ---
 
@@ -152,29 +162,30 @@ The recursion depth is **n**, so the space complexity is **O(n)**.
 
 For some algorithms, different cases yield different time complexities.
 
-| Case         | Description |
-|-------------|------------|
-| **Best Case (Ω - Omega)** | Minimum time an algorithm takes (e.g., Quick Sort in sorted data → O(n log n)) |
-| **Worst Case (O - Big-O)** | Maximum time an algorithm takes (e.g., Bubble Sort on reverse-sorted data → O(n²)) |
-| **Average Case (Θ - Theta)** | Expected time complexity for random inputs |
+| Case                         | Description                                                                          |
+|------------------------------|--------------------------------------------------------------------------------------|
+| **Best Case (Ω - Omega)**    | Minimum time an algorithm takes (e.g., Quick Sort in sorted data → `O(n log n)`)     |
+| **Worst Case (O - Big-O)**   | Maximum time an algorithm takes (e.g., Bubble Sort on reverse-sorted data → `O(n²)`) |
+| **Average Case (Θ - Theta)** | Expected time complexity for random inputs                                           |
 
 ### **Example: Quick Sort Complexity**
 
-- **Best Case**: O(n log n) (When the pivot splits the array evenly)
-- **Worst Case**: O(n²) (When the pivot is always the smallest or largest element)
-- **Average Case**: O(n log n)
+- **Best Case**: `O(n log n)` (When the pivot splits the array evenly)
+- **Worst Case**: `O(n²)` (When the pivot is always the smallest or largest element)
+- **Average Case**: `O(n log n)`
 
 ---
 
 ## **4. Practical Considerations**
 
 1. **Choosing the right algorithm**: Avoid unnecessary inefficiencies.
-2. **Data structures matter**: Using a hash map (O(1) lookup) vs. a list (O(n) lookup) can significantly impact performance.
+2. **Data structures matter**: Using a hash map (`O(1)` lookup) vs. a list (`O(n)` lookup) can significantly impact performance.
 3. **Optimize loops**: Avoid nested loops when possible.
 4. **Recursion vs. Iteration**: Iteration is often more memory-efficient than recursion.
 
----
-
-## **Conclusion**
+### **Conclusion**
 
 Time and space complexity analysis helps determine how an algorithm will perform as input grows. Using **Big-O notation**, we can express and compare the efficiency of different approaches.
+
+---
+
