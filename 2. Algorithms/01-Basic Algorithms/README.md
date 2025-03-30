@@ -1,6 +1,6 @@
 # Algorithmic Concepts and Implementations  
 
-This repository is dedicated to exploring fundamental algorithmic concepts, including:  
+This unit is dedicated to exploring fundamental algorithmic concepts, including:  
 
 - **Asymptotic Notation** – Understanding time and space complexity.  
 - **Recursion** – Solving problems through recursive approaches.  
@@ -23,8 +23,4 @@ This repository is dedicated to exploring fundamental algorithmic concepts, incl
 
 4. **Algorithmic Concepts**  
    - Asymptotic Notation (Big-O, Theta, Omega)  
-   - Recursion  
-
-## Contributions  
-
-Feel free to contribute by adding explanations, optimizing algorithms, or implementing new variations
+   - Recursion
