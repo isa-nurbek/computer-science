@@ -389,7 +389,7 @@ def sum_iterative(n):
 
 ---
 
-### **Best Practices for Recursion**
+## **Best Practices for Recursion**
 
 ✅ **1. Always Define a Base Case**  
 
@@ -411,7 +411,7 @@ def sum_iterative(n):
 
 - Python **does NOT optimize** tail recursion.
 
-### **Conclusion**
+### **Summary**
 
 While recursion is a powerful tool for solving problems like tree traversal, backtracking, and divide-and-conquer algorithms, it comes with pitfalls like **stack overflow, redundant computations, and high memory usage**.  
 In many cases, **iteration** is preferable for efficiency, especially when tail recursion is not optimized. **Memoization** can also significantly improve performance in recursive solutions.
