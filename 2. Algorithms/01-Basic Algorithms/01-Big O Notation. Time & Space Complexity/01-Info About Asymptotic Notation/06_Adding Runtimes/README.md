@@ -16,9 +16,9 @@ If an algorithm consists of multiple independent steps, the total runtime is the
 
 ---
 
-### **Examples of Adding Runtimes in Python**
+## **Examples of Adding Runtimes in Python**
 
-#### **Example 1: Two Independent Loops (Addition)**
+### **Example 1: Two Independent Loops (Addition)**
 
 ```python
 def example1(n):
@@ -47,7 +47,7 @@ O(n) + O(n) = O(2n)
 
 ---
 
-#### **Example 2: Different Growth Rates**
+### **Example 2: Different Growth Rates**
 
 ```python
 def example2(n):
@@ -81,7 +81,7 @@ O(n² + n) ⇒ O(n²)
 
 ---
 
-#### **Example 3: Logarithmic and Linear Growth**
+### **Example 3: Logarithmic and Linear Growth**
 
 ```python
 import math
@@ -114,7 +114,7 @@ O(n) + O(log n)
 
 ---
 
-#### **Example 4: Multiplication of Runtimes**
+### **Example 4: Multiplication of Runtimes**
 
 ```python
 def example4(n, m):
