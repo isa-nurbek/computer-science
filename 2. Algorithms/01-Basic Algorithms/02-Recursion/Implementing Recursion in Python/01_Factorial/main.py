@@ -19,3 +19,41 @@ def factorial(n):
 print(factorial(5))  # Output: 120
 
 # =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+
+### Time Complexity:
+- **Base Case:** When `n == 0`, the function returns `1` in constant time, `O(1)`.
+- **Recursive Case:** For `n > 0`, the function makes one recursive call to `factorial(n - 1)` and performs one
+multiplication operation (`n * ...`), which is also `O(1)`.
+- The function makes a total of `n + 1` calls (from `n` down to `0`), and each call does `O(1)` work (excluding the recursive part).
+
+- Thus, the total time complexity is `O(n)`.
+
+---
+
+### Space Complexity:
+- **Recursive Calls:** Each recursive call adds a new stack frame to the call stack. Since there are `n + 1` calls
+(from `n` down to `0`), the maximum depth of the call stack is `O(n)`.
+- No additional data structures or memory allocations are used beyond the call stack.
+
+- Thus, the space complexity is `O(n)` due to the recursion stack.
+
+---
+
+### Summary:
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(n)` (due to recursion stack)
+
+### Iterative Alternative (Optimized Space):
+
+- **Time Complexity:** `O(n)` (same as recursive)
+- **Space Complexity:** `O(1)` (no recursion stack, just one variable `result`).
+
+The recursive version is less space-efficient due to the call stack, but both versions are linear in time.
+
+"""
