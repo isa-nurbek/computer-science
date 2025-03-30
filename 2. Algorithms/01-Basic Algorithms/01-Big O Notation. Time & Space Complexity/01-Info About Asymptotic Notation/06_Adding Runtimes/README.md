@@ -2,8 +2,6 @@
 
 When analyzing the time complexity of an algorithm, we often break it down into different parts and sum their complexities. Understanding how to add runtimes is essential when evaluating the efficiency of multi-step algorithms.
 
----
-
 ## **Basic Idea of Adding Runtimes**
 
 If an algorithm consists of multiple independent steps, the total runtime is the sum of the runtimes of individual steps.
@@ -11,8 +9,8 @@ If an algorithm consists of multiple independent steps, the total runtime is the
 ### **Rules to Follow**
 
 1. **Addition Rule**: If an algorithm consists of multiple consecutive steps, their complexities are added.  
-   - Example: If one step runs in \(O(f(n))\) time and another in \(O(g(n))\), the total complexity is \(O(f(n) + g(n))\).  
-   - However, in Big-O notation, we keep only the dominant term, ignoring lower-order terms and constant factors.
+   - *Example*: If one step runs in `O(f(n))` time and another in `O(g(n))`, the total complexity is `O(f(n) + g(n))`.  
+   - However, in *Big-O* notation, we keep only the *dominant term*, ignoring lower-order terms and constant factors.
 
 2. **Multiplication Rule**: If an algorithm consists of nested loops or recursive calls, the complexities multiply.
 
@@ -37,13 +35,15 @@ example1(5)
 
 **Analysis:**  
 
-- The first loop runs **n** times → \(O(n)\).  
-- The second loop runs **n** times → \(O(n)\).  
+- The first loop runs **n** times → `O(n)`.  
+- The second loop runs **n** times → `O(n)`.  
 - Since they are sequential (not nested), the total time complexity is:  
-  \[
-  O(n) + O(n) = O(2n)
-  \]
-- Since we ignore constants in Big-O notation, this simplifies to **O(n).**
+
+```plaintext
+O(n) + O(n) = O(2n)
+```
+
+- Since we ignore constants in *Big-O* notation, this simplifies to **O(n).**
 
 ---
 
@@ -55,7 +55,7 @@ def example2(n):
     for i in range(n):
         print(i)
 
-    # O(n^2) loop
+    # O(n²) loop
     for j in range(n):
         for k in range(n):
             print(j, k)
@@ -68,13 +68,16 @@ example2(5)
 - The first loop runs in **O(n)**.  
 - The second nested loop runs in **O(n²)** (since it has two nested loops).  
 - The total runtime:  
-  \[
-  O(n) + O(n^2) = O(n^2 + n)
-  \]
-- The dominant term is \(O(n^2)\), so we drop the lower-order term (\(O(n)\)):  
-  \[
-  O(n^2 + n) \approx O(n^2)
-  \]
+
+```plaintext
+O(n) + O(n²) = O(n² + n)
+```
+
+- The dominant term is `O(n²)`, so we drop the lower-order term `O(n)`:  
+
+```plaintext
+O(n² + n) ⇒ O(n²)
+```
 
 ---
 
@@ -100,12 +103,14 @@ example3(16)
 **Analysis:**  
 
 - The first loop runs **O(n)** times.  
-- The second loop runs **O(log n)** times (since \(j\) doubles each time).  
+- The second loop runs **O(log n)** times (since `j` doubles each time).  
 - The total runtime:  
-  \[
-  O(n) + O(\log n)
-  \]
-- Since \(O(n)\) grows much faster than \(O(\log n)\), the dominant term is **O(n).**
+
+```plaintext
+O(n) + O(log n)
+```
+
+- Since `O(n)` grows much faster than `O(log n)`, the dominant term is **O(n).**
 
 ---
 
