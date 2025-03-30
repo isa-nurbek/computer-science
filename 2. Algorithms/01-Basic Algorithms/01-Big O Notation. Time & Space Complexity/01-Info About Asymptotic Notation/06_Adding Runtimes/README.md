@@ -152,7 +152,7 @@ O(n) + O(m)
 
 ---
 
-### **Adding Runtimes with Recursion**  
+## **Adding Runtimes with Recursion**  
 
 When dealing with recursive functions, we analyze their runtime using recurrence relations. Adding runtimes in recursion follows similar principles as before:  
 
@@ -263,11 +263,13 @@ T(n) = T(n-1) + O(n)
 
 ---
 
+## **Adding Runtimes with Recursion Detailed Explanation**
+
 Let's analyze all the recursion cases in detail, breaking down their time complexity step by step.
 
-## **Case 1: Simple Recursion (Linear Reduction)**
+### **Case 1: Simple Recursion (Linear Reduction)**
 
-### **Code:**
+**Code:**
 
 ```python
 def example1(n):
@@ -277,34 +279,29 @@ def example1(n):
     example1(n - 1)  # Recursive call
 ```
 
-### **Analysis:**
+**Analysis:**
 
 1. The function calls itself **n times** (each time reducing `n` by 1).
 2. Each call performs **O(1)** work (printing a number).
 3. The recurrence relation is:
-   \[
-   T(n) = T(n-1) + O(1)
-   \]
-4. Expanding this recurrence:
-   \[
-   T(n) = T(n-1) + O(1)
-   \]
-   \[
-   = T(n-2) + O(1) + O(1)
-   \]
-   \[
-   = T(n-3) + O(1) + O(1) + O(1)
-   \]
-   \[
-   = O(n)
-   \]
-5. **Final Complexity: O(n) (Linear Time).**
+
+```plaintext
+T(n) = T(n-1) + O(1)
+```
+
+Expanding this recurrence:
+
+```plaintext
+T(n) = T(n-1) + O(1) = T(n-2) + O(1) + O(1) = T(n-3) + O(1) + O(1) + O(1) = O(n)
+```
+
+**Final Complexity: `O(n)` (Linear Time).**
 
 ---
 
-## **Case 2: Simple Recursion + Iteration (Quadratic Growth)**
+### **Case 2: Simple Recursion + Iteration (Quadratic Growth)**
 
-### **Code:**
+**Code:**
 
 ```python
 def example2(n):
@@ -317,34 +314,29 @@ def example2(n):
         print(i)
 ```
 
-### **Analysis:**
+**Analysis:**
 
 1. **Recursive calls:** The function calls itself **n times** → **O(n)** depth.
 2. **For-loop execution:** At each level, the loop runs **O(n)** times.
 3. The recurrence relation:
-   \[
-   T(n) = T(n-1) + O(n)
-   \]
-4. Expanding:
-   \[
-   T(n) = T(n-1) + O(n)
-   \]
-   \[
-   = T(n-2) + O(n-1) + O(n)
-   \]
-   \[
-   = T(n-3) + O(n-2) + O(n-1) + O(n)
-   \]
-   \[
-   = O(n + (n-1) + (n-2) + ... + 1) = O(n^2)
-   \]
-5. **Final Complexity: O(n²) (Quadratic Time).**
+
+```plaintext
+T(n) = T(n-1) + O(n)
+```
+
+Expanding:
+
+```plaintext
+T(n) = T(n-1) + O(n) = T(n-2) + O(n-1) + O(n) = T(n-3) + O(n-2) + O(n-1) + O(n) = O(n + (n-1) + (n-2) + ... + 1) = O(n²)
+```
+
+**Final Complexity: `O(n²)` (Quadratic Time).**
 
 ---
 
-## **Case 3: Tree Recursion (Exponential Growth)**
+### **Case 3: Tree Recursion (Exponential Growth)**
 
-### **Code:**
+**Code:**
 
 ```python
 def example3(n):
@@ -355,38 +347,34 @@ def example3(n):
     example3(n - 1)  # Second recursive call
 ```
 
-### **Analysis:**
+**Analysis:**
 
 1. **Recursive calls:** Each function call makes **two new calls**.
 2. **Recursive depth:** Since `n` decreases by 1 at each step, the recursion tree has **n levels**.
 3. The recurrence relation:
-   \[
-   T(n) = 2T(n-1) + O(1)
-   \]
-4. Expanding:
-   \[
-   T(n) = 2T(n-1) + O(1)
-   \]
-   \[
-   = 2(2T(n-2) + O(1)) + O(1)
-   \]
-   \[
-   = 4T(n-2) + 2O(1) + O(1)
-   \]
-   \[
-   = 8T(n-3) + 4O(1) + 2O(1) + O(1)
-   \]
-   - Expanding further, this follows the pattern:
-   \[
-   T(n) = 2^n O(1) = O(2^n)
-   \]
-5. **Final Complexity: O(2ⁿ) (Exponential Time).**
+
+```plaintext
+T(n) = 2T(n-1) + O(1)
+```
+
+- Expanding:
+
+```plaintext
+T(n) = 2T(n-1) + O(1) = 2(2T(n-2) + O(1)) + O(1) = 4T(n-2) + 2O(1) + O(1) = 8T(n-3) + 4O(1) + 2O(1) + O(1)
+
+- Expanding further, this follows the pattern:
+
+```plaintext
+T(n) = 2ⁿ + O(1) = O(2ⁿ)
+```
+
+**Final Complexity: `O(2ⁿ)` (Exponential Time).**
 
 ---
 
-## **Case 4: Mixed Recursion and Iteration**
+### **Case 4: Mixed Recursion and Iteration**
 
-### **Code:**
+**Code:**
 
 ```python
 def example4(n):
@@ -401,36 +389,40 @@ def example4(n):
 example4(5)
 ```
 
-### **Analysis:**
+**Analysis:**
 
 1. **Recursive calls:** The function calls itself **n times** → **O(n)** depth.
 2. **For-loop execution:** At each level, the loop runs **O(n)** times.
 3. The recurrence relation is the same as **Case 2**:
-   \[
-   T(n) = T(n-1) + O(n)
-   \]
-4. Expanding:
-   \[
-   T(n) = O(n + (n-1) + (n-2) + ... + 1) = O(n^2)
-   \]
-5. **Final Complexity: O(n²) (Quadratic Time).**
+
+```plaintext
+T(n) = T(n-1) + O(n)
+```
+
+- Expanding:
+
+```plaintext
+T(n) = O(n + (n-1) + (n-2) + ... + 1) = O(n²)
+```
+
+**Final Complexity: `O(n²)` (Quadratic Time).**
 
 ---
 
-## **Summary of Complexity for All Cases**
+### **Summary of Complexity for All Cases**
 
-| **Example** | **Recurrence Relation** | **Time Complexity** | **Growth Rate** |
-|------------|------------------------|---------------------|----------------|
-| **Simple Recursion** | \(T(n) = T(n-1) + O(1)\) | **O(n)** | **Linear** |
-| **Recursion + Iteration** | \(T(n) = T(n-1) + O(n)\) | **O(n²)** | **Quadratic** |
-| **Tree Recursion** | \(T(n) = 2T(n-1) + O(1)\) | **O(2ⁿ)** | **Exponential** |
-| **Mixed Recursion & Iteration** | \(T(n) = T(n-1) + O(n)\) | **O(n²)** | **Quadratic** |
+| **Example**                     | **Recurrence Relation**   | **Time Complexity** | **Growth Rate** |
+|---------------------------------|---------------------------|---------------------|-----------------|
+| **Simple Recursion**            | T(n) = T(n-1) + O(1)      | **O(n)**            | **Linear**      |
+| **Recursion + Iteration**       | T(n) = T(n-1) + O(n)      | **O(n²)**           | **Quadratic**   |
+| **Tree Recursion**              | T(n) = 2T(n-1) + O(1)     | **O(2ⁿ)**           | **Exponential** |
+| **Mixed Recursion & Iteration** | T(n) = T(n-1) + O(n)      | **O(n²)**           | **Quadratic**   |
 
 ---
 
 ### **Key Takeaways**
 
-1. **Linear recursion (O(n))** occurs when each recursive call makes only **one additional call** and does **O(1) work**.  
-2. **Quadratic recursion (O(n²))** occurs when recursion depth is **O(n)** and each step has a **loop of O(n)** work.  
-3. **Exponential recursion (O(2ⁿ))** occurs when **each recursive step branches into two or more recursive calls**.  
+1. **Linear recursion `O(n)`** occurs when each recursive call makes only **one additional call** and does **`O(1)` work**.  
+2. **Quadratic recursion `O(n²)`** occurs when recursion depth is **`O(n)`** and each step has a **loop of `O(n)`** work.  
+3. **Exponential recursion `O(2ⁿ)`** occurs when **each recursive step branches into two or more recursive calls**.  
 4. **Always use recurrence relations to break down the complexity.**  
