@@ -11,6 +11,8 @@ Recursion is a technique in computer science where a function calls itself in or
 
 When a function calls itself, it creates a **new function call** on the call stack. Each function call has its **own execution context** (its own local variables and parameters). The recursion continues until it reaches the **base case**, at which point it starts returning values back up the call stack.
 
+![Recursion Steps](./images_of_recursion/recursion.gif)
+
 ---
 
 ### **Example 1: Factorial Calculation**
