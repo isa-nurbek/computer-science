@@ -202,14 +202,14 @@ Binary search in a sorted list calls itself on half the input:
 
 ## 📚 Core Properties (Cheat Sheet)
 
-| Property            | Mathematical Form             | Example                                  | Algorithm Use Case              |
-|---------------------|-------------------------------|------------------------------------------|---------------------------------|
-| **Reflexivity**     | `f(n) = O(f(n))`              | `5n² = O(n²)`                            | A single loop is O(n)           |
-| **Transitivity**    | `f=O(g), g=O(h) ⇒ f=O(h)`     | `n=O(n log n), n log n=O(n²) ⇒ n=O(n²)` | Comparing algorithm families    |
-| **Constant Factor** | `f=O(g) ⇒ c·f=O(g)`           | `999n = O(n)`                            | Ignoring loop unrolling         |
-| **Sum Rule**        | `f=O(g), h=O(g) ⇒ f+h=O(g)`   | `n² + n³ = O(n³)`                        | Sequential operations           |
-| **Product Rule**    | `f=O(g), h=O(k) ⇒ f·h=O(g·k)` | `O(n) · O(log n) = O(n log n)`           | Nested loops                    |
-| **Composition**     | `f=O(nᵏ) ⇒ f(g(n))=O(g(n)ᵏ)`  | `2^(log n) = O(n)`                       | Recursive algorithms            |
+| Property            | Mathematical Form             | Example                                  | Algorithm Use Case             |
+|---------------------|-------------------------------|------------------------------------------|--------------------------------|
+| **Reflexivity**     | `f(n) = O(f(n))`              | `5n² = O(n²)`                            | A single loop is `O(n)`        |
+| **Transitivity**    | `f=O(g), g=O(h) ⇒ f=O(h)`     | `n=O(n log n), n log n=O(n²) ⇒ n=O(n²)` | Comparing algorithm families   |
+| **Constant Factor** | `f=O(g) ⇒ c·f=O(g)`           | `999n = O(n)`                            | Ignoring loop unrolling        |
+| **Sum Rule**        | `f=O(g), h=O(g) ⇒ f+h=O(g)`   | `n² + n³ = O(n³)`                        | Sequential operations          |
+| **Product Rule**    | `f=O(g), h=O(k) ⇒ f·h=O(g·k)` | `O(n) · O(log n) = O(n log n)`           | Nested loops                   |
+| **Composition**     | `f=O(nᵏ) ⇒ f(g(n))=O(g(n)ᵏ)`  | `2^(log n) = O(n)`                       | Recursive algorithms           |
 
 ---
 
@@ -224,35 +224,35 @@ Binary search in a sorted list calls itself on half the input:
 3. **Express the complexity**:
    - Write the complexity in terms of `n`, simplifying by dropping constants and lower-order terms.
 
-**Here are some common Big O notations, ordered from fastest to slowest**:
+**Here are some common *Big O* notations, ordered from fastest to slowest**:
 
 1. **O(1) - Constant Time**:
    - The algorithm takes the same amount of time regardless of the input size.
-   - Example: Accessing an element in an array by index.
+   - *Example*: Accessing an element in an array by index.
 
 2. **O(log n) - Logarithmic Time**:
    - The algorithm's runtime grows logarithmically with the input size.
-   - Example: Binary search.
+   - *Example*: Binary search.
 
 3. **O(n) - Linear Time**:
    - The algorithm's runtime grows linearly with the input size.
-   - Example: Iterating through a list.
+   - *Example*: Iterating through a list.
 
 4. **O(n log n) - Linearithmic Time**:
    - The algorithm's runtime grows in proportion to `n log n`.
-   - Example: Efficient sorting algorithms like Merge Sort and Quick Sort.
+   - *Example*: Efficient sorting algorithms like Merge Sort and Quick Sort.
 
 5. **O(n²) - Quadratic Time**:
    - The algorithm's runtime grows quadratically with the input size.
-   - Example: Nested loops.
+   - *Example*: Nested loops.
 
 6. **O(2^n) - Exponential Time**:
    - The algorithm's runtime doubles with each additional input.
-   - Example: Recursive Fibonacci without memoization.
+   - *Example*: Recursive Fibonacci without memoization.
 
 7. **O(n!) - Factorial Time**:
    - The algorithm's runtime grows factorially with the input size.
-   - Example: Generating all permutations of a list.
+   - *Example*: Generating all permutations of a list.
 
 ---
 
@@ -404,7 +404,7 @@ def fibonacci(n):
 
 ## **How to Count Runtime in Detail?**
 
-Measuring runtime is crucial for analyzing an algorithm's efficiency. This involves both theoretical (Big O notation) and empirical (actual execution time) analysis.
+Measuring runtime is crucial for analyzing an algorithm's efficiency. This involves both theoretical (*Big O* notation) and empirical (actual execution time) analysis.
 
 ### **1. Theoretical Runtime Analysis**
 
