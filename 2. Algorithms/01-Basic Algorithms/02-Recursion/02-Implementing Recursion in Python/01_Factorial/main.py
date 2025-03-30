@@ -25,7 +25,6 @@ print(factorial(5))  # Output: 120
 """
 ## Time and Space Complexity Analysis:
 
-
 ### Time Complexity:
 - **Base Case:** When `n == 0`, the function returns `1` in constant time, `O(1)`.
 - **Recursive Case:** For `n > 0`, the function makes one recursive call to `factorial(n - 1)` and performs one
@@ -64,8 +63,6 @@ The recursive version is less space-efficient due to the call stack, but both ve
 
 """
 Let's break it down step by step.
-
----
 
 ## **Understanding the Code**
 
