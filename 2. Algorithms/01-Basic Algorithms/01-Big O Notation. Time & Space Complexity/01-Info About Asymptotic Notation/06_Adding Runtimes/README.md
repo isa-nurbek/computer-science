@@ -134,17 +134,19 @@ example4(4, 5)
 - First loop runs in **O(n)**.  
 - Second loop runs in **O(m)**.  
 - Since they are sequential, the total runtime is:
-  \[
-  O(n) + O(m)
-  \]
-- We cannot simplify further unless we know a relationship between \(n\) and \(m\).
+
+```plaintext
+O(n) + O(m)
+```
+
+- We cannot simplify further unless we know a relationship between `n` and `m`.
 
 ---
 
 ### **Conclusion**
 
 - When adding runtimes, **keep the dominant term** (the one that grows the fastest).  
-- If multiple steps run sequentially, **their complexities add up**: \(O(f(n)) + O(g(n))\).  
+- If multiple steps run sequentially, **their complexities add up**: `O(f(n)) + O(g(n))`.  
 - If one term grows significantly faster, **lower-order terms can be ignored**.  
 - **Multiplication** occurs when steps are nested.
 
@@ -156,8 +158,6 @@ When dealing with recursive functions, we analyze their runtime using recurrence
 
 - **Sequential recursive calls** → Complexity adds up.  
 - **Nested recursive calls (branching recursion)** → Complexity grows multiplicatively.
-
----
 
 ### **Example 1: Simple Recursion (Addition)**
 
@@ -179,13 +179,17 @@ example1(5)
 - The recursive function **prints `n` and then calls itself with `n-1`**. This runs **O(n)** times.
 - The for-loop runs **O(n)** times at each level.
 - The recurrence relation is:
-  \[
-  T(n) = T(n-1) + O(n)
-  \]
+
+```plaintext
+T(n) = T(n-1) + O(n)
+```
+
 - This expands to:
-  \[
-  O(n) + O(n-1) + O(n-2) + ... + O(1) = O(n^2)
-  \]
+
+```plaintext
+O(n) + O(n-1) + O(n-2) + ... + O(1) = O(n²)
+```
+
 - Final complexity: **O(n²) (Quadratic Time).**
 
 ---
@@ -207,13 +211,17 @@ example2(3)
 
 - The function makes **two recursive calls per step**.
 - The recurrence relation is:
-  \[
-  T(n) = 2T(n-1) + O(1)
-  \]
+
+```plaintext
+T(n) = 2T(n-1) + O(1)
+```
+
 - Expanding it:
-  \[
-  2T(n-1) + 2T(n-2) + 2T(n-3) + ... = O(2^n)
-  \]
+
+```plaintext
+2T(n-1) + 2T(n-2) + 2T(n-3) + ... = O(2ⁿ)
+```
+
 - Final complexity: **O(2ⁿ) (Exponential Time).**
 
 ---
@@ -237,25 +245,25 @@ example3(5)
 - Recursive depth is **O(n)**.
 - Each level runs a **loop of size `O(n)`**.
 - Recurrence relation:
-  \[
-  T(n) = T(n-1) + O(n)
-  \]
+
+```plaintext
+T(n) = T(n-1) + O(n)
+```
+
 - This results in **O(n²)**.
 
 ---
 
 ### **Key Takeaways**
 
-1. **Single recursion (linear reduction) adds up linearly** → O(n).  
-2. **If each step adds a growing workload, it becomes quadratic** → O(n²).  
-3. **Tree recursion (multiple calls per step) grows exponentially** → O(2ⁿ).  
+1. **Single recursion (linear reduction) adds up linearly** → `O(n)`.  
+2. **If each step adds a growing workload, it becomes quadratic** → `O(n²)`.  
+3. **Tree recursion (multiple calls per step) grows exponentially** → `O(2ⁿ)`.  
 4. **Always focus on dominant terms when summing complexities.**  
 
 ---
 
 Let's analyze all the recursion cases in detail, breaking down their time complexity step by step.
-
----
 
 ## **Case 1: Simple Recursion (Linear Reduction)**
 
