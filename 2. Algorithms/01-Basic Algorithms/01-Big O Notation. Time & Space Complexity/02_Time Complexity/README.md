@@ -218,26 +218,26 @@ Knowing time complexity helps in selecting the most **efficient** algorithm for 
 
 Let's dive deeper into the **Time Complexity Analysis** of each of the examples provided above. I'll break down each algorithm's behavior and how we determine its time complexity.
 
-### **1. O(1) - Constant Time**
+### **A. O(1) - Constant Time**
 
-**Example: Accessing the First Element in an Array**
+#### **Example: Accessing the First Element in an Array**
 
 ```python
 def get_first_element(lst):
     return lst[0]
 ```
 
-#### **Time Complexity Analysis**
+**Time Complexity Analysis:**
 
 - **What happens inside the function?** The function simply accesses the first element in the list, which is a direct memory lookup.
 - **Does the input size matter?** No. Whether the list has 1 element or 1 million, the time to access the first element is constant.
-- **Conclusion:** The time taken by this operation does not depend on the size of the input (`lst`). Hence, it's **O(1)**.
+- **Conclusion:** The time taken by this operation does not depend on the size of the input (`lst`). Hence, it's **`O(1)`**.
 
 ---
 
-### **2. O(log n) - Logarithmic Time**
+### **B. O(log n) - Logarithmic Time**
 
-**Example: Binary Search**
+#### **Example: Binary Search**
 
 ```python
 def binary_search(arr, target):
@@ -253,21 +253,22 @@ def binary_search(arr, target):
     return -1
 ```
 
-#### **Time Complexity Analysis**
+**Time Complexity Analysis:**
 
 - **What happens inside the function?**
   - We start by dividing the list in half and checking the middle element.
   - If the middle element is the target, we return it.
   - If the target is smaller, we search the left half, and if it's larger, we search the right half.
   - Each step cuts the search space in half.
-- **How many times can we halve the list?** The number of times we can divide the list by 2 before the search space becomes empty is approximately **log₂(n)**.
-- **Conclusion:** The number of operations grows logarithmically with respect to the size of the input. Hence, the time complexity is **O(log n)**.
+
+- **How many times can we halve the list?** The number of times we can divide the list by 2 before the search space becomes empty is approximately **`log₂(n)`**.
+- **Conclusion:** The number of operations grows logarithmically with respect to the size of the input. Hence, the time complexity is **`O(log n)`**.
 
 ---
 
-### **3. O(n) - Linear Time**
+### **C. O(n) - Linear Time**
 
-**Example: Finding the Maximum in a List**
+#### **Example: Finding the Maximum in a List**
 
 ```python
 def find_max(arr):
@@ -278,18 +279,18 @@ def find_max(arr):
     return max_value
 ```
 
-#### **Time Complexity Analysis**
+**Time Complexity Analysis:**
 
 - **What happens inside the function?** We initialize the `max_value` to the first element and then iterate over the list. For each element, we check if it's greater than the current `max_value` and update it if necessary.
 - **Does the input size matter?** Yes. In the worst case, we need to check every element in the list.
 - **How many iterations?** We perform **n** comparisons, where **n** is the length of the list.
-- **Conclusion:** Since the time taken grows linearly with the size of the input, the time complexity is **O(n)**.
+- **Conclusion:** Since the time taken grows linearly with the size of the input, the time complexity is **`O(n)`**.
 
 ---
 
-### **4. O(n log n) - Linearithmic Time**
+### **D. O(n log n) - Linearithmic Time**
 
-**Example: Merge Sort**
+#### **Example: Merge Sort**
 
 ```python
 def merge_sort(arr):
@@ -316,21 +317,21 @@ def merge(left, right):
     return sorted_arr
 ```
 
-#### **Time Complexity Analysis**
+**Time Complexity Analysis:**
 
 - **What happens inside the function?**
-  - **Divide Step:** The list is recursively split into two halves until each sublist has only one element. This step requires **log₂(n)** divisions (since the list is halved at each step).
-  - **Conquer Step (Merging):** After the splitting is done, the sublists are merged in sorted order. Merging two sublists takes **O(n)** time.
+  - **Divide Step:** The list is recursively split into two halves until each sublist has only one element. This step requires **`log₂(n)`** divisions (since the list is halved at each step).
+  - **Conquer Step (Merging):** After the splitting is done, the sublists are merged in sorted order. Merging two sublists takes **`O(n)`** time.
 - **Total Time Complexity:**
-  - At each level of recursion, we merge sublists, which takes **O(n)** time.
-  - The depth of the recursion is **log₂(n)** (since the list is halved each time).
-  - Hence, the total time complexity is **O(n log n)** because you merge **n** elements across **log n** levels.
+  - At each level of recursion, we merge sublists, which takes **`O(n)`** time.
+  - The depth of the recursion is **`log₂(n)`** (since the list is halved each time).
+  - Hence, the total time complexity is **`O(n log n)`** because you merge **n** elements across **log n** levels.
 
 ---
 
-### **5. O(n²) - Quadratic Time**
+### **E. O(n²) - Quadratic Time**
 
-**Example: Bubble Sort**
+#### **Example: Bubble Sort**
 
 ```python
 def bubble_sort(arr):
@@ -342,7 +343,7 @@ def bubble_sort(arr):
     return arr
 ```
 
-#### **Time Complexity Analysis**
+**Time Complexity Analysis:**
 
 - **What happens inside the function?**
   - The function uses two nested loops:
@@ -351,13 +352,13 @@ def bubble_sort(arr):
 - **Number of comparisons:**
   - In the worst case, the inner loop runs about **n** times for the first iteration, **n-1** times for the second, and so on.
   - This gives a total of **n + (n-1) + (n-2) + ... + 1** comparisons, which is the sum of the first **n** integers.
-- **Conclusion:** The sum of the first **n** integers is **O(n²)**, so the time complexity is **O(n²)**.
+- **Conclusion:** The sum of the first **n** integers is **`O(n²)`**, so the time complexity is **`O(n²)`**.
 
 ---
 
-### **6. O(2ⁿ) - Exponential Time**
+### **F. O(2ⁿ) - Exponential Time**
 
-**Example: Recursive Fibonacci**
+#### **Example: Recursive Fibonacci**
 
 ```python
 def fibonacci(n):
@@ -368,20 +369,20 @@ def fibonacci(n):
 print(fibonacci(5))  # Output: 5
 ```
 
-#### **Time Complexity Analysis**
+**Time Complexity Analysis:**
 
 - **What happens inside the function?**
   - The function recursively calls itself to calculate the **n**-th Fibonacci number.
   - The number of function calls grows exponentially, as each call spawns two more calls.
 - **How many calls are made?**
   - At each level of recursion, two new calls are made. The total number of function calls grows exponentially as **2ⁿ**.
-- **Conclusion:** The time complexity is **O(2ⁿ)**, as the number of function calls doubles with each increase in **n**.
+- **Conclusion:** The time complexity is **`O(2ⁿ)`**, as the number of function calls doubles with each increase in **n**.
 
 ---
 
-### **7. O(n!) - Factorial Time**
+### **G. O(n!) - Factorial Time**
 
-**Example: Generating Permutations**
+#### **Example: Generating Permutations**
 
 ```python
 from itertools import permutations
@@ -392,29 +393,27 @@ def generate_permutations(s):
 print(generate_permutations("ABC"))
 ```
 
-#### **Time Complexity Analysis**
+**Time Complexity Analysis:**
 
 - **What happens inside the function?**
   - The function generates all possible permutations of the input string `s`.
   - If the string has **n** characters, the number of possible permutations is **n!** (factorial).
 - **How many permutations?**
   - There are **n!** different ways to arrange **n** elements.
-- **Conclusion:** Since there are **n!** permutations to generate, the time complexity is **O(n!)**.
+- **Conclusion:** Since there are **n!** permutations to generate, the time complexity is **`O(n!)`**.
 
 ---
 
 ### **Summary Table of Time Complexities**
 
-| Algorithm               | Time Complexity | Explanation |
-|-------------------------|-----------------|-------------|
-| **get_first_element**    | **O(1)**        | Constant time operation |
-| **binary_search**        | **O(log n)**    | Halving the search space each time |
-| **find_max**             | **O(n)**        | Iterate through every element |
+| Algorithm                | Time Complexity | Explanation                                        |
+|--------------------------|-----------------|----------------------------------------------------|
+| **get_first_element**    | **O(1)**        | Constant time operation                            |
+| **binary_search**        | **O(log n)**    | Halving the search space each time                 |
+| **find_max**             | **O(n)**        | Iterate through every element                      |
 | **merge_sort**           | **O(n log n)**  | Divide and conquer approach with linear merge step |
-| **bubble_sort**          | **O(n²)**       | Nested loops, comparing adjacent elements |
-| **fibonacci**            | **O(2ⁿ)**       | Exponential growth due to recursion |
-| **generate_permutations**| **O(n!)**       | Generating all possible permutations |
-
----
+| **bubble_sort**          | **O(n²)**       | Nested loops, comparing adjacent elements          |
+| **fibonacci**            | **O(2ⁿ)**       | Exponential growth due to recursion                |
+| **generate_permutations**| **O(n!)**       | Generating all possible permutations               |
 
 Each algorithm's time complexity provides insight into how the algorithm behaves as the input size grows. Understanding time complexity helps in selecting efficient algorithms for solving problems with large inputs.
