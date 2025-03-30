@@ -361,6 +361,7 @@ T(n) = 2T(n-1) + O(1)
 
 ```plaintext
 T(n) = 2T(n-1) + O(1) = 2(2T(n-2) + O(1)) + O(1) = 4T(n-2) + 2O(1) + O(1) = 8T(n-3) + 4O(1) + 2O(1) + O(1)
+```
 
 - Expanding further, this follows the pattern:
 
