@@ -152,4 +152,53 @@ def fibonacci_optimized(n):
     return n if n <= 1 else fibonacci(n - 1) + fibonacci(n - 2)
 
 
+# Test Case:
 print(fibonacci_optimized(6))  # Output: 8
+
+# =========================================================================================================================== #
+
+# Big O Analysis for Optimized Approach:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the time and space complexity of the `fibonacci_optimized` function that uses `lru_cache` for memoization.
+
+### Time Complexity:
+
+With `@lru_cache(None)`, the function memoizes all previously computed results. This means each unique `fibonacci_optimized(k)`
+for `k` from `0` to `n` is computed exactly once.
+
+1. **First call for a given `n`:** The function recursively computes `fibonacci_optimized(n-1)` and `fibonacci_optimized(n-2)`,
+but these are stored in the cache after the first computation.
+
+2. **Subsequent calls:** If the same `k` is encountered again (e.g., `fibonacci_optimized(n-2)` is called while computing
+`fibonacci_optimized(n-1)`), the result is retrieved from the cache in `O(1)` time.
+
+Thus, the total number of unique computations is `O(n)` (since we compute `fibonacci_optimized(0)` to `fibonacci_optimized(n)`
+exactly once each). Each computation (ignoring recursive calls) is `O(1)` (just a lookup or addition).
+
+**Final Time Complexity:** `O(n)`.
+
+---
+
+### Space Complexity:
+
+The space complexity is determined by:
+1. The depth of the recursion stack.
+2. The size of the cache.
+
+1. **Recursion Stack:** The maximum depth of the recursion is `O(n)` (e.g., when computing `fibonacci_optimized(n)`,
+the longest chain of recursive calls is `n -> n-1 -> n-2 -> ... -> 0`).
+
+2. **Cache Size:** The cache stores all results from `fibonacci_optimized(0)` to `fibonacci_optimized(n)`, which is `O(n)` space.
+
+**Final Space Complexity:** `O(n)` (due to the cache and recursion stack).
+
+---
+
+### Summary:
+- **Time Complexity:** `O(n)`
+- **Space Complexity:** `O(n)` 
+
+"""
