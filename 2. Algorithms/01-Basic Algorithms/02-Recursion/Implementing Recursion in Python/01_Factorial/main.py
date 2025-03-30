@@ -57,3 +57,87 @@ multiplication operation (`n * ...`), which is also `O(1)`.
 The recursive version is less space-efficient due to the call stack, but both versions are linear in time.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's break it down step by step.
+
+---
+
+## **Understanding the Code**
+
+### **1. Base Case**
+The function checks if `n` is `0`:
+```
+if n == 0:
+    return 1
+```
+- This is the base case, which stops the recursion.
+- The factorial of `0` is defined as `1` (by convention: `0! = 1`).
+
+### **2. Recursive Case**
+If `n` is not `0`, the function calculates:
+```
+return n * factorial(n - 1)
+```
+- This means that the function calls itself with `n - 1`.
+- It continues calling itself until it reaches the base case (`n == 0`).
+
+---
+
+## **How the Recursion Works (Step-by-Step for `factorial(5)`)**
+
+### **Step 1: Initial Call**
+```
+factorial(5) 
+```
+- `5` is not `0`, so we compute:
+  ```
+  5 * factorial(4)
+  ```
+  
+### **Step 2: Recursive Calls**
+Each call reduces `n` by `1`:
+
+1. `factorial(5) = 5 * factorial(4)`
+2. `factorial(4) = 4 * factorial(3)`
+3. `factorial(3) = 3 * factorial(2)`
+4. `factorial(2) = 2 * factorial(1)`
+5. `factorial(1) = 1 * factorial(0)`
+
+### **Step 3: Base Case**
+When `n == 0`:
+```
+factorial(0) = 1
+```
+Now, we start returning values.
+
+---
+
+## **Returning Values (Backtracking Phase)**
+The function now returns values step by step:
+
+1. `factorial(0) = 1`
+2. `factorial(1) = 1 * 1 = 1`
+3. `factorial(2) = 2 * 1 = 2`
+4. `factorial(3) = 3 * 2 = 6`
+5. `factorial(4) = 4 * 6 = 24`
+6. `factorial(5) = 5 * 24 = 120`
+
+### **Final Answer:**
+```
+factorial(5) = 120
+```
+
+---
+
+## **Summary**
+1. **Base Case:** Stops recursion when `n == 0`.
+2. **Recursive Case:** Calls itself with `n - 1`.
+3. **Stack Unwinding:** Once the base case is reached, results are multiplied back up.
+4. **Final Answer:** `factorial(5) = 120`.
+
+"""
