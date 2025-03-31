@@ -144,12 +144,18 @@ print(fibonacci(6))  # Output: 8
 
 # Optimized Fibonacci Approach:
 
+# Import the lru_cache decorator from functools module
+# lru_cache stands for "Least Recently Used Cache"
 from functools import lru_cache
 
 
+# Apply the lru_cache decorator with no size limit (None means unlimited cache)
+# This will memoize function calls to avoid redundant calculations
 @lru_cache(None)
 def fibonacci_optimized(n):
-    return n if n <= 1 else fibonacci(n - 1) + fibonacci(n - 2)
+    # Base case: Fibonacci of 0 is 0, and Fibonacci of 1 is 1
+    return n if n <= 1 else fibonacci_optimized(n - 1) + fibonacci_optimized(n - 2)
+    # Recursive case: F(n) = F(n-1) + F(n-2)
 
 
 # Test Case:
