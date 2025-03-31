@@ -14,7 +14,7 @@ This unit explores fundamental algorithmic concepts, including asymptotic notati
 
 - Principles of recursion
 - Base case and recursive case
-- Tail recursion vs. regular recursion
+- Types of Recursion
 - Examples: Factorial, Fibonacci, Tower of Hanoi
 
 ### 3. Searching Algorithms
