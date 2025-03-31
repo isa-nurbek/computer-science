@@ -218,6 +218,8 @@ This leads to **redundant calculations**.
 - The first time `fibonacci(6)` is computed, all required subproblems are solved and **stored** in the cache.
 - The next time any of these subproblems are needed, the function **returns cached results instantly** instead of recalculating.
 
+---
+
 ### **Performance Improvement**
 
 - **Without Memoization:** Time complexity **O(2ⁿ)** (exponential).
