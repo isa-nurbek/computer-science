@@ -202,3 +202,59 @@ the longest chain of recursive calls is `n -> n-1 -> n-2 -> ... -> 0`).
 - **Space Complexity:** `O(n)` 
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation with Optimized Approach:
+
+"""
+Let's break down this optimized Fibonacci function using **memoization** with `functools.lru_cache`.
+
+### **How It Works**
+
+1. **`@lru_cache(None)` (Memoization)**  
+   - `lru_cache` is a built-in **decorator** in Python that **stores (caches)** function results.  
+   - When a function call is repeated with the same input, it **returns the cached result** instead of recalculating it.  
+   - `None` means an **unlimited cache size** (it can store all previously computed values).
+
+2. **Recursive Fibonacci Calculation**
+   - The function uses **recursion** to compute `fibonacci(n)`.
+   - The base cases:
+     ```
+     return n if n <= 1
+     ```
+     If `n` is `0` or `1`, return `n` directly.
+     
+   - Otherwise, compute Fibonacci recursively:
+     ```
+     fibonacci(n - 1) + fibonacci(n - 2)
+     ```
+     It breaks the problem into smaller Fibonacci numbers until it reaches the base cases.
+
+---
+
+### **Step-by-Step Execution for `fibonacci(6)`**
+
+#### **Without Memoization (Normal Recursion)**
+```
+fibonacci(6) = fibonacci(5) + fibonacci(4)
+fibonacci(5) = fibonacci(4) + fibonacci(3)
+fibonacci(4) = fibonacci(3) + fibonacci(2)
+fibonacci(3) = fibonacci(2) + fibonacci(1)
+fibonacci(2) = fibonacci(1) + fibonacci(0)
+```
+This leads to **redundant calculations**.
+
+#### **With `@lru_cache` (Memoization)**
+- The first time `fibonacci(6)` is computed, all required subproblems are solved and **stored** in the cache.
+- The next time any of these subproblems are needed, the function **returns cached results instantly** instead of recalculating.
+
+---
+
+### **Performance Improvement**
+- **Without Memoization:** Time complexity **O(2ⁿ)** (exponential).
+- **With `@lru_cache`:** Time complexity **O(n)** (linear), since each Fibonacci number is computed **only once**.
+
+This makes the function **much faster** for large values of `n`.
+
+"""
