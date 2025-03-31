@@ -38,8 +38,6 @@ For example:
 The time complexity is therefore **O(d)**, where `d` is the number of digits in `n`. Since `d = floor(log10(n)) + 1`,
 the time complexity can also be expressed as **O(log n)** (logarithmic in `n`).
 
----
-
 ### Space Complexity:
 
 The space complexity is determined by the maximum depth of the recursion stack.
@@ -47,8 +45,6 @@ The space complexity is determined by the maximum depth of the recursion stack.
 1. Each recursive call adds a new frame to the call stack.
 2. The maximum depth of the recursion is equal to the number of digits in `n`, which is `d = floor(log10(n)) + 1`.
 3. Thus, the space complexity is also **O(d)** or **O(log n)** (logarithmic in `n`).
-
----
 
 ### Summary:
 
@@ -68,7 +64,7 @@ The function `sum_digits(n)` calculates the sum of the digits of a given integer
 Let's break down how it works step by step.
 
 ### **Code Breakdown**
-```python
+```
 def sum_digits(n):
 ```
 - This defines a function named `sum_digits` that takes a single argument `n`, which is expected to be an integer.
