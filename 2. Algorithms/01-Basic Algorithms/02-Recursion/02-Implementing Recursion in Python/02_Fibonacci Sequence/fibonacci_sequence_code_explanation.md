@@ -136,7 +136,6 @@ The space complexity is **O(n)** (linear). Here's why:
 
 - **Time Complexity:** `O(2ⁿ)`
 - **Space Complexity:** `O(n)`
--
 
 ### Additional Notes
 
@@ -150,6 +149,8 @@ The space complexity is **O(n)** (linear). Here's why:
 A better way is to use **memoization (caching)** to store already computed results and avoid redundant calculations.
 
 **Using Memoization with Python `functools.lru_cache`:**
+
+## **Fibonacci Sequence Optimized function**
 
 ```python
 # Import the lru_cache decorator from functools module
