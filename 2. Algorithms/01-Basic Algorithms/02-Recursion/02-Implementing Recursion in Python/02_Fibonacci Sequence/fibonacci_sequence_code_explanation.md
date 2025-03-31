@@ -222,11 +222,11 @@ This leads to **redundant calculations**.
 
 ## Big O Analysis for Optimized Approach
 
-***Time and Space Complexity Analysis***
+**Time and Space Complexity Analysis:**
 
 Let's analyze the time and space complexity of the `fibonacci_optimized` function that uses `lru_cache` for memoization.
 
-***Time Complexity***
+**Time Complexity:**
 
 With `@lru_cache(None)`, the function memoizes all previously computed results. This means each unique `fibonacci_optimized(k)` for `k` from `0` to `n` is computed exactly once.
 
@@ -237,7 +237,7 @@ Thus, the total number of unique computations is `O(n)` (since we compute `fibon
 
 **Final Time Complexity:** `O(n)`.
 
-***Space Complexity***
+**Space Complexity:**
 
 The space complexity is determined by:
 
@@ -249,7 +249,7 @@ The space complexity is determined by:
 
 **Final Space Complexity:** `O(n)` (due to the cache and recursion stack).
 
-***Summary***
+**Summary:**
 
 - **Time Complexity:** `O(n)`
 - **Space Complexity:** `O(n)`
