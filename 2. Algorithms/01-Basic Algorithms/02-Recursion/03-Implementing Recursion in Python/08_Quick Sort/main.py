@@ -93,3 +93,114 @@ print(quick_sort([3, 6, 8, 10, 1, 2, 1]))
   - Best/Average Case: O(n) (due to creating new lists; can be optimized to O(log n) with in-place partitioning).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Understanding QuickSort**
+
+QuickSort is a **divide-and-conquer** sorting algorithm that:
+
+1. Selects a **pivot** element.
+2. Partitions the list into three parts:
+   - Elements **less than** the pivot.
+   - Elements **equal to** the pivot.
+   - Elements **greater than** the pivot.
+3. Recursively sorts the smaller sublists.
+4. Combines the sorted sublists to produce the final sorted array.
+
+---
+
+### **Code Breakdown**
+
+#### **Step 1: Base Case**
+```
+if len(arr) <= 1:
+    return arr
+```
+- If the list has **one or zero** elements, it is already sorted.
+- The function returns the array as is.
+
+#### **Step 2: Choosing the Pivot**
+```
+pivot = arr[len(arr) // 2]
+```
+- The pivot is chosen as the middle element of the list.
+
+#### **Step 3: Partitioning**
+```
+left = [x for x in arr if x < pivot]   # All elements less than the pivot
+middle = [x for x in arr if x == pivot]  # All elements equal to the pivot
+right = [x for x in arr if x > pivot]   # All elements greater than the pivot
+```
+- The list is divided into three parts:
+  - `left` contains elements smaller than the pivot.
+  - `middle` contains elements equal to the pivot.
+  - `right` contains elements greater than the pivot.
+
+#### **Step 4: Recursively Sorting**
+```
+return quick_sort(left) + middle + quick_sort(right)
+```
+- The function recursively sorts `left` and `right` sublists.
+- Finally, it concatenates `left + middle + right` to get the sorted array.
+
+---
+
+### **Example Walkthrough**
+
+#### **Input:**
+```
+quick_sort([3, 6, 8, 10, 1, 2, 1])
+```
+#### **First Call**
+- `arr = [3, 6, 8, 10, 1, 2, 1]`
+- `pivot = arr[len(arr) // 2] = 8`
+- Partitioning:
+  - `left = [3, 6, 1, 2, 1]`
+  - `middle = [8]`
+  - `right = [10]`
+- Recursively call `quick_sort(left)` and `quick_sort(right)`.
+
+#### **Second Call (Sorting Left: [3, 6, 1, 2, 1])**
+- `pivot = 1`
+- Partitioning:
+  - `left = []`
+  - `middle = [1, 1]`
+  - `right = [3, 6, 2]`
+- Recursively call `quick_sort(left)` (returns `[]`) and `quick_sort(right)`.
+
+#### **Third Call (Sorting Right: [3, 6, 2])**
+- `pivot = 6`
+- Partitioning:
+  - `left = [3, 2]`
+  - `middle = [6]`
+  - `right = []`
+- Recursively call `quick_sort(left)` and `quick_sort(right)`.
+
+#### **Fourth Call (Sorting Left: [3, 2])**
+- `pivot = 2`
+- Partitioning:
+  - `left = []`
+  - `middle = [2]`
+  - `right = [3]`
+- Recursively call `quick_sort(left)` (returns `[]`) and `quick_sort(right)` (returns `[3]`).
+
+---
+
+### **Final Sorted Output**
+
+Combining all recursive calls:
+```
+[] + [1, 1] + [2] + [3] + [6] + [8] + [10] = [1, 1, 2, 3, 6, 8, 10]
+```
+So, the final sorted array is:
+```
+[1, 1, 2, 3, 6, 8, 10]
+```
+
+This implementation is **not in-place**, as it creates new lists (`left`, `middle`, `right`) rather than swapping elements.
+
+"""
