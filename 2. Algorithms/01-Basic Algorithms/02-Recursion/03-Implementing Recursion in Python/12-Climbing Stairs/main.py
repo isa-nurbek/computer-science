@@ -80,3 +80,102 @@ for `n = 5`). You can optimize it using:
 if optimized further.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This Python function `climb_stairs(n)` is solving the classic "Climbing Stairs" problem using recursion. 
+Let's break it down step by step:
+
+### **Problem Statement**
+You have `n` steps to climb. At each step, you can either take 1 step or 2 steps at a time. How many distinct ways
+can you climb to the top?
+
+For example:
+- `n = 1` → Only 1 way: `[1]`
+- `n = 2` → Two ways: `[1,1]` or `[2]`
+- `n = 3` → Three ways: `[1,1,1]`, `[1,2]`, `[2,1]`
+
+### **Code Explanation**
+```
+def climb_stairs(n):
+    if n <= 2:
+        return n  # Base case
+    else:
+        return climb_stairs(n - 1) + climb_stairs(n - 2)
+```
+
+#### **Step-by-step Execution for `n = 5`**
+
+The function follows a recursive approach, breaking the problem into smaller subproblems.
+
+1. `climb_stairs(5)`  
+   → `climb_stairs(4) + climb_stairs(3)`
+
+2. `climb_stairs(4)`  
+   → `climb_stairs(3) + climb_stairs(2)`
+
+3. `climb_stairs(3)`  
+   → `climb_stairs(2) + climb_stairs(1)`
+
+4. **Base Cases**:  
+   - `climb_stairs(2) = 2`  
+   - `climb_stairs(1) = 1`
+
+Now, we can evaluate step by step:
+
+```
+climb_stairs(3) = climb_stairs(2) + climb_stairs(1)
+                 = 2 + 1
+                 = 3
+```
+
+```
+climb_stairs(4) = climb_stairs(3) + climb_stairs(2)
+                 = 3 + 2
+                 = 5
+```
+
+```
+climb_stairs(5) = climb_stairs(4) + climb_stairs(3)
+                 = 5 + 3
+                 = 8
+```
+
+### **Final Output**
+```
+print(climb_stairs(5))  # Output: 8
+```
+There are **8 ways** to climb 5 stairs.
+
+---
+
+### **Optimized Approach: Dynamic Programming**
+
+To avoid redundant calculations, we can use **memoization (Top-Down)** or **tabulation (Bottom-Up)**.
+
+Here’s a better **Bottom-Up DP (Iterative) solution**:
+
+"""
+
+# Optimized Approach:
+
+
+def climb_stairs(n):
+    if n <= 2:
+        return n
+    a, b = 1, 2
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+    return b
+
+
+"""
+- **Time Complexity:** **O(n)**
+- **Space Complexity:** **O(1)** (only two variables `a` and `b` are used)
+
+This is much faster and avoids deep recursion!
+
+"""
