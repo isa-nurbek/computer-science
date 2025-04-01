@@ -64,7 +64,7 @@ def merge_sort(arr):
 This defines a function `merge_sort` that takes an array (`arr`) as an input.
 
 ```python
-    if len(arr) > 1:
+if len(arr) > 1:
 ```
 
 - The base case of the recursion: if the array has one or zero elements, it's already sorted, so the function returns without doing anything.
@@ -75,9 +75,9 @@ This defines a function `merge_sort` that takes an array (`arr`) as an input.
 ## **Step 2: Splitting the Array**
 
 ```python
-        mid = len(arr) // 2
-        left = arr[:mid]
-        right = arr[mid:]
+mid = len(arr) // 2
+left = arr[:mid]
+right = arr[mid:]
 ```
 
 - We **find the middle index** of the array.
@@ -95,8 +95,8 @@ For example, if `arr = [38, 27, 43, 3, 9, 82, 10]`, we get:
 ## **Step 3: Recursively Sorting Each Half**
 
 ```python
-        merge_sort(left)
-        merge_sort(right)
+merge_sort(left)
+merge_sort(right)
 ```
 
 - We **recursively** apply `merge_sort` on the `left` and `right` subarrays until each subarray contains only one element.
@@ -121,7 +121,7 @@ At this point, all the arrays have only **one element**, so they are inherently 
 Once the subarrays are sorted, we merge them back in sorted order.
 
 ```python
-        i = j = k = 0
+i = j = k = 0
 ```
 
 - `i` is the index for `left`
@@ -131,14 +131,14 @@ Once the subarrays are sorted, we merge them back in sorted order.
 ### **Merging Process**
 
 ```python
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-                arr[k] = left[i]
-                i += 1
-            else:
-                arr[k] = right[j]
-                j += 1
-            k += 1
+while i < len(left) and j < len(right):
+    if left[i] < right[j]:
+        arr[k] = left[i]
+        i += 1
+    else:
+        arr[k] = right[j]
+        j += 1
+    k += 1
 ```
 
 - We compare elements from `left` and `right` one by one.
@@ -151,19 +151,19 @@ Merging `[27]` and `[43]`:
 - Move to the next element in `left`. Since no more elements are left, we take the remaining `43`.
 
 ```python
-        while i < len(left):
-            arr[k] = left[i]
-            i += 1
-            k += 1
+while i < len(left):
+    arr[k] = left[i]
+    i += 1
+    k += 1
 ```
 
 - If there are remaining elements in `left`, we add them to `arr`.
 
 ```python
-        while j < len(right):
-            arr[k] = right[j]
-            j += 1
-            k += 1
+while j < len(right):
+    arr[k] = right[j]
+    j += 1
+    k += 1
 ```
 
 - If there are remaining elements in `right`, we add them to `arr`.
