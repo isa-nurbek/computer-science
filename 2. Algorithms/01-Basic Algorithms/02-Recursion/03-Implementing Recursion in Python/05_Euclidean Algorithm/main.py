@@ -53,3 +53,72 @@ need the call stack.
 - Space Complexity (iterative): **O(1)** (if implemented without recursion)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This function calculates the **Greatest Common Divisor (GCD)** of two numbers using **Euclid’s Algorithm**.
+Let's go through the function step by step.
+
+
+1. **Base Case:**
+   - If `b == 0`, the function returns `a`. This is the stopping condition.
+   - The GCD of any number and `0` is the number itself (`GCD(a, 0) = a`).
+
+2. **Recursive Case:**
+   - Otherwise, the function calls itself with new arguments: `gcd(b, a % b)`.
+   - This follows the rule:  
+
+    ```
+    GCD(a, b) = GCD(b, a % b)
+    ```
+
+   - This step keeps reducing `a` and `b` until `b` becomes `0`, at which point `a` is the GCD.
+
+---
+
+### **Example Execution:**
+Let's trace `gcd(48, 18)` step by step.
+
+#### **Step 1:**
+```
+gcd(48, 18)
+```
+- `b` is not `0`, so we compute:
+  - `a % b = 48 % 18 = 12`
+  - Call `gcd(18, 12)`
+
+#### **Step 2:**
+```
+gcd(18, 12)
+```
+- `b` is not `0`, so we compute:
+  - `a % b = 18 % 12 = 6`
+  - Call `gcd(12, 6)`
+
+#### **Step 3:**
+```
+gcd(12, 6)
+```
+- `b` is not `0`, so we compute:
+  - `a % b = 12 % 6 = 0`
+  - Call `gcd(6, 0)`
+
+#### **Step 4:**
+```
+gcd(6, 0)
+```
+- Now `b == 0`, so return `6`.
+
+**Final Output:** `6`
+
+---
+
+### **Key Takeaways:**
+- Uses **recursion** based on **Euclidean Algorithm**.
+- Reduces the problem size significantly at each step.
+- Stops when `b == 0`, returning the greatest common divisor.
+
+"""
