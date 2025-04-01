@@ -258,6 +258,4 @@ These are the **two valid solutions** for `N = 4`.
 - The **backtracking step removes** the queen when needed.
 - This ensures **only valid configurations** are stored in `res`.
 
-Would you like a visualization of how the queens are placed step by step? 😊
-
 """
