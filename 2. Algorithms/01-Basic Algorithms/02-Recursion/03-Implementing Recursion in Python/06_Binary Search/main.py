@@ -108,3 +108,96 @@ The recursive version is elegant but slightly less space-efficient than the iter
 both have the same **O(log n)** time complexity.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+### **Understanding the Binary Search Code**
+
+The given code implements a **recursive** binary search algorithm, which efficiently searches for a target element
+in a **sorted** list.
+
+### **Code Breakdown**
+```
+def binary_search(arr, low, high, target):
+```
+- This function takes four parameters:
+  - `arr`: The sorted list in which we search for the target.
+  - `low`: The starting index of the search range.
+  - `high`: The ending index of the search range.
+  - `target`: The value we are searching for.
+
+---
+
+#### **Base Case: Stopping Condition**
+```
+if low > high:
+    return -1
+```
+- If `low` is greater than `high`, it means the element is not found, so we return `-1`.
+
+---
+
+#### **Finding the Middle Index**
+```
+mid = (low + high) // 2
+```
+- The middle index `mid` is calculated using integer division.
+
+---
+
+#### **Checking the Middle Element**
+```
+if arr[mid] == target:
+    return mid
+```
+- If the middle element is equal to `target`, we return `mid`, as we have found the target.
+
+---
+
+#### **Recursive Cases**
+
+If the target is greater than the middle element:
+```
+elif arr[mid] < target:
+    return binary_search(arr, mid + 1, high, target)
+```
+- This means the target is in the right half of the array.
+- We call `binary_search` on the right half (`mid + 1` to `high`).
+
+If the target is smaller than the middle element:
+```
+else:
+    return binary_search(arr, low, mid - 1, target)
+```
+- This means the target is in the left half of the array.
+- We call `binary_search` on the left half (`low` to `mid - 1`).
+
+---
+
+### **Example Execution**
+
+Let's analyze how the function works when searching for `5` in `arr = [1, 3, 5, 7, 9]`.
+
+#### **First Call**
+```
+binary_search([1, 3, 5, 7, 9], 0, 4, 5)
+```
+- `low = 0`, `high = 4`
+- `mid = (0 + 4) // 2 = 2`
+- `arr[2] = 5`, which matches the target.
+- **Return `2`** (Index of `5` in the array).
+
+#### **Final Output**
+```
+2
+```
+
+### **Conclusion**
+- This is an efficient search algorithm for sorted lists.
+- The recursive approach is elegant but has extra function call overhead.
+- An **iterative** version can reduce space complexity to **O(1)**.
+
+"""
