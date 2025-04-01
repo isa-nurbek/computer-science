@@ -1,4 +1,4 @@
-# Code Explanation: Euclidean Algorithm Implementing in Python
+# Code Explanation: Greatest Common Divisor (Euclidean Algorithm) Implementing in Python
 
 ## **Euclidean Algorithm function**
 
