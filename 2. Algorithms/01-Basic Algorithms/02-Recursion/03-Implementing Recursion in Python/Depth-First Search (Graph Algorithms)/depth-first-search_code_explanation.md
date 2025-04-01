@@ -191,20 +191,11 @@ A B D E F C
 
 ---
 
+## Big O Analysis
+
+## Time and Space Complexity Analysis
+
 Let's analyze the time and space complexity of the provided DFS (Depth-First Search) implementation.
-
-### Given Graph
-
-```python
-graph = {
-    'A': ['B', 'C'],
-    'B': ['D', 'E'],
-    'C': ['F'],
-    'D': [],
-    'E': ['F'],
-    'F': []
-}
-```
 
 ### Time Complexity
 
