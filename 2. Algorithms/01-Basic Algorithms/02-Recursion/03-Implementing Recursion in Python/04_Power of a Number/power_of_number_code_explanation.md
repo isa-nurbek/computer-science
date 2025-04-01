@@ -1,6 +1,6 @@
 # Code Explanation: Power Of a Number Implementing in Python
 
-## **Sower Of a Number function**
+## **Power Of a Number function**
 
 ```python
 def power(base, exp):
