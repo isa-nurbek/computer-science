@@ -140,8 +140,8 @@ The maximum depth here is 5 (e.g., `5 → 4 → 3 → 2 → 1`), so the space co
 
 ### Summary
 
-- **Time Complexity**: O(2ⁿ)
-- **Space Complexity**: O(n)
+- **Time Complexity**: `O(2ⁿ)`
+- **Space Complexity**: `O(n)`
 
 ### Optimization Note
 
@@ -168,7 +168,7 @@ def climb_stairs(n):
     return b
 ```
 
-- **Time Complexity:** **O(n)**
-- **Space Complexity:** **O(1)** (only two variables `a` and `b` are used)
+- **Time Complexity:** **`O(n)`**
+- **Space Complexity:** **`O(1)`** (only two variables `a` and `b` are used)
 
 This is much faster and avoids deep recursion!
