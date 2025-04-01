@@ -118,3 +118,146 @@ This is a classic backtracking problem where the time complexity is exponential 
 approach due to pruning. The space complexity is linear in terms of auxiliary space.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This Python function `solve_n_queens(n)` is an implementation of the **N-Queens problem** using **backtracking**.
+The problem is to place `n` queens on an `n x n` chessboard such that no two queens attack each other.
+
+### **Understanding the Problem**
+
+- Queens can attack **horizontally, vertically, and diagonally**.
+- The goal is to place `n` queens such that **no two queens share the same row, column, or diagonal**.
+
+---
+
+## **Step-by-Step Code Explanation**
+
+The function **`solve_n_queens(n)`** solves the problem by using **backtracking**.
+
+### **1. Function Definition**
+```
+def solve_n_queens(n):
+```
+- This is the main function that initializes the chessboard and calls the `backtrack` function to find all valid solutions.
+
+### **2. Backtracking Helper Function**
+```
+def backtrack(row, cols, diags, anti_diags, board, res):
+```
+- This is a recursive function that **places queens row by row**.
+- It uses **sets** to keep track of **attacked columns and diagonals**.
+
+---
+
+### **3. Base Case - Stopping Condition**
+```
+if row == n:
+    res.append(["".join(row) for row in board])
+    return
+```
+- If all `n` queens have been placed (`row == n`), we **add the current board configuration** to `res`.
+
+---
+
+### **4. Loop through each column**
+```
+for col in range(n):
+```
+- We try to place a queen in every column of the current row.
+
+---
+
+### **5. Checking if the Position is Safe**
+```
+diag = row - col
+anti_diag = row + col
+if col in cols or diag in diags or anti_diag in anti_diags:
+    continue
+```
+- A queen **cannot be placed** in a column if:
+  - Another queen is already in that **column** (`col in cols`).
+  - Another queen is already in the **main diagonal** (`diag in diags`).
+  - Another queen is already in the **anti-diagonal** (`anti_diag in anti_diags`).
+
+If the column is unsafe, we skip it (`continue`).
+
+---
+
+### **6. Place the Queen**
+```
+cols.add(col)
+diags.add(diag)
+anti_diags.add(anti_diag)
+board[row][col] = 'Q'
+```
+- If the position is **safe**, we:
+  - Mark the column as occupied.
+  - Mark the diagonals as occupied.
+  - Place the queen (`'Q'`) on the board.
+
+---
+
+### **7. Recursive Call**
+```
+backtrack(row + 1, cols, diags, anti_diags, board, res)
+```
+- Move to the **next row** and try to place the next queen.
+
+---
+
+### **8. Backtracking (Undo the Move)**
+```
+board[row][col] = '.'
+cols.remove(col)
+diags.remove(diag)
+anti_diags.remove(anti_diag)
+```
+- If the recursive call **fails**, we **undo the move** and try the next column.
+
+---
+
+### **9. Initialize Board and Start Backtracking**
+```
+res = []
+board = [['.' for _ in range(n)] for _ in range(n)]
+backtrack(0, set(), set(), set(), board, res)
+return res
+```
+- Create an **empty chessboard**.
+- Start the backtracking function from `row = 0`.
+- Return all valid board configurations.
+
+---
+
+## **Example Walkthrough**
+Let's run `solve_n_queens(4)`.
+```
+[
+  [".Q..",  //  Q in column 1
+   "...Q",  //  Q in column 4
+   "Q...",  //  Q in column 0
+   "..Q."], //  Q in column 2
+
+  ["..Q.",  //  Q in column 2
+   "Q...",  //  Q in column 0
+   "...Q",  //  Q in column 4
+   ".Q.."]  //  Q in column 1
+]
+```
+These are the **two valid solutions** for `N = 4`.
+
+---
+
+## **Summary**
+- The algorithm **explores all possibilities** using recursion.
+- It **prunes invalid paths** using sets (`cols`, `diags`, `anti_diags`).
+- The **backtracking step removes** the queen when needed.
+- This ensures **only valid configurations** are stored in `res`.
+
+Would you like a visualization of how the queens are placed step by step? 😊
+
+"""
