@@ -189,3 +189,54 @@ A B D E F C
 - DFS **follows a depth-first traversal order**.
 - `'F'` was already visited when processing `'C'`, so it was skipped.
 
+---
+
+Let's analyze the time and space complexity of the provided DFS (Depth-First Search) implementation.
+
+### Given Graph
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+```
+
+### Time Complexity
+
+1. **Visiting Nodes**: Each node is visited exactly once because once a node is marked as visited (added to the `visited` set), it won't be processed again.
+   - Number of nodes: Let `V` be the number of vertices (nodes). Here, `V = 6` (`A`, `B`, `C`, `D`, `E`, `F`).
+
+2. **Traversing Edges**: For each node, we iterate through all its neighbors (edges). In the worst case, we traverse every edge in the graph.
+   - Number of edges: Let `E` be the number of edges. Here, `E = 5` (`A->B`, `A->C`, `B->D`, `B->E`, `E->F`).
+
+3. **Operations Inside `dfs`**:
+   - Checking `if node not in visited`: This is an `O(1)` operation on average for a set.
+   - Printing the node: `O(1)`.
+   - Adding to the `visited` set: `O(1)` on average.
+   - Iterating through neighbors: Proportional to the number of edges.
+
+Thus, the total time complexity is `O(V + E)`. This is because we visit each node once and traverse each edge once.
+
+### Space Complexity
+
+1. **Visited Set**: The `visited` set stores all nodes, so it takes `O(V)` space.
+2. **Recursion Stack**: In the worst case, the recursion stack can grow up to `O(V)` (e.g., if the graph is a straight line like `A -> B -> C -> D -> E -> F`).
+   - In a balanced tree-like structure, the recursion stack would be `O(height of the tree)`.
+
+Thus, the total space complexity is `O(V)` (due to the visited set and recursion stack).
+
+### Summary
+
+- **Time Complexity**: `O(V + E)`
+- **Space Complexity**: `O(V)`
+
+### For the Given Graph
+
+- `V = 6`, `E = 5`.
+- Time complexity: `O(6 + 5) = O(11)` (linear in the size of the graph).
+- Space complexity: `O(6)` (for the visited set and recursion stack).
