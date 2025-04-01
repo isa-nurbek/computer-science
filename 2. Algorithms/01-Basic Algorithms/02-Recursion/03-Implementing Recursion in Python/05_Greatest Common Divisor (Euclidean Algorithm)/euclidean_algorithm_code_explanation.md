@@ -1,6 +1,6 @@
 # Code Explanation: Greatest Common Divisor (Euclidean Algorithm) Implementing in Python
 
-## **Euclidean Algorithm function**
+## **Greatest Common Divisor function**
 
 ```python
 def gcd(a, b):
