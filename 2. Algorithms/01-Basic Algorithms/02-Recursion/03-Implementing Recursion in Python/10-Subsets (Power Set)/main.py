@@ -89,3 +89,117 @@ leading to `2ⁿ` subsets.
 This is optimal for generating all subsets, as the output itself is of size O(n ⋅ 2ⁿ).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+This code generates all possible subsets of a given list of numbers using recursion. Let's break it down step by step:
+
+### **Understanding the function:**
+```
+def subsets(nums):
+```
+- This function takes a list of numbers `nums` as input and returns a list of all possible subsets.
+
+---
+
+### **Base Case (Stopping Condition):**
+```
+if not nums:
+    return [[]]
+```
+- If `nums` is empty (`nums == []`), it means we've reached the end of the recursion.
+- In this case, the only subset is the empty subset `[[]]`, so we return that.
+
+---
+
+### **Recursive Case:**
+```
+without_first = subsets(nums[1:])
+```
+- Here, we call `subsets` recursively on the rest of the list (`nums[1:]`), which means we are generating subsets **without
+including the first element**.
+- This step keeps reducing the size of the list until it eventually reaches the base case.
+
+---
+
+```
+with_first = [[nums[0]] + subset for subset in without_first]
+```
+- This creates new subsets by **including the first element** (`nums[0]`) in each subset of `without_first`.
+- It goes through each subset in `without_first` and adds `nums[0]` to it.
+
+---
+
+### **Combining Both Cases:**
+```
+return with_first + without_first
+```
+- We return both groups of subsets:
+  - `with_first`: subsets that include `nums[0]`
+  - `without_first`: subsets that exclude `nums[0]`
+
+---
+
+## **Step-by-step Execution for [1, 2, 3]**
+
+### **Recursive Breakdown**
+1. `subsets([1, 2, 3])`
+   - First element: `1`
+   - Compute `subsets([2, 3])`
+
+2. `subsets([2, 3])`
+   - First element: `2`
+   - Compute `subsets([3])`
+
+3. `subsets([3])`
+   - First element: `3`
+   - Compute `subsets([])`
+
+4. `subsets([])  → returns [[]]` (base case reached)
+
+---
+
+### **Building Subsets Bottom-Up**
+- `subsets([3])`:
+  ```
+  without_first = [[]]
+  with_first = [[3]]
+  return [[3], []]
+  ```
+  
+- `subsets([2, 3])`:
+  ```
+  without_first = [[3], []]
+  with_first = [[2, 3], [2]]
+  return [[2, 3], [2], [3], []]
+  ```
+
+- `subsets([1, 2, 3])`:
+  ```
+  without_first = [[2, 3], [2], [3], []]
+  with_first = [[1, 2, 3], [1, 2], [1, 3], [1]]
+  return [[1, 2, 3], [1, 2], [1, 3], [1], [2, 3], [2], [3], []]
+  ```
+
+---
+
+## **Final Output**
+```
+[[1, 2, 3], [1, 2], [1, 3], [1], [2, 3], [2], [3], []]
+```
+This is the **power set**, which contains all possible subsets of `[1, 2, 3]`.
+
+---
+
+## **Key Takeaways**
+1. **Recursive approach**: We break the problem into smaller subproblems.
+2. **Base case**: If the list is empty, return `[[]]`.
+3. **Subset formation**:
+   - Find subsets **without** the first element.
+   - Create new subsets **with** the first element.
+4. **Combine** both cases to form the full list of subsets.
+
+"""
