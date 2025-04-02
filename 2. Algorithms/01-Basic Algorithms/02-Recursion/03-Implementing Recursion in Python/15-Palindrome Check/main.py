@@ -75,3 +75,77 @@ If we were to implement this **iteratively** (using a loop instead of recursion)
   *(Can be optimized to `O(1)` with an iterative approach.)*
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The function `is_palindrome` is a recursive function that checks whether a given string `s` is a palindrome.
+A palindrome is a word, phrase, or sequence that reads the same forward and backward.
+
+### **Understanding the Code:**
+
+#### **Function Signature:**
+```
+def is_palindrome(s, left=0, right=None):
+```
+- `s`: The input string that needs to be checked.
+- `left`: The left index (default is `0`, which starts from the first character).
+- `right`: The right index (default is `None`, which is set to the last character index in the first call).
+
+#### **Handling Default `right` Value:**
+```
+if right is None:
+    right = len(s) - 1 
+```
+- If `right` is `None` (which happens only in the first call), we initialize it to `len(s) - 1`, which is the index of
+the last character in the string.
+
+#### **Base Case (Stopping Condition):**
+```
+if left >= right:
+    return True
+```
+- If `left` crosses or meets `right`, it means all corresponding characters have been checked, and they matched.
+- At this point, we return `True`, meaning the string is a palindrome.
+
+#### **Recursive Case:**
+```
+return s[left] == s[right] and is_palindrome(s, left + 1, right - 1)
+```
+- This checks if the characters at positions `left` and `right` are the same.
+- If they are different, the function immediately returns `False`, meaning the string is **not** a palindrome.
+- If they are the same, the function makes a **recursive call** to check the next pair of characters: 
+  - `left + 1` (move one step right)
+  - `right - 1` (move one step left)
+
+---
+
+### **How Recursion Works Step-by-Step:**
+
+#### **Example 1: Checking "madam"**
+```
+is_palindrome("madam")
+```
+- **First Call:** `left = 0`, `right = 4` → `'m' == 'm'` → Recursive call with `left = 1`, `right = 3`
+- **Second Call:** `left = 1`, `right = 3` → `'a' == 'a'` → Recursive call with `left = 2`, `right = 2`
+- **Third Call:** `left = 2`, `right = 2` → (Base case `left >= right` met) → Returns `True`
+- **Unwinding:** The recursive calls return `True` all the way up → Final result: `True`
+
+#### **Example 2: Checking "hello"**
+```
+is_palindrome("hello")
+```
+- **First Call:** `left = 0`, `right = 4` → `'h' != 'o'` → Returns `False`
+- Since `False` is returned, no further recursive calls are made.
+
+---
+
+### **Key Takeaways:**
+- The function **compares characters from both ends** moving towards the center.
+- It **stops early** if a mismatch is found.
+- It uses **recursion** to reduce the problem to a smaller substring in each step.
+- The **base case** ensures that the recursion stops when `left` meets `right`.
+
+"""
