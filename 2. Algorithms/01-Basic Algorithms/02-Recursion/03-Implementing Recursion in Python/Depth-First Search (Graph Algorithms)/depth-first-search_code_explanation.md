@@ -47,8 +47,6 @@ dfs(graph, "A", visited)  # Output: A B D E F C
 
 The given Python code implements **Depth-First Search (DFS)** using recursion to traverse a directed graph represented as an **adjacency list**.
 
----
-
 ### **1. Understanding the Graph Representation**
 
 The `graph` is a dictionary where:
@@ -69,7 +67,7 @@ graph = {
 
 #### **Graph Visualization**
 
-```
+```plaintext
      A
     / \
    B   C
@@ -91,15 +89,6 @@ graph = {
 ### **2. Depth-First Search (DFS) Function**
 
 #### **Function Definition**
-
-```python
-def dfs(graph, node, visited):
-    if node not in visited:
-        print(node, end=" ")
-        visited.add(node)
-        for neighbor in graph[node]:
-            dfs(graph, neighbor, visited)
-```
 
 - `graph`: The adjacency list representation of the graph.
 - `node`: The current node being visited.
@@ -173,7 +162,7 @@ dfs(graph, 'A', visited)
 
 ### **5. Final Output**
 
-```
+```plaintext
 A B D E F C
 ```
 
