@@ -78,3 +78,130 @@ Thus, the space complexity is O(n).
 - **Space Complexity:** O(n) (linear space, due to recursion depth).
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The **Tower of Hanoi** is a classic problem in recursion. Let's break the code down step by step and understand how it works.
+
+## **Understanding the Problem**
+
+There are three rods: **Source (A)**, **Target (C)**, and **Auxiliary (B)**. The goal is to move **n** disks from the
+Source rod to the Target rod, following these rules:
+
+1. Only one disk can be moved at a time.
+2. A disk can only be placed on an empty rod or on top of a larger disk.
+3. You must use the Auxiliary rod as an intermediate step.
+
+---
+
+## **Breaking Down the Code**
+
+### **Function Definition**
+```
+def tower_of_hanoi(n, source, target, auxiliary):
+```
+- `n`: Number of disks.
+- `source`: The rod from which the disks are moved.
+- `target`: The rod to which the disks need to be moved.
+- `auxiliary`: The rod used as a helper.
+
+### **Base Case**
+```
+if n == 1:
+    print(f"Move disk 1 from {source} to {target}")
+    return
+```
+- If there is only **one disk**, it is directly moved from `source` to `target`.
+
+### **Recursive Case**
+```
+tower_of_hanoi(n - 1, source, auxiliary, target)
+```
+- Move **n - 1 disks** from `source` to `auxiliary` using `target` as the helper.
+
+```
+print(f"Move disk {n} from {source} to {target}")
+```
+- Move the **nth (largest) disk** directly from `source` to `target`.
+
+```
+tower_of_hanoi(n - 1, auxiliary, target, source)
+```
+- Move the **n - 1 disks** from `auxiliary` to `target`, using `source` as the helper.
+
+---
+
+## **Recursive Execution for `tower_of_hanoi(3, 'A', 'C', 'B')`**
+
+Let's go step by step with **n = 3**:
+
+### **Step 1: Move `n-1 = 2` disks from `A` to `B` using `C`**
+1. Move **disk 1** from **A → C**.
+2. Move **disk 2** from **A → B**.
+3. Move **disk 1** from **C → B**.
+
+### **Step 2: Move `disk 3` from `A` to `C`**
+4. Move **disk 3** from **A → C**.
+
+### **Step 3: Move `n-1 = 2` disks from `B` to `C` using `A`**
+5. Move **disk 1** from **B → A**.
+6. Move **disk 2** from **B → C**.
+7. Move **disk 1** from **A → C**.
+
+### **Final Output**
+```
+Move disk 1 from A to C
+Move disk 2 from A to B
+Move disk 1 from C to B
+Move disk 3 from A to C
+Move disk 1 from B to A
+Move disk 2 from B to C
+Move disk 1 from A to C
+```
+
+---
+
+## **How Recursion Works Here**
+At each step, we reduce the problem size (`n` decreases) until we reach the base case (`n == 1`).
+The recursion tree for `n = 3` looks like this:
+
+```
+tower_of_hanoi(3, A, C, B)
+│
+├── tower_of_hanoi(2, A, B, C) 
+│   ├── tower_of_hanoi(1, A, C, B) → "Move disk 1 from A to C"
+│   ├── Move disk 2 from A to B
+│   ├── tower_of_hanoi(1, C, B, A) → "Move disk 1 from C to B"
+│
+├── Move disk 3 from A to C
+│
+├── tower_of_hanoi(2, B, C, A)
+│   ├── tower_of_hanoi(1, B, A, C) → "Move disk 1 from B to A"
+│   ├── Move disk 2 from B to C
+│   ├── tower_of_hanoi(1, A, C, B) → "Move disk 1 from A to C"
+```
+
+Each call follows the same pattern, moving **smaller subproblems** until reaching the simplest case (`n = 1`).
+
+---
+
+## **Time Complexity**
+Since each move follows a recursive pattern of **T(n) = 2T(n-1) + 1**, the **time complexity** is **O(2ⁿ - 1) ≈ O(2ⁿ)**,
+which grows exponentially.
+
+---
+
+## **Key Takeaways**
+- The algorithm **recursively** breaks the problem into **smaller subproblems**.
+- The **base case** is `n == 1`, which is directly moved.
+- The **recursive case** follows:
+  1. Move `n-1` disks from Source → Auxiliary.
+  2. Move the largest disk from Source → Target.
+  3. Move `n-1` disks from Auxiliary → Target.
+
+This problem is a great way to understand **recursion** and **divide-and-conquer strategies**! 
+
+"""
