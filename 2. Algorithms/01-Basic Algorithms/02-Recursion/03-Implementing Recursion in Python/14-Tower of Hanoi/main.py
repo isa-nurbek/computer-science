@@ -43,3 +43,38 @@ Move disk 1 from B to A
 Move disk 2 from B to C
 Move disk 1 from A to C
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis
+
+### Time Complexity:
+
+The time complexity can be derived from the recurrence relation:
+- For `n == 1`, the time is constant: T(1) = 1.
+- For `n > 1`, the time is: T(n) = 2 ⋅ T(n - 1) + 1.
+
+This is because the function makes two recursive calls with `n - 1` disks and performs a constant amount of work
+(the `if` check and the `return`).
+
+#### Solving the Recurrence:
+The recurrence T(n) = 2 ⋅ T(n - 1) + 1 is a standard recurrence for Tower of Hanoi. Its solution is: T(n) = 2ⁿ - 1
+
+Thus, the time complexity is O(2ⁿ).
+
+### Space Complexity:
+
+The space complexity is determined by the maximum depth of the recursion stack. 
+- The recursion depth is `n` because each recursive call reduces `n` by 1 until `n == 1`.
+- At each recursion level, a constant amount of space is used (for the function call stack frame).
+
+Thus, the space complexity is O(n).
+
+### Summary:
+- **Time Complexity:** O(2ⁿ) (exponential time).
+- **Space Complexity:** O(n) (linear space, due to recursion depth).
+
+"""
