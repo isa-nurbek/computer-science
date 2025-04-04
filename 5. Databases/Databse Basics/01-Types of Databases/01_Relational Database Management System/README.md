@@ -186,3 +186,173 @@ An **RDBMS** is a system to manage structured data efficiently using:
 - Relationships for flexibility
 
 It’s the backbone of many applications in **finance**, **e-commerce**, **healthcare**, **education**, etc.
+
+---
+
+## Examples using SQL commands AND how to normalize a database design from scratch
+
+## 🔶 PART 1: Hands-on SQL Example
+
+Imagine a **Library Management System**. Here's how we can model it and interact using SQL.
+
+### ✅ Step 1: Create Tables
+
+```sql
+-- Book Table
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY,
+    Title VARCHAR(100),
+    Author VARCHAR(100),
+    Genre VARCHAR(50)
+);
+
+-- Member Table
+CREATE TABLE Members (
+    MemberID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    JoinDate DATE
+);
+
+-- Borrow Table (Relationship between Members and Books)
+CREATE TABLE BorrowedBooks (
+    BorrowID INT PRIMARY KEY,
+    BookID INT,
+    MemberID INT,
+    BorrowDate DATE,
+    ReturnDate DATE,
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (MemberID) REFERENCES Members(MemberID)
+);
+```
+
+---
+
+### ✅ Step 2: Insert Some Data
+
+```sql
+-- Insert Books
+INSERT INTO Books VALUES (1, '1984', 'George Orwell', 'Dystopian');
+INSERT INTO Books VALUES (2, 'To Kill a Mockingbird', 'Harper Lee', 'Classic');
+
+-- Insert Members
+INSERT INTO Members VALUES (1, 'Alice Smith', '2023-01-10');
+INSERT INTO Members VALUES (2, 'Bob Johnson', '2023-02-15');
+
+-- Insert Borrowed Records
+INSERT INTO BorrowedBooks VALUES (1, 1, 1, '2023-03-01', '2023-03-15');
+INSERT INTO BorrowedBooks VALUES (2, 2, 2, '2023-03-05', NULL);
+```
+
+---
+
+### ✅ Step 3: Run Queries
+
+- **Find all borrowed books:**
+
+```sql
+SELECT Title, Name, BorrowDate, ReturnDate
+FROM BorrowedBooks
+JOIN Books ON BorrowedBooks.BookID = Books.BookID
+JOIN Members ON BorrowedBooks.MemberID = Members.MemberID;
+```
+
+- **List members who haven't returned books:**
+
+```sql
+SELECT Name, Title
+FROM BorrowedBooks
+JOIN Books ON BorrowedBooks.BookID = Books.BookID
+JOIN Members ON BorrowedBooks.MemberID = Members.MemberID
+WHERE ReturnDate IS NULL;
+```
+
+---
+
+## 🔶 PART 2: Database Normalization
+
+**Normalization** is the process of structuring a database to reduce redundancy and improve data integrity.
+
+Let’s walk through the steps using a **Student Course Registration** system.
+
+---
+
+### 🎯 Raw Table (Unnormalized / Flat Table)
+
+| StudentID | StudentName | Course1  | Course2  | Course3  |
+|-----------|-------------|----------|----------|----------|
+| 1         | Alice       | Math     | Physics  | NULL     |
+| 2         | Bob         | English  | History  | Math     |
+
+Problems:
+
+- Redundant course names
+- Difficult to query
+- Not scalable (Course4, Course5...?)
+
+---
+
+### ✅ First Normal Form (1NF)
+
+**Rule**: Atomic columns (no multivalued fields)
+
+Break into separate rows for each course:
+
+| StudentID | StudentName | Course   |
+|-----------|-------------|----------|
+| 1         | Alice       | Math     |
+| 1         | Alice       | Physics  |
+| 2         | Bob         | English  |
+| 2         | Bob         | History  |
+| 2         | Bob         | Math     |
+
+---
+
+### ✅ Second Normal Form (2NF)
+
+**Rule**: Remove partial dependencies (non-key attributes depend on the whole key)
+
+Split into:
+
+**Students Table:**
+
+| StudentID | StudentName |
+|-----------|-------------|
+| 1         | Alice       |
+| 2         | Bob         |
+
+**Courses Table:**
+
+| CourseID | CourseName |
+|----------|------------|
+| 101      | Math       |
+| 102      | Physics    |
+| 103      | English    |
+| 104      | History    |
+
+**StudentCourses Table:**
+
+| StudentID | CourseID |
+|-----------|----------|
+| 1         | 101      |
+| 1         | 102      |
+| 2         | 103      |
+| 2         | 104      |
+| 2         | 101      |
+
+---
+
+### ✅ Third Normal Form (3NF)
+
+**Rule**: Remove transitive dependencies (non-key fields depending on other non-key fields)
+
+Already satisfied in this case!
+
+---
+
+## 🔸 Summary
+
+| Step | Goal                         | Action                           |
+|------|------------------------------|----------------------------------|
+| 1NF  | Remove repeating groups      | Atomic values                    |
+| 2NF  | Remove partial dependency    | Split into related tables        |
+| 3NF  | Remove transitive dependency | Ensure fields depend on key only |
