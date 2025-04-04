@@ -419,3 +419,176 @@ EXPLAIN SELECT * FROM employees WHERE salary > 80000;
 
 ---
 
+Let’s go deeper into **SQL engines** — **MySQL**, **PostgreSQL**, **SQL Server**, **SQLite**, and **Oracle** — focusing on:
+
+- How they **compare**
+- Key **features**
+- Differences in **syntax or capabilities**
+- Best use cases for each
+
+## 🔷 1. **MySQL**
+
+### ✅ Overview
+
+- Open-source and widely used
+- Owned by Oracle
+- Default choice for many web apps (especially LAMP stack)
+
+### ✅ Key Features
+
+- Fast for read-heavy apps
+- Supports ACID with **InnoDB**
+- Supports **JSON**, **full-text search**
+- Strong community, easy to set up
+
+### ✅ Pros
+
+- Simple to install/use
+- Good performance
+- Supported by most hosting services
+
+### ⚠️ Limitations
+
+- Weaker standards compliance than PostgreSQL
+- Limited materialized views, window functions (improved in 8.0)
+
+### 🔹 Use Case
+
+- Web apps, CMSs (WordPress, Joomla), small-to-medium enterprise apps
+
+---
+
+## 🔷 2. **PostgreSQL**
+
+### ✅ Overview
+
+- Open-source, highly standards-compliant
+- Known for **robustness and extensibility**
+
+### ✅ Key Features
+
+- Full ACID support
+- Advanced indexing (GIN, GiST, BRIN)
+- **Window functions**, **CTEs**, **JSONB**, **array types**
+- Native **Full-Text Search**, **spatial data (PostGIS)**
+
+### ✅ Pros
+
+- Supports complex queries and custom data types
+- True concurrency with MVCC (no read locks)
+- Extensions (e.g., PostGIS, TimescaleDB)
+
+### ⚠️ Limitations
+
+- Slightly steeper learning curve
+- Fewer GUI tools than MySQL (though improving)
+
+### 🔹 Use Case
+
+- Analytics, financial systems, GIS applications, heavy data processing
+
+---
+
+## 🔷 3. **SQL Server (Microsoft SQL Server)**
+
+### ✅ Overview
+
+- Proprietary, enterprise-grade database
+- Tight integration with Windows, .NET, Azure
+
+### ✅ Key Features
+
+- Advanced BI tools (SSRS, SSIS, SSAS)
+- Excellent support for **stored procedures**, **triggers**, **views**
+- Row-level security, temporal tables, indexing options
+- Transactional replication
+
+### ✅ Pros
+
+- Great performance for complex business workloads
+- SQL Server Management Studio (SSMS) is top-tier
+- Integration with Microsoft stack is seamless
+
+### ⚠️ Limitations
+
+- Licensing cost
+- Mostly Windows-focused (Linux support is improving)
+
+### 🔹 Use Case
+
+- Enterprise ERPs, financial applications, Azure-based apps
+
+---
+
+## 🔷 4. **SQLite**
+
+### ✅ Overview
+
+- Lightweight, serverless, embedded SQL engine
+- Database is a single file
+
+### ✅ Key Features
+
+- Zero configuration
+- Full SQL support (with minor limits)
+- Great for testing, prototyping, mobile apps
+
+### ✅ Pros
+
+- Simple and portable
+- Perfect for desktop/mobile apps
+- Used in Android, iOS, browsers
+
+### ⚠️ Limitations
+
+- No client-server model
+- Limited concurrency (not suited for high-traffic multi-user apps)
+
+### 🔹 Use Case
+
+- Mobile apps, local testing/dev, IoT devices
+
+---
+
+## 🔷 5. **Oracle Database**
+
+### ✅ Overview
+
+- Enterprise-grade, highly scalable RDBMS
+- Known for reliability, scalability, security
+
+### ✅ Key Features
+
+- Real Application Clusters (RAC)
+- Flashback queries, Partitioning, Advanced replication
+- PL/SQL (procedural extension)
+- Fine-grained auditing and encryption
+
+### ✅ Pros
+
+- Highly robust and scalable
+- Used by large banks, governments, Fortune 500
+
+### ⚠️ Limitations
+
+- Expensive licensing
+- Complex setup
+
+### 🔹 Use Case
+
+- Large enterprise systems, critical applications, government infrastructure
+
+---
+
+## 🔶 Comparison Table
+
+| Feature               | MySQL          | PostgreSQL       | SQL Server      | SQLite          | Oracle          |
+|-----------------------|----------------|------------------|-----------------|-----------------|-----------------|
+| Type                  | Open-source    | Open-source      | Proprietary     | Embedded        | Proprietary     |
+| ACID Compliance       | ✅ (InnoDB)    | ✅              | ✅              | ✅             | ✅              |
+| JSON Support          | ✅             | ✅ (JSONB)      | ✅              | ⚠️ Limited     | ✅              |
+| Full-text Search      | ✅             | ✅              | ✅              | ⚠️ Limited     | ✅              |
+| Procedural Language   | No (just SQL)  | PL/pgSQL         | T-SQL           | ❌              | PL/SQL          |
+| Use Case Fit          | Web apps       | Data-heavy apps  | Enterprise      | Mobile apps     | Critical apps    |
+| Extensibility         | Medium         | High             | Medium          | Low             | High             |
+| Licensing             | Free           | Free             | Paid/Free Tier  | Free            | Paid             |
