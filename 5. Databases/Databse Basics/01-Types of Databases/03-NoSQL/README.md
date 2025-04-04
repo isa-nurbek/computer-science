@@ -145,6 +145,8 @@ Amazon [DynamoDB](https://aws.amazon.com/ru/dynamodb/) and [Redis](https://redis
 
 A column-oriented NoSQL database stores data similar to a relational database. However, instead of storing data as rows, it is stored as columns. Column-oriented databases aim to provide faster read speeds by being able to quickly aggregate data for a specific column. For example, take a look at the following e-commerce database of products:
 
+<img src="../03-NoSQL/images_of_nosql/nosql-column-oriented.svg" alt="Alt text" width="200" />
+
 - Data stored by **column** instead of rows.
 - Optimized for **large-scale read/write**.
 
