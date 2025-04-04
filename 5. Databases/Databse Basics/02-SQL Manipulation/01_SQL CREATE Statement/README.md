@@ -179,3 +179,520 @@ CREATE TABLE IF NOT EXISTS employees (
 ## **Conclusion**
 
 The `CREATE` statement is foundational in SQL for defining database structures. Using best practices and avoiding pitfalls ensures efficient, scalable, and maintainable databases. Properly designed tables with correct constraints and indexing improve performance and data integrity.
+
+---
+
+**Advanced `CREATE` Examples with Constraints and Optimizations** 🚀
+
+## **1. Advanced Constraints in `CREATE TABLE`**
+
+Constraints help maintain data integrity. Here’s a table using multiple constraints effectively.
+
+```sql
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10,2) CHECK (total_amount >= 0),
+    status ENUM('pending', 'shipped', 'delivered', 'canceled') NOT NULL DEFAULT 'pending',
+    CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
+);
+```
+
+### **🔍 Explanation of Constraints:**
+
+- **`PRIMARY KEY AUTO_INCREMENT`** → Ensures `order_id` is unique and automatically increments.
+- **`NOT NULL`** → Ensures values cannot be `NULL` (e.g., `customer_id` and `status`).
+- **`DEFAULT CURRENT_TIMESTAMP`** → Sets `order_date` to the current time if no value is provided.
+- **`CHECK (total_amount >= 0)`** → Prevents negative values for `total_amount`.
+- **`ENUM`** → Restricts `status` to a predefined set of values.
+- **`FOREIGN KEY ON DELETE CASCADE`** → If a customer is deleted, all their orders will also be deleted automatically.
+
+---
+
+## **2. Optimized Table Design with Partitioning**
+
+Partitioning can improve query performance on large datasets.
+
+```sql
+CREATE TABLE logs (
+    log_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    log_date DATE NOT NULL,
+    message TEXT
+) PARTITION BY RANGE (YEAR(log_date)) (
+    PARTITION p2019 VALUES LESS THAN (2020),
+    PARTITION p2020 VALUES LESS THAN (2021),
+    PARTITION p2021 VALUES LESS THAN (2022),
+    PARTITION p_future VALUES LESS THAN MAXVALUE
+);
+```
+
+### **🔍 Explanation:**
+
+- **Partitioning by Year (`RANGE`)** improves query performance by keeping relevant data in specific partitions.
+- **`MAXVALUE`** ensures future data is stored correctly.
+
+🛠 **When to Use Partitioning?**
+
+- When working with **very large tables** (e.g., logs, event tracking).
+- If queries are **often filtered by a partitioned column** (e.g., `WHERE log_date BETWEEN '2021-01-01' AND '2021-12-31'`).
+
+---
+
+## **3. Creating a Table with JSON and Indexing for Performance**
+
+### **🚀 Storing JSON Data Efficiently**
+
+```sql
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    metadata JSON DEFAULT NULL,
+    INDEX idx_metadata ((CAST(metadata->'$.age' AS UNSIGNED)))
+);
+```
+
+**🔍 Explanation:**
+
+- **JSON Data Type** → Stores dynamic key-value pairs in the `metadata` column.
+- **JSON Indexing** → Indexes `metadata->'$.age'` to improve query speed when searching users by age.
+
+📌 **Querying JSON:**
+
+```sql
+SELECT * FROM users WHERE JSON_EXTRACT(metadata, '$.age') > 30;
+```
+
+---
+
+## **4. Creating a Composite Primary Key**
+
+Composite keys use multiple columns to uniquely identify a record.
+
+```sql
+CREATE TABLE course_enrollments (
+    student_id INT,
+    course_id INT,
+    enrollment_date DATE DEFAULT CURRENT_DATE,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+```
+
+**🔍 Explanation:**
+
+- **`PRIMARY KEY (student_id, course_id)`** → Prevents duplicate enrollments for the same student in the same course.
+- **`FOREIGN KEY`** → Enforces referential integrity.
+
+---
+
+## **5. Using Indexes for Query Optimization**
+
+Indexes speed up searches but increase storage and `INSERT/UPDATE/DELETE` time.
+
+```sql
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    department_id INT,
+    salary DECIMAL(10,2),
+    INDEX idx_department_salary (department_id, salary)
+);
+```
+
+**🔍 Explanation:**
+
+- **`INDEX idx_department_salary (department_id, salary)`** → Optimizes queries like:
+
+  ```sql
+  SELECT * FROM employees WHERE department_id = 3 AND salary > 50000;
+  ```
+
+🛠 **Indexing Best Practices:**
+
+- Use **indexes on frequently searched columns** (e.g., `email`, `order_date`).
+- Avoid **indexing columns that are updated frequently**, as it slows down writes.
+- Consider **composite indexes** for queries filtering by multiple columns.
+
+---
+
+## **6. Creating a Temporary Table**
+
+Temporary tables exist only during the session.
+
+```sql
+CREATE TEMPORARY TABLE temp_sales (
+    sale_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    sale_amount DECIMAL(10,2)
+);
+```
+
+📌 **Why Use Temporary Tables?**
+
+- Useful for **storing intermediate results** in complex queries.
+- Automatically **deleted when the session ends**.
+
+---
+
+## **7. Creating a Table with Generated Columns**
+
+Generated columns store computed values.
+
+```sql
+CREATE TABLE transactions (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    amount DECIMAL(10,2) NOT NULL,
+    tax DECIMAL(10,2) GENERATED ALWAYS AS (amount * 0.08) STORED
+);
+```
+
+📌 **Benefits of Generated Columns:**
+
+- Saves computation time during queries.
+- Reduces redundancy by avoiding manually storing computed values.
+
+---
+
+## **8. Using `IF NOT EXISTS` to Prevent Errors**
+
+Avoid errors if a table already exists.
+
+```sql
+CREATE TABLE IF NOT EXISTS customers (
+    customer_id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+```
+
+---
+
+## **Best Practices Summary ✅**
+
+| 🔍 **Best Practice**       | ✅ **Why It’s Important**                                     |
+|----------------------------|----------------------------------------------------------------|
+| Use `NOT NULL` constraints | Prevents accidental `NULL` values in critical columns.         |
+| Use `DEFAULT` values       | Avoids `NULL` issues and provides fallback values.             |
+| Optimize indexes           | Speeds up queries but use wisely to avoid slowing down writes. |
+| Normalize data             | Prevents redundant data and improves consistency.              |
+| Partition large tables     | Helps manage massive datasets efficiently.                     |
+| Use JSON carefully         | Great for dynamic data, but indexing is necessary.             |
+| Choose correct data types  | Avoid unnecessary space usage and improve performance.         |
+
+---
+
+## **Conclusion:**
+
+A well-structured `CREATE` statement improves performance, data integrity, and scalability. Using **constraints, indexes, partitioning, and JSON storage** effectively ensures a well-optimized database.
+
+---
+
+Let's dive into **SQL triggers, stored procedures, and real-world schema design** in detail.
+
+---
+
+## **1️⃣ SQL Triggers**
+
+A **trigger** is an automated SQL procedure that executes before or after an event (`INSERT`, `UPDATE`, `DELETE`) on a table.
+
+### **Basic Syntax**
+
+```sql
+CREATE TRIGGER trigger_name
+BEFORE | AFTER INSERT | UPDATE | DELETE
+ON table_name
+FOR EACH ROW
+BEGIN
+    -- SQL statements;
+END;
+```
+
+---
+
+### **🔹 Example 1: Logging Changes in an `employees` Table**
+
+```sql
+CREATE TABLE employee_audit (
+    audit_id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT,
+    action_type VARCHAR(10),
+    change_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+Now, we create a **trigger** to log updates:
+
+```sql
+CREATE TRIGGER after_employee_update
+AFTER UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_audit (employee_id, action_type)
+    VALUES (OLD.employee_id, 'UPDATE');
+END;
+```
+
+📌 **How It Works:**
+
+- This trigger runs **after an `UPDATE`** on `employees`.
+- It inserts a record into `employee_audit`, logging the **employee ID** and **action type**.
+
+---
+
+### **🔹 Example 2: Prevent Negative Salaries**
+
+```sql
+CREATE TRIGGER prevent_negative_salary
+BEFORE INSERT OR UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    IF NEW.salary < 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Salary cannot be negative';
+    END IF;
+END;
+```
+
+📌 **How It Works:**
+
+- If a new `salary` is negative, an error is thrown.
+
+---
+
+### **Best Practices for Triggers**
+
+✅ **Use triggers for logging and validation** but not for complex business logic.  
+✅ **Avoid recursive triggers**, as they can cause infinite loops.  
+✅ **Minimize performance impact** by keeping trigger logic lightweight.  
+
+---
+
+## **2️⃣ SQL Stored Procedures**
+
+A **stored procedure** is a reusable block of SQL code stored in the database, which can accept **input parameters**, execute SQL, and return results.
+
+**Basic Syntax:**
+
+```sql
+CREATE PROCEDURE procedure_name (param1 datatype, param2 datatype)
+BEGIN
+    -- SQL statements;
+END;
+```
+
+---
+
+### **🔹 Example 1: Get Employee Details**
+
+```sql
+CREATE PROCEDURE GetEmployee(IN emp_id INT)
+BEGIN
+    SELECT * FROM employees WHERE employee_id = emp_id;
+END;
+```
+
+📌 **Calling the Procedure:**
+
+```sql
+CALL GetEmployee(101);
+```
+
+🔹 This retrieves the employee with `employee_id = 101`.
+
+---
+
+### **🔹 Example 2: Increase Salary by Percentage**
+
+```sql
+CREATE PROCEDURE IncreaseSalary(IN emp_id INT, IN percentage DECIMAL(5,2))
+BEGIN
+    UPDATE employees
+    SET salary = salary + (salary * percentage / 100)
+    WHERE employee_id = emp_id;
+END;
+```
+
+📌 **Calling the Procedure:**
+
+```sql
+CALL IncreaseSalary(102, 10);
+```
+
+🔹 This increases **employee 102's salary** by 10%.
+
+---
+
+### **🔹 Example 3: Returning a Value**
+
+```sql
+CREATE PROCEDURE CountEmployees(OUT total INT)
+BEGIN
+    SELECT COUNT(*) INTO total FROM employees;
+END;
+```
+
+📌 **Calling the Procedure:**
+
+```sql
+CALL CountEmployees(@count);
+SELECT @count;
+```
+
+🔹 This gets the total employee count.
+
+---
+
+### **Best Practices for Stored Procedures**
+
+✅ **Use procedures for complex business logic** to reduce repeated SQL.  
+✅ **Use `IN`, `OUT`, and `INOUT` parameters** for flexibility.  
+✅ **Optimize performance** by avoiding unnecessary computations inside procedures.  
+
+---
+
+## **3️⃣ Real-World Schema Design**
+
+Now, let's design a **real-world relational database**.
+
+## **📌 Scenario: E-Commerce System**
+
+We need to create a **schema** for an e-commerce store with:
+
+- `customers`
+- `products`
+- `orders`
+- `order_items`
+- `payments`
+
+---
+
+### **🔹 1. Customers Table**
+
+```sql
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    phone VARCHAR(20),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+🔹 **Why?**
+
+- `AUTO_INCREMENT` for unique customer IDs.
+- `UNIQUE` email ensures no duplicates.
+- `created_at` logs when the customer signed up.
+
+---
+
+### **🔹 2. Products Table**
+
+```sql
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) CHECK (price > 0),
+    stock_quantity INT CHECK (stock_quantity >= 0),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+🔹 **Why?**
+
+- `CHECK (price > 0)` ensures positive prices.
+- `CHECK (stock_quantity >= 0)` prevents negative stock.
+
+---
+
+### **🔹 3. Orders Table**
+
+```sql
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10,2) CHECK (total_amount >= 0),
+    status ENUM('pending', 'shipped', 'delivered', 'canceled') NOT NULL DEFAULT 'pending',
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
+);
+```
+
+🔹 **Why?**
+
+- `ENUM` keeps track of order status.
+- `ON DELETE CASCADE` removes orders if a customer is deleted.
+
+---
+
+### **🔹 4. Order Items (Many-to-Many Relationship)**
+
+```sql
+CREATE TABLE order_items (
+    order_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    product_id INT,
+    quantity INT CHECK (quantity > 0),
+    price DECIMAL(10,2),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+```
+
+🔹 **Why?**
+
+- `ON DELETE CASCADE` removes items when an order is deleted.
+- Stores `price` separately to preserve historical prices.
+
+---
+
+### **🔹 5. Payments Table**
+
+```sql
+CREATE TABLE payments (
+    payment_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    amount DECIMAL(10,2) CHECK (amount > 0),
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payment_method ENUM('credit_card', 'paypal', 'bank_transfer'),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE
+);
+```
+
+🔹 **Why?**
+
+- `CHECK (amount > 0)` ensures valid payments.
+- `ENUM` restricts payment methods.
+
+---
+
+### **🔹 Relationships Between Tables**
+
+| **Table**                  | **Relationship**                                            |
+|----------------------------|-------------------------------------------------------------|
+| `customers` → `orders`     | **One-to-Many** (One customer can have many orders)         |
+| `orders` → `order_items`   | **One-to-Many** (One order can have multiple items)         |
+| `products` → `order_items` | **One-to-Many** (One product can appear in multiple orders) |
+| `orders` → `payments`      | **One-to-One** (Each order has one payment)                 |
+
+---
+
+## **Best Practices for Schema Design**
+
+✅ **Normalize the database** (Avoid redundant data).  
+✅ **Use `FOREIGN KEYS`** for data integrity.  
+✅ **Index frequently searched columns** (e.g., `email`, `order_date`).  
+✅ **Partition large tables** (e.g., historical `orders`).  
+✅ **Avoid over-indexing** (Too many indexes slow down writes).  
+
+---
+
+## **🎯 Summary**
+
+We covered:
+✅ **Triggers** (Automated actions)  
+✅ **Stored Procedures** (Reusable SQL logic)  
+✅ **Real-World Schema Design** (E-commerce system)  
