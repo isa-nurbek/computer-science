@@ -189,7 +189,7 @@ It’s the backbone of many applications in **finance**, **e-commerce**, **healt
 
 ---
 
-## Examples using SQL commands AND how to normalize a database design from scratch
+Let’s see hands-on example using SQL commands and how to normalize a database design from scratch.
 
 ## 🔶 PART 1: Hands-on SQL Example
 
