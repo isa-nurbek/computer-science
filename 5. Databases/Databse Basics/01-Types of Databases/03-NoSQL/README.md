@@ -187,13 +187,21 @@ Amazon’s [Redshift](https://aws.amazon.com/ru/redshift/) is a popular option f
 
 ### 🔹 Structure
 
+A graph database stores data using a graph structure. In a graph structure, data is stored in individual nodes (also called vertices) and establishes relationships via edges (also called links or lines). The advantage of the relationships built using a graph database as opposed to a relational database is that they are much simpler to set up, manage, and query. For example, let’s say we wanted to build a recommendation engine for our e-commerce store. We could establish relationships between similar items our customers searched for to create recommendations.
+
+### 🌐 Example
+
+![Graph Database NoSQL](./images_of_nosql/NoSQL-graphs.svg "Graph Database NoSQL")
+
+In the graph above, we can see that there are four nodes: “Neo”, “Hiking”, “Cameras”, and “Hiking Camera Backpack”. Because the user, “Neo”, searched for “Hiking” and “Cameras”, there are edges connecting all 3 nodes. More edges are created after the search, linking a new node, “Hiking Camera Backpack”.
+
+### 🌐 Example 2
+
 - Nodes: Entities (e.g., Person)
 - Edges: Relationships (e.g., FRIENDS_WITH)
 - Properties: Additional info on nodes or edges
 
-### 🌐 Example
-
-```
+```plaintext
 (Alice)-[FRIENDS_WITH]->(Bob)
 ```
 
@@ -203,13 +211,15 @@ Amazon’s [Redshift](https://aws.amazon.com/ru/redshift/) is a popular option f
 - **Fraud detection**
 - **Recommendation systems**
 
-### 🔍 Query Example (Cypher - Neo4j)
+### 🔍 Query Example 3 (Cypher - Neo4j)
 
 ```cypher
 MATCH (a:Person)-[:FRIENDS_WITH]->(b:Person)
 WHERE a.name = "Alice"
 RETURN b.name
 ```
+
+[Neo4j](https://neo4j.com/) is a popular option for developers looking to work with a graph database.
 
 ---
 
@@ -242,13 +252,21 @@ RETURN b.name
 ## 🔷 Summary Table
 
 | Feature          | RDBMS (SQL)        | NoSQL                      |
-|------------------|-------------------|----------------------------|
-| Schema           | Fixed             | Dynamic                    |
-| Joins            | Supported         | Not typically supported    |
-| Transactions     | Strong (ACID)     | Eventual / Limited         |
-| Scalability      | Vertical          | Horizontal                 |
-| Examples         | MySQL, PostgreSQL | MongoDB, Redis, Cassandra  |
+|------------------|--------------------|----------------------------|
+| Schema           | Fixed              | Dynamic                    |
+| Joins            | Supported          | Not typically supported    |
+| Transactions     | Strong (ACID)      | Eventual / Limited         |
+| Scalability      | Vertical           | Horizontal                 |
+| Examples         | MySQL, PostgreSQL  | MongoDB, Redis, Cassandra  |
 
----
+## Wrap Up
 
-Would you like code examples in a specific language (like Python with MongoDB/Redis), or a real-world use case implemented step-by-step?
+We’ve now learned some of the fundamentals of NoSQL database technology. Let’s take a moment to review what we’ve learned:
+
+- NoSQL stands for “not-only SQL” (also called “non-relational”, or “non-SQL”) and refers to any database that stores data in any format other than relational tables.
+- NoSQL database technology grew in popularity due to datasets growing in size and complexity.
+- NoSQL databases may provide flexibility, scalability, and speed advantages.
+- NoSQL databases experience disadvantages such as lack of data integrity and lack of language standardization across different NoSQL databases.
+- Common types of NoSQL databases include key-value, document, graph, and column-oriented.
+
+Next time a project requires a database, consider the tradeoffs between a relational and a NoSQL database and pick one that best suits your use case!
