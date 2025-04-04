@@ -247,3 +247,175 @@ WHERE book_id = 1;
 | TCL  | `COMMIT`, `ROLLBACK`, `SAVEPOINT`     | Transactions                |
 
 ---
+
+Let's break down the advanced SQL topics in-depth, starting with **Subqueries**, then move on to **Joins**, **Indexing**, and **Performance Tuning** — all with explanations and examples.
+
+## 🔷 1. **Subqueries** (Nested Queries)
+
+A **subquery** is a query **inside another query**. Used for filtering, comparison, or transformation.
+
+### 📌 Types of Subqueries
+
+- **Scalar subquery** (returns one value)
+- **Row subquery** (returns a row)
+- **Table subquery** (returns multiple rows and columns)
+- **Correlated subquery** (references outer query)
+
+### 🔸 Example: Scalar Subquery
+
+```sql
+SELECT name
+FROM employees
+WHERE salary = (SELECT MAX(salary) FROM employees);
+```
+
+**Explanation:**
+
+- Inner query returns the highest salary.
+- Outer query finds the employee(s) earning that.
+
+---
+
+### 🔸 Example: Correlated Subquery
+
+```sql
+SELECT e1.name
+FROM employees e1
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM employees e2
+    WHERE e1.position = e2.position
+);
+```
+
+**Explanation:**
+
+- For each employee, it compares their salary to the **average salary in the same position**.
+
+---
+
+## 🔷 2. **Joins**
+
+Joins combine rows from **two or more tables** based on related columns.
+
+### 📌 Types of Joins
+
+| Join Type    | Description                            |
+|--------------|----------------------------------------|
+| `INNER JOIN` | Returns only matching rows             |
+| `LEFT JOIN`  | All rows from left, matched from right |
+| `RIGHT JOIN` | All rows from right, matched from left |
+| `FULL JOIN`  | All rows, matched or not               |
+| `CROSS JOIN` | Cartesian product (all combinations)   |
+| `SELF JOIN`  | Join a table with itself               |
+
+---
+
+### 🔸 Example: INNER JOIN
+
+```sql
+SELECT e.name, d.department_name
+FROM employees e
+INNER JOIN departments d ON e.department_id = d.id;
+```
+
+**Explanation:**
+
+- Joins employees to departments where `department_id` matches.
+- Returns only matched records.
+
+---
+
+### 🔸 Example: LEFT JOIN
+
+```sql
+SELECT e.name, d.department_name
+FROM employees e
+LEFT JOIN departments d ON e.department_id = d.id;
+```
+
+**Explanation:**
+
+- Shows all employees even if they don’t belong to any department.
+- `NULL` for departments where there's no match.
+
+---
+
+## 🔷 3. **Indexing**
+
+Indexes speed up **search and retrieval** in large tables. Think of it like a book’s index.
+
+### 📌 Types of Indexes
+
+- **Single-column Index**
+- **Composite Index** (multiple columns)
+- **Unique Index** (prevents duplicate values)
+- **Full-text Index** (for text search)
+- **Clustered Index** (physically sorts table — only one per table)
+
+---
+
+### 🔸 Example: Creating an Index
+
+```sql
+CREATE INDEX idx_salary ON employees(salary);
+```
+
+**Explanation:**
+
+- Speeds up queries that filter or sort by `salary`.
+
+---
+
+### 🔸 Index Use Case
+
+```sql
+SELECT * FROM employees
+WHERE salary > 80000;
+```
+
+With `idx_salary`, this is **much faster** than scanning the entire table.
+
+> ⚠️ Over-indexing slows down inserts/updates. Use wisely.
+
+---
+
+## 🔷 4. **Performance Tuning**
+
+Optimizing queries and database design for speed and efficiency.
+
+### 📌 Key Techniques
+
+| Technique              | Description                                    |
+|------------------------|------------------------------------------------|
+| **Indexes**            | Speeds up SELECT queries                       |
+| **Query Optimization** | Avoid `SELECT *`, use proper joins and filters |
+| **Normalization**      | Reduce redundancy and improve integrity        |
+| **Caching**            | Reduce repeated queries                        |
+| **Partitioning**       | Split large tables                             |
+| **EXPLAIN / ANALYZE**  | Analyze query execution plan                   |
+
+---
+
+### 🔸 Example: Use `EXPLAIN`
+
+```sql
+EXPLAIN SELECT * FROM employees WHERE salary > 80000;
+```
+
+**Output:**
+
+- Shows whether it uses index or full table scan
+- Helps detect bottlenecks
+
+---
+
+### 🔸 Optimization Tips
+
+- Replace `SELECT *` with specific columns
+- Use `LIMIT` with pagination
+- Avoid unnecessary subqueries
+- Use indexed columns in `WHERE`, `ORDER BY`, and `JOIN`
+
+---
+
