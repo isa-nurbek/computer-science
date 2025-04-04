@@ -145,12 +145,16 @@ Amazon [DynamoDB](https://aws.amazon.com/ru/dynamodb/) and [Redis](https://redis
 
 A column-oriented NoSQL database stores data similar to a relational database. However, instead of storing data as rows, it is stored as columns. Column-oriented databases aim to provide faster read speeds by being able to quickly aggregate data for a specific column. For example, take a look at the following e-commerce database of products:
 
-<img src="../03-NoSQL/images_of_nosql/nosql-column-oriented.svg" alt="A column-oriented NoSQL" width="800" height="600" />
+### 🧱 Example 1
+
+![A column-oriented NoSQL](./images_of_nosql/nosql-column-oriented.svg "A column-oriented NoSQL")
+
+If we wanted to analyze the total sales for all the products, all we would need to do is aggregate data from the sales column. This is in contrast to a relational model that would have to pull data from each row. We would also be pulling adjacent data (like size information in the above example) that isn’t relevant to our query.
+
+### 🧱 Example 2 (Conceptual)
 
 - Data stored by **column** instead of rows.
 - Optimized for **large-scale read/write**.
-
-### 🧱 Example (Conceptual)
 
 ```plaintext
 Row Key: 001
@@ -174,6 +178,8 @@ Query to get all users with age > 20 (CQL - Cassandra Query Language):
 ```sql
 SELECT * FROM users WHERE age > 20;
 ```
+
+Amazon’s [Redshift](https://aws.amazon.com/ru/redshift/) is a popular option for developers looking to work with a column-oriented database.
 
 ---
 
