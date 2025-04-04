@@ -105,13 +105,7 @@ db.users.find({ "address.city": "New York" })
 
 ### 🔹 Structure
 
-A key-value database consists of individual records organized via key-value pairs. In this model, keys and values can be any type of data, ranging from numbers to complex objects. However, keys must be unique. This means this type of database is best when data is attributed to a unique key, like an ID number. Ideally, the data is also simple, and we are looking to prioritize fast queries over fancy features. For example, let’s say we wanted to store shopping cart information for customers who shop in an e-commerce store. Our key-value database might look like this:
-
-```plaintext
-Key             Value
-customer-123 { “address”: “…”, name: “…”, “preferences”: {…} }
-customer-456 { “address”: “…”, name: “…”, “preferences”: {…} }
-```
+A key-value database consists of individual records organized via key-value pairs. In this model, keys and values can be any type of data, ranging from numbers to complex objects. However, keys must be unique. This means this type of database is best when data is attributed to a unique key, like an ID number. Ideally, the data is also simple, and we are looking to prioritize fast queries over fancy features.
 
 - Every record is a **key** and its associated **value**.
 - Very fast for simple **get/set** operations.
@@ -141,18 +135,22 @@ HSET user:001 name "Alice" email "alice@example.com"
 HGETALL user:001
 ```
 
+Amazon [DynamoDB](https://aws.amazon.com/ru/dynamodb/) and [Redis](https://redis.io/) are popular options for developers looking to work with key-value databases.
+
 ---
 
 ## 🔷 3. Column Store (e.g., Apache Cassandra)
 
 ### 🔹 Structure
 
+A column-oriented NoSQL database stores data similar to a relational database. However, instead of storing data as rows, it is stored as columns. Column-oriented databases aim to provide faster read speeds by being able to quickly aggregate data for a specific column. For example, take a look at the following e-commerce database of products:
+
 - Data stored by **column** instead of rows.
 - Optimized for **large-scale read/write**.
 
 ### 🧱 Example (Conceptual)
 
-```
+```plaintext
 Row Key: 001
 ------------------------------------
 | Name    | Email             | Age |
