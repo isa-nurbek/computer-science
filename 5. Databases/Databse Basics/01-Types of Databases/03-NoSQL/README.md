@@ -139,7 +139,7 @@ Amazon [DynamoDB](https://aws.amazon.com/ru/dynamodb/) and [Redis](https://redis
 
 ---
 
-## 🔷 3. Column Store (e.g., Apache Cassandra)
+## 🔷 3. Column Store (e.g., Apache Cassandra, Redshift)
 
 ### 🔹 Structure
 
