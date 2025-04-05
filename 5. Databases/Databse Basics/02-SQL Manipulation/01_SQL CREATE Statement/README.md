@@ -696,3 +696,175 @@ We covered:
 ✅ **Triggers** (Automated actions)  
 ✅ **Stored Procedures** (Reusable SQL logic)  
 ✅ **Real-World Schema Design** (E-commerce system)  
+
+---
+
+## **Database Indexing: Concepts, Types & Best Practices**
+
+## **1️⃣ What is an Index?**
+
+An **index** is a data structure that speeds up queries by reducing the amount of data scanned. It's like an index in a book—rather than scanning every page, you can jump directly to the relevant section.
+
+---
+
+## **2️⃣ Types of Indexes in SQL**
+
+### **🔹 1. Primary Index (Clustered Index)**
+
+- A **clustered index** determines the **physical order** of rows in a table.
+- Every table **can have only one clustered index** (usually the `PRIMARY KEY`).
+- Improves performance for **range-based queries** (e.g., `BETWEEN`, `ORDER BY`).
+
+#### **Example**
+
+```sql
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY,  -- Automatically creates a clustered index
+    name VARCHAR(100),
+    salary DECIMAL(10,2)
+);
+```
+
+📌 **Since `PRIMARY KEY` is indexed, searches on `employee_id` are optimized.**
+
+---
+
+### **🔹 2. Secondary Index (Non-Clustered Index)**
+
+- **Stores pointers to the actual data**, instead of sorting it.
+- **Multiple non-clustered indexes** can exist in a table.
+- Useful for **frequently searched columns**.
+
+**Example:**
+
+```sql
+CREATE INDEX idx_employee_name ON employees (name);
+```
+
+📌 **Now, queries like `WHERE name = 'John Doe'` run faster.**
+
+---
+
+### **🔹 3. Composite Index (Multi-Column Index)**
+
+- An index on **multiple columns**, used when queries involve multiple fields.
+- **Column order matters** (e.g., an index on `(A, B)` can be used for `A` or `A, B`, but not for `B` alone).
+
+**Example:**
+
+```sql
+CREATE INDEX idx_employee_salary ON employees (department_id, salary);
+```
+
+📌 **Speeds up queries like:**
+
+```sql
+SELECT * FROM employees WHERE department_id = 3 AND salary > 50000;
+```
+
+---
+
+### **🔹 4. Unique Index**
+
+- Ensures column values are **unique**, preventing duplicates.
+
+**Example:**
+
+```sql
+CREATE UNIQUE INDEX idx_email_unique ON customers (email);
+```
+
+📌 **Ensures that no two customers have the same email.**
+
+---
+
+### **🔹 5. Full-Text Index**
+
+- Used for **fast text searches**, often in large datasets.
+
+**Example:**
+
+```sql
+CREATE FULLTEXT INDEX idx_product_desc ON products (description);
+```
+
+📌 **Speeds up searches like:**
+
+```sql
+SELECT * FROM products WHERE MATCH(description) AGAINST('gaming laptop');
+```
+
+---
+
+### **🔹 6. Partial Index (Filtered Index)**
+
+- Indexes only a **subset of rows**, reducing storage costs.
+
+**Example:**
+
+```sql
+CREATE INDEX idx_active_users ON users (status) WHERE status = 'active';
+```
+
+📌 **Speeds up queries that filter for active users while saving space.**
+
+---
+
+### **🔹 7. Covering Index**
+
+- An index that **stores all columns** needed for a query, avoiding extra lookups.
+
+**Example:**
+
+```sql
+CREATE INDEX idx_order_summary ON orders (customer_id, order_date, total_amount);
+```
+
+📌 **Now, queries like**:
+
+```sql
+SELECT customer_id, order_date, total_amount FROM orders WHERE customer_id = 123;
+```
+
+**can be served directly from the index!**
+
+---
+
+## **3️⃣ When to Use Indexes?**
+
+✅ **Columns frequently used in WHERE, JOIN, ORDER BY, or GROUP BY**  
+✅ **Columns with high selectivity** (many unique values, e.g., `email`)  
+✅ **Indexes should cover all columns used in WHERE + SELECT**  
+
+🚫 **Avoid Indexing:**
+
+- Columns with **low cardinality** (few unique values, e.g., `gender` with only `M/F`).
+- Frequently updated columns (every `INSERT/UPDATE/DELETE` requires index maintenance).
+- Small tables (full-table scans might be faster than index lookups).
+
+---
+
+## **4️⃣ How to Check Index Usage?**
+
+### **🔍 Using `EXPLAIN`**
+
+You can analyze query performance using:
+
+```sql
+EXPLAIN SELECT * FROM employees WHERE name = 'John Doe';
+```
+
+📌 **Look for `Using index`** → It means the index is working!
+
+---
+
+## **5️⃣ Indexing Best Practices ✅**
+
+| Best Practice                                      | Why?                                                          |
+|----------------------------------------------------|---------------------------------------------------------------|
+| **Use Indexing on High-Selectivity Columns**       | Boosts performance for queries filtering unique values.       |
+| **Avoid Over-Indexing**                            | Each index slows down `INSERT/UPDATE/DELETE`.                 |
+| **Use Composite Indexes for Multi-Column Queries** | Reduces lookup time for queries using multiple fields.        |
+| **Leverage Covering Indexes**                      | Speeds up queries by storing all needed columns in the index. |
+| **Monitor Performance with `EXPLAIN`**             | Helps check if queries are using indexes effectively.         |
+| **Drop Unused Indexes**                            | Saves storage space and speeds up writes.                     |
