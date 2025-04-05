@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS employees (
 
 ---
 
-## **Conclusion**
+### **Conclusion**
 
 The `CREATE` statement is foundational in SQL for defining database structures. Using best practices and avoiding pitfalls ensures efficient, scalable, and maintainable databases. Properly designed tables with correct constraints and indexing improve performance and data integrity.
 
@@ -369,7 +369,7 @@ CREATE TABLE IF NOT EXISTS customers (
 
 ---
 
-## **Best Practices Summary ✅**
+### **Best Practices Summary ✅**
 
 | 🔍 **Best Practice**       | ✅ **Why It’s Important**                                     |
 |----------------------------|----------------------------------------------------------------|
@@ -381,9 +381,7 @@ CREATE TABLE IF NOT EXISTS customers (
 | Use JSON carefully         | Great for dynamic data, but indexing is necessary.             |
 | Choose correct data types  | Avoid unnecessary space usage and improve performance.         |
 
----
-
-## **Conclusion:**
+### **Conclusion:**
 
 A well-structured `CREATE` statement improves performance, data integrity, and scalability. Using **constraints, indexes, partitioning, and JSON storage** effectively ensures a well-optimized database.
 
@@ -678,9 +676,7 @@ CREATE TABLE payments (
 | `products` → `order_items` | **One-to-Many** (One product can appear in multiple orders) |
 | `orders` → `payments`      | **One-to-One** (Each order has one payment)                 |
 
----
-
-## **Best Practices for Schema Design**
+### **Best Practices for Schema Design**
 
 ✅ **Normalize the database** (Avoid redundant data).  
 ✅ **Use `FOREIGN KEYS`** for data integrity.  
@@ -688,9 +684,7 @@ CREATE TABLE payments (
 ✅ **Partition large tables** (e.g., historical `orders`).  
 ✅ **Avoid over-indexing** (Too many indexes slow down writes).  
 
----
-
-## **🎯 Summary**
+### **🎯 Summary**
 
 We covered:
 ✅ **Triggers** (Automated actions)  
@@ -858,7 +852,7 @@ EXPLAIN SELECT * FROM employees WHERE name = 'John Doe';
 
 ---
 
-## **5️⃣ Indexing Best Practices ✅**
+### **5️⃣ Indexing Best Practices ✅**
 
 | Best Practice                                      | Why?                                                          |
 |----------------------------------------------------|---------------------------------------------------------------|
