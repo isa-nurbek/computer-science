@@ -566,3 +566,266 @@ The `INSERT` statement in PostgreSQL is a powerful tool for adding data to your 
 - Use `ON CONFLICT` for handling duplicate keys or unique constraint violations.
 - Validate data and enforce constraints like `CHECK` and `NOT NULL`.
 
+---
+
+## *PostgreSQL `INSERT` Statement: Various Features and Techniques**
+
+Below are more detailed examples of how to use the `INSERT` statement in PostgreSQL with various features and techniques.
+
+### **1. Inserting Data into a Table with Auto-Increment**
+
+Let’s create a table with an auto-incremented primary key column (`SERIAL`) and insert data into it.
+
+#### **Table: customers**
+
+```sql
+CREATE TABLE customers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    age INT
+);
+```
+
+#### **Inserting Data with Auto-Increment**
+
+When inserting into the table, you do not need to specify a value for the `id` since it will be auto-generated.
+
+```sql
+INSERT INTO customers (name, email, age)
+VALUES ('Alice Smith', 'alice@example.com', 30);
+```
+
+- The `id` will be automatically assigned.
+
+#### **Using `RETURNING` to Get the Auto-Incremented `id`**
+
+If you want to retrieve the auto-generated `id` right after inserting the row:
+
+```sql
+INSERT INTO customers (name, email, age)
+VALUES ('Bob Johnson', 'bob@example.com', 25)
+RETURNING id;
+```
+
+- This will return the `id` of the newly inserted customer.
+
+---
+
+### **2. Using `ON CONFLICT` for Upsert**
+
+PostgreSQL allows you to handle conflicts using the `ON CONFLICT` clause. This is useful when you want to update an existing record or ignore the insert if a conflict occurs (e.g., on a unique constraint or primary key).
+
+#### **Upsert Example:**
+
+Here we insert a new row or update the existing row if the `email` is already in use.
+
+```sql
+INSERT INTO customers (name, email, age)
+VALUES ('Alice Green', 'alice@example.com', 35)
+ON CONFLICT (email)
+DO UPDATE SET age = EXCLUDED.age;
+```
+
+- If the email `'alice@example.com'` already exists, the query will update the `age` of the existing customer.
+- The `EXCLUDED` keyword refers to the values that were proposed for insertion but were excluded due to the conflict.
+
+#### **Ignore Duplicate Entries Example:**
+
+If you simply want to ignore the insert when a duplicate value is encountered:
+
+```sql
+INSERT INTO customers (name, email, age)
+VALUES ('Charlie Brown', 'charlie@example.com', 40)
+ON CONFLICT (email) DO NOTHING;
+```
+
+- This will insert the row if `email` is not already in use. If it exists, nothing happens.
+
+---
+
+### **3. Inserting Data Using `SELECT` (Copy Data from Another Table)**
+
+You can insert data into a table by selecting it from another table.
+
+#### **Example:**
+
+Let's say you have an `old_customers` table, and you want to copy all customers who are older than 30 into the `customers` table.
+
+```sql
+INSERT INTO customers (name, email, age)
+SELECT name, email, age FROM old_customers
+WHERE age > 30;
+```
+
+- This copies the `name`, `email`, and `age` of customers aged over 30 from the `old_customers` table into the `customers` table.
+
+---
+
+### **4. Inserting Multiple Rows at Once**
+
+PostgreSQL allows you to insert multiple rows in a single statement, which is more efficient than performing individual insert operations.
+
+**Example:**
+
+```sql
+INSERT INTO customers (name, email, age)
+VALUES 
+    ('David Green', 'david@example.com', 28),
+    ('Eve White', 'eve@example.com', 22),
+    ('Frank Black', 'frank@example.com', 34);
+```
+
+- This inserts three rows in a single query, reducing the query overhead.
+
+---
+
+### **5. Using `DEFAULT` to Insert Default Values**
+
+In PostgreSQL, columns with default values can be inserted without explicitly specifying values.
+
+#### **Table: orders**
+
+```sql
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL
+);
+```
+
+#### **Inserting with Default Values:**
+
+You don't need to insert a value for `order_date` because it has a default of the current timestamp.
+
+```sql
+INSERT INTO orders (total)
+VALUES (100.50);
+```
+
+- The `order_date` will automatically be set to the current timestamp when the row is inserted.
+
+---
+
+### **6. Inserting Data with a `CHECK` Constraint**
+
+You can insert data into a table while ensuring that values meet specific conditions by using a `CHECK` constraint.
+
+#### **Table: products**
+
+```sql
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    price DECIMAL CHECK (price >= 0)
+);
+```
+
+#### **Inserting Data with Validation:**
+
+The `CHECK` constraint ensures that `price` is non-negative.
+
+```sql
+INSERT INTO products (name, price)
+VALUES ('Laptop', 1200.00);
+```
+
+- If you try to insert a negative price:
+
+```sql
+INSERT INTO products (name, price)
+VALUES ('Smartphone', -500.00);
+```
+
+- This will fail because the `CHECK` constraint on `price` ensures it must be greater than or equal to 0.
+
+---
+
+### **7. Inserting and Using `WITH` Clause (CTE) to Generate Data**
+
+The `WITH` clause (Common Table Expressions, CTEs) allows you to generate data and use it in the `INSERT` statement.
+
+**Example:**
+
+Here we generate some data dynamically using a `WITH` clause and then insert it into a table.
+
+```sql
+WITH new_customers AS (
+    SELECT 'Alice Walker' AS name, 'alicew@example.com' AS email, 30 AS age
+    UNION ALL
+    SELECT 'Bob Stone', 'bob@example.com', 35
+)
+INSERT INTO customers (name, email, age)
+SELECT name, email, age FROM new_customers;
+```
+
+- The `WITH` clause generates a temporary result set (`new_customers`) and then inserts those values into the `customers` table.
+
+---
+
+### **8. Inserting Data Using `ARRAY` for Multiple Values**
+
+In PostgreSQL, you can store arrays in a table. Here’s an example of inserting array values.
+
+**Table: products:**
+
+```sql
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    features TEXT[]
+);
+```
+
+#### **Inserting Array Values:**
+
+```sql
+INSERT INTO products (name, features)
+VALUES ('Smartphone', ARRAY['Touchscreen', '5G', 'Dual Camera']);
+```
+
+- The `features` column stores an array of text values, which can be inserted in this way.
+
+---
+
+### **9. Inserting with `INSERT INTO ... SELECT` Using Joins**
+
+You can insert data into one table based on a `JOIN` with another table.
+
+**Example:**
+
+You have two tables: `customers` and `orders`. You want to insert a summary of orders into a `order_summary` table.
+
+```sql
+CREATE TABLE order_summary (
+    customer_id INT,
+    total_orders INT,
+    total_spent DECIMAL
+);
+```
+
+#### **Inserting with Join:**
+
+```sql
+INSERT INTO order_summary (customer_id, total_orders, total_spent)
+SELECT c.id, COUNT(o.id), SUM(o.total)
+FROM customers c
+JOIN orders o ON c.id = o.customer_id
+GROUP BY c.id;
+```
+
+- This inserts the total number of orders and the total amount spent for each customer into the `order_summary` table, joining data from `customers` and `orders`.
+
+---
+
+### **Conclusion:**
+
+These examples showcase various ways to use the `INSERT` statement in PostgreSQL:
+
+- **Inserting multiple rows efficiently.**
+- **Upsert operations using `ON CONFLICT`.**
+- **Copying data between tables.**
+- **Using default values and constraints.**
+- **Inserting data with dynamic queries using CTEs and `WITH`.**
+
+PostgreSQL's flexibility allows you to tailor `INSERT` operations to your needs, making it easy to manage large datasets efficiently and effectively. Let me know if you'd like to explore any specific use cases further!
