@@ -182,7 +182,7 @@ The `CREATE` statement is foundational in SQL for defining database structures. 
 
 ---
 
-**Advanced `CREATE` Examples with Constraints and Optimizations** 🚀
+## Advanced CREATE Examples with Constraints and Optimizations
 
 ## **1. Advanced Constraints in `CREATE TABLE`**
 
@@ -389,9 +389,9 @@ A well-structured `CREATE` statement improves performance, data integrity, and s
 
 ---
 
-Let's dive into **SQL triggers, stored procedures, and real-world schema design** in detail.
+## SQL triggers, stored procedures, and real-world schema design
 
----
+Let's dive into **SQL triggers, stored procedures, and real-world schema design** in detail.
 
 ## **1️⃣ SQL Triggers**
 
@@ -699,7 +699,7 @@ We covered:
 
 ---
 
-## **Database Indexing: Concepts, Types & Best Practices**
+## Database Indexing: Concepts, Types & Best Practices
 
 ## **1️⃣ What is an Index?**
 
