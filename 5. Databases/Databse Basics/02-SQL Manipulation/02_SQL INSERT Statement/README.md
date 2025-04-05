@@ -568,7 +568,7 @@ The `INSERT` statement in PostgreSQL is a powerful tool for adding data to your 
 
 ---
 
-## *PostgreSQL `INSERT` Statement: Various Features and Techniques**
+## **PostgreSQL `INSERT` Statement: Various Features and Techniques**
 
 Below are more detailed examples of how to use the `INSERT` statement in PostgreSQL with various features and techniques.
 
