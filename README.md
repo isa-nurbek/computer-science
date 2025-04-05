@@ -60,10 +60,6 @@ This repository serves as a foundational guide to essential Computer Science con
 - Study probability and its applications in algorithms.
 - Explore linear algebra and its role in machine learning and computer graphics.
 
-## Why These Topics?
-
-Each of these topics forms a crucial foundation for problem-solving, software development, and understanding the broader field of Computer Science. Mastery of these areas enables developers to design efficient, scalable, and robust solutions for real-world problems.
-
 ## Resources
 
 - **Books**:
@@ -72,9 +68,6 @@ Each of these topics forms a crucial foundation for problem-solving, software de
   - *Computer Organization and Design* by David A. Patterson and John L. Hennessy.
 
 - **Online Platforms**:
+- 
   - [Codecademy](https://www.codecademy.com/learn/paths/computer-science)
-  - [MIT OpenCourseWare](https://ocw.mit.edu/)
-
----
-
-Happy learning! 🚀
+  - [MIT OpenCourseWare](https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/)
