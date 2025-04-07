@@ -161,3 +161,133 @@ DELETE FROM employees WHERE name = 'Bob';
 
 ---
 
+## DML Practice Problems
+
+Let's dive into **DML Practice Problems** first, then cover **transactions and rollback** with examples.
+
+---
+
+## ✅ Part 1: DML Practice Problems
+
+We'll use this sample table:
+
+### Table: `students`
+
+| id | name     | age | grade |
+|----|----------|-----|-------|
+| 1  | Alice    | 20  | B     |
+| 2  | Bob      | 19  | C     |
+| 3  | Charlie  | 21  | A     |
+| 4  | Diana    | 22  | B     |
+
+---
+
+### 🔄 Problem 1: Select students older than 20
+
+```sql
+SELECT * FROM students WHERE age > 20;
+```
+
+**Expected Result**: Charlie and Diana
+
+---
+
+### ➕ Problem 2: Add a new student "Eve", age 20, grade "A"
+
+```sql
+INSERT INTO students (name, age, grade) VALUES ('Eve', 20, 'A');
+```
+
+---
+
+### 📝 Problem 3: Update "Bob"'s grade to "B+"
+
+```sql
+UPDATE students SET grade = 'B+' WHERE name = 'Bob';
+```
+
+---
+
+### ❌ Problem 4: Delete students with grade "C"
+
+```sql
+DELETE FROM students WHERE grade = 'C';
+```
+
+---
+
+### 🔍 Problem 5: Select names of students with grade "A" or "B+"
+
+```sql
+SELECT name FROM students WHERE grade IN ('A', 'B+');
+```
+
+---
+
+## 💡 Part 2: Transactions and Rollback in DML
+
+### 🎯 What are Transactions?
+
+A **transaction** is a group of SQL operations that are executed as a **single unit**. It's either **fully completed** or **fully reversed**.
+
+### ✅ Commands
+
+| Command     | Purpose                            |
+|-------------|------------------------------------|
+| `BEGIN`     | Starts a transaction               |
+| `COMMIT`    | Saves all changes made             |
+| `ROLLBACK`  | Undoes all changes since `BEGIN`   |
+
+---
+
+### 🔁 Example Scenario with Rollback
+
+```sql
+-- Start transaction
+BEGIN;
+
+-- Step 1: Insert new student
+INSERT INTO students (name, age, grade) VALUES ('Frank', 23, 'D');
+
+-- Step 2: Oops! We realize we made a mistake (grade should be 'B')
+ROLLBACK;
+
+-- Now: No change is saved, 'Frank' was never added
+```
+
+### ✅ Now let's do it correctly
+
+```sql
+BEGIN;
+
+-- Insert new student with correct data
+INSERT INTO students (name, age, grade) VALUES ('Frank', 23, 'B');
+
+-- All good? Commit it!
+COMMIT;
+```
+
+---
+
+### 💥 Rollback with Update Example
+
+```sql
+BEGIN;
+
+UPDATE students SET grade = 'F' WHERE name = 'Charlie';
+
+-- Realize this was a mistake!
+ROLLBACK;
+
+-- Charlie's grade is restored to the original value.
+```
+
+---
+
+### 🧠 Why Use Transactions?
+
+- Ensure **data integrity**
+- Useful in **multi-step operations** (e.g. transferring money)
+- Allow **safe testing** before committing changes
+
+---
