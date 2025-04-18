@@ -1,4 +1,4 @@
-# Code Explanation: Naive Pattern Search Algorithm Implementation in Python
+# Code Explanation: Naive *Pattern Search Algorithm*
 
 ## 1. **naive_pattern_search() Function**
 
