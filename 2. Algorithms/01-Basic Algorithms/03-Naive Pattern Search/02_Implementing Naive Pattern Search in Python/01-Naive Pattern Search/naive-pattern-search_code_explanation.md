@@ -1,7 +1,5 @@
 # Code Explanation: Naive Pattern Search Implementation in Python
 
-Let's break down the code and understand how the `Stack` class works in detail.
-
 ## 1. **naive_pattern_search() Function**
 
 ```python
