@@ -482,3 +482,230 @@ def heap_sort(arr):
 | Heap Sort    | `O(n log n)` / `O(n log n)` / `O(n log n)` | `O(1)`               | ❌ No   | ✅ Yes                    |
 
 ---
+
+## 🔁 **How to Convert Any Recursion into Iteration Using a Stack**
+
+Recursion uses the **call stack** under the hood — so if we want to turn recursion into iteration, we can **manually manage a stack** to simulate that behavior.
+
+---
+
+## 🔍 General Strategy
+
+1. **Understand what state the recursive call depends on.**  
+2. **Create a stack (usually a list in Python).**  
+3. **Push the initial state onto the stack.**  
+4. **Loop until the stack is empty:**
+   - Pop a state from the stack.
+   - Do the logic you would have done before the recursive call.
+   - Push new states as needed (like recursive calls).
+
+---
+
+## 🧠 Let’s start with a simple example: **Factorial**
+
+### ✅ Recursive Version
+
+```python
+def factorial_recursive(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * factorial_recursive(n - 1)
+```
+
+### 🔁 Iterative Version Using a Stack
+
+```python
+def factorial_stack(n):
+    if n == 0 or n == 1:
+        return 1
+
+    stack = []
+    result = 1
+
+    while n > 1:
+        stack.append(n)
+        n -= 1
+
+    while stack:
+        result *= stack.pop()
+
+    return result
+```
+
+---
+
+## 🧩 Now a more advanced example: **Binary Tree Inorder Traversal**
+
+### ✅ Recursive
+
+```python
+def inorder_recursive(root):
+    if root:
+        inorder_recursive(root.left)
+        print(root.val, end=' ')
+        inorder_recursive(root.right)
+```
+
+### 🔁 Iterative Using Stack
+
+```python
+def inorder_iterative(root):
+    stack = []
+    current = root
+
+    while stack or current:
+        if current:
+            stack.append(current)
+            current = current.left
+        else:
+            current = stack.pop()
+            print(current.val, end=' ')
+            current = current.right
+```
+
+---
+
+## 🧱 General Template for Recursion → Iteration
+
+Let’s say you have:
+
+```python
+def recursive(args):
+    if base_case:
+        return result
+    do_something
+    recursive(new_args_1)
+    recursive(new_args_2)
+```
+
+Then the **iterative version** looks like:
+
+```python
+def iterative(start_args):
+    stack = [start_args]
+    
+    while stack:
+        args = stack.pop()
+
+        if base_case:
+            continue or store result
+
+        do_something
+        stack.append(new_args_1)
+        stack.append(new_args_2)
+```
+
+You’re just **managing the recursive state manually**.
+
+---
+
+## 🧠 Challenge: DFS using Recursion → Stack
+
+### ✅ Recursive DFS
+
+```python
+def dfs_recursive(graph, node, visited):
+    if node not in visited:
+        visited.add(node)
+        for neighbor in graph[node]:
+            dfs_recursive(graph, neighbor, visited)
+```
+
+### 🔁 Iterative DFS
+
+```python
+def dfs_iterative(graph, start):
+    visited = set()
+    stack = [start]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            print(node, end=' ')
+            visited.add(node)
+            # Reverse to keep order same as recursive
+            stack.extend(reversed(graph[node]))
+```
+
+---
+
+## 🧵 Tail Recursion vs Normal (Head/General) Recursion
+
+Tail recursion is a **special case** of recursion where the **recursive call is the last operation** in the function. That makes it easier to **optimize**, and even convert into iteration more directly.
+
+---
+
+### 🔍 Normal (Head) Recursion
+
+Here, the recursive call is **not** the last thing that happens.
+
+```python
+def factorial_normal(n):
+    if n == 0:
+        return 1
+    return n * factorial_normal(n - 1)  # recursive call is *not* last
+```
+
+### 🔍 Tail Recursion
+
+Here, the recursive call is the **final** step. No computation after it.
+
+```python
+def factorial_tail(n, acc=1):
+    if n == 0:
+        return acc
+    return factorial_tail(n - 1, acc * n)
+```
+
+🧠 In tail recursion:
+
+- All calculations are passed forward via parameters (like `acc`)
+- You don’t need to "return and multiply" after the call — it's already done
+
+---
+
+## 📦 Why Tail Recursion Matters
+
+### 🔧 Tail Call Optimization (TCO)
+
+- Some languages like **Scheme**, **Scala**, or **Haskell** **optimize** tail calls by **reusing stack frames**, which prevents stack overflow.
+- **Python does NOT support TCO by design** (for clarity and debugging), so **tail-recursive functions still consume stack**.
+
+> So, tail recursion in Python won’t save space — but it **helps structure** problems for easier conversion to iteration.
+
+---
+
+### 🔁 How Tail Recursion Helps with Iterative Conversion
+
+Tail-recursive functions can be rewritten using loops more easily.
+
+Tail-recursive `factorial_tail`:
+
+```python
+def factorial_tail(n, acc=1):
+    if n == 0:
+        return acc
+    return factorial_tail(n - 1, acc * n)
+```
+
+Becomes this loop:
+
+```python
+def factorial_iterative(n):
+    acc = 1
+    while n > 0:
+        acc *= n
+        n -= 1
+    return acc
+```
+
+---
+
+## ⚔️ Comparison: Tail vs Normal Recursion
+
+| Feature                    | Normal Recursion            | Tail Recursion              |
+|----------------------------|---------------------------- |-----------------------------|
+| Recursive call at end?     | ❌ No                      | ✅ Yes                      |
+| Stack grows with depth     | ✅ Yes                     | ✅ Yes (in Python)          |
+| Easier to convert to loop? | ❌ Not always              | ✅ Much easier              |
+| Optimized in Python?       | ❌ No                      | ❌ No (Python avoids TCO)   |
