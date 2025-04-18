@@ -106,3 +106,138 @@ The **average case** is efficient (`O(n + m)`) due to the rolling hash, but the 
 to spurious hash matches. The space complexity is **constant** if we ignore the output storage.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's walk through the **Rabin-Karp string matching algorithm** step-by-step using the code you provided and break down
+each part of the logic.
+
+### 👇 **Goal**
+Find all **starting indices** in the `text` where the `pattern` appears.
+
+---
+
+### 🔧 **Parameters**
+```
+def rabin_karp_search(text, pattern, prime=101):
+```
+
+- `text`: The string we want to search in.
+- `pattern`: The substring we want to find.
+- `prime`: A large prime number used for hashing to reduce collisions.
+
+---
+
+### 📌 **Variables and Setup**
+```
+n = len(text)        # Length of the text
+m = len(pattern)     # Length of the pattern
+d = 256              # Size of the alphabet (extended ASCII)
+```
+
+#### Rolling Hash:
+```
+h = pow(d, m - 1) % prime
+```
+- `h` is used to remove the leading character when sliding the window.
+- `pow(d, m - 1)` calculates `d^m-1`, which helps in removing the contribution of the first character of the current window.
+
+```
+p = 0  # Hash value for the pattern
+t = 0  # Hash value for the text window
+result = []  # List to store the result (starting indices)
+```
+
+---
+
+### 🔢 **Initial Hash Computation**
+```
+for i in range(m):
+    p = (d * p + ord(pattern[i])) % prime
+    t = (d * t + ord(text[i])) % prime
+```
+This loop computes:
+- `p`: Hash of the pattern
+- `t`: Hash of the first `m` characters (first window) of the text
+
+Both use the **same rolling hash formula**, similar to calculating a number in base-256.
+
+---
+
+### 🔄 **Main Loop**
+```
+for i in range(n - m + 1):
+```
+This loop slides the pattern over the text.
+
+#### ✅ **Hash Match**
+```
+if p == t:
+    if text[i:i + m] == pattern:
+        result.append(i)
+```
+- If the hash values match, it's a **potential match**.
+- To confirm (due to possibility of hash collisions), check the actual substring: `text[i:i + m]`.
+
+---
+
+### 📦 **Update Hash (Sliding Window)**
+```
+if i < n - m:
+    t = (d * (t - ord(text[i]) * h) + ord(text[i + m])) % prime
+    if t < 0:
+        t += prime
+```
+
+#### What’s happening here?
+
+Let’s break this down:
+- Remove the contribution of `text[i]` (leftmost character of the current window).
+- Add `text[i + m]` (next character in text).
+- The hash is updated efficiently in constant time.
+
+The modulo `prime` ensures the hash value stays within integer bounds.
+
+---
+
+### ✅ **Return Results**
+```
+return result
+```
+
+---
+
+### 🧪 **Example**
+```
+text = "AABAACAADAABAABA"
+pattern = "AABA"
+```
+
+**Output:**
+```
+Rabin-Karp: [0, 9, 12]
+```
+
+Which means `"AABA"` occurs at indices 0, 9, and 12 in the text.
+
+---
+
+### 📈 **Time Complexity**
+
+- **Best/Average Case**: O(n + m)
+  - Hash comparisons are fast, and very few actual substring comparisons.
+- **Worst Case**: O(nm)
+  - Happens when lots of hash collisions occur.
+
+---
+
+### 🧠 Summary
+The Rabin-Karp algorithm:
+- Uses hashing to **quickly eliminate non-matches**.
+- Only does **character-by-character comparison** when hashes match.
+- Efficient for **multiple pattern search** (with slight modifications).
+
+"""
