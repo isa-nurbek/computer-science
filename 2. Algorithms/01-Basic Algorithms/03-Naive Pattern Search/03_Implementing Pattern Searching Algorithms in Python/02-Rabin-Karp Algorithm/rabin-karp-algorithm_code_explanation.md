@@ -1,4 +1,4 @@
-# Code Explanation: Rabin-Karp Algorithm Implementation in Python
+# Code Explanation: *Rabin-Karp Algorithm*
 
 ## 1. **rabin_karp_search() Function**
 
