@@ -175,3 +175,165 @@ def fibonacci_memo(n):
 📦 Space Complexity: `O(n)` (for cache and recursion stack)
 
 ---
+
+## DFS vs BFS
+
+Let’s go deeper by comparing **Recursion vs. Iteration** with a classic recursive problem: **Tree Traversal**, and also compare with **Graph Traversal** (DFS vs BFS) to show real-life use cases.
+
+## 🌳 Binary Tree Traversal – Recursion vs Iteration
+
+Say we have this binary tree:
+
+```plaintext
+      1
+     / \
+    2   3
+   / \
+  4   5
+```
+
+### Tree Node Definition in Python
+
+```python
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+```
+
+---
+
+### 1. **Inorder Traversal (Left ➝ Root ➝ Right)**
+
+#### ✅ Recursive Version
+
+```python
+def inorder_recursive(root):
+    if root:
+        inorder_recursive(root.left)
+        print(root.val, end=' ')
+        inorder_recursive(root.right)
+```
+
+#### ✅ Iterative Version
+
+```python
+def inorder_iterative(root):
+    stack = []
+    current = root
+    while stack or current:
+        if current:
+            stack.append(current)
+            current = current.left
+        else:
+            current = stack.pop()
+            print(current.val, end=' ')
+            current = current.right
+```
+
+### 🔍 Complexity (Both Versions)
+
+- **Time Complexity**: `O(n)` (visit every node once)
+- **Space Complexity**:  
+  - Recursive: `O(h)` (h = height of tree, for call stack)
+  - Iterative: `O(h)` (explicit stack)
+
+---
+
+## 🌐 Graph Traversal – DFS vs BFS
+
+We’ll show both **recursive** and **iterative** DFS, and also **BFS** using a queue.
+
+Say we have this graph:
+
+```plaintext
+Graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': ['F'],
+    'F': []
+}
+```
+
+---
+
+### 🔍 Depth-First Search (DFS)
+
+#### ✅ Recursive DFS
+
+```python
+def dfs_recursive(graph, node, visited=None):
+    if visited is None:
+        visited = set()
+    if node not in visited:
+        print(node, end=' ')
+        visited.add(node)
+        for neighbor in graph[node]:
+            dfs_recursive(graph, neighbor, visited)
+```
+
+#### ✅ Iterative DFS (using Stack)
+
+```python
+def dfs_iterative(graph, start):
+    visited = set()
+    stack = [start]
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            print(node, end=' ')
+            visited.add(node)
+            # Push neighbors in reverse to maintain order
+            stack.extend(reversed(graph[node]))
+```
+
+---
+
+### 🔁 Breadth-First Search (BFS)
+
+✅ **Always iterative** using a **queue**
+
+```python
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    while queue:
+        node = queue.popleft()
+        if node not in visited:
+            print(node, end=' ')
+            visited.add(node)
+            queue.extend(graph[node])
+```
+
+---
+
+### 🔬 Complexity Analysis
+
+| Algorithm      | Time Complexity  | Space Complexity | Notes                         |
+|----------------|------------------|------------------|-------------------------------|
+| DFS (rec/iter) | `O(V + E)`       | `O(V)`           | Stack depth or explicit stack |
+| BFS            | `O(V + E)`       | `O(V)`           | Uses a queue                  |
+
+Where:
+
+- `V` = number of vertices
+- `E` = number of edges
+
+---
+
+## 🧠 Recap: When to Use What?
+
+| Task Type                          | Use Recursion                   | Use Iteration               |
+|------------------------------------|---------------------------------|-----------------------------|
+| Tree Traversal                     | ✅ Clean and simple             | ✅ Avoid recursion limit   |
+| Graph DFS                          | ✅ or Iteration (both fine)     | ✅ Same performance        |
+| Fibonacci / Factorial              | ✅ With memoization             | ✅ Faster without memo     |
+| BFS                                | ❌ Not natural in recursion     | ✅ Queue-based             |
+| Deep recursion (e.g. depth > 1000) | ❌ May hit stack overflow       | ✅ Safer                   |
+
+---
