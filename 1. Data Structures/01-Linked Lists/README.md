@@ -1,30 +1,31 @@
 # Linked Lists in Python
 
-Welcome to the **Linked Lists** unit! This unit focuses on understanding, implementing, and using Linked Lists and Doubly Linked Lists in Python.
+Welcome to the **Linked Lists** unit! This unit focuses on understanding, implementing, and using **Singly Linked Lists** and **Doubly Linked Lists** in Python.
 
-## Objectives
+## 📌 Objectives
 
 By the end of this unit, you will be able to:
 
-- Create and use your own `Node` classes in Python.
-- Create and use your own `LinkedList` class in Python using your prior `Node` class.
+- Create and use your own `Node` class in Python.
+- Build and manipulate a `LinkedList` class using your custom `Node`.
 - Apply common Linked List algorithms.
-- Create and use your own `DoublyLinkedList` class in Python using an edited version of your prior `Node` class.
+- Modify the `Node` class and implement a `DoublyLinkedList` class for bi-directional operations.
 
-## What You Will Learn
+## 📘 What You Will Learn
 
-1. **Node Class**:
+### 1. **Node Class**
 
-    - Understand the foundational building block of Linked Lists.
-    - Learn to implement and utilize a `Node` class in Python.
+- Understand the foundational building block of linked lists.
+- Implement and utilize a `Node` class in Python.
 
-2. **Singly Linked List**:
+### 2. **Singly Linked List**
 
-    - Explore how to build and manipulate a `LinkedList` class.
-    - Practice adding, removing, and searching elements.
-    - Understand the traversal and use of common algorithms.
+- Construct a `LinkedList` class and perform basic operations.
+- Practice adding, removing, and searching for elements.
+- Traverse the list and apply common algorithms.
 
-3. **Doubly Linked List**:
-    - Learn to modify the `Node` class for Doubly Linked Lists.
-    - Implement a `DoublyLinkedList` class to handle bi-directional traversal.
-    - Dive into advanced algorithms and applications.
+### 3. **Doubly Linked List**
+
+- Modify the `Node` class to support previous and next pointers.
+- Implement a `DoublyLinkedList` class for bi-directional traversal.
+- Explore advanced algorithms and use cases.
