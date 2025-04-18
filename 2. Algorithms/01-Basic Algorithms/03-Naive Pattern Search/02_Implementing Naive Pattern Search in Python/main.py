@@ -107,3 +107,131 @@ If we ignore the space required for the output (`result`), the auxiliary space c
   - O(1) (auxiliary space, excluding output)
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+Let's go through the code step by step and understand how it works and why the output is `[0, 9, 12]`.
+
+### 🔍 **Purpose of the Code**
+The goal of this function is to **find all occurrences** of a `pattern` string inside a larger `text` string using
+a **naive pattern matching algorithm**.
+
+---
+
+### 📦 Function Definition
+```
+def naive_pattern_search(text, pattern):
+```
+- Takes two arguments:
+  - `text`: the main string where you are searching.
+  - `pattern`: the string (substring) you want to find in `text`.
+
+---
+
+### 📏 Variable Initialization
+```
+n = len(text)
+m = len(pattern)
+result = []
+```
+- `n`: length of the text.
+- `m`: length of the pattern.
+- `result`: list that will store the starting indices where the pattern matches the text.
+
+---
+
+### 🔁 Loop Through All Possible Start Positions
+```
+for i in range(n - m + 1):
+```
+- You slide the pattern across the text from left to right.
+- `i` is the starting index in `text` where we try to match the pattern.
+- We only loop up to `n - m` because if `i` goes beyond that, the pattern won't fully fit.
+
+---
+
+### ✅ Matching Pattern at Each Position
+```
+match = True
+for j in range(m):
+    if text[i + j] != pattern[j]:
+        match = False
+        break
+```
+- For each `i`, it tries to match all characters in the pattern:
+  - `text[i + j]` compares the text character with the corresponding character in the pattern.
+  - If **any character mismatches**, set `match = False` and break out of the loop.
+
+---
+
+### 📌 If Pattern Matches, Save the Index
+```
+if match:
+    result.append(i)
+```
+- If `match` is still `True` after checking all characters, it means the pattern matched the text starting at index `i`.
+- Append `i` to `result`.
+
+---
+
+### 🔚 Return the Result List
+```
+return result
+```
+- Finally, it returns the list of all starting indices where the pattern was found.
+
+---
+
+### ▶️ Example Usage
+```
+text = "AABAACAADAABAABA"
+pattern = "AABA"
+matches = naive_pattern_search(text, pattern)
+print("Pattern found at indices:", matches)
+```
+
+Let’s manually verify how it finds matches:
+
+#### Text: `"AABAACAADAABAABA"`
+- Indices: ` 012345678901234`
+
+#### Pattern: `"AABA"` (length = 4)
+
+We try matching at each index from 0 to 12:
+
+- `i = 0`: `text[0:4] = "AABA"` ✅
+- `i = 1`: `text[1:5] = "ABAA"` ❌
+- `i = 2`: `text[2:6] = "BAAC"` ❌
+- `i = 3`: `text[3:7] = "AACA"` ❌
+- `i = 4`: `text[4:8] = "ACAA"` ❌
+- `i = 5`: `text[5:9] = "CAAD"` ❌
+- `i = 6`: `text[6:10] = "AADA"` ❌
+- `i = 7`: `text[7:11] = "ADAA"` ❌
+- `i = 8`: `text[8:12] = "DAAB"` ❌
+- `i = 9`: `text[9:13] = "AABA"` ✅
+- `i = 10`: `text[10:14] = "ABAA"` ❌
+- `i = 11`: `text[11:15] = "BAAB"` ❌
+- `i = 12`: `text[12:16] = "AABA"` ✅
+
+So, matches at:
+- `0`
+- `9`
+- `12`
+
+Hence, output:
+```
+Pattern found at indices: [0, 9, 12]
+```
+
+---
+
+### 💡 Summary
+- This is a simple **brute-force pattern matching** method.
+- Time Complexity: **O((n−m+1) × m)** in worst case (n = text length, m = pattern length).
+- Works well for small strings or for learning, but **inefficient** for large inputs.
+- For more efficiency, algorithms like **KMP**, **Boyer-Moore**, or **Rabin-Karp** are used.
+
+"""
