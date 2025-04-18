@@ -1,41 +1,32 @@
 # Queues in Python
 
-Welcome to the **Queues** unit! This unit focuses on understanding, implementing, and using **Queues** and **Dequeues** in Python using both classes and built-in modules.
+Welcome to the **Queues** unit! This unit is all about understanding how Queues work, their key operations, and how to implement them efficiently using both Python lists and linked lists.
 
 ## 📌 Objectives
 
 By the end of this unit, you will be able to:
 
-- Understand the FIFO (First In, First Out) principle of Queues.
-- Create and use your own `Queue` class in Python.
-- Use Python's built-in `collections.deque` module.
-- Implement and manipulate a `Deque` (Double-Ended Queue).
-- Apply common queue operations and algorithms.
+- Understand the First-In-First-Out (FIFO) principle of queues.
+- Implement a Queue using Python's built-in `list`.
+- Build a Queue using a custom `LinkedList`-based approach.
+- Perform standard queue operations like `enqueue`, `dequeue`, and `peek`.
+- Recognize the performance differences between implementations.
 
 ## 📘 What You Will Learn
 
-### 1. **Queue Basics**
+### 1. **Queue Fundamentals**
 
-- Understand how queues work in computer science.
-- Explore real-life examples of queues (e.g., waiting lines, task scheduling).
+- Understand the FIFO (First-In, First-Out) behavior.
+- Learn real-world applications of queues (e.g., print queues, task scheduling, etc.).
 
-### 2. **Implementing a Queue (Class-Based)**
+### 2. **Queue Using List**
 
-- Build a `Queue` class using a list or linked list.
-- Learn and implement `enqueue`, `dequeue`, `peek`, and `is_empty` methods.
+- Implement a queue using Python’s built-in `list`.
+- Explore how `append()` and `pop(0)` work for enqueuing and dequeuing.
+- Analyze the time complexity and performance concerns of list-based queues.
 
-### 3. **Using `collections.deque`**
+### 3. **Queue Using Linked List**
 
-- Learn to use Python's efficient built-in `deque` from the `collections` module.
-- Perform fast append and pop operations from both ends.
-
-### 4. **Implementing a Deque (Double-Ended Queue)**
-
-- Understand the difference between a queue and a deque.
-- Implement or use a `Deque` that supports insertion and deletion from both ends.
-
-### 5. **Common Queue Applications**
-
-- Task scheduling
-- Breadth-First Search (BFS)
-- Caching and buffering systems
+- Reuse your custom `Node` and `LinkedList` classes.
+- Implement `enqueue` (add to tail) and `dequeue` (remove from head) operations efficiently.
+- Practice writing clean and modular queue code with O(1) operations.
