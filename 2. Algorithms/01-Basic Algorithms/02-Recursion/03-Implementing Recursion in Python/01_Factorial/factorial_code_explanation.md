@@ -1,4 +1,4 @@
-# Code Explanation: Factorial Implementing in Python
+# Code Explanation: *Factorial*
 
 Our `factorial` function is a classic example of recursion. Let's break it down step by step.
 
