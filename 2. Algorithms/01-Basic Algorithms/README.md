@@ -1,4 +1,4 @@
-# Algorithmic Concepts and Implementations
+# Basic Algorithmic Concepts and Implementations
 
 This unit is dedicated to exploring fundamental algorithmic concepts, including:
 
