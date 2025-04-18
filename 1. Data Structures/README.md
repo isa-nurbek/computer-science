@@ -1,9 +1,20 @@
-# Introduction to Data Structures
+# 📘 Introduction to Data Structures
 
-Learn how data structures are used by computer programs to efficiently store and retrieve data. This repository provides an overview of key data structures, their applications, and practical examples to help you understand and implement them effectively.
+Welcome to **Data Structures** unit! This unit is designed to help you understand how computer programs use data structures to **efficiently store, organize, and retrieve information**. Whether you're preparing for technical interviews or building more optimized software, mastering data structures is a foundational step.
 
-## Contents
+### 🚀 What You'll Learn
 
-- Overview of Data Structures
-- Practical Examples and Use Cases
-- Code Implementations
+Explore the core data structures every developer should know, complete with real-world applications and hands-on code examples:
+
+- **Linked Lists** – Flexible memory management and dynamic data operations  
+- **Queues** – First-in, first-out (FIFO) structures for task scheduling  
+- **Stacks** – Last-in, first-out (LIFO) operations for undo functionality, parsing, and more  
+- **Hash Maps** – Fast key-value lookups for caching, indexing, and beyond  
+
+### 🧠 Topics Covered
+
+- **Overview of Common Data Structures**  
+- **Real-World Use Cases and Applications**  
+- **Code Implementations in Practice**  
+
+Each section includes clear explanations, visual illustrations, and ready-to-run code to reinforce your understanding.
