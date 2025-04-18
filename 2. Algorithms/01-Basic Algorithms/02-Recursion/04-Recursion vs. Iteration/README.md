@@ -116,7 +116,7 @@ def fibonacci_recursive(n):
     return fibonacci_recursive(n-1) + fibonacci_recursive(n-2)
 ```
 
-🧠 **Time Complexity**: `O(2^n)` — very inefficient due to repeated calculations  
+🧠 **Time Complexity**: `O(2ⁿ)` — very inefficient due to repeated calculations  
 📦 **Space Complexity**: `O(n)` — max depth of the recursion tree
 
 ---
@@ -176,7 +176,7 @@ def fibonacci_memo(n):
 
 ---
 
-## DFS vs BFS
+## DFS vs BFS (Recursion vs. Iteration)
 
 Let’s go deeper by comparing **Recursion vs. Iteration** with a classic recursive problem: **Tree Traversal**, and also compare with **Graph Traversal** (DFS vs BFS) to show real-life use cases.
 
@@ -335,5 +335,150 @@ Where:
 | Fibonacci / Factorial              | ✅ With memoization             | ✅ Faster without memo     |
 | BFS                                | ❌ Not natural in recursion     | ✅ Queue-based             |
 | Deep recursion (e.g. depth > 1000) | ❌ May hit stack overflow       | ✅ Safer                   |
+
+---
+
+## Sorting Algorithms (Recursion vs Iteration)
+
+Let’s go through some **popular sorting algorithms** that use **recursion**, along with how they work, Python code, and their time/space complexities.
+
+## 🔀 Sorting Algorithms Using Recursion
+
+### 1. **Merge Sort** – Divide and Conquer
+
+Merge Sort splits the array in half recursively, sorts each half, and merges them.
+
+#### ✅ Python Code
+
+```python
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i = j = 0
+
+    # Merge two sorted arrays
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+
+    # Append any remaining elements
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+```
+
+🧠 **Time Complexity**: `O(n log n)`  
+📦 **Space Complexity**: `O(n)` (extra space for merging)
+
+---
+
+### 2. **Quick Sort** – Divide and Conquer (but in-place)
+
+Quick Sort picks a pivot, partitions the array, and recursively sorts the sub-arrays.
+
+#### ✅ Python Code
+
+```python
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[0]
+    less = [x for x in arr[1:] if x <= pivot]
+    greater = [x for x in arr[1:] if x > pivot]
+
+    return quick_sort(less) + [pivot] + quick_sort(greater)
+```
+
+🧠 **Time Complexity**:
+
+- Best/Average: `O(n log n)`
+- Worst: `O(n²)` (if pivot is badly chosen)
+
+📦 **Space Complexity**: `O(n)` (because it returns new arrays)
+
+---
+
+### 🔄 In-Place Quick Sort Version (No Extra Space)
+
+```python
+def quick_sort_inplace(arr, low, high):
+    if low < high:
+        pi = partition(arr, low, high)
+        quick_sort_inplace(arr, low, pi - 1)
+        quick_sort_inplace(arr, pi + 1, high)
+
+def partition(arr, low, high):
+    pivot = arr[high]
+    i = low - 1
+
+    for j in range(low, high):
+        if arr[j] < pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+
+    arr[i+1], arr[high] = arr[high], arr[i+1]
+    return i + 1
+```
+
+📦 **Space Complexity**: `O(log n)` (for recursive calls only – no extra lists)
+
+---
+
+### 3. **Heap Sort** (Not recursive by nature, but can use recursive heapify)
+
+```python
+def heapify(arr, n, i):
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    if l < n and arr[l] > arr[largest]:
+        largest = l
+    if r < n and arr[r] > arr[largest]:
+        largest = r
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)  # Recursive call
+
+def heap_sort(arr):
+    n = len(arr)
+
+    # Build max heap
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+
+    # One by one extract elements
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+```
+
+🧠 **Time Complexity**: `O(n log n)`  
+📦 **Space Complexity**: `O(1)` (in-place sorting)
+
+---
+
+## 🔁 Comparison Table of Recursive Sorting Algorithms
+
+| Algorithm    | Time (Best/Average/Worst)                  | Space                | Stable? | In-Place?                  |
+|--------------|--------------------------------------------|----------------------|---------|----------------------------|
+| Merge Sort   | `O(n log n)` / `O(n log n)` / `O(n log n)` | `O(n)`               | ✅ Yes  | ❌ No                     |
+| Quick Sort   | `O(n log n)` / `O(n log n)` / `O(n²)`      | `O(log n)` or `O(n)` | ❌ No   | ✅ Yes (in-place version) |
+| Heap Sort    | `O(n log n)` / `O(n log n)` / `O(n log n)` | `O(1)`               | ❌ No   | ✅ Yes                    |
 
 ---
