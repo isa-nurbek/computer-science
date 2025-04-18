@@ -2,30 +2,30 @@
 
 This unit explores fundamental algorithmic concepts, including asymptotic notation, recursion, searching algorithms, and dynamic programming. Each topic is accompanied by explanations, examples, and implementations.
 
-## Topics Covered
+## 📘 Topics Covered
 
-### 1. Asymptotic Notation
+### 1. **Asymptotic Notation**
 
-- Understanding Big-O, Big-Θ (Omega), and Big-Ω (Theta)
+- Understanding Big-O (Ο), Big-Ω (Ω), and Big-Θ (Θ)
 - Time and space complexity analysis
-- Best, worst, and average-case scenarios
+- Best-case, worst-case, and average-case scenarios
 
-### 2. Recursion
+### 2. **Recursion**
 
 - Principles of recursion
 - Base case and recursive case
-- Types of Recursion
+- Types of recursion (tail, head, tree, etc.)
 - Examples: Factorial, Fibonacci, Tower of Hanoi
 
-### 3. Searching Algorithms
+### 3. **Searching Algorithms**
 
 - Linear Search
 - Binary Search (Iterative & Recursive)
 - Interpolation Search
-- Applications and efficiency comparison
+- Applications and efficiency comparisons
 
-### 4. Dynamic Programming
+### 4. **Dynamic Programming**
 
 - Memoization vs. Tabulation
 - Overlapping subproblems and optimal substructure
-- Examples: Fibonacci sequence, Knapsack problem, Longest Common Subsequence
+- Examples: Fibonacci Sequence, Knapsack Problem, Longest Common Subsequence
