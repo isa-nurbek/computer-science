@@ -211,8 +211,6 @@ The Rabin-Karp algorithm:
 
 ### Time and Space Complexity Analysis
 
-### **Rabin-Karp Algorithm: Time and Space Complexity Analysis**
-
 #### **Time Complexity:**
 
 1. **Preprocessing (Hash Calculation for Pattern and First Window):**
@@ -243,11 +241,9 @@ The Rabin-Karp algorithm:
 
 ### **Summary:**
 
-| Scenario          | Time Complexity | Space Complexity |
-|-------------------|-----------------|------------------|
+| Scenario          | Time Complexity | Space Complexity               |
+|-------------------|-----------------|--------------------------------|
 | Best/Average Case | `O(n + m)`      | `O(1)` (or `O(n)` with output) |
 | Worst Case        | `O(nm)`         | `O(1)` (or `O(n)` with output) |
 
 The **average case** is efficient (`O(n + m)`) due to the rolling hash, but the **worst case** degrades to `O(nm)` due to spurious hash matches. The space complexity is **constant** if we ignore the output storage.
-
-Would you like further clarification on any part? 😊
