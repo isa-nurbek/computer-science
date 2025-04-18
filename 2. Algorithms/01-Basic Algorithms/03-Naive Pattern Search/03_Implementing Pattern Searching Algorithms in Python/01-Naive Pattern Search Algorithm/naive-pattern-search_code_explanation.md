@@ -1,4 +1,4 @@
-# Code Explanation: Naive *Pattern Search Algorithm*
+# Code Explanation: *Naive Pattern Search Algorithm*
 
 ## 1. **naive_pattern_search() Function**
 
@@ -43,7 +43,7 @@ pattern = "AABA"
 matches = naive_pattern_search(text, pattern)
 print("Pattern found at indices:", matches)
 
-Output:
+# Output:
 Pattern found at indices: [0, 9, 12]
 ```
 
