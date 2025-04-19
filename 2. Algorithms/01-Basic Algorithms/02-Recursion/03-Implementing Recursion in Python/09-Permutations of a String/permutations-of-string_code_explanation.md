@@ -1,4 +1,4 @@
-# Code Explanation: Permutations of a String Implementing in Python
+# Code Explanation: *Permutations of a String*
 
 ## **Permutations of a String function**
 
