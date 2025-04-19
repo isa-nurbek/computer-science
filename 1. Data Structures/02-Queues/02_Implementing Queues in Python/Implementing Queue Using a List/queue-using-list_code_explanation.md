@@ -1,4 +1,4 @@
-# Code Explanation: Queue with List Implementation in Python
+# Code Explanation: *Queue with List*
 
 ## Explanation of the Queue Class and Its Methods
 
