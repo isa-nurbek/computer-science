@@ -110,3 +110,44 @@ print("Full Boyer-Moore:", boyer_moore_full("AABAACAADAABAABA", "AABA"))
 Full Boyer-Moore: [0, 9, 12]
 
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+### Time Complexity:
+1. **Preprocessing (Heuristic Calculations):**
+   - `bad_char_heuristic`: O(m + 256) → O(m) (since 256 is a constant)
+   - `good_suffix_heuristic`: O(m) (the while loops and for loop all operate in linear time relative to m)
+
+2. **Searching Phase:**
+   - The main searching loop can have different behaviors:
+     - **Best Case:** O(n/m) when the pattern doesn't appear in the text and we get maximum shifts every time (e.g., when the
+     last character of the pattern never matches any character in the text).
+     - **Average Case:** O(n) for typical inputs (better than linear in practice due to skipping characters).
+     - **Worst Case:** O(n*m) when the pattern and text have many matching characters but the pattern isn't found (e.g.,
+     text = "AAAAAA", pattern = "BAAA"). However, with the good suffix rule, the worst case can be improved to O(n + m)
+     in most practical implementations.
+
+### Space Complexity:
+1. **Preprocessing:**
+   - `bad_char_heuristic`: O(256) → O(1) (fixed-size array for all ASCII characters).
+   - `good_suffix_heuristic`: O(m) (stores arrays of size m + 1).
+
+2. **Overall Space Complexity:**
+   - O(m) (dominated by the good suffix heuristic storage).
+
+### Summary:
+- **Time Complexity:**
+  - Best Case: O(n/m)
+  - Average Case: O(n) (often better in practice due to skips)
+  - Worst Case: O(n*m) (but can be improved to O(n + m) with proper optimizations)
+- **Space Complexity:** O(m) (for storing the heuristics).
+
+The Boyer-Moore algorithm is highly efficient in practice, especially for large texts and patterns, because it often
+skips large portions of the text. The worst-case scenario is rare in real-world applications.
+
+"""
