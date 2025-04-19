@@ -1,4 +1,4 @@
-# Code Explanation: Depth-First Search (Graph Algorithms) Implementing in Python
+# Code Explanation: *Depth-First Search (Graph Algorithms)*
 
 ## **Climbing Stairs function**
 
