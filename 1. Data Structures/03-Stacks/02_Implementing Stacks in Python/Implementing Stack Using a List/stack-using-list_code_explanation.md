@@ -1,4 +1,4 @@
-# Code Explanation: Stack with List Implementation in Python
+# Code Explanation: *Stack with List*
 
 ## Explanation of the `Stack` Class
 
