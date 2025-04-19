@@ -186,17 +186,6 @@ Rabin-Karp: [0, 9, 12]
 
 Which means `"AABA"` occurs at indices 0, 9, and 12 in the text.
 
----
-
-### 📈 **Time Complexity**
-
-- **Best/Average Case**: `O(n + m)`
-  - Hash comparisons are fast, and very few actual substring comparisons.
-- **Worst Case**: `O(nm)`
-  - Happens when lots of hash collisions occur.
-
----
-
 ### 🧠 Summary
 
 The Rabin-Karp algorithm:
