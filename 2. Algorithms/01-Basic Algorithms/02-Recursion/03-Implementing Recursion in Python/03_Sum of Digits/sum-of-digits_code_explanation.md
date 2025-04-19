@@ -1,4 +1,4 @@
-# Code Explanation: Sum of Digits Implementing in Python
+# Code Explanation: *Sum of Digits*
 
 ## **Sum of Digits function**
 
