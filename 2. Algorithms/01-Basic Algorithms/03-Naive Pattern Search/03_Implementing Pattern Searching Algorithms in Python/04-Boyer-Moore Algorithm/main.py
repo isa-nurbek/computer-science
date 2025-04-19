@@ -157,7 +157,8 @@ skips large portions of the text. The worst-case scenario is rare in real-world 
 # Detailed Code Explanation:
 
 """
-The provided code implements the **Boyer-Moore string search algorithm**, one of the most efficient string matching algorithms. Let's break it down **step-by-step**, explain **each component**, and understand **how it all works together**.
+The provided code implements the **Boyer-Moore string search algorithm**, one of the most efficient string matching algorithms.
+Let's break it down **step-by-step**, explain **each component**, and understand **how it all works together**.
 
 ## 🚀 Goal
 To find all occurrences of a **pattern** string inside a **text** string using the Boyer-Moore algorithm, which uses
