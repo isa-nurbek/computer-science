@@ -127,13 +127,6 @@ KMP: [0, 9, 12]
 - Avoids re-checking characters unnecessarily by leveraging the LPS array to skip ahead intelligently after mismatches.
 - Brute-force would take `O(n*m)` in the worst case, but KMP guarantees linear time.  
 
-### **Example**
-For `text = "ABABDABACDABABCABAB"`, `pattern = "ABABCABAB"`:  
-- LPS = `[0, 0, 1, 2, 0, 1, 2, 3, 4]`  
-- Matching phase skips redundant comparisons using LPS, resulting in `O(n + m)` time.  
-
-Thus, KMP is optimal for pattern matching with linear scalability.
-
 """
 
 # =========================================================================================================================== #
