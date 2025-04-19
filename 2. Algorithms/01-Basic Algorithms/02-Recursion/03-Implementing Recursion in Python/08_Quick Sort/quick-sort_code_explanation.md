@@ -1,6 +1,6 @@
-# Code Explanation: Merge Sort Implementing in Python
+# Code Explanation: *Quick Sort*
 
-## **Merge Sort function**
+## **Quick Sort function**
 
 ```python
 def quick_sort(arr):
