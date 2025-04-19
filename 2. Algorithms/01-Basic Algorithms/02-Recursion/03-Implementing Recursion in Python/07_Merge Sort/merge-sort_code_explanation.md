@@ -1,4 +1,4 @@
-# Code Explanation: Merge Sort Implementing in Python
+# Code Explanation: *Merge Sort*
 
 ## **Merge Sort function**
 
