@@ -1,4 +1,4 @@
-# Code Explanation: N-Queens Problem Implementing in Python
+# Code Explanation: *N-Queens Problem*
 
 ## **N-Queens Problem function**
 
