@@ -1,6 +1,6 @@
-# Code Explanation: Tower of Hanoi Implementing in Python
+# Code Explanation: *Palindrome Check*
 
-## **Tower of Hanoi function**
+## **Palindrome Check function**
 
 ```python
 def is_palindrome(s, left=0, right=None):
