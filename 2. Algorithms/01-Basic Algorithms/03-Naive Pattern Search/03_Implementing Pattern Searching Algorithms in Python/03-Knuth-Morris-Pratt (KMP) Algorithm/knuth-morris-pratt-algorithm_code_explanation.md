@@ -225,19 +225,6 @@ This means that the pattern `"AABA"` occurs at indices 0, 9, and 12 in the text.
 
 ---
 
-## 📦 Time and Space Complexity
-
-- **Time Complexity**:
-  - Preprocessing LPS: O(m)
-  - Searching: O(n)
-  - **Total: O(n + m)**
-
-- **Space Complexity**:
-  - LPS array: O(m)
-  - Result array: Depends on the number of matches
-
----
-
 ## **Big O Analysis:**
 
 ### Time and Space Complexity Analysis
