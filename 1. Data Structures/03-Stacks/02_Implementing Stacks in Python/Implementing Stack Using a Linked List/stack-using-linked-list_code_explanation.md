@@ -1,4 +1,4 @@
-# Code Explanation: Stack with Linked List Implementation in Python
+# Code Explanation: *Stack with Linked List*
 
 Let's break down the code and understand how the `Stack` class works in detail.
 
