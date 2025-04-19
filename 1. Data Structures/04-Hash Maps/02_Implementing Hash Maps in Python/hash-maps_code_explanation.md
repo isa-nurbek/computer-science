@@ -1,4 +1,4 @@
-# Code Explanation: Hash Maps Implementation in Python
+# Code Explanation: *Hash Maps*
 
 The provided code defines a simple implementation of a **hash map** (also known as a hash table) in Python. A hash map is a data structure that stores key-value pairs and allows for efficient insertion, retrieval, and deletion of these pairs. Below is a detailed explanation of how the code works:
 
