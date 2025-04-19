@@ -1,4 +1,4 @@
-# Code Explanation: Tower of Hanoi Implementing in Python
+# Code Explanation: *Tower of Hanoi*
 
 ## **Tower of Hanoi function**
 
