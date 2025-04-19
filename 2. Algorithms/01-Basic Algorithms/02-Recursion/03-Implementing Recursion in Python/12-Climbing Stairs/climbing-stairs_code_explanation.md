@@ -1,4 +1,4 @@
-# Code Explanation: Climbing Stairs Implementing in Python
+# Code Explanation: *Climbing Stairs*
 
 ## **Climbing Stairs function**
 
