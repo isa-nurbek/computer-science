@@ -1,4 +1,4 @@
-# Code Explanation: Power Of a Number Implementing in Python
+# Code Explanation: *Power Of a Number*
 
 ## **Power Of a Number function**
 
