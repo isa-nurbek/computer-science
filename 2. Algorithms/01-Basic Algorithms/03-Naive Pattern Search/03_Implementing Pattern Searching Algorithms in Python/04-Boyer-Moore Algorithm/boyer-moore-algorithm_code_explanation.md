@@ -174,14 +174,14 @@ This part computes the **good suffix shift** values.
 #### Step 1: Build `border_pos` table (similar to Z-algorithm idea)
 
 ```python
-    while i > 0:
-        while j <= m and pattern[i - 1] != pattern[j - 1]:
-            if good_suffix[j] == 0:
-                good_suffix[j] = j - i
-            j = border_pos[j]
-        i -= 1
-        j -= 1
-        border_pos[i] = j
+while i > 0:
+    while j <= m and pattern[i - 1] != pattern[j - 1]:
+        if good_suffix[j] == 0:
+            good_suffix[j] = j - i
+        j = border_pos[j]
+    i -= 1
+    j -= 1
+    border_pos[i] = j
 ```
 
 This loop finds the **longest border** (i.e., prefix == suffix) and uses it to figure out how far we can safely shift.
@@ -189,12 +189,12 @@ This loop finds the **longest border** (i.e., prefix == suffix) and uses it to f
 #### Step 2: Fill remaining good suffix shifts
 
 ```python
-    j = border_pos[0]
-    for i in range(m + 1):
-        if good_suffix[i] == 0:
-            good_suffix[i] = j
-        if i == j:
-            j = border_pos[j]
+j = border_pos[0]
+for i in range(m + 1):
+    if good_suffix[i] == 0:
+        good_suffix[i] = j
+    if i == j:
+        j = border_pos[j]
 ```
 
 This ensures that any suffix without a proper border still gets a valid shift.
@@ -221,12 +221,12 @@ def boyer_moore_full(text, pattern):
 ### Initial setup
 
 ```python
-    if m == 0 or n < m:
-        return []
+if m == 0 or n < m:
+    return []
 
-    bad_char = bad_char_heuristic(pattern)
-    good_suffix = good_suffix_heuristic(pattern)
-    result = []
+bad_char = bad_char_heuristic(pattern)
+good_suffix = good_suffix_heuristic(pattern)
+result = []
 ```
 
 - Handles edge cases.
@@ -238,9 +238,9 @@ def boyer_moore_full(text, pattern):
 ### Main loop
 
 ```python
-    s = 0
-    while s <= n - m:
-        j = m - 1
+s = 0
+while s <= n - m:
+    j = m - 1
 ```
 
 - `s`: current alignment (start) of pattern with text
@@ -249,8 +249,8 @@ def boyer_moore_full(text, pattern):
 #### Character Matching Loop
 
 ```python
-        while j >= 0 and pattern[j] == text[s + j]:
-            j -= 1
+while j >= 0 and pattern[j] == text[s + j]:
+    j -= 1
 ```
 
 - Continues moving left while characters match.
@@ -258,9 +258,9 @@ def boyer_moore_full(text, pattern):
 #### If Full Match
 
 ```python
-        if j < 0:
-            result.append(s)
-            s += good_suffix[0]
+if j < 0:
+    result.append(s)
+    s += good_suffix[0]
 ```
 
 - If `j < 0`, pattern is completely matched.
@@ -272,10 +272,10 @@ def boyer_moore_full(text, pattern):
 ### If Mismatch
 
 ```python
-        else:
-            bad_char_shift = j - bad_char[ord(text[s + j])]
-            good_suffix_shift = good_suffix[j + 1]
-            s += max(1, max(bad_char_shift, good_suffix_shift))
+else:
+    bad_char_shift = j - bad_char[ord(text[s + j])]
+    good_suffix_shift = good_suffix[j + 1]
+    s += max(1, max(bad_char_shift, good_suffix_shift))
 ```
 
 - **Bad character shift**: how far to move so mismatched character aligns with last occurrence.
