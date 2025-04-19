@@ -8,61 +8,105 @@ def bad_char_heuristic(pattern):
     If a character doesn't exist in the pattern, it's marked as -1.
     """
     # Initialize all characters as not found (-1)
-    bad_char = [-1] * 256  # Using 256 for all possible ASCII characters
+    bad_char = [-1] * 256  # Assuming ASCII character set
 
-    # Fill the table with the last occurrence of each character in the pattern
+    # Fill the table with the last occurrence of each character in pattern
     for i in range(len(pattern)):
-        bad_char[ord(pattern[i])] = i  # Store the rightmost position of each character
+        bad_char[ord(pattern[i])] = i  # Store the rightmost position
 
     return bad_char
 
 
-def boyer_moore_search(text, pattern):
+def good_suffix_heuristic(pattern):
     """
-    Searches for all occurrences of pattern in text using the Boyer-Moore algorithm
-    with the bad character heuristic.
+    Preprocesses the pattern to create the good suffix heuristic table.
+    This table determines how far we can shift the pattern when a mismatch occurs,
+    based on the idea that a matching suffix might appear elsewhere in the pattern.
+    """
+    m = len(pattern)
+    good_suffix = [0] * (m + 1)  # Shift table
+    border_pos = [0] * (m + 1)  # Position of the border (prefix that matches suffix)
+
+    # Case 1: The matching suffix appears somewhere else in the pattern
+    i = m  # Start from end of pattern
+    j = m + 1  # Position beyond the pattern
+    border_pos[i] = j  # Initialize border position for the suffix
+
+    while i > 0:
+        # If characters don't match, keep moving j to find a border
+        while j <= m and pattern[i - 1] != pattern[j - 1]:
+            # If no good suffix value is set yet, set it
+            if good_suffix[j] == 0:
+                good_suffix[j] = j - i
+            j = border_pos[j]
+        # Characters match, move both pointers left
+        i -= 1
+        j -= 1
+        border_pos[i] = j  # Record the border position
+
+    # Case 2: Only part of the matching suffix appears at the beginning
+    j = border_pos[0]
+    for i in range(m + 1):
+        # If no good suffix value was set, use the border position
+        if good_suffix[i] == 0:
+            good_suffix[i] = j
+        # If we reach the border, update j to the next border position
+        if i == j:
+            j = border_pos[j]
+
+    return good_suffix
+
+
+def boyer_moore_full(text, pattern):
+    """
+    Implements the Boyer-Moore string search algorithm using both
+    the bad character and good suffix heuristics for maximum efficiency.
     Returns a list of starting indices where the pattern is found in the text.
     """
     n = len(text)
     m = len(pattern)
-    bad_char = bad_char_heuristic(pattern)  # Preprocess the bad character table
-    result = []  # To store the starting positions of matches
 
-    s = 0  # s is the shift of the pattern with respect to text
+    # Handle edge cases
+    if m == 0 or n < m:
+        return []
+
+    # Preprocess the pattern to create heuristic tables
+    bad_char = bad_char_heuristic(pattern)  # Bad character table
+    good_suffix = good_suffix_heuristic(pattern)  # Good suffix table
+    result = []  # To store matching indices
+
+    s = 0  # Current alignment of pattern with text
     while s <= n - m:
-        j = m - 1  # Start comparing from the end of the pattern
+        j = m - 1  # Start comparing from the end of pattern
 
         # Keep moving left while characters match
         while j >= 0 and pattern[j] == text[s + j]:
             j -= 1
 
         if j < 0:
-            # If we've passed the start of the pattern, we found a match
+            # Full match found
             result.append(s)
-
-            # Shift the pattern so that the next character in text
-            # aligns with the last occurrence of it in pattern
-            if s + m < n:  # Check if we're not at the end of the text
-                s += m - bad_char[ord(text[s + m])]
-            else:
-                s += 1
+            # Shift by the good suffix value for full match
+            s += good_suffix[0]
         else:
-            # If there's a mismatch, shift the pattern to align the bad character
-            # in the text with the last occurrence of it in the pattern
-            # The shift is at least 1 to ensure we make progress
-            shift = j - bad_char[ord(text[s + j])]
-            s += max(1, shift)
+            # Mismatch occurred - calculate both shifts
+            # Bad character shift (can be negative, so we use max with 1)
+            bad_char_shift = j - bad_char[ord(text[s + j])]
+            # Good suffix shift for the current position
+            good_suffix_shift = good_suffix[j + 1]
+            # Use the maximum shift value (but at least 1)
+            s += max(1, max(bad_char_shift, good_suffix_shift))
 
     return result
 
 
 # Example usage
 
-print("Boyer-Moore:", boyer_moore_search("AABAACAADAABAABA", "AABA"))
+print("Full Boyer-Moore:", boyer_moore_full("AABAACAADAABAABA", "AABA"))
 
 # Output:
 
 """
-Boyer-Moore: [0, 9, 12]
+Full Boyer-Moore: [0, 9, 12]
 
 """
