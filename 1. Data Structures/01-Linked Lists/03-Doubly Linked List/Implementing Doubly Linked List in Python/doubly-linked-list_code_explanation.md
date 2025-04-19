@@ -1,4 +1,4 @@
-# Code Explanation: Doubly Linked List Implementation in Python
+# Code Explanation: *Doubly Linked List*
 
 ## **Understanding the Classes**
 
