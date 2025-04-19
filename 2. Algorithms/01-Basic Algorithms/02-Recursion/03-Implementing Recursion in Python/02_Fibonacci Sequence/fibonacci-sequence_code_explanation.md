@@ -1,4 +1,4 @@
-# Code Explanation: Fibonacci Sequence Implementing in Python
+# Code Explanation: *Fibonacci Sequence*
 
 Let's break down the code in detail.
 
