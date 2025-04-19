@@ -1,4 +1,4 @@
-# Code Explanation: Queue with Linked List Implementation in Python
+# Code Explanation: *Queue with Linked List*
 
 The provided code defines a simple **Queue** data structure using a **singly linked list**. Below is a detailed explanation of how the code works, broken down into its components:
 
