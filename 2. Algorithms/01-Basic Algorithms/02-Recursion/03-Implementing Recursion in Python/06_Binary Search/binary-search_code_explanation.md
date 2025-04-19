@@ -1,4 +1,4 @@
-# Code Explanation: Binary Search Implementing in Python
+# Code Explanation: *Binary Search*
 
 ## **Binary Search function**
 
