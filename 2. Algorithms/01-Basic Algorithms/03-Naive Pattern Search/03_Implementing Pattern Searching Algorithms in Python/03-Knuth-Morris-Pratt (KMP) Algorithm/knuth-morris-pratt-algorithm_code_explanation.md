@@ -235,3 +235,39 @@ This means that the pattern `"AABA"` occurs at indices 0, 9, and 12 in the text.
 - **Space Complexity**:
   - LPS array: O(m)
   - Result array: Depends on the number of matches
+
+---
+
+## **Big O Analysis:**
+
+### Time and Space Complexity Analysis
+
+#### **1. Preprocessing (LPS Array Construction)**
+
+- **Time Complexity**: `O(m)`  
+  - The `compute_lps` function processes the pattern of length `m` in a single pass with `i` and `length` pointers.
+  - The `while` loop runs in `O(m)` because `i` increments at least once in every iteration, and `length` adjustments (due to mismatches) do not cause more than `O(m)` work in total.
+  
+- **Space Complexity**: `O(m)`  
+  - The LPS array stores `m` integers (one for each character in the pattern).
+
+#### **2. Pattern Matching Phase**
+
+- **Time Complexity**: `O(n)`  
+  - The main loop processes the text of length `n` with `i` and `j` pointers.
+  - `i` only increments (max `n` steps), and `j` adjustments (via `lps`) do not exceed `O(n)` total steps because `j` cannot decrease more than it increments.
+  
+- **Space Complexity**: `O(1)` (additional space)  
+  - Only a few variables (`i`, `j`, `result`) are used, and the LPS array was already constructed in preprocessing.
+
+#### **Total Complexity**
+
+- **Time**: `O(n + m)`  
+  - Preprocessing: `O(m)`  
+  - Matching: `O(n)`  
+- **Space**: `O(m)` (due to the LPS array)  
+
+### **Why KMP is Efficient**
+
+- Avoids re-checking characters unnecessarily by leveraging the LPS array to skip ahead intelligently after mismatches.
+- Brute-force would take `O(n*m)` in the worst case, but KMP guarantees linear time.  
