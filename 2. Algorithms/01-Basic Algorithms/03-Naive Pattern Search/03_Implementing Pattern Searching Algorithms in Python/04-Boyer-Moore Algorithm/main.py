@@ -151,3 +151,205 @@ The Boyer-Moore algorithm is highly efficient in practice, especially for large 
 skips large portions of the text. The worst-case scenario is rare in real-world applications.
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The provided code implements the **Boyer-Moore string search algorithm**, one of the most efficient string matching algorithms. Let's break it down **step-by-step**, explain **each component**, and understand **how it all works together**.
+
+## 🚀 Goal
+To find all occurrences of a **pattern** string inside a **text** string using the Boyer-Moore algorithm, which uses
+two main heuristics:
+1. **Bad Character Heuristic**
+2. **Good Suffix Heuristic**
+
+---
+
+## 🔧 Part 1: Bad Character Heuristic
+
+### ```
+def bad_char_heuristic(pattern):
+    bad_char = [-1] * 256
+    for i in range(len(pattern)):
+        bad_char[ord(pattern[i])] = i
+    return bad_char
+```
+
+### 🔍 How it works:
+- Creates a lookup table `bad_char` of size 256 (ASCII character set).
+- For each character in the `pattern`, it stores the **last occurrence** (index) of that character.
+- If a mismatch occurs at index `j`, we can shift the pattern so that the mismatched character in `text` aligns with
+its **last occurrence in pattern**.
+
+### 💡 Example:
+For pattern `"AABA"`, the table will store:
+- `bad_char[ord('A')] = 3` (last 'A' at index 3)
+- `bad_char[ord('B')] = 2` (last 'B' at index 2)
+
+If mismatch on 'B' at position `j = 2`, shift pattern accordingly.
+
+---
+
+## 🔧 Part 2: Good Suffix Heuristic
+
+### ```
+def good_suffix_heuristic(pattern):
+    m = len(pattern)
+    good_suffix = [0] * (m + 1)
+    border_pos = [0] * (m + 1)
+
+    i = m
+    j = m + 1
+    border_pos[i] = j
+```
+
+This part computes the **good suffix shift** values.
+
+### 👣 Step-by-step breakdown:
+
+#### Step 1: Build `border_pos` table (similar to Z-algorithm idea)
+
+```
+while i > 0:
+    while j <= m and pattern[i - 1] != pattern[j - 1]:
+        if good_suffix[j] == 0:
+            good_suffix[j] = j - i
+        j = border_pos[j]
+    i -= 1
+    j -= 1
+    border_pos[i] = j
+```
+
+This loop finds the **longest border** (i.e., prefix == suffix) and uses it to figure out how far we can safely shift.
+
+#### Step 2: Fill remaining good suffix shifts
+
+```
+j = border_pos[0]
+for i in range(m + 1):
+    if good_suffix[i] == 0:
+        good_suffix[i] = j
+    if i == j:
+        j = border_pos[j]
+```
+
+This ensures that any suffix without a proper border still gets a valid shift.
+
+### 💡 Use:
+- When a mismatch happens after a partial match, shift the pattern based on the longest suffix that is also a prefix.
+
+---
+
+## 🧠 Part 3: Boyer-Moore Full Matcher
+
+### ```
+def boyer_moore_full(text, pattern):
+```
+
+### Inputs:
+- `text`: main string to search in
+- `pattern`: substring to search for
+
+---
+
+### Initial setup
+
+```
+if m == 0 or n < m:
+    return []
+
+bad_char = bad_char_heuristic(pattern)
+good_suffix = good_suffix_heuristic(pattern)
+result = []
+```
+
+- Handles edge cases.
+- Precomputes both heuristics.
+- Prepares to collect results.
+
+---
+
+### Main loop
+
+```
+s = 0
+while s <= n - m:
+    j = m - 1
+```
+
+- `s`: current alignment (start) of pattern with text
+- `j`: current index in pattern (start matching from right to left)
+
+#### Character Matching Loop
+
+```
+while j >= 0 and pattern[j] == text[s + j]:
+    j -= 1
+```
+
+- Continues moving left while characters match.
+
+#### If Full Match
+
+```
+if j < 0:
+    result.append(s)
+    s += good_suffix[0]
+```
+
+- If `j < 0`, pattern is completely matched.
+- Add current shift `s` to results.
+- Shift pattern using `good_suffix[0]` (since entire pattern matched).
+
+---
+
+### If Mismatch
+
+```
+else:
+    bad_char_shift = j - bad_char[ord(text[s + j])]
+    good_suffix_shift = good_suffix[j + 1]
+    s += max(1, max(bad_char_shift, good_suffix_shift))
+```
+
+- **Bad character shift**: how far to move so mismatched character aligns with last occurrence.
+- **Good suffix shift**: how far to move based on already matched suffix.
+- Choose the **maximum** of the two to avoid unnecessary rechecking.
+
+---
+
+## ✅ Final Output
+
+### ```
+return result
+```
+
+Returns a list of starting positions in `text` where `pattern` is found.
+
+---
+
+## 🧪 Example
+
+### ```
+print("Full Boyer-Moore:", boyer_moore_full("AABAACAADAABAABA", "AABA"))
+```
+
+Matches found at:
+- Index `0`: "AABA"
+- Index `9`: "AABA"
+- Index `12`: "AABA"
+
+---
+
+## 🧠 Summary
+
+| Component               | Purpose                                                          |
+|-------------------------|------------------------------------------------------------------|
+| `bad_char_heuristic`    | Aligns pattern based on last seen character in mismatch          |
+| `good_suffix_heuristic` | Aligns pattern based on matched suffix that’s also a prefix      |
+| `boyer_moore_full`      | Combines both heuristics to efficiently scan through the text    |
+
+
+"""
