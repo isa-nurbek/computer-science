@@ -1,4 +1,4 @@
-# Code Explanation: Subsets (Power Set) Implementing in Python
+# Code Explanation: *Subsets (Power Set)*
 
 ## **Subsets function**
 
