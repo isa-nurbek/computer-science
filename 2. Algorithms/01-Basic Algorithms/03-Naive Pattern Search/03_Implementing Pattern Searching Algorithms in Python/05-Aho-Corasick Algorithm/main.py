@@ -113,3 +113,66 @@ Pattern 'he' found at index 2
 Pattern 'hers' found at index 2
 
 """
+
+# =========================================================================================================================== #
+
+# Big O Analysis:
+
+"""
+## Time and Space Complexity Analysis:
+
+Let's analyze the **time and space complexity** of the **Aho-Corasick algorithm**, which is particularly efficient for
+**multi-pattern string matching**.
+
+---
+
+### ✅ **Let’s define some variables:**
+- `n` = length of the **text**.
+- `m` = total length of all **patterns** combined.
+- `k` = number of **patterns**.
+- `σ` = size of the **alphabet** (e.g., 26 for lowercase English letters).
+
+---
+
+## 🔧 Build Phase
+
+### 1. `build_trie(patterns)`
+- Every character in every pattern is inserted once into the trie.
+- **Time complexity:** `O(m)` (each character in the patterns is processed once).
+- **Space complexity:** `O(m)` (in worst-case, each character creates a new node).
+
+---
+
+### 2. `build_failure_links()`
+- BFS traversal of the trie, setting fail links.
+- Each node has at most `σ` children.
+- For each node and each child, the failure link is found by traversing up at most `log(m)` times in practice,
+but amortized constant time using efficient fail links.
+
+- **Time complexity:** `O(m)` (since each node and edge is visited once).
+- **Space complexity:** `O(m)` (queue size and failure links).
+
+---
+
+## 🔍 Search Phase: `search(text)`
+- Traverse the text once, following trie edges and fail links.
+- For each character in the text:
+  - In the worst case, we might follow several fail links (though amortized time per character is **O(1)**).
+- When we land on a node with output, we collect matches (which may be many).
+- **Time complexity:** `O(n + z)`  
+  - `n` for scanning the text,  
+  - `z` for total number of matches found.
+- **Space complexity:** `O(z)` for storing matches.
+
+---
+
+## ✅ Summary
+
+| Phase                 | Time Complexity  | Space Complexity  |
+|-----------------------|------------------|-------------------|
+| `build_trie`          | O(m)             | O(m)              |
+| `build_failure_links` | O(m)             | O(m)              |
+| `search`              | O(n + z)         | O(z)              |
+| **Total**             | **O(m + n + z)** | **O(m + z)**      |
+
+"""
