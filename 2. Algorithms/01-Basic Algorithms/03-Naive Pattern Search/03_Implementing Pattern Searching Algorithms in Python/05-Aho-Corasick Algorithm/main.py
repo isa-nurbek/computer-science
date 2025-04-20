@@ -176,3 +176,202 @@ but amortized constant time using efficient fail links.
 | **Total**             | **O(m + n + z)** | **O(m + z)**      |
 
 """
+
+# =========================================================================================================================== #
+
+# Detailed Code Explanation:
+
+"""
+The provided code implements the **Aho-Corasick algorithm**, which is a powerful pattern matching algorithm used to efficiently
+search for **multiple patterns** in a single pass through the text. It builds an automaton (a finite state machine with failure
+links) based on the patterns and then uses it to scan the text.
+
+## ✅ Core Components and Explanation
+
+### 📦 `TrieNode` Class
+Each `TrieNode` represents a node in the trie (prefix tree).
+
+- `children`: a dictionary mapping each character to its child node.
+- `fail`: a pointer to the longest proper suffix which is also a prefix (used when the current character doesn't match).
+- `output`: list of patterns that end at this node (used to collect matches).
+
+---
+
+### 🔧 `AhoCorasick` Class
+The main class that constructs the automaton and performs the search.
+
+---
+
+### 1. `build_trie(patterns)`
+
+Builds a **trie (prefix tree)** from the given list of patterns.
+
+#### Example: patterns = `["he", "she", "his", "hers"]`
+It will create a tree like:
+
+```
+(root)
+  ├─ h ─ e*  [he]
+  │   └─ r ─ s*  [hers]
+  └─ s ─ h ─ e*  [she]
+      └─ i ─ s*  [his]
+```
+
+> Asterisks (*) indicate terminal nodes with `output` values (i.e., patterns ending here).
+
+---
+
+### 2. `build_failure_links()`
+
+Adds **failure links** to each node in the trie. These links help the automaton **fall back** to a proper node when a mismatch occurs during the search.
+
+- Starts from the root node’s children, whose failure link is the root itself.
+- For each node, it tries to find the longest possible suffix that is also a prefix.
+- If it can’t find one, it defaults to the root.
+- It also merges the output of the fail node, so the search can detect multiple overlapping patterns.
+
+#### Example:
+
+If you're at `'hers'` and the next char doesn’t match, you follow the `fail` link. If that node has an output (like `he`),
+it’ll still be detected.
+
+---
+
+### 3. `search(text)`
+
+Scans through the given text using the constructed automaton.
+
+#### Workflow:
+- Start at the root.
+- For each character in the text:
+  - Follow the character down the trie.
+  - If no edge exists, follow the failure link until you find one (or hit the root).
+  - If you land on a node with an output, it means **a pattern ends here**, so store the match.
+- Continues scanning the text.
+
+#### Output:
+A list of `(start_index, pattern)` tuples indicating where each pattern was found in the text.
+
+---
+
+## 🧪 Example: Searching "ushers"
+
+Patterns: `["he", "she", "his", "hers"]`  
+Text: `"ushers"`
+
+During the search:
+
+| i | char | matched patterns |
+|---|------|------------------|
+| 0 | u    | none             |
+| 1 | s    | "she"            |
+| 2 | h    |                  |
+| 3 | e    | "he"             |
+| 4 | r    |                  |
+| 5 | s    | "hers"           |
+
+So the output is:
+
+```
+Pattern 'she' found at index 1
+Pattern 'he' found at index 2
+Pattern 'hers' found at index 2
+```
+
+---
+
+## 💡 Summary
+
+- **Trie** helps organize the patterns by common prefixes.
+- **Failure links** allow the algorithm to backtrack efficiently without re-checking the input.
+- **Output links** ensure we don't miss matches from fallback paths.
+- Time complexity:
+  - Preprocessing: O(total length of all patterns)
+  - Search: O(length of text + number of matches)
+
+---
+
+## ASCII visualization
+
+Here's an **ASCII visualization** of the **Aho-Corasick trie** structure for the patterns:
+
+- `"he"`
+- `"she"`
+- `"his"`
+- `"hers"`
+
+---
+
+### 📦 Trie with Output Labels (Terminal Nodes)
+
+We'll build the trie step by step and mark:
+- Terminal nodes with `[pattern]`
+- Failure links (will be shown below separately)
+
+```
+(root)
+  |
+  |-- h
+  |    |
+  |    |-- e [he]
+  |         |
+  |         |-- r
+  |              |
+  |              |-- s [hers]
+  |
+  |-- s
+       |
+       |-- h
+            |
+            |-- e [she]
+       |
+       |-- i
+            |
+            |-- s [his]
+```
+
+---
+
+### 🔄 Failure Links (Dashed arrows, logical view)
+
+Failure links are set up during the `build_failure_links()` phase.
+
+Let’s represent them like this: `node --fail--> fallback_node`
+
+#### Key failure links (simplified):
+
+```
+h          --fail--> (root)
+s          --fail--> (root)
+e (under h)--fail--> e (under s->h)
+r (under he)--fail--> (root)
+s (under her)--fail--> s (under root->s)
+h (under s) --fail--> h (under root)
+e (under sh)--fail--> e (under h)
+i (under s) --fail--> (root)
+s (under si)--fail--> s (under h)
+```
+
+Failure links are designed to:
+- Redirect search to the **next best node** when a mismatch happens.
+- Carry over any matching patterns from those fallback nodes.
+
+---
+
+### 🧠 How it helps during search:
+
+Example: Searching "ushers"
+
+- At `'s'` → matches `s`
+- Then `'h'` → matches `sh`
+- Then `'e'` → hits terminal node → matches `she`
+- Then `'r'` → fallback to `'r'` under `'he'`
+- Then `'s'` → hits `'hers'`
+
+---
+
+This ASCII view helps understand how:
+- The trie stores pattern structure.
+- The failure links let the search bounce efficiently between branches.
+
+"""
