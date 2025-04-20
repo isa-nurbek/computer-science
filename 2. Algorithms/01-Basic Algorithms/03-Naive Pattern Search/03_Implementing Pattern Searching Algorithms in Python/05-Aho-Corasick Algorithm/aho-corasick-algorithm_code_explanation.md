@@ -137,8 +137,6 @@ Each `TrieNode` represents a node in the trie (prefix tree).
 
 The main class that constructs the automaton and performs the search.
 
----
-
 ### 1. `build_trie(patterns)`
 
 Builds a **trie (prefix tree)** from the given list of patterns.
@@ -341,8 +339,6 @@ Let's analyze the **time and space complexity** of the **Aho-Corasick algorithm*
 - **Time complexity:** `O(m)` (each character in the patterns is processed once).
 - **Space complexity:** `O(m)` (in worst-case, each character creates a new node).
 
----
-
 **2. `build_failure_links()`:**
 
 - BFS traversal of the trie, setting fail links.
@@ -353,7 +349,7 @@ Let's analyze the **time and space complexity** of the **Aho-Corasick algorithm*
 
 ---
 
-**🔍 Search Phase: `search(text)`:**
+## 🔍 Search Phase: `search(text)`**
 
 - Traverse the text once, following trie edges and fail links.
 - For each character in the text:
