@@ -349,7 +349,7 @@ Let's analyze the **time and space complexity** of the **Aho-Corasick algorithm*
 
 ---
 
-## 🔍 Search Phase: `search(text)`**
+## 🔍 Search Phase: `search(text)`
 
 - Traverse the text once, following trie edges and fail links.
 - For each character in the text:
