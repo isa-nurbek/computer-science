@@ -11,6 +11,8 @@ This repository serves as an introductory guide to fundamental Computer Science 
 
 This repository serves as a foundational guide to essential Computer Science concepts, implemented and explored using the Python programming language.
 
+---
+
 ## Topics Covered
 
 ### 1. **Data Structures**
@@ -59,6 +61,8 @@ This repository serves as a foundational guide to essential Computer Science con
   - Graph Theory and Combinatorics
 - Study probability and its applications in algorithms.
 - Explore linear algebra and its role in machine learning and computer graphics.
+
+---
 
 ## Resources
 
