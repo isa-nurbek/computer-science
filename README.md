@@ -71,3 +71,7 @@ This repository serves as a foundational guide to essential Computer Science con
 - 
   - [Codecademy](https://www.codecademy.com/learn/paths/computer-science)
   - [MIT OpenCourseWare](https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/)
+
+## 🙌 Contributions
+
+This is a personal learning project, but feedback, improvements are always welcome!
