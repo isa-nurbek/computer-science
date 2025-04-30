@@ -72,7 +72,6 @@ This repository serves as a foundational guide to essential Computer Science con
   - *Computer Organization and Design* by David A. Patterson and John L. Hennessy.
 
 - **Online Platforms**:
-- 
   - [Codecademy](https://www.codecademy.com/learn/paths/computer-science)
   - [MIT OpenCourseWare](https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/)
 
